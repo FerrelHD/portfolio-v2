@@ -1,83 +1,95 @@
-# Ebraheem Alhetari - Full-Stack Developer Portfolio
+# Ferrel Rashad Akeyla — Digital Portfolio (v2)
 
-### Enjoying my project? Please show your appreciation by starring it on GitHub! ⭐
+<div align="center">
+  <h3>⚡ Full-Stack Developer • Machine Learning Enthusiast • 3D & Game Creator ⚡</h3>
+  <p>Crafting high-performance web systems, interactive physics-driven experiences, and scalable data solutions.</p>
 
-Welcome to my portfolio! I'm **Ebraheem Alhetari**, a full-stack developer and freelancer with a passion for creating immersive web experiences. Specializing in **Vue.js**, **GSAP** animations, and **Tailwind CSS**, I craft elegant, responsive, and fully animated websites.
+  <p>
+    <a href="https://github.com/FerrelHD"><img src="https://img.shields.io/badge/GitHub-FerrelHD-181717?style=for-the-badge&logo=github" alt="GitHub" /></a>
+    <a href="https://www.linkedin.com/in/ferrel-rashad-8a165514b/"><img src="https://img.shields.io/badge/LinkedIn-Ferrel_Rashad-0A66C2?style=for-the-badge&logo=linkedin" alt="LinkedIn" /></a>
+    <a href="mailto:ferrelrashadakeyla2014@gmail.com"><img src="https://img.shields.io/badge/Email-Get_in_Touch-EA4335?style=for-the-badge&logo=gmail" alt="Email" /></a>
+  </p>
+</div>
 
-## 📜 Important Note
+---
 
-If you would like to use or modify this portfolio, please:
+## 🌟 Overview
 
-1. **Star** this repository on GitHub.
-2. **Fork** the repository instead of cloning or downloading it directly.
-3. **Credit** Ebraheem Alhetari as the original coder and animator, and acknowledge **Huy Nguyen** for the original UI design.
+Welcome to my personal digital portfolio repository. This project showcases my multi-disciplinary engineering capabilities spanning **modern full-stack web applications**, **quantitative machine learning models**, and **interactive 3D simulations**.
 
-In the `data.ts` file, there are resource links that credit the original designer and other relevant sources:
+Built with a focus on fluid 60 FPS motion, responsive macOS-style browser mockups, and type-safe architecture.
 
-```ts
-const resourceLinks = [
-  {
-    label: 'Huy Nguyen (the UI designer)',
-    url: 'https://www.huyng.xyz',
-  },
-  {
-    label: 'Ebraheem Alhetari',
-    url: 'https://github.com/Hetari/portfolio',
-  },
-```
+---
 
-By following these guidelines, you'll be respecting the effort and collaboration behind this project.
+## 🛠️ Tech Stack & Arsenal
 
+### 1. **Frontend & Motion Engineering**
+- **Frameworks & Libs:** Vue 3 (Composition API), React 19, Next.js, TypeScript
+- **Animation & Motion:** GSAP (ScrollTrigger & Timeline Animations), Framer Motion, Lenis Smooth Scroll
+- **Styling:** Tailwind CSS, PostCSS, Custom Vector SVG Design
 
-## 🛠 Tech Stack
+### 2. **Backend & Machine Learning Systems**
+- **Languages & Frameworks:** Python, Laravel 11, Node.js, Express, Streamlit
+- **ML & Data Science:** XGBoost, LightGBM, Scikit-Learn, Pandas, NumPy
+- **Databases & Cloud:** Supabase, PostgreSQL, MySQL, REST APIs
 
-This portfolio showcases my expertise in modern web technologies, including:
+### 3. **3D Modeling & Game Development**
+- **Engines & Tools:** Unity 3D (C#), Blender 3D, Roblox Studio (Luau)
+- **Creative Media:** Sony Vegas Pro, Premiere Pro, Audio Synthesis & Web Audio API
 
-- [**Vue.js**](https://vuejs.org/) (with Composition API & TypeScript)
-- [**GSAP**](https://greensock.com/gsap/) (for stunning animations)
-- [**Tailwind CSS**](https://tailwindcss.com/) (for efficient styling)
-- [**Lenis**](https://lenis.darkroom.engineering/) (smooth scrolling)
-- [**Vite.js**](https://vitejs.dev/) (fast development and build tool)
+---
 
-## ✨ Features
+## 🚀 Featured Projects
 
-The entire portfolio is a dynamic and animated experience, designed to capture attention and showcase my skills. A key aspect is its visually captivating UI, originally designed by the talented freelancer **Huy Nguyen**, whom I acknowledge and credit for allowing me to use and clone his design.
+| Project | Category | Tech Stack | Status |
+| :--- | :--- | :--- | :--- |
+| **[Stock Prediction ML](https://github.com/FerrelHD/Stock-Prediction-System)** | Quant ML & Web Analytics | Python, Streamlit, XGBoost, LightGBM | [Source Code](https://github.com/FerrelHD/Stock-Prediction-System) |
+| **[Spider-Dev Portfolio](https://github.com/FerrelHD/Portofolio)** | Creative Frontend & Web Audio | React 19, GSAP, Tailwind CSS, Web Audio | [Live Repo](https://github.com/FerrelHD/Portofolio) |
+| **[Student Life](https://ferrelhd.github.io/Student-Life/)** | Productivity Web App | React 19, TypeScript, Supabase, Tailwind | [Live Demo](https://ferrelhd.github.io/Student-Life/) |
+| **[Fersya Shop](https://github.com/FerrelHD/Fersya-Shop)** | Organic E-Commerce Store | Laravel 11, Filament Admin, Tailwind CSS | [Source Code](https://github.com/FerrelHD/Fersya-Shop) |
+| **Finesser Shop** | Digital Assets Storefront | Laravel, Bootstrap, MySQL | Archived |
+| **[Street Rush](https://github.com/FerrelHD/Street-Rush-Unity)** | 3D Arcade Runner Game | Unity, C#, Mobile 3D Physics | [Unity Repo](https://github.com/FerrelHD/Street-Rush-Unity) |
+| **[Gunung Gede Simulation](https://www.roblox.com/games/125712163693709/Mount-Gede-Via-Gunung-Putri)** | 3D Hiking Trail Simulation | Luau, Roblox Studio, Terrain Modeling | [Play Roblox](https://www.roblox.com/games/125712163693709/Mount-Gede-Via-Gunung-Putri) |
 
-## 🔍 Portfolio Sections
+---
 
-- **Loading Screen**: A fully animated, immersive start to the experience.
-- **Hero**: A powerful introduction highlighting my name and expertise.
-- **Services**: An overview of what I offer as a developer.
-- **My Works**: A collection of my best projects, demonstrating my skills.
-- **About Me**: A deep dive into who I am as a developer.
-- **Testimonials**: Real feedback from people I've worked with.
-- **Contact Me**: Easily get in touch via the contact form.
-- **Footer**: Site navigation and social links.
+## 💻 Local Development Setup
 
-## 🚀 Getting Started
-
-To view the project locally, follow these steps:
+To run this portfolio locally on your machine:
 
 ```bash
-# Clone the repository
-git clone https://github.com/hetari/portfolio
+# 1. Clone the repository
+git clone https://github.com/FerrelHD/portfolio-v2.git
 
-# Navigate to the project directory
-cd portfolio
+# 2. Navigate to project root
+cd portfolio-v2
 
-# Install dependencies
+# 3. Install dependencies
 npm install
 
-# Run the development server
+# 4. Start local development server
 npm run dev
 ```
 
-You can now view the portfolio on `http://localhost:5173` in your browser.
+The application will be accessible at `http://localhost:5173/portfolio/`.
 
-## 🌱 Future Plans
+---
 
-I am continuously improving my portfolio and plan to add **Arabic language support** soon, making it fully bilingual for both English and Arabic users.
+## 📦 Build for Production
 
-## 🎨 Acknowledgments
+```bash
+npm run build
+```
 
-I want to extend a special thank you to **Huy Nguyen** for his original UI design, which I have cloned with his permission. His creative vision has been instrumental in shaping the look and feel of this portfolio.
+---
+
+## 🎨 Acknowledgments & Credits
+
+- **UI/UX Design Inspiration:** [Huy Nguyen](https://www.huyng.xyz)
+- **Base Animation Architecture:** Adapted and customized from [Ebraheem Alhetari](https://github.com/Hetari/portfolio)
+
+---
+
+<div align="center">
+  <p>© 2026 <strong>Ferrel Rashad Akeyla</strong>. Built with precision and passion.</p>
+</div>
