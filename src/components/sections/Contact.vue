@@ -29,7 +29,7 @@
           v-html="makeItHappen"
         ></h3>
         <div
-          class="mt-[5%] flex scale-150 items-center lg:scale-[1.5] xl:scale-[3] 2xl:scale-[3.5]"
+          class="mt-6 sm:mt-10 flex scale-110 sm:scale-125 md:scale-135 lg:scale-150 items-center"
         >
           <!-- <Button
             :data-cal-namespace="dataCalNamespace"

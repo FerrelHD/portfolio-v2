@@ -2,7 +2,7 @@
   <!-- common-padding  -->
   <section
     id="testimonials-section"
-    class="common-padding relative mx-auto min-h-svh -translate-y-0 overflow-y-clip py-0 will-change-transform"
+    class="common-padding relative mx-auto min-h-fit lg:min-h-svh py-10 lg:py-16 -translate-y-0 overflow-y-clip will-change-transform"
   >
     <div
       class="border-flax-smoke-300 grid w-full grid-cols-12 border-b-[1px] pb-[clamp(2.25rem,2.1786rem_+_0.3571vi,2.5rem)]"

@@ -26,31 +26,33 @@
       </div>
     </div>
 
-    <div class="grid w-full grid-cols-12">
-      <div class="col-span-7 place-content-center md:col-span-6">
-        <h6 class="heading-4 sm:heading-2 leading-none font-bold">
-          © {{ new Date().getFullYear() }} Ferrel Rashad Akeyla <br />
-          All rights reserved.
+    <div class="grid w-full grid-cols-1 md:grid-cols-12 gap-y-8 gap-x-6 items-end">
+      <div class="col-span-1 md:col-span-6 lg:col-span-7 xl:col-span-7">
+        <h6 class="text-xl sm:text-2xl md:text-3xl lg:text-[2.2rem] xl:text-[2.75rem] leading-tight font-bold tracking-tight text-flax-smoke-950">
+          © {{ new Date().getFullYear() }} Ferrel Rashad Akeyla
         </h6>
+        <p class="heading-6 text-flax-smoke-500 font-medium mt-1">
+          All rights reserved.
+        </p>
       </div>
 
       <div
-        class="col-span-5 place-content-center max-sm:place-content-end md:col-span-3"
+        class="col-span-1 md:col-span-4 lg:col-span-3 flex flex-col justify-center space-y-1"
       >
-        <p class="heading-6 font-bold uppercase">Ferrel's Local time</p>
-        <p class="heading-6">{{ myLocalTime }}</p>
-        <p class="heading-6 font-bold uppercase">Your Local time</p>
-        <p class="heading-6">{{ userLocalTime }}</p>
+        <p class="heading-6 font-bold uppercase text-flax-smoke-700">Ferrel's Local time</p>
+        <p class="heading-6 text-flax-smoke-900 font-mono">{{ myLocalTime }}</p>
+        <p class="heading-6 font-bold uppercase text-flax-smoke-700 pt-2">Your Local time</p>
+        <p class="heading-6 text-flax-smoke-900 font-mono">{{ userLocalTime }}</p>
       </div>
 
       <div
-        class="hidden md:col-span-2 md:col-start-11 md:block lg:col-span-1 lg:col-start-12"
+        class="col-span-1 md:col-span-2 lg:col-span-2 flex justify-start md:justify-end"
       >
         <MagneticEffect divId="scroll-to-top" textId="scroll-to-top-icon">
           <div
             @click="lenis.scrollTo('#app', { duration: 2 })"
             id="scroll-to-top"
-            class="flex-center bg-flax-smoke-400 size-20 cursor-pointer flex-col rounded-full"
+            class="flex-center bg-flax-smoke-400 size-16 sm:size-20 cursor-pointer flex-col rounded-full hover:bg-flax-smoke-500 transition-colors"
           >
             <svg
               class="size-1/2"

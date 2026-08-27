@@ -1,7 +1,7 @@
 <template>
   <div
     id="slider"
-    class="column-gap relative mt-[10%] grid w-full grid-cols-12 gap-2 max-md:min-h-svh lg:h-[85svh]"
+    class="column-gap relative mt-6 sm:mt-10 lg:mt-[5%] grid w-full grid-cols-12 gap-6 lg:gap-4 max-md:min-h-fit lg:h-auto"
   >
     <!-- For larger devices, show one person at a time with index -->
     <template v-if="!isSmallScreen">
@@ -30,7 +30,7 @@
           </div>
         </div>
 
-        <div class="relative flex h-full items-end justify-between">
+        <div class="relative flex h-full items-end justify-between mt-8 lg:mt-0">
           <div class="heading-5 flex w-2/12 items-center gap-3 overflow-clip">
             <p
               id="current-index"
@@ -54,11 +54,11 @@
         </div>
       </div>
       <div
-        class="columns-gap relative order-first col-span-full flex w-full items-center justify-center overflow-clip max-sm:order-last lg:order-last lg:col-span-6 lg:h-full"
+        class="relative order-first col-span-full flex w-full items-center justify-center max-sm:order-last lg:order-last lg:col-span-6 lg:h-full"
       >
         <!-- Ultra-Realistic IDE Editor Window -->
         <div
-          class="relative z-10 w-full max-w-xl overflow-hidden rounded-2xl border border-white/15 bg-[#0e0e0d] shadow-[0_25px_60px_rgba(0,0,0,0.9)] transition-all duration-300"
+          class="relative z-10 w-full max-w-xl overflow-hidden rounded-2xl border border-white/15 bg-[#0e0e0d] shadow-[0_15px_35px_rgba(0,0,0,0.35)] transition-all duration-300"
         >
           <!-- Window Top Bar (macOS Dots & Multi-Tabs) -->
           <div
