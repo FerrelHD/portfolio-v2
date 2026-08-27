@@ -26,7 +26,7 @@
       <h3
         id="little-bit-about-me"
         v-html="aboutMe"
-        class="heading-1-alt lg:heading-1 section-heading col-span-full leading-none font-extrabold uppercase md:col-span-8 md:col-start-6"
+        class="heading-1-alt lg:heading-1 section-heading col-span-full leading-[0.95] font-extrabold uppercase md:col-span-8 md:col-start-6"
       ></h3>
     </div>
 
@@ -73,14 +73,20 @@
   import { textSplitterIntoChar } from '@/functions';
   import { onBeforeMount, onMounted, ref } from 'vue';
 
-  const aboutMe = ref('Full-Stack Engineer, 3D & Creative Developer/');
+  const aboutMe = ref('');
 
   onBeforeMount(() => {
-    aboutMe.value = textSplitterIntoChar(
-      'Full-Stack Developer, 3D & Creative Engineer/',
-      true,
-      true,
-    );
+    const lines = [
+      'Full-Stack Developer,',
+      '3D & Creative',
+      'Engineer/',
+    ];
+    aboutMe.value = lines
+      .map(
+        (line) =>
+          `<span class="block">${textSplitterIntoChar(line, true, false)}</span>`,
+      )
+      .join('');
   });
 
   onMounted(() => {
