@@ -9,9 +9,10 @@
         class="columns-gap relative col-span-full flex flex-col max-lg:h-fit lg:col-span-6 lg:h-full"
       >
         <div>
+          <!-- Word-by-word Kinetic Cascading Quote -->
           <p
             id="quote-text"
-            class="heading-3 mb-14 min-h-36 max-w-[30ch] font-semibold md:min-h-fit md:max-w-full md:leading-none lg:min-h-36 lg:max-w-[30ch] lg:leading-normal"
+            class="heading-3 mb-14 min-h-36 max-w-[32ch] font-semibold leading-snug md:min-h-fit md:max-w-full lg:min-h-36 lg:max-w-[32ch]"
             v-html="computedQuote"
           ></p>
           <div id="quote-author" class="heading-6 mb-6 font-semibold">
@@ -20,7 +21,7 @@
           </div>
           <div id="quote-tags" class="flex flex-wrap gap-2">
             <p
-              class="border-flax-smoke-500/60 bg-black/50 text-flax-smoke-400 rounded-full border px-3 py-1 text-xs uppercase"
+              class="border-flax-smoke-400 bg-flax-smoke-300/40 text-flax-smoke-900 font-semibold rounded-full border px-3.5 py-1.5 text-xs uppercase tracking-wider transition-all duration-300 hover:bg-flax-smoke-900 hover:text-flax-smoke-50 select-none"
               v-for="i in people[index].tags"
               :key="i"
             >
@@ -64,14 +65,14 @@
             class="flex items-center justify-between border-b border-white/10 bg-[#161615] px-4 py-2.5 select-none"
           >
             <!-- 3 macOS Window Controls -->
-            <div class="flex items-center gap-1.5 pr-2">
+            <div class="flex items-center gap-1.5 pr-3">
               <span class="size-2.5 rounded-full bg-[#FF5F56]/90 hover:opacity-100 transition-opacity"></span>
               <span class="size-2.5 rounded-full bg-[#FFBD2E]/90 hover:opacity-100 transition-opacity"></span>
               <span class="size-2.5 rounded-full bg-[#27C93F]/90 hover:opacity-100 transition-opacity"></span>
             </div>
 
-            <!-- Clickable Interactive Multi-Tab Bar -->
-            <div class="flex flex-1 items-center gap-1 overflow-x-auto px-2">
+            <!-- Clickable Interactive Multi-Tab Bar (No truncation) -->
+            <div class="flex flex-1 items-center gap-1.5 overflow-x-auto">
               <button
                 v-for="(tab, tabIdx) in people"
                 :key="tabIdx"
@@ -80,13 +81,13 @@
                   index === tabIdx
                     ? 'border-white/20 bg-black/70 text-flax-smoke-100 shadow-sm'
                     : 'border-transparent text-flax-smoke-500 hover:bg-white/5 hover:text-flax-smoke-300',
-                  'group/tab flex cursor-pointer items-center gap-1.5 rounded-md border px-2.5 py-1 font-mono text-xs transition-all duration-200',
+                  'group/tab flex cursor-pointer items-center gap-1.5 rounded-md border px-3 py-1 font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200',
                 ]"
               >
                 <span
                   :class="[
                     tab.badgeColor,
-                    'rounded px-1 py-0.2 text-[10px] font-bold',
+                    'rounded px-1.5 py-0.5 text-[10px] font-bold',
                   ]"
                 >
                   {{ tab.badge }}
@@ -98,20 +99,12 @@
                 ></span>
               </button>
             </div>
-
-            <!-- Active Language Badge -->
-            <div
-              id="terminal-lang"
-              class="hidden font-mono text-[10px] text-flax-smoke-400 sm:block"
-            >
-              {{ people[index].language }}
-            </div>
           </div>
 
           <!-- Code Editor Body with Line Numbers & Stagger Wave -->
           <div
             id="terminal-code-body"
-            class="min-h-[290px] overflow-x-auto p-4 sm:p-5 font-mono text-xs sm:text-sm leading-relaxed"
+            class="min-h-[300px] overflow-x-auto p-4 sm:p-5 font-mono text-xs sm:text-sm leading-relaxed"
           >
             <div class="flex items-start">
               <!-- Line Numbers Gutter -->
@@ -224,7 +217,7 @@
                   class="flex max-w-60 flex-wrap gap-2 text-xs uppercase"
                 >
                   <p
-                    class="border-flax-smoke-500/60 bg-black/50 text-flax-smoke-400 rounded-full border px-3 py-1"
+                    class="border-flax-smoke-400 bg-flax-smoke-300/40 text-flax-smoke-900 font-semibold rounded-full border px-3 py-1 text-xs"
                     v-for="tag in p.tags"
                     :key="tag"
                   >
@@ -244,25 +237,65 @@
   import { Button } from '../common';
   import { computed, onMounted, ref } from 'vue';
   import { useWindowSize } from '@vueuse/core';
-  import { textSplitterIntoChar } from '@/functions';
   import gsap from 'gsap';
 
   const { width } = useWindowSize();
   const isSmallScreen = computed(() => width.value < 640);
+
+  // Helper to split text into wrapped words with keyword accents for kinetic staggering (Saran C)
+  const splitWordsIntoSpans = (text: string) => {
+    const parts = text.split(/(\{.*?\})/g);
+    let html = '';
+
+    parts.forEach((part) => {
+      if (part.startsWith('{') && part.endsWith('}')) {
+        const inner = part.slice(1, -1);
+        const words = inner.split(' ');
+        words.forEach((word) => {
+          if (!word) return;
+          html += `<span class="inline-block overflow-hidden mr-[0.22em]"><span class="quote-word inline-block font-bold text-flax-smoke-950 bg-flax-smoke-300/60 border border-flax-smoke-400/50 px-1.5 py-0.5 rounded-md shadow-xs will-change-transform">${word}</span></span>`;
+        });
+      } else {
+        const words = part.split(' ');
+        words.forEach((word) => {
+          if (!word) return;
+          html += `<span class="inline-block overflow-hidden mr-[0.22em]"><span class="quote-word inline-block font-medium text-flax-smoke-800 will-change-transform">${word}</span></span>`;
+        });
+      }
+    });
+
+    return html;
+  };
+
   const computedQuote = computed(() => {
-    return textSplitterIntoChar(`" ${people[index.value].quote} "`);
+    return splitWordsIntoSpans(`"${people[index.value].quote}"`);
   });
 
   const canClick = ref(true);
 
+  // Kinetic Word-by-Word Wave transition for Quote
   const animateTextTransition = (direction: 'up' | 'zero') => {
-    const translateY = direction === 'up' ? '-100%' : '0%';
-    gsap.to('#quote-text .letters', {
-      translateY,
-      duration: 0.45,
-      stagger: 0.001,
-      ease: 'power1.inOut',
-    });
+    if (direction === 'up') {
+      gsap.to('.quote-word', {
+        y: -25,
+        opacity: 0,
+        duration: 0.25,
+        stagger: 0.012,
+        ease: 'power2.in',
+      });
+    } else {
+      gsap.fromTo(
+        '.quote-word',
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.45,
+          stagger: 0.018,
+          ease: 'power3.out',
+        },
+      );
+    }
   };
 
   const animateQuoteAuthorTransition = (
@@ -274,7 +307,7 @@
     gsap.to(['#quote-author', '#quote-tags'], {
       translateX,
       opacity,
-      duration: 0.45,
+      duration: 0.4,
       ease: 'power1.inOut',
       onComplete: () => {
         if (onCompleteFunc) onCompleteFunc();
@@ -289,7 +322,7 @@
     const translateY = direction === 'up' ? '-100%' : '0%';
     gsap.to(['#current-index'], {
       translateY,
-      duration: 0.45,
+      duration: 0.4,
       ease: 'power1.inOut',
       onComplete: () => {
         if (onCompleteFunc) onCompleteFunc();
@@ -323,14 +356,14 @@
               opacity: 1,
               filter: 'blur(0px)',
               duration: 0.32,
-              stagger: 0.02,
+              stagger: 0.018,
               ease: 'power3.out',
               onComplete: () => {
                 canClick.value = true;
               },
             },
           );
-        }, 20);
+        }, 15);
       },
     });
   };
@@ -342,7 +375,7 @@
     animateTerminalTransition(newIndex, () => {
       setTimeout(() => {
         animateTextTransition('zero');
-      }, 20);
+      }, 15);
       animateCurrentQuoteIndex('zero');
       animateQuoteAuthorTransition('right');
     });
@@ -377,7 +410,18 @@
 
   onMounted(() => {
     if (!isSmallScreen.value) {
-      gsap.set(['#quote-text .letters', '#current-index'], {
+      gsap.fromTo(
+        '.quote-word',
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.018,
+          ease: 'power3.out',
+        },
+      );
+      gsap.set('#current-index', {
         translateY: 0,
       });
     }
@@ -388,7 +432,7 @@
   const people = [
     {
       quote:
-        'Crafting fluid, high-performance interfaces with 60 FPS micro-animations, type-safe architecture, and intuitive design systems.',
+        'Crafting fluid, high-performance interfaces with {60 FPS micro-animations}, type-safe architecture, and {intuitive design systems}.',
       author: 'Frontend & Motion',
       position: 'Core Mastery • Daily Driver',
       tags: ['React 19', 'TypeScript', 'GSAP', 'Tailwind CSS', 'Next.js', 'Framer Motion'],
@@ -400,24 +444,27 @@
         '<span class="text-purple-400">import</span> { useGSAP } <span class="text-purple-400">from</span> <span class="text-emerald-300">\'@gsap/react\'</span>;',
         '<span class="text-purple-400">import</span> gsap <span class="text-purple-400">from</span> <span class="text-emerald-300">\'gsap\'</span>;',
         '',
-        '<span class="text-blue-400">export const</span> <span class="text-yellow-300">useKineticScroll</span> = (target: <span class="text-cyan-300">RefObject</span>) => {',
+        '<span class="text-blue-400">export const</span> <span class="text-yellow-300">useKineticScroll</span> = (ref: <span class="text-cyan-300">RefObject</span>) => {',
         '  <span class="text-yellow-300">useGSAP</span>(() => {',
         '    gsap.<span class="text-blue-300">fromTo</span>(',
-        '      target.current,',
-        '      { <span class="text-rose-300">y</span>: <span class="text-amber-300">80</span>, <span class="text-rose-300">opacity</span>: <span class="text-amber-300">0</span>, <span class="text-rose-300">filter</span>: <span class="text-emerald-300">\'blur(8px)\'</span> },',
+        '      ref.current,',
+        '      { <span class="text-rose-300">y</span>: <span class="text-amber-300">60</span>, <span class="text-rose-300">opacity</span>: <span class="text-amber-300">0</span>, <span class="text-rose-300">filter</span>: <span class="text-emerald-300">\'blur(6px)\'</span> },',
         '      {',
         '        <span class="text-rose-300">y</span>: <span class="text-amber-300">0</span>, <span class="text-rose-300">opacity</span>: <span class="text-amber-300">1</span>, <span class="text-rose-300">filter</span>: <span class="text-emerald-300">\'blur(0px)\'</span>,',
         '        <span class="text-rose-300">duration</span>: <span class="text-amber-300">1.2</span>, <span class="text-rose-300">ease</span>: <span class="text-emerald-300">\'expo.out\'</span>,',
-        '        <span class="text-rose-300">scrollTrigger</span>: { <span class="text-rose-300">scrub</span>: <span class="text-amber-300">0.5</span>, <span class="text-rose-300">start</span>: <span class="text-emerald-300">\'top 80%\'</span> }',
+        '        <span class="text-rose-300">scrollTrigger</span>: {',
+        '          <span class="text-rose-300">scrub</span>: <span class="text-amber-300">0.5</span>,',
+        '          <span class="text-rose-300">start</span>: <span class="text-emerald-300">\'top 80%\'</span>,',
+        '        },',
         '      }',
         '    );',
-        '  }, [target]);',
+        '  }, [ref]);',
         '};',
       ],
     },
     {
       quote:
-        'Architecting scalable REST APIs, reliable database schemas, and data-driven quantitative ML prediction pipelines.',
+        'Architecting {scalable REST APIs}, reliable database schemas, and data-driven {quantitative ML prediction} pipelines.',
       author: 'Backend & Machine Learning',
       position: 'Production Ready • Battle Tested',
       tags: ['Python', 'Laravel 11', 'Node.js', 'Streamlit', 'XGBoost', 'Supabase', 'MySQL'],
@@ -434,7 +481,8 @@
         '        self.regressor = xgb.<span class="text-blue-300">XGBRegressor</span>(',
         '            n_estimators=n_estimators,',
         '            learning_rate=lr,',
-        '            max_depth=<span class="text-amber-300">6</span>, subsample=<span class="text-amber-300">0.85</span>,',
+        '            max_depth=<span class="text-amber-300">6</span>,',
+        '            subsample=<span class="text-amber-300">0.85</span>,',
         '            tree_method=<span class="text-emerald-300">"hist"</span>,',
         '            objective=<span class="text-emerald-300">"reg:squarederror"</span>',
         '        )',
@@ -446,7 +494,7 @@
     },
     {
       quote:
-        'Engineering interactive game mechanics, real-time physics loops, cinematic video timing, and stylized 3D asset modeling.',
+        'Engineering {interactive game mechanics}, {real-time physics loops}, cinematic video timing, and stylized {3D asset modeling}.',
       author: '3D Modeling & Game Systems',
       position: 'Interactive Crafts • Next-Gen',
       tags: ['Unity C#', 'Blender 3D', 'Roblox Studio', 'Luau', 'Vegas Pro', 'Game Loops'],
@@ -468,7 +516,9 @@
         '        <span class="text-blue-400">float</span> steer = <span class="text-cyan-300">Input</span>.<span class="text-blue-300">GetAxis</span>(<span class="text-emerald-300">"Horizontal"</span>);',
         '        <span class="text-cyan-300">Vector3</span> thrust = transform.forward * thrustForce;',
         '        rb.<span class="text-blue-300">AddForce</span>(thrust, <span class="text-cyan-300">ForceMode</span>.Acceleration);',
-        '        transform.<span class="text-blue-300">Rotate</span>(<span class="text-cyan-300">Vector3</span>.up, steer * driftCurve.<span class="text-blue-300">Evaluate</span>(rb.linearVelocity.magnitude));',
+        '',
+        '        <span class="text-blue-400">float</span> speed = rb.linearVelocity.magnitude;',
+        '        transform.<span class="text-blue-300">Rotate</span>(<span class="text-cyan-300">Vector3</span>.up, steer * driftCurve.<span class="text-blue-300">Evaluate</span>(speed));',
         '    }',
         '}',
       ],
