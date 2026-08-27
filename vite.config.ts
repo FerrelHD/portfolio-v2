@@ -17,7 +17,7 @@ export default defineConfig({
     vue(),
     robots(),
     sitemap({
-      hostname: 'https://hetari.github.io/',
+      hostname: 'https://ferrelhd.github.io/',
       basePath: 'portfolio',
       changefreq: 'hourly', // default: 'daily'
       priority: 1,

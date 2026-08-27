@@ -7,14 +7,16 @@
       class="flex-center relative h-[92vh] w-full flex-col rounded-lg bg-black uppercase"
     >
       <video
-        class="absolute bottom-0 left-0 size-full rounded-lg object-cover object-bottom brightness-50"
+        class="absolute bottom-0 left-0 size-full rounded-lg object-cover object-center brightness-40 contrast-125"
         :src="contact"
         autoplay
         muted
         loop
         playsinline
       ></video>
-      <!-- :style="'background-image: url(' + contact + ') !important; '" -->
+      <div
+        class="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-t from-black/80 via-black/30 to-black/80"
+      ></div>
       <div class="flex-center z-10 flex-col gap-y-10">
         <p
           class="heading-4 text-flax-smoke-300 max-w-[30ch] text-center font-mono"

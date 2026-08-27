@@ -2,49 +2,38 @@
   <svg
     id="svg-my-en-name"
     class="w-full fill-flax-smoke-900"
-    viewBox="0 0 580 95"
+    viewBox="0 0 560 74"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g>
-      <!-- F -->
-      <path
-        class="translate-y-full will-change-auto"
-        d="M15,85 V10 H85 V28 H38 V47 H76 V64 H38 V85 Z"
-      ></path>
-      <!-- E -->
-      <path
-        class="translate-y-full will-change-auto"
-        d="M105,85 V10 H175 V28 H128 V47 H168 V64 H128 V67 H175 V85 Z"
-      ></path>
-      <!-- R -->
-      <path
-        class="translate-y-full will-change-auto"
-        d="M195,85 V10 H248 C268,10 280,22 280,38 C280,50 272,59 257,62 L281,85 H255 L233,65 H221 V85 Z M221,48 H246 C254,48 258,44 258,37 C258,30 254,27 246,27 H221 Z"
-      ></path>
-      <!-- R -->
-      <path
-        class="translate-y-full will-change-auto"
-        d="M300,85 V10 H353 C373,10 385,22 385,38 C385,50 377,59 362,62 L386,85 H360 L338,65 H326 V85 Z M326,48 H351 C359,48 363,44 363,37 C363,30 359,27 351,27 H326 Z"
-      ></path>
-      <!-- E -->
-      <path
-        class="translate-y-full will-change-auto"
-        d="M405,85 V10 H475 V28 H428 V47 H468 V64 H428 V67 H475 V85 Z"
-      ></path>
-      <!-- L -->
-      <path
-        class="translate-y-full will-change-auto"
-        d="M495,85 V10 H518 V67 H565 V85 Z"
-      ></path>
-    </g>
+    <!-- F -->
+    <path
+      class="translate-y-full will-change-auto"
+      d="M0 73V0H70V14.5H21V33.5H66V47.5H21V73H0Z"
+    ></path>
+    <!-- E -->
+    <path
+      class="translate-y-full will-change-auto"
+      d="M90 73V0H160V14.5H111V33.5H156V47.5H111V58.5H160V73H90Z"
+    ></path>
+    <!-- R -->
+    <path
+      class="translate-y-full will-change-auto"
+      d="M180 73V0H220C232 0 240 3 246 8C252 13 255 20 255 27.5C255 35 252 41 246 45.5C240.5 49.5 232 51.5 220 51.5H201V73H180ZM201 37.5H217C222 37.5 225.5 36.5 228 34.5C230.5 32.5 232 29.5 232 27C232 23.5 230.5 20.5 228 18.5C225.5 16.5 222 15 217 15H201V37.5ZM230 46L256 73H230L206 46H230Z"
+    ></path>
+    <!-- R -->
+    <path
+      class="translate-y-full will-change-auto"
+      d="M276 73V0H316C328 0 336 3 342 8C348 13 351 20 351 27.5C351 35 348 41 342 45.5C336.5 49.5 328 51.5 316 51.5H297V73H276ZM297 37.5H313C318 37.5 321.5 36.5 324 34.5C326.5 32.5 328 29.5 328 27C328 23.5 326.5 20.5 324 18.5C321.5 16.5 318 15 313 15H297V37.5ZM326 46L352 73H326L302 46H326Z"
+    ></path>
+    <!-- E -->
+    <path
+      class="translate-y-full will-change-auto"
+      d="M372 73V0H442V14.5H393V33.5H438V47.5H393V58.5H442V73H372Z"
+    ></path>
+    <!-- L -->
+    <path
+      class="translate-y-full will-change-auto"
+      d="M462 73V0H483V58.5H534V73H462Z"
+    ></path>
   </svg>
 </template>
-
-<style scoped>
-  #svg-my-en-name path {
-    transform-box: fill-box;
-    transform-origin: center bottom;
-  }
-</style>
-
-

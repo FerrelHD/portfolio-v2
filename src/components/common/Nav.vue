@@ -54,8 +54,8 @@
           <Link
             class="font-medium tracking-wider"
             tag="p"
-            label="hetari4all@gmail.com"
-            url="mailto:hetari4all@gmail.com"
+            label="ferrelrashadakeyla2014@gmail.com"
+            url="mailto:ferrelrashadakeyla2014@gmail.com"
           />
           <div class="mt-6 flex flex-wrap justify-start gap-1">
             <Button
@@ -87,7 +87,7 @@
             id="name"
             class="font-fancy flex items-start text-xl font-extrabold uppercase md:text-3xl"
           >
-            hetari
+            Ferrel
             <span
               class="font-fancy inline! origin-center! text-xl transition-transform duration-500 ease-in-out group-hover:rotate-[360deg]"
               >&copy;</span
