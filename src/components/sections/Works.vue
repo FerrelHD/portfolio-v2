@@ -59,7 +59,8 @@
           <a
             :href="work.primaryUrl !== '#' ? work.primaryUrl : undefined"
             :target="work.primaryUrl !== '#' ? '_blank' : undefined"
-            class="group/frame relative block w-full select-none"
+            :aria-label="`Open ${work.name} project live preview or repository`"
+            class="group/frame relative block w-full select-none active:scale-[0.99] transition-transform duration-200"
           >
             <div
               class="relative w-full overflow-hidden rounded-2xl border border-white/15 bg-[#121211] shadow-[0_20px_50px_rgba(0,0,0,0.85)] transition-all duration-500 hover:-translate-y-1.5 hover:border-white/35 hover:shadow-[0_30px_70px_rgba(0,0,0,0.95)]"

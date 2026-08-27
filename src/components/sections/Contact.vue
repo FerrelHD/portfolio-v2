@@ -13,6 +13,7 @@
         muted
         loop
         playsinline
+        preload="metadata"
       ></video>
       <div
         class="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-t from-black/80 via-black/30 to-black/80"

@@ -52,6 +52,9 @@
           <div
             @click="lenis.scrollTo('#app', { duration: 2 })"
             id="scroll-to-top"
+            role="button"
+            tabindex="0"
+            aria-label="Scroll to top of page"
             class="flex-center bg-flax-smoke-400 size-16 sm:size-20 cursor-pointer flex-col rounded-full hover:bg-flax-smoke-500 transition-colors"
           >
             <svg

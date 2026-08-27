@@ -19,7 +19,7 @@ const navLinks = [
     url: '#about-me-section',
   },
   {
-    label: 'Testimonials',
+    label: 'Arsenal',
     url: '#testimonials-section',
   },
   {
