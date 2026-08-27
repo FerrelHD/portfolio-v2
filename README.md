@@ -9,6 +9,10 @@
     <a href="https://www.linkedin.com/in/ferrel-rashad-8a165514b/"><img src="https://img.shields.io/badge/LinkedIn-Ferrel_Rashad-0A66C2?style=for-the-badge&logo=linkedin" alt="LinkedIn" /></a>
     <a href="mailto:ferrelrashadakeyla2014@gmail.com"><img src="https://img.shields.io/badge/Email-Get_in_Touch-EA4335?style=for-the-badge&logo=gmail" alt="Email" /></a>
   </p>
+
+  <br />
+
+  <img src="./public/hero-preview.png" alt="Ferrel Rashad Akeyla — Digital Portfolio Preview" width="100%" />
 </div>
 
 ---
@@ -71,7 +75,7 @@ npm install
 npm run dev
 ```
 
-The application will be accessible at `http://localhost:5173/portfolio/`.
+The application will be accessible at `http://localhost:5173/`.
 
 ---
 
