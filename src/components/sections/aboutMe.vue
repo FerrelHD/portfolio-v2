@@ -37,16 +37,14 @@
         <img
           :src="profile2"
           class="aspect-[1/1.5] rounded-lg object-cover object-top mix-blend-screen brightness-90 grayscale"
-          alt="Headshot of Ebraheem facing a camera"
+          alt="Ferrel Rashad Akeyla portrait"
         />
       </div>
       <div class="col-span-11 mt-10 md:col-span-8 md:col-start-6">
         <p
           class="heading-4 relative w-full max-w-[40ch] leading-snug font-medium text-balance"
         >
-          With a passion for design and development, I take projects from
-          ideation to launch, ensuring a seamless journey that leaves a lasting
-          positive impact on the digital landscape and your business.
+          Combining rigorous software engineering with creative visual storytelling, I take ideas from concept to production-ready deployment across web, 3D, and interactive media.
         </p>
 
         <div
@@ -56,12 +54,8 @@
             ( ABOUT ME )
           </p>
           <p class="heading-6 font-fancy w-full text-balance sm:max-w-[40ch]">
-            Creating great web experiences is my primary focus. I ensure each
-            project leaves users with a feel-good sensation through meticulous
-            attention to detail and user-centric design principles. <br /><br />
-            When I'm not immersed in web development and design, you can find me
-            sharing insights about my freelance journey on <i>&Xopf;</i>,
-            loudly, playing music (Funk), or just relaxing.
+            I am Ferrel Rashad Akeyla, a multidisciplinary digital creator specializing in high-performance Full-Stack Web Applications (React 19, TypeScript, Laravel 11), Machine Learning quantitative systems, Unity C# game loops, and cinematic visual media. <br /><br />
+            Based in Depok, Jawa Barat, I focus on building applications that are blazingly fast, aesthetically memorable, and engineered with precision.
           </p>
         </div>
       </div>
@@ -79,16 +73,11 @@
   import { textSplitterIntoChar } from '@/functions';
   import { onBeforeMount, onMounted, ref } from 'vue';
 
-  const aboutMe = ref('ٍSelected Projects /');
-
-  // const initialPath = ref(`M0 0H${width.value}  V${height.value} H0 Z`);
-  // const targetPath = ref(
-  //   `M0 0H${width.value}L${width.value * 0.9} ${height.value}H${width.value * 0.1}L0 0Z`,
-  // );
+  const aboutMe = ref('Full-Stack Engineer, 3D & Creative Developer/');
 
   onBeforeMount(() => {
     aboutMe.value = textSplitterIntoChar(
-      'Programmer, Developer, Web-animator/',
+      'Full-Stack Developer, 3D & Creative Engineer/',
       true,
       true,
     );

@@ -1,13 +1,13 @@
 <template>
-  <div class="invisible relative z-99999999 hidden md:visible md:block">
+  <div class="invisible pointer-events-none relative z-99999999 hidden md:visible md:block">
     <div
       id="cursor"
-      class="fixed z-100 h-[2.5rem] w-[6rem] origin-center scale-0 rounded-md bg-flax-smoke-500 opacity-0"
+      class="pointer-events-none fixed z-100 h-[2.5rem] w-[6rem] origin-center scale-0 rounded-md bg-flax-smoke-500 opacity-0 select-none"
     ></div>
 
     <div
       id="inner"
-      class="fixed left-1.5 top-1.5 z-101 flex scale-0 object-center text-flax-smoke-50 opacity-0"
+      class="pointer-events-none fixed left-1.5 top-1.5 z-101 flex scale-0 object-center text-flax-smoke-50 opacity-0 select-none"
     >
       <div
         class="flex-center size-7 rounded-xs bg-flax-smoke-200 text-flax-smoke-900"

@@ -133,7 +133,7 @@
     navbarScale,
   } from '@/animations';
   import { navbarLinks, navLinks, socialLinks } from '@/data';
-  import { lenis } from '@/main';
+  import { lenis } from '@/lenis';
 
   const isNavbarOpen = ref(false);
 

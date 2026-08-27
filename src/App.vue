@@ -80,7 +80,7 @@
   import { useWindowSize } from '@vueuse/core';
 
   import { Navbar } from './components/common';
-  import { lenis, raf } from './main';
+  import { lenis, raf } from './lenis';
   const { width, height } = useWindowSize();
   const noise: Ref<HTMLElement | null> = ref(null);
 

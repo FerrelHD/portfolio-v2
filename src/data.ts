@@ -37,43 +37,43 @@ const navbarLinks = [
 
 const socialLinks = [
   {
-    label: 'X',
-    url: 'https://x.com/hetaridev',
-  },
-  {
-    label: 'Telegram',
-    url: 'https://t.me/e_1_e',
-  },
-  {
     label: 'GitHub',
-    url: 'https://github.com/hetari',
+    url: 'https://github.com/FerrelHD',
   },
   {
     label: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/hetaridev/',
+    url: 'https://www.linkedin.com/in/ferrel-rashad-8a165514b/',
+  },
+  {
+    label: 'Email',
+    url: 'mailto:ferrelrashadakeyla2014@gmail.com',
   },
 ];
 
 const resourceLinks = [
   {
-    label: 'Pillarstack',
-    url: 'https://www.pillarstack.com',
+    label: 'Spider-Dev Portfolio',
+    url: 'https://github.com/FerrelHD/Portofolio',
   },
   {
-    label: 'Figma Template',
-    url: 'https://www.figma.com/community/file/1328038510191576951/project-starter-template',
+    label: 'Stock Prediction ML',
+    url: 'https://github.com/FerrelHD/Stock-Prediction-System',
+  },
+  {
+    label: 'Student Life App',
+    url: 'https://ferrelhd.github.io/Student-Life/',
   },
 ];
 
 const heroText =
-  'A freelance full-stack developer, making good shit since 2023, hiding bad shit since 2023.';
+  'A multidisciplinary full-stack developer & digital creator, building high-performance web systems, 3D interactive experiences, and cinematic media.';
 
-const locationPlace = `15°22'22.0"N 44°10'39.5"E`;
-const locationCountry = 'Yemen, Sanaa';
+const locationPlace = `6°24'00.0"S 106°49'00.0"E`;
+const locationCountry = 'Indonesia, Depok';
 
-// cal.com
+// cal.com / contact
 const dataCalNamespace = '30min';
-const dataCalLink = 'brhoom/30min';
+const dataCalLink = 'ferrel/30min';
 const dataCalConfig =
   '{"layout":"month_view", "theme": "dark", "brand": "#8C8C73"}';
 

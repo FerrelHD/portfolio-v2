@@ -122,7 +122,7 @@
 
 <script setup lang="ts">
   import { displayNone } from '@/animations';
-  import { lenis } from '@/main';
+  import { lenis } from '@/lenis';
   import { onMounted } from 'vue';
 
   const handleClick = () => {

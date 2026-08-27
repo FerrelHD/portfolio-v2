@@ -1,4 +1,4 @@
-import { lenis } from '@/main';
+import { lenis } from '@/lenis';
 
 const textSplitterIntoChar = (
   text: string,

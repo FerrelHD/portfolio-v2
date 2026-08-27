@@ -56,16 +56,12 @@
         class="columns-gap relative order-first col-span-full flex h-[60vh] w-full items-start justify-center overflow-clip max-sm:order-last lg:order-last lg:col-span-6 lg:h-full"
       >
         <img
-          :class="{ hidden: index !== 0 }"
-          class="relative z-10 size-full rounded-lg object-cover object-center mix-blend-screen brightness-90 grayscale lg:h-[85svh]"
-          :src="people[0].profile"
-          alt=""
-        />
-        <img
-          :class="{ hidden: index !== 1 }"
-          class="relative z-10 size-full rounded-lg object-cover object-center mix-blend-screen brightness-90 grayscale lg:h-[85svh]"
-          :src="people[1].profile"
-          alt=""
+          v-for="(item, i) in people"
+          :key="i"
+          :class="{ hidden: index !== i }"
+          class="relative z-10 size-full rounded-lg object-cover object-top mix-blend-screen brightness-90 grayscale lg:h-[85svh]"
+          :src="item.profile"
+          :alt="item.author"
         />
         <div
           id="quote-overlay"
@@ -87,9 +83,9 @@
             <div class="col-span-3">
               <div class="columns-gap flex w-full flex-col gap-y-4">
                 <img
-                  class="aspect-square size-full rounded-md object-cover object-center mix-blend-screen brightness-90 grayscale"
+                  class="aspect-square size-full rounded-md object-cover object-top mix-blend-screen brightness-90 grayscale"
                   :src="p.profile"
-                  alt=""
+                  :alt="p.author"
                 />
 
                 <p
@@ -126,7 +122,11 @@
 </template>
 
 <script setup lang="ts">
-  import { esmail, mohammad } from '@/assets/images';
+  import {
+    studentLifeImg,
+    stockPredictionImg,
+    streetRushImg,
+  } from '@/assets/images';
   import { Button } from '../common';
   import { computed, onMounted, ref } from 'vue';
   import { useWindowSize } from '@vueuse/core';
@@ -187,7 +187,6 @@
     newIndex: number,
     onCompleteFunc?: () => void,
   ) => {
-    // const translateY = direction === 'up' ? '100%' : '-100%';
     gsap.to('#quote-overlay', {
       translateY: '0%',
       duration: 0.7,
@@ -261,19 +260,27 @@
   const people = [
     {
       quote:
-        'Collaborating with Hetari on multiple projects has been a true pleasure. His exceptional skills, attention to detail, and commitment to quality consistently made him an invaluable asset to the team.',
-      author: 'Mohammad AL-Sulami',
-      position: 'Full Stack Developer',
-      tags: ['Web Development', 'Animation', 'UI/UX'],
-      profile: mohammad,
+        'Crafting fluid, high-performance interfaces with 60 FPS micro-animations, type-safe architecture, and intuitive design systems.',
+      author: 'Frontend & Motion',
+      position: 'Core Mastery • Daily Driver',
+      tags: ['React 19', 'TypeScript', 'GSAP', 'Tailwind CSS', 'Next.js', 'Framer Motion'],
+      profile: studentLifeImg,
     },
     {
       quote:
-        'Working with Ebraheem on the Axon website has been an exceptional experience. His invaluable support and dedication were crucial in bringing this project to life. Thank you, Ebraheem!',
-      author: 'Esmail Atta',
-      position: 'Founder of Axon',
-      tags: ['Web Development', 'SEO'],
-      profile: esmail,
+        'Architecting scalable REST APIs, reliable database schemas, and data-driven quantitative ML prediction pipelines.',
+      author: 'Backend & Machine Learning',
+      position: 'Production Ready • Battle Tested',
+      tags: ['Python', 'Laravel 11', 'Node.js', 'Streamlit', 'XGBoost', 'Supabase', 'MySQL'],
+      profile: stockPredictionImg,
+    },
+    {
+      quote:
+        'Engineering interactive game mechanics, real-time physics loops, cinematic video timing, and stylized 3D asset modeling.',
+      author: '3D Modeling & Game Systems',
+      position: 'Interactive Crafts • Next-Gen',
+      tags: ['Unity C#', 'Blender 3D', 'Roblox Studio', 'Luau', 'Vegas Pro', 'Game Loops'],
+      profile: streetRushImg,
     },
   ];
 </script>

@@ -10,19 +10,17 @@
       <h3
         class="heading-1 max-sm:heading-2 text-flax-smoke-950 col-span-full leading-none font-bold uppercase will-change-auto"
       >
-        Don't take my <br />
-        word for it /
+        Tech Arsenal & <br />
+        Stack /
       </h3>
       <div
         class="text-flax-smoke-800 col-span-full mt-[5%] flex justify-end gap-10 sm:gap-20 lg:col-span-10"
       >
         <p class="heading-6 text-center text-nowrap uppercase">
-          ( Testimonials )
+          ( Arsenal )
         </p>
         <p class="heading-6 font-fancy w-full text-balance sm:max-w-[40ch]">
-          Here's what my clients say about our collaboration. Their satisfaction
-          and meeting expectations are my top priorities, ensuring the best
-          experience possible.
+          A curated ecosystem of modern frameworks, programming languages, and creative tooling I utilize to build scalable and high-performance digital products.
         </p>
       </div>
     </div>

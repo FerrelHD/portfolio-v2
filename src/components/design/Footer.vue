@@ -29,7 +29,7 @@
     <div class="grid w-full grid-cols-12">
       <div class="col-span-7 place-content-center md:col-span-6">
         <h6 class="heading-4 sm:heading-2 leading-none font-bold">
-          © {{ new Date().getFullYear() }} Huy <br />
+          © {{ new Date().getFullYear() }} Ferrel Rashad Akeyla <br />
           All rights reserved.
         </h6>
       </div>
@@ -37,7 +37,7 @@
       <div
         class="col-span-5 place-content-center max-sm:place-content-end md:col-span-3"
       >
-        <p class="heading-6 font-bold uppercase">Hetari's Local time</p>
+        <p class="heading-6 font-bold uppercase">Ferrel's Local time</p>
         <p class="heading-6">{{ myLocalTime }}</p>
         <p class="heading-6 font-bold uppercase">Your Local time</p>
         <p class="heading-6">{{ userLocalTime }}</p>
@@ -88,7 +88,7 @@
   import { navbarLinks, resourceLinks, socialLinks } from '@/data';
   import { Link } from '..';
   import { onMounted, ref } from 'vue';
-  import { lenis } from '@/main';
+  import { lenis } from '@/lenis';
   import MagneticEffect from '../MagneticEffect.vue';
   import moment from 'moment-timezone';
 
@@ -103,9 +103,9 @@
   const userLocalTime = ref('');
 
   onMounted(() => {
-    myLocalTime.value = moment.tz('Asia/Aden').format('h:mm:ss a');
+    myLocalTime.value = moment.tz('Asia/Jakarta').format('h:mm:ss a');
     setInterval(() => {
-      myLocalTime.value = moment.tz('Asia/Aden').format('h:mm:ss a');
+      myLocalTime.value = moment.tz('Asia/Jakarta').format('h:mm:ss a');
     }, 1000);
 
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
