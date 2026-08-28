@@ -33,7 +33,8 @@
     >
       <!-- Top Meta Bar -->
       <div
-        class="flex items-center justify-between border-b border-white/10 pb-4 select-none"
+        id="preloader-top"
+        class="flex items-center justify-between border-b border-white/10 pb-4 select-none will-change-transform will-change-opacity"
       >
         <div class="flex items-center gap-2">
           <span class="size-2 rounded-full bg-flame animate-pulse"></span>
@@ -57,7 +58,8 @@
         <div class="relative flex flex-col items-center justify-center text-center">
           <!-- Name + Absolute Star on right (prevents star from offsetting center) -->
           <div
-            class="relative flex items-center justify-center w-[230px] xs:w-[270px] sm:w-[440px] md:w-[540px]"
+            id="preloader-name-star"
+            class="relative flex items-center justify-center w-[230px] xs:w-[270px] sm:w-[440px] md:w-[540px] will-change-transform will-change-opacity"
           >
             <!-- SVG Name with Line Drawing Animation -->
             <svg
@@ -117,7 +119,8 @@
 
           <!-- Subtitle Cleanly & Symmetrically Centered Underneath FERREL -->
           <p
-            class="font-mono text-[9px] xs:text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-flax-smoke-400 mt-4 sm:mt-5 text-center"
+            id="preloader-subtitle"
+            class="font-mono text-[9px] xs:text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-flax-smoke-400 mt-4 sm:mt-5 text-center will-change-transform will-change-opacity"
           >
             ( FULL-STACK DEVELOPER & DIGITAL CREATOR )
           </p>
@@ -126,7 +129,8 @@
 
       <!-- Bottom Status & Percentage Counter -->
       <div
-        class="flex items-end justify-between border-t border-white/10 pt-4 select-none"
+        id="preloader-bottom"
+        class="flex items-end justify-between border-t border-white/10 pt-4 select-none will-change-transform will-change-opacity"
       >
         <!-- Loading Status Sub-label -->
         <div
@@ -271,15 +275,52 @@
       0,
     );
 
-    // --- PHASE 2: SEAMLESS CONTINUOUS CURTAIN REVEAL ---
-    // Preloader content glides upward and fades seamlessly (no stop)
+    // --- PHASE 2: DIRECTIONAL SPLIT EXIT & SEAMLESS CURTAIN REVEAL ---
+    // 1. Subtitle fades & scales down smoothly first (0.35s)
     master.to(
-      '#preloader-content',
+      '#preloader-subtitle',
       {
-        y: -30,
+        y: -15,
+        opacity: 0,
+        scale: 0.96,
+        duration: 0.35,
+        ease: 'power2.in',
+      },
+      1.38,
+    );
+
+    // 2. Top meta bar glides UP and away
+    master.to(
+      '#preloader-top',
+      {
+        y: -25,
         opacity: 0,
         duration: 0.45,
-        ease: 'power2.inOut',
+        ease: 'power3.in',
+      },
+      1.42,
+    );
+
+    // 3. Bottom status & counter glide DOWN and away
+    master.to(
+      '#preloader-bottom',
+      {
+        y: 25,
+        opacity: 0,
+        duration: 0.45,
+        ease: 'power3.in',
+      },
+      1.42,
+    );
+
+    // 4. Center name & star glide UP with the rising curtain
+    master.to(
+      '#preloader-name-star',
+      {
+        y: -45,
+        opacity: 0,
+        duration: 0.5,
+        ease: 'power3.inOut',
       },
       1.45,
     );
