@@ -1,65 +1,68 @@
 <template>
   <section
     id="contact-section"
-    class="relative w-full min-h-svh p-3 sm:p-6 md:p-8 flex flex-col justify-between select-none"
+    class="relative w-full min-h-svh p-2.5 xs:p-4 sm:p-6 md:p-8 flex flex-col justify-between select-none"
   >
     <div
-      class="relative w-full overflow-hidden rounded-3xl border border-white/15 bg-[#0a0a09] p-6 sm:p-10 md:p-12 shadow-2xl flex flex-col justify-between min-h-[92vh]"
+      class="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-white/15 bg-[#0a0a09] p-5 xs:p-6 sm:p-10 md:p-12 shadow-2xl flex flex-col justify-between min-h-[92vh]"
     >
       <!-- Top Monogram & Meta Bar -->
       <div
-        class="flex items-center justify-between border-b border-white/10 pb-5 mb-4 select-none"
+        class="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2 xs:gap-0 border-b border-white/10 pb-4 sm:pb-5 mb-4 select-none"
       >
         <div class="flex items-center gap-2">
           <span class="size-2 rounded-full bg-flame animate-pulse"></span>
           <span
-            class="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-widest text-flax-smoke-300"
+            class="font-mono text-[10px] xs:text-[11px] sm:text-xs font-bold uppercase tracking-widest text-flax-smoke-300"
           >
             FERREL.DEV // FINAL_LAP
           </span>
         </div>
         <span
-          class="font-mono text-[10px] sm:text-xs uppercase tracking-wider text-flax-smoke-500"
+          class="font-mono text-[9px] xs:text-[10px] sm:text-xs uppercase tracking-wider text-flax-smoke-500"
         >
           DEPOK, ID • GMT+7
         </span>
       </div>
 
       <!-- Giant Bold Headline Banner -->
-      <div class="text-center my-4 sm:my-6">
+      <div class="text-center my-3 sm:my-6">
         <p
-          class="font-mono text-xs sm:text-sm font-semibold tracking-widest uppercase text-flame mb-2"
+          class="font-mono text-[10px] xs:text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase text-flame mb-2"
         >
-          ( READY TO COLLABORATE )
+          ( LET'S CREATE SOMETHING GREATER )
         </p>
         <h2
           id="make-it-happen"
-          class="font-title text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-flax-smoke-100 leading-none text-balance"
-          v-html="makeItHappen"
-        ></h2>
+          class="font-title text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-flax-smoke-100 leading-tight sm:leading-none text-balance"
+        >
+          <span v-html="beGreater"></span>
+          <span> </span>
+          <span class="text-flame" v-html="together"></span>
+        </h2>
       </div>
 
       <!-- 3-Column Symmetrical Grid ala Lando Norris -->
       <div
-        class="grid grid-cols-12 gap-6 sm:gap-8 items-center my-6 sm:my-8 relative z-10"
+        class="grid grid-cols-12 gap-5 sm:gap-8 items-center my-4 sm:my-8 relative z-10"
       >
         <!-- Left Column: PAGES -->
         <div
-          class="col-span-6 sm:col-span-3 flex flex-col items-start gap-4 select-none"
+          class="col-span-6 sm:col-span-3 flex flex-col items-start gap-3 sm:gap-4 select-none"
         >
           <p
-            class="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-flax-smoke-500"
+            class="font-mono text-[9px] xs:text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-flax-smoke-500"
           >
             [ PAGES ]
           </p>
           <ul
-            class="flex flex-col gap-2.5 font-fancy text-base sm:text-xl md:text-2xl font-bold uppercase text-flax-smoke-300"
+            class="flex flex-col gap-2 xs:gap-2.5 font-fancy text-sm xs:text-base sm:text-xl md:text-2xl font-bold uppercase text-flax-smoke-300"
           >
             <li v-for="page in pagesNav" :key="page.label">
               <button
                 type="button"
                 @click="navigateTo(page.url)"
-                class="group flex items-center gap-2 transition-all hover:text-white hover:translate-x-1.5 cursor-pointer text-left"
+                class="group flex items-center gap-1.5 xs:gap-2 transition-all hover:text-white hover:translate-x-1.5 cursor-pointer text-left"
               >
                 <span
                   class="size-1.5 rounded-full bg-flame opacity-0 transition-opacity group-hover:opacity-100"
@@ -72,44 +75,44 @@
 
         <!-- Center Column: Cinematic Video Centerpiece & CTA Button -->
         <div
-          class="col-span-full order-first sm:order-none sm:col-span-6 flex flex-col items-center justify-center relative"
+          class="col-span-full order-first sm:order-none sm:col-span-6 flex flex-col items-center justify-center relative mb-2 sm:mb-0"
         >
           <!-- macOS Window Video Frame -->
           <div
-            class="relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-[440px] flex flex-col overflow-hidden rounded-2xl border border-white/15 bg-[#141413] shadow-2xl shadow-black/80 group"
+            class="relative w-full max-w-[280px] xs:max-w-[330px] sm:max-w-[380px] md:max-w-[440px] flex flex-col overflow-hidden rounded-xl sm:rounded-2xl border border-white/15 bg-[#141413] shadow-2xl shadow-black/80 group"
           >
             <!-- macOS Window Header Bar -->
             <div
-              class="flex items-center justify-between px-3.5 py-2.5 bg-[#1a1a18]/90 border-b border-white/10 select-none"
+              class="relative flex items-center justify-between px-3 sm:px-3.5 py-2 xs:py-2.5 bg-[#1a1a18]/90 border-b border-white/10 select-none"
             >
               <!-- 3 Traffic Light Dots -->
-              <div class="flex items-center gap-1.5">
+              <div class="flex items-center gap-1.5 z-10">
                 <span
-                  class="size-2.5 rounded-full bg-[#ff5f56] border border-[#e0443e]/50 transition-opacity hover:opacity-80"
+                  class="size-2 xs:size-2.5 rounded-full bg-[#ff5f56] border border-[#e0443e]/50 transition-opacity hover:opacity-80"
                 ></span>
                 <span
-                  class="size-2.5 rounded-full bg-[#ffbd2e] border border-[#dea123]/50 transition-opacity hover:opacity-80"
+                  class="size-2 xs:size-2.5 rounded-full bg-[#ffbd2e] border border-[#dea123]/50 transition-opacity hover:opacity-80"
                 ></span>
                 <span
-                  class="size-2.5 rounded-full bg-[#27c93f] border border-[#1aab29]/50 transition-opacity hover:opacity-80"
+                  class="size-2 xs:size-2.5 rounded-full bg-[#27c93f] border border-[#1aab29]/50 transition-opacity hover:opacity-80"
                 ></span>
               </div>
 
-              <!-- Window Title -->
+              <!-- Window Title (Dead Center) -->
               <span
-                class="font-mono text-[10px] sm:text-[11px] font-medium text-flax-smoke-400 tracking-tight truncate max-w-[170px] sm:max-w-none"
+                class="absolute left-1/2 -translate-x-1/2 font-mono text-[10px] sm:text-[11px] font-semibold text-flax-smoke-300 tracking-wide pointer-events-none select-none"
               >
-                spiderman-2-cinematic.mp4
+                spiderman 2
               </span>
 
               <!-- Live Badge -->
               <span
-                class="flex items-center gap-1.5 font-mono text-[9px] text-emerald-400 font-bold uppercase"
+                class="flex items-center gap-1 xs:gap-1.5 font-mono text-[8px] xs:text-[9px] text-emerald-400 font-bold uppercase whitespace-nowrap z-10"
               >
                 <span
                   class="size-1.5 rounded-full bg-emerald-400 animate-pulse"
                 ></span>
-                <span class="hidden sm:inline">60 FPS</span>
+                <span>EDITED BY FERREL</span>
               </span>
             </div>
 
@@ -131,7 +134,7 @@
           </div>
 
           <!-- Business Enquiries CTA Button (Floating overlapping the centerpiece) -->
-          <div class="relative -mt-6 z-20 flex flex-col items-center">
+          <div class="relative -mt-5 xs:-mt-6 z-20 flex flex-col items-center">
             <!-- Floating Copied Badge -->
             <Transition
               enter-active-class="transition duration-200 ease-out"
@@ -155,23 +158,23 @@
             <a
               href="mailto:ferrelrashadakeyla2014@gmail.com"
               @click="copyEmail"
-              class="group relative inline-flex items-center gap-3 rounded-full border border-flame bg-flame px-7 py-3.5 font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-flame/25 transition-all duration-300 hover:bg-white hover:text-black hover:border-white active:scale-95 cursor-pointer select-none"
+              class="group relative inline-flex items-center gap-2.5 xs:gap-3 rounded-full border border-flame bg-flame px-5 xs:px-7 py-3 xs:py-3.5 font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-flame/25 transition-all duration-300 hover:bg-white hover:text-black hover:border-white active:scale-95 cursor-pointer select-none"
             >
               <span>Business Enquiries</span>
               <svg
-                class="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                class="size-3.5 xs:size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2.5"
               >
                 <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
+                <polyline points="7 7 17 7 17"></polyline>
               </svg>
             </a>
 
             <p
-              class="mt-2 font-mono text-[10px] text-flax-smoke-500 uppercase tracking-wider"
+              class="mt-2 font-mono text-[9px] xs:text-[10px] text-flax-smoke-500 uppercase tracking-wider text-center"
             >
               CLICK TO SEND OR COPY EMAIL
             </p>
@@ -180,32 +183,32 @@
 
         <!-- Right Column: FOLLOW ON -->
         <div
-          class="col-span-6 sm:col-span-3 flex flex-col items-end sm:items-end gap-4 text-right select-none"
+          class="col-span-6 sm:col-span-3 flex flex-col items-end sm:items-end gap-3 sm:gap-4 text-right select-none"
         >
           <p
-            class="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-flax-smoke-500"
+            class="font-mono text-[9px] xs:text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-flax-smoke-500"
           >
             [ FOLLOW ON ]
           </p>
           <ul
-            class="flex flex-col gap-2.5 font-fancy text-base sm:text-xl md:text-2xl font-bold uppercase text-flax-smoke-300"
+            class="flex flex-col gap-2 xs:gap-2.5 font-fancy text-sm xs:text-base sm:text-xl md:text-2xl font-bold uppercase text-flax-smoke-300"
           >
             <li v-for="social in socialLinks" :key="social.label">
               <a
                 :href="social.url"
                 target="_blank"
-                class="group flex items-center justify-end gap-2 transition-all hover:text-white hover:-translate-x-1.5 cursor-pointer"
+                class="group flex items-center justify-end gap-1.5 xs:gap-2 transition-all hover:text-white hover:-translate-x-1.5 cursor-pointer"
               >
                 <span>{{ social.label }}</span>
                 <svg
-                  class="size-3.5 opacity-40 transition-all group-hover:opacity-100 group-hover:text-flame"
+                  class="size-3 xs:size-3.5 opacity-40 transition-all group-hover:opacity-100 group-hover:text-flame"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2.5"
                 >
                   <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
+                  <polyline points="7 7 17 7 17"></polyline>
                 </svg>
               </a>
             </li>
@@ -274,7 +277,8 @@
   import { animateSplitText } from '@/animations';
   import { lenis } from '@/lenis';
 
-  const makeItHappen = ref("Let's Make it happen");
+  const beGreater = ref('Be Greater.');
+  const together = ref('Together.');
   const emailCopied = ref(false);
 
   const pagesNav = [
@@ -317,7 +321,8 @@
   };
 
   onBeforeMount(() => {
-    makeItHappen.value = textSplitterIntoChar(makeItHappen.value);
+    beGreater.value = textSplitterIntoChar(beGreater.value);
+    together.value = textSplitterIntoChar(together.value);
   });
 
   onMounted(() => {
