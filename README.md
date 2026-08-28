@@ -52,7 +52,7 @@ Built with a focus on fluid 60 FPS motion, responsive macOS-style browser mockup
 | **[Spider-Dev Portfolio](https://github.com/FerrelHD/Portofolio)** | Creative Frontend & Web Audio | React 19, GSAP, Tailwind CSS, Web Audio | [Live Repo](https://github.com/FerrelHD/Portofolio) |
 | **[Student Life](https://ferrelhd.github.io/Student-Life/)** | Productivity Web App | React 19, TypeScript, Supabase, Tailwind | [Live Demo](https://ferrelhd.github.io/Student-Life/) |
 | **[Fersya Shop](https://github.com/FerrelHD/Fersya-Shop)** | Organic E-Commerce Store | Laravel 11, Filament Admin, Tailwind CSS | [Source Code](https://github.com/FerrelHD/Fersya-Shop) |
-| **Finesser Shop** | Digital Assets Storefront | Laravel, Bootstrap, MySQL | Archived |
+| **[Finesser Shop](https://github.com/FerrelHD/Finesser-Shop)** | Digital Assets Storefront | Laravel, Bootstrap, MySQL | [Source Code](https://github.com/FerrelHD/Finesser-Shop) |
 | **[Street Rush](https://github.com/FerrelHD/Street-Rush-Unity)** | 3D Arcade Runner Game | Unity, C#, Mobile 3D Physics | [Unity Repo](https://github.com/FerrelHD/Street-Rush-Unity) |
 | **[Gunung Gede Simulation](https://www.roblox.com/games/125712163693709/Mount-Gede-Via-Gunung-Putri)** | 3D Hiking Trail Simulation | Luau, Roblox Studio, Terrain Modeling | [Play Roblox](https://www.roblox.com/games/125712163693709/Mount-Gede-Via-Gunung-Putri) |
 

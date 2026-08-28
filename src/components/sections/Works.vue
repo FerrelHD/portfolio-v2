@@ -428,10 +428,11 @@
       name: 'Finesser Shop',
       category: 'Digital Assets Storefront',
       tags: ['Laravel', 'Bootstrap', 'MySQL'],
-      status: 'offline',
+      status: 'repo',
       domain: 'finesser.shop',
       previewImg: finesserShopImg,
-      primaryUrl: '#',
+      primaryUrl: 'https://github.com/FerrelHD/Finesser-Shop',
+      githubUrl: 'https://github.com/FerrelHD/Finesser-Shop',
       year: '2024',
     },
     {
