@@ -56,8 +56,6 @@
     <People />
     <Contact />
   </main>
-
-  <Footer />
 </template>
 
 <script setup lang="ts">
@@ -74,7 +72,6 @@
     LoadingScreen,
     Marquee,
     SamsungError,
-    Footer,
     Cursor,
   } from '@/components/design';
   import { useWindowSize } from '@vueuse/core';

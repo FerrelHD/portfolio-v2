@@ -45,8 +45,12 @@ const socialLinks = [
     url: 'https://www.linkedin.com/in/ferrel-rashad-8a165514b/',
   },
   {
-    label: 'Email',
-    url: 'mailto:ferrelrashadakeyla2014@gmail.com',
+    label: 'Instagram',
+    url: 'https://www.instagram.com/ferrelrshd',
+  },
+  {
+    label: 'YouTube',
+    url: 'https://www.youtube.com/@ferrelrashad3399',
   },
 ];
 

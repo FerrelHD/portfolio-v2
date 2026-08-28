@@ -1,112 +1,241 @@
 <template>
   <section
     id="contact-section"
-    class="relative min-h-svh w-full overflow-y-clip p-[4vh] select-none"
+    class="relative w-full min-h-svh p-3 sm:p-6 md:p-8 flex flex-col justify-between select-none"
   >
     <div
-      class="flex-center relative h-[92vh] w-full flex-col rounded-lg bg-black uppercase"
+      class="relative w-full overflow-hidden rounded-3xl border border-white/15 bg-[#0a0a09] p-6 sm:p-10 md:p-12 shadow-2xl flex flex-col justify-between min-h-[92vh]"
     >
-      <video
-        class="absolute bottom-0 left-0 size-full rounded-lg object-cover object-center brightness-40 contrast-125"
-        :src="contact"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-      ></video>
+      <!-- Top Monogram & Meta Bar -->
       <div
-        class="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-t from-black/80 via-black/30 to-black/80"
-      ></div>
-      <div class="flex-center z-10 flex-col gap-y-10">
+        class="flex items-center justify-between border-b border-white/10 pb-5 mb-4 select-none"
+      >
+        <div class="flex items-center gap-2">
+          <span class="size-2 rounded-full bg-flame animate-pulse"></span>
+          <span
+            class="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-widest text-flax-smoke-300"
+          >
+            FERREL.DEV // FINAL_LAP
+          </span>
+        </div>
+        <span
+          class="font-mono text-[10px] sm:text-xs uppercase tracking-wider text-flax-smoke-500"
+        >
+          DEPOK, ID • GMT+7
+        </span>
+      </div>
+
+      <!-- Giant Bold Headline Banner -->
+      <div class="text-center my-4 sm:my-6">
         <p
-          class="heading-4 text-flax-smoke-300 max-w-[30ch] text-center font-mono"
+          class="font-mono text-xs sm:text-sm font-semibold tracking-widest uppercase text-flame mb-2"
         >
-          Your design is a masterpiece waiting to become alive.
+          ( READY TO COLLABORATE )
         </p>
-        <h3
+        <h2
           id="make-it-happen"
-          class="heading-1 text-flax-smoke-200 max-w-[10ch] text-center leading-none"
+          class="font-title text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-flax-smoke-100 leading-none text-balance"
           v-html="makeItHappen"
-        ></h3>
+        ></h2>
+      </div>
+
+      <!-- 3-Column Symmetrical Grid ala Lando Norris -->
+      <div
+        class="grid grid-cols-12 gap-6 sm:gap-8 items-center my-6 sm:my-8 relative z-10"
+      >
+        <!-- Left Column: PAGES -->
         <div
-          class="mt-6 sm:mt-10 flex scale-110 sm:scale-125 md:scale-135 lg:scale-150 items-center"
+          class="col-span-6 sm:col-span-3 flex flex-col items-start gap-4 select-none"
         >
-          <!-- <Button
-            :data-cal-namespace="dataCalNamespace"
-            :data-cal-link="dataCalLink"
-            :data-cal-config="dataCalConfig"
-            label="Get in touch"
-          /> -->
-          <Button label="Get in touch" url="mailto:ferrelrashadakeyla2014@gmail.com" />
+          <p
+            class="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-flax-smoke-500"
+          >
+            [ PAGES ]
+          </p>
+          <ul
+            class="flex flex-col gap-2.5 font-fancy text-base sm:text-xl md:text-2xl font-bold uppercase text-flax-smoke-300"
+          >
+            <li v-for="page in pagesNav" :key="page.label">
+              <button
+                type="button"
+                @click="navigateTo(page.url)"
+                class="group flex items-center gap-2 transition-all hover:text-white hover:translate-x-1.5 cursor-pointer text-left"
+              >
+                <span
+                  class="size-1.5 rounded-full bg-flame opacity-0 transition-opacity group-hover:opacity-100"
+                ></span>
+                <span>{{ page.label }}</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Center Column: Cinematic Video Centerpiece & CTA Button -->
+        <div
+          class="col-span-full order-first sm:order-none sm:col-span-6 flex flex-col items-center justify-center relative"
+        >
+          <!-- Video Frame Container -->
+          <div
+            class="relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-[420px] aspect-[16/10] overflow-hidden rounded-2xl border border-white/20 bg-[#141413] shadow-2xl shadow-black group"
+          >
+            <video
+              class="size-full object-cover object-center brightness-60 contrast-125 transition-transform duration-700 group-hover:scale-105"
+              :src="contact"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            ></video>
+            <div
+              class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"
+            ></div>
+
+            <!-- Top Pill Badge in Video -->
+            <div
+              class="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none"
+            >
+              <span
+                class="rounded bg-black/70 px-2 py-0.5 font-mono text-[9px] font-bold uppercase text-flax-smoke-300 backdrop-blur-xs border border-white/10"
+              >
+                CINEMATIC MESH // 60 FPS
+              </span>
+              <span
+                class="size-2 rounded-full bg-emerald-400 animate-pulse"
+              ></span>
+            </div>
+          </div>
+
+          <!-- Business Enquiries CTA Button (Floating overlapping the centerpiece) -->
+          <div class="relative -mt-6 z-20 flex flex-col items-center">
+            <!-- Floating Copied Badge -->
+            <Transition
+              enter-active-class="transition duration-200 ease-out"
+              enter-from-class="opacity-0 -translate-y-1 scale-95"
+              enter-to-class="opacity-100 translate-y-0 scale-100"
+              leave-active-class="transition duration-200 ease-in"
+              leave-from-class="opacity-100 translate-y-0 scale-100"
+              leave-to-class="opacity-0 -translate-y-1 scale-95"
+            >
+              <div
+                v-if="emailCopied"
+                class="absolute -top-7 z-30 flex items-center gap-1.5 rounded-full border border-flame bg-flame px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-white shadow-lg shadow-flame/40 pointer-events-none select-none"
+              >
+                <span
+                  class="size-1.5 rounded-full bg-white animate-pulse"
+                ></span>
+                <span>Copied // Clipboard</span>
+              </div>
+            </Transition>
+
+            <a
+              href="mailto:ferrelrashadakeyla2014@gmail.com"
+              @click="copyEmail"
+              class="group relative inline-flex items-center gap-3 rounded-full border border-flame bg-flame px-7 py-3.5 font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-flame/25 transition-all duration-300 hover:bg-white hover:text-black hover:border-white active:scale-95 cursor-pointer select-none"
+            >
+              <span>Business Enquiries</span>
+              <svg
+                class="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </a>
+
+            <p
+              class="mt-2 font-mono text-[10px] text-flax-smoke-500 uppercase tracking-wider"
+            >
+              CLICK TO SEND OR COPY EMAIL
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Column: FOLLOW ON -->
+        <div
+          class="col-span-6 sm:col-span-3 flex flex-col items-end sm:items-end gap-4 text-right select-none"
+        >
+          <p
+            class="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-flax-smoke-500"
+          >
+            [ FOLLOW ON ]
+          </p>
+          <ul
+            class="flex flex-col gap-2.5 font-fancy text-base sm:text-xl md:text-2xl font-bold uppercase text-flax-smoke-300"
+          >
+            <li v-for="social in socialLinks" :key="social.label">
+              <a
+                :href="social.url"
+                target="_blank"
+                class="group flex items-center justify-end gap-2 transition-all hover:text-white hover:-translate-x-1.5 cursor-pointer"
+              >
+                <span>{{ social.label }}</span>
+                <svg
+                  class="size-3.5 opacity-40 transition-all group-hover:opacity-100 group-hover:text-flame"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
+
+      <!-- Running Tech Ticker Marquee Ribbon -->
       <div
-        class="absolute bottom-5 flex w-full items-center justify-center px-5 md:justify-between"
+        class="relative w-full overflow-hidden border-y border-white/10 py-2.5 my-3 bg-white/[0.02] select-none"
       >
-        <div class="hidden md:flex">
-          <div class="border-flax-smoke-300 relative border">
-            <Vue3Lottie
-              ref="customControl"
-              :animationData="earthLottie"
-              :loop="true"
-              :autoPlay="true"
-            />
-          </div>
-          <div
-            class="flex-center py border-flax-smoke-300 text-flax-smoke-300 w-fit flex-col border border-l-0 font-mono"
-          >
-            <p
-              class="border-flax-smoke-300 flex size-full items-center justify-start border-b pr-2 pl-1 font-bold"
-            >
-              Working Globally
-            </p>
-            <p class="flex size-full items-center justify-start pr-2 pl-1">
-              Depok, Indonesia
-            </p>
-          </div>
+        <div
+          class="flex items-center gap-8 whitespace-nowrap font-mono text-[11px] font-semibold uppercase tracking-widest text-flax-smoke-400 animate-marquee"
+        >
+          <span v-for="n in 2" :key="n" class="flex items-center gap-8">
+            <span>REACT 19</span>
+            <span class="size-1 rounded-full bg-flame"></span>
+            <span>TYPESCRIPT</span>
+            <span class="size-1 rounded-full bg-flame"></span>
+            <span>LARAVEL 11</span>
+            <span class="size-1 rounded-full bg-flame"></span>
+            <span>PYTHON ML</span>
+            <span class="size-1 rounded-full bg-flame"></span>
+            <span>UNITY 3D</span>
+            <span class="size-1 rounded-full bg-flame"></span>
+            <span>GSAP MOTION</span>
+            <span class="size-1 rounded-full bg-flame"></span>
+            <span>SUPABASE</span>
+            <span class="size-1 rounded-full bg-flame"></span>
+            <span>TAILWIND CSS</span>
+            <span class="size-1 rounded-full bg-flame"></span>
+          </span>
         </div>
+      </div>
 
-        <div class="heading-6 text-flax-smoke-500 relative w-fit flex flex-col items-end">
-          <p class="w-full font-bold uppercase text-right">For further inquiries</p>
-          
-          <!-- Floating Copied Popover Badge (Brand Flame Style) -->
-          <Transition
-            enter-active-class="transition duration-200 ease-out"
-            enter-from-class="opacity-0 -translate-y-1 scale-95"
-            enter-to-class="opacity-100 translate-y-0 scale-100"
-            leave-active-class="transition duration-200 ease-in"
-            leave-from-class="opacity-100 translate-y-0 scale-100"
-            leave-to-class="opacity-0 -translate-y-1 scale-95"
-          >
-            <div
-              v-if="emailCopied"
-              class="absolute -top-7 right-0 z-30 flex items-center gap-1.5 rounded-full border border-flame bg-flame px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-white shadow-lg shadow-flame/30 pointer-events-none select-none"
-            >
-              <span class="size-1.5 rounded-full bg-white animate-pulse"></span>
-              <span>Copied // Clipboard</span>
-            </div>
-          </Transition>
-
+      <!-- Bottom Edge Bar -->
+      <div
+        class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10 font-mono text-[11px] text-flax-smoke-500 select-none"
+      >
+        <p>© 2026 Ferrel Rashad Akeyla. All rights reserved.</p>
+        <div class="flex items-center gap-6">
+          <span class="flex items-center gap-1.5 text-flax-smoke-400">
+            <span class="size-1.5 rounded-full bg-emerald-400"></span>
+            <span>Depok, Indonesia • GMT+7</span>
+          </span>
           <button
             type="button"
-            @click="copyEmail"
-            class="text-flax-smoke-300 hover:text-white mt-1 h-6 text-right font-medium tracking-wider lowercase flex items-center gap-1 cursor-pointer transition-colors"
-            title="Click to copy email address"
+            @click="scrollToTop"
+            class="group flex items-center gap-1 text-flax-smoke-300 hover:text-white cursor-pointer uppercase transition-colors"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              role="img"
-              class="-scale-x-75 scale-y-75 fill-current"
+            <span>Back to top</span>
+            <span class="transition-transform group-hover:-translate-y-0.5"
+              >↑</span
             >
-              <path
-                d="M7.82834 17.2929L10.1213 19.586L8.70709 21.0001L4 16.2929L8.7071 11.5858L10.1213 13L7.82844 15.2929L18 15.2928L17.9999 3H19.9999L20 16.2928C20 16.8451 19.5523 17.2928 19 17.2928L7.82834 17.2929Z"
-              ></path>
-            </svg>
-            <span>ferrelrashadakeyla2014@gmail.com</span>
           </button>
         </div>
       </div>
@@ -115,30 +244,58 @@
 </template>
 
 <script setup lang="ts">
-  import { earthLottie } from '@/assets/videos';
-  import { Button } from '../common';
-  import { Vue3Lottie } from 'vue3-lottie';
   import { contact } from '@/assets/videos';
   import { onBeforeMount, onMounted, ref } from 'vue';
   import { textSplitterIntoChar } from '@/functions';
   import { animateSplitText } from '@/animations';
-  // import { dataCalConfig, dataCalLink, dataCalNamespace } from '@/data';
+  import { lenis } from '@/lenis';
 
   const makeItHappen = ref("Let's Make it happen");
   const emailCopied = ref(false);
 
+  const pagesNav = [
+    { label: 'Home', url: '#app' },
+    { label: 'Services', url: '#services' },
+    { label: 'Projects', url: '#works' },
+    { label: 'About', url: '#about-me-section' },
+    { label: 'Arsenal', url: '#slider' },
+  ];
+
+  const socialLinks = [
+    { label: 'GitHub', url: 'https://github.com/FerrelHD' },
+    {
+      label: 'LinkedIn',
+      url: 'https://www.linkedin.com/in/ferrel-rashad-8a165514b/',
+    },
+    { label: 'Instagram', url: 'https://www.instagram.com/ferrelrshd' },
+    { label: 'YouTube', url: 'https://www.youtube.com/@ferrelrashad3399' },
+  ];
+
+  const navigateTo = (url: string) => {
+    lenis.start();
+    lenis.scrollTo(url, { duration: 2 });
+  };
+
+  const scrollToTop = () => {
+    lenis.start();
+    lenis.scrollTo(0, { duration: 2 });
+  };
+
   const copyEmail = () => {
-    navigator.clipboard.writeText('ferrelrashadakeyla2014@gmail.com').then(() => {
-      emailCopied.value = true;
-      setTimeout(() => {
-        emailCopied.value = false;
-      }, 2000);
-    });
+    navigator.clipboard
+      .writeText('ferrelrashadakeyla2014@gmail.com')
+      .then(() => {
+        emailCopied.value = true;
+        setTimeout(() => {
+          emailCopied.value = false;
+        }, 2000);
+      });
   };
 
   onBeforeMount(() => {
     makeItHappen.value = textSplitterIntoChar(makeItHappen.value);
   });
+
   onMounted(() => {
     animateSplitText(
       '#make-it-happen .letters',
@@ -149,20 +306,3 @@
     );
   });
 </script>
-
-<style>
-  .lottie-animation-container {
-    height: 100% !important;
-  }
-  .lottie-animation-container svg {
-    height: 100px !important;
-    width: fit-content !important;
-    margin: -10px -30px !important;
-    padding: 0 !important;
-  }
-
-  .lottie-animation-container {
-    --lottie-animation-container-width: fit-content !important;
-    --lottie-animation-container-height: 0% !important;
-  }
-</style>
