@@ -91,7 +91,6 @@ npm run build
 ## 🎨 Acknowledgments & Credits
 
 - **UI/UX Design Inspiration:** [Huy Nguyen](https://www.huyng.xyz)
-- **Base Animation Architecture:** Adapted and customized from [Ebraheem Alhetari](https://github.com/Hetari/portfolio)
 
 ---
 

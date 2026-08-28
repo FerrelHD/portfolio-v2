@@ -17,9 +17,8 @@ export default defineConfig({
     vue(),
     robots(),
     sitemap({
-      hostname: 'https://ferrelhd.github.io/',
-      basePath: 'portfolio',
-      changefreq: 'hourly', // default: 'daily'
+      hostname: 'https://ferrel-rashad-portfolio.vercel.app/',
+      changefreq: 'weekly',
       priority: 1,
     }),
   ],
