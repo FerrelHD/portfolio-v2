@@ -26,8 +26,8 @@
         <p
           class="heading-4 font-fancy col-span-8 w-full text-balance sm:font-semibold lg:col-span-7"
         >
-          Featured client projects that have been meticulously crafted with
-          passion and purpose over the years.
+          A curated collection of web apps, 3D interactive experiences, and
+          machine learning systems I’ve engineered and shipped.
         </p>
       </div>
     </div>

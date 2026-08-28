@@ -48,15 +48,36 @@
         </ul>
       </div>
 
-      <div class="w-full">
+      <div class="relative w-full">
         <div class="text-flax-smoke-50 mt-2 h-full font-normal">
           <p class="text-left text-sm font-bold uppercase">Email address</p>
-          <Link
-            class="font-medium tracking-wider"
-            tag="p"
-            label="ferrelrashadakeyla2014@gmail.com"
-            url="mailto:ferrelrashadakeyla2014@gmail.com"
-          />
+
+          <!-- Floating Copied Popover Badge (Brand Flame Style) -->
+          <Transition
+            enter-active-class="transition duration-200 ease-out"
+            enter-from-class="opacity-0 -translate-y-1 scale-95"
+            enter-to-class="opacity-100 translate-y-0 scale-100"
+            leave-active-class="transition duration-200 ease-in"
+            leave-from-class="opacity-100 translate-y-0 scale-100"
+            leave-to-class="opacity-0 -translate-y-1 scale-95"
+          >
+            <div
+              v-if="emailCopied"
+              class="absolute -top-6 left-0 z-30 flex items-center gap-1.5 rounded-full border border-flame bg-flame px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-white shadow-lg shadow-flame/30 pointer-events-none select-none"
+            >
+              <span class="size-1.5 rounded-full bg-white animate-pulse"></span>
+              <span>Copied // Clipboard</span>
+            </div>
+          </Transition>
+
+          <button
+            type="button"
+            @click="copyEmail"
+            class="font-medium tracking-wider text-flax-smoke-300 hover:text-white transition-colors cursor-pointer text-left block text-sm sm:text-base mt-1"
+            title="Click to copy email address"
+          >
+            ferrelrashadakeyla2014@gmail.com
+          </button>
           <div class="mt-6 flex flex-wrap justify-start gap-1">
             <Button
               class="contact border-flax-smoke-600 border opacity-0"
@@ -136,6 +157,16 @@
   import { lenis } from '@/lenis';
 
   const isNavbarOpen = ref(false);
+  const emailCopied = ref(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText('ferrelrashadakeyla2014@gmail.com').then(() => {
+      emailCopied.value = true;
+      setTimeout(() => {
+        emailCopied.value = false;
+      }, 2000);
+    });
+  };
 
   const toggleBtnClickAnimation = () => {
     isNavbarOpen.value = !isNavbarOpen.value;

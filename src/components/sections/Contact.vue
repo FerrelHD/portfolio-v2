@@ -67,14 +67,47 @@
           </div>
         </div>
 
-        <div class="heading-6 text-flax-smoke-500 w-fit">
-          <p class="w-full font-bold uppercase">For further inquiries</p>
-          <Link
-            class="text-flax-smoke-300 h-6 text-right font-medium tracking-wider lowercase"
-            label="ferrelrashadakeyla2014@gmail.com"
-            :icon="true"
-            url="mailto:ferrelrashadakeyla2014@gmail.com"
-          />
+        <div class="heading-6 text-flax-smoke-500 relative w-fit flex flex-col items-end">
+          <p class="w-full font-bold uppercase text-right">For further inquiries</p>
+          
+          <!-- Floating Copied Popover Badge (Brand Flame Style) -->
+          <Transition
+            enter-active-class="transition duration-200 ease-out"
+            enter-from-class="opacity-0 -translate-y-1 scale-95"
+            enter-to-class="opacity-100 translate-y-0 scale-100"
+            leave-active-class="transition duration-200 ease-in"
+            leave-from-class="opacity-100 translate-y-0 scale-100"
+            leave-to-class="opacity-0 -translate-y-1 scale-95"
+          >
+            <div
+              v-if="emailCopied"
+              class="absolute -top-7 right-0 z-30 flex items-center gap-1.5 rounded-full border border-flame bg-flame px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-white shadow-lg shadow-flame/30 pointer-events-none select-none"
+            >
+              <span class="size-1.5 rounded-full bg-white animate-pulse"></span>
+              <span>Copied // Clipboard</span>
+            </div>
+          </Transition>
+
+          <button
+            type="button"
+            @click="copyEmail"
+            class="text-flax-smoke-300 hover:text-white mt-1 h-6 text-right font-medium tracking-wider lowercase flex items-center gap-1 cursor-pointer transition-colors"
+            title="Click to copy email address"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              role="img"
+              class="-scale-x-75 scale-y-75 fill-current"
+            >
+              <path
+                d="M7.82834 17.2929L10.1213 19.586L8.70709 21.0001L4 16.2929L8.7071 11.5858L10.1213 13L7.82844 15.2929L18 15.2928L17.9999 3H19.9999L20 16.2928C20 16.8451 19.5523 17.2928 19 17.2928L7.82834 17.2929Z"
+              ></path>
+            </svg>
+            <span>ferrelrashadakeyla2014@gmail.com</span>
+          </button>
         </div>
       </div>
     </div>
@@ -85,7 +118,6 @@
   import { earthLottie } from '@/assets/videos';
   import { Button } from '../common';
   import { Vue3Lottie } from 'vue3-lottie';
-  import Link from '../Link.vue';
   import { contact } from '@/assets/videos';
   import { onBeforeMount, onMounted, ref } from 'vue';
   import { textSplitterIntoChar } from '@/functions';
@@ -93,6 +125,17 @@
   // import { dataCalConfig, dataCalLink, dataCalNamespace } from '@/data';
 
   const makeItHappen = ref("Let's Make it happen");
+  const emailCopied = ref(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText('ferrelrashadakeyla2014@gmail.com').then(() => {
+      emailCopied.value = true;
+      setTimeout(() => {
+        emailCopied.value = false;
+      }, 2000);
+    });
+  };
+
   onBeforeMount(() => {
     makeItHappen.value = textSplitterIntoChar(makeItHappen.value);
   });

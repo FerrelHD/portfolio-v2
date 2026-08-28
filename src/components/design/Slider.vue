@@ -60,7 +60,7 @@
         <div
           class="relative z-10 w-full max-w-xl overflow-hidden rounded-2xl border border-white/15 bg-[#0e0e0d] shadow-[0_15px_35px_rgba(0,0,0,0.35)] transition-all duration-300 min-w-0"
         >
-          <!-- Window Top Bar (macOS Dots & Multi-Tabs) -->
+          <!-- Window Top Bar (macOS Dots & Multi-Tabs + Copy Button) -->
           <div
             class="flex items-center justify-between border-b border-white/10 bg-[#161615] px-4 py-2.5 select-none"
           >
@@ -99,6 +99,33 @@
                 ></span>
               </button>
             </div>
+
+            <!-- 1-Click Copy Snippet Action -->
+            <button
+              type="button"
+              @click="copyCode(index)"
+              :class="[
+                copiedIndex === index
+                  ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300'
+                  : 'border-white/10 bg-white/5 text-flax-smoke-400 hover:border-white/20 hover:bg-white/10 hover:text-white',
+                'ml-3 flex cursor-pointer items-center gap-1.5 rounded-md border px-2.5 py-1 font-mono text-[11px] transition-all duration-200 active:scale-95 shrink-0',
+              ]"
+              :aria-label="`Copy ${people[index].filename} code`"
+            >
+              <template v-if="copiedIndex === index">
+                <svg class="size-3 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span class="font-semibold">Copied!</span>
+              </template>
+              <template v-else>
+                <svg class="size-3 text-flax-smoke-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy</span>
+              </template>
+            </button>
           </div>
 
           <!-- Code Editor Body with Line Numbers & Stagger Wave -->
@@ -206,17 +233,32 @@
           <div
             class="w-full min-w-0 overflow-hidden rounded-xl border border-white/15 bg-[#0f0f0e] shadow-xl"
           >
-            <!-- Terminal Header -->
+            <!-- Terminal Header with Copy Action -->
             <div
-              class="flex items-center justify-between border-b border-white/10 bg-[#181817] px-3.5 py-2.5 select-none"
+              class="flex items-center justify-between border-b border-white/10 bg-[#181817] px-3.5 py-2 select-none"
             >
               <div class="flex items-center gap-1.5">
                 <span class="size-2 rounded-full bg-[#FF5F56]/90"></span>
                 <span class="size-2 rounded-full bg-[#FFBD2E]/90"></span>
                 <span class="size-2 rounded-full bg-[#27C93F]/90"></span>
               </div>
-              <div class="font-mono text-xs text-amber-400/90 font-medium">
-                {{ p.filename }}
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs text-amber-400/90 font-medium">
+                  {{ p.filename }}
+                </span>
+                <button
+                  type="button"
+                  @click="copyCode(i)"
+                  :class="[
+                    copiedIndex === i
+                      ? 'border-emerald-500/40 bg-emerald-500/15 text-emerald-300'
+                      : 'border-white/10 bg-white/5 text-flax-smoke-400 hover:text-white',
+                    'flex cursor-pointer items-center gap-1 rounded border px-2 py-0.5 font-mono text-[10px] transition-all active:scale-95',
+                  ]"
+                >
+                  <span v-if="copiedIndex === i" class="font-semibold text-emerald-400">✓ Copied</span>
+                  <span v-else>Copy</span>
+                </button>
               </div>
             </div>
 
@@ -310,6 +352,25 @@
   });
 
   const canClick = ref(true);
+  const copiedIndex = ref<number | null>(null);
+
+  const copyCode = (targetIdx: number) => {
+    const target = people[targetIdx];
+    if (!target) return;
+
+    const rawCode = target.codeLines
+      .map((line) => line.replace(/<[^>]*>?/gm, ''))
+      .join('\n');
+
+    navigator.clipboard.writeText(rawCode).then(() => {
+      copiedIndex.value = targetIdx;
+      setTimeout(() => {
+        if (copiedIndex.value === targetIdx) {
+          copiedIndex.value = null;
+        }
+      }, 2000);
+    });
+  };
 
   // Kinetic Word-by-Word Wave transition for Quote
   const animateTextTransition = (direction: 'up' | 'zero') => {

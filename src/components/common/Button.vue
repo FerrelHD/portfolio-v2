@@ -11,7 +11,7 @@
     :href="url"
   >
     <span
-      class="ease-expo flex-center absolute bottom-0 left-0 z-10 my-auto size-full w-full will-change-auto translate-y-full text-nowrap rounded-t-[15rem] bg-flax-smoke-500 font-fancy transition-all duration-700 group-hover:translate-y-0 group-hover:rounded-none"
+      class="ease-expo flex-center absolute bottom-0 left-0 z-10 my-auto size-full w-full will-change-auto translate-y-full text-nowrap rounded-t-[15rem] bg-flame font-fancy text-white transition-all duration-700 group-hover:translate-y-0 group-hover:rounded-none"
     >
       {{ label }}</span
     >

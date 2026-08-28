@@ -2,32 +2,33 @@
   <section class="padding-x mb-[-100svh] py-0">
     <div
       id="hero"
-      class="sticky top-0 flex min-h-svh w-full items-end pb-[clamp(2.25rem,2.1786rem_+_0.3571vi,2.5rem)]"
+      class="sticky top-0 flex min-h-svh w-full flex-col justify-end pb-6 sm:pb-8 md:pb-10 pt-16 sm:pt-20"
     >
       <div class="relative flex w-full flex-col items-center">
+        <!-- Big Name Header & Rotating Flame Star -->
         <div class="w-full items-end overflow-clip">
-          <div class="flex w-full items-start gap-10">
+          <div class="flex w-full items-start gap-6 sm:gap-10">
             <MyName />
             <Star id="star" class="hide-on-mobile translate-x-full" />
           </div>
         </div>
 
-        <div class="lg:column-gap spacing-t grid w-full grid-cols-12">
+        <!-- 3-Column Hero Content Grid -->
+        <div class="lg:column-gap mt-4 sm:mt-6 lg:mt-8 grid w-full grid-cols-12 items-end">
+          <!-- Column 1: Subtitle & CTA -->
           <div
-            class="col-span-full flex flex-col items-start gap-14 sm:col-span-4"
+            class="col-span-full flex flex-col items-start gap-3 sm:gap-4 sm:col-span-4"
           >
             <div class="overflow-hidden">
               <svg
                 id="down-arrow"
                 stroke="currentColor"
                 fill="none"
-                stroke-width="1.25"
+                stroke-width="1.5"
                 viewBox="6 6 12 12"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="hide-on-mobile m-0 size-4 -translate-x-full p-0 md:size-6"
-                color="#8C8C73"
-                style="color: #8c8c73"
+                class="hide-on-mobile m-0 size-4 -translate-x-full p-0 md:size-5 text-flame"
                 height="1em"
                 width="1em"
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,30 +46,48 @@
             <p
               v-html="whoAmI"
               id="whoAmI"
-              class="who-am-i heading-5 w-full max-w-[30ch] overflow-clip leading-snug font-medium text-balance sm:max-w-[37ch] lg:text-start"
+              class="who-am-i text-sm sm:text-base md:text-[1.05rem] w-full max-w-[30ch] overflow-clip leading-snug font-medium text-balance sm:max-w-[37ch] lg:text-start text-flax-smoke-900"
             ></p>
 
-            <div class="relative origin-left overflow-hidden sm:scale-150">
+            <div class="relative origin-left overflow-hidden sm:scale-110 pt-1">
               <div id="contact-btn" class="flex -translate-y-full">
-                <Button label="Get in touch" url="mailto:ferrelrashadakeyla2014@gmail.com" />
+                <Button
+                  label="Get in touch"
+                  url="mailto:ferrelrashadakeyla2014@gmail.com"
+                />
               </div>
             </div>
           </div>
 
+          <!-- Column 2: Developer Frame with Balanced Portrait Crop -->
           <div
             id="profile-container"
-            class="relative col-span-4 mt-10 h-[20vh] max-w-lg flex-col rounded-lg select-none sm:mt-0 sm:h-full md:flex md:h-[50vh]"
+            class="relative col-span-4 mt-4 sm:mt-0 flex w-full max-w-[210px] sm:max-w-[240px] md:max-w-[260px] mx-auto flex-col rounded-2xl border border-flax-smoke-300/80 bg-flax-smoke-100/70 p-2 shadow-xl backdrop-blur-xs select-none group will-change-transform"
           >
-            <div class="overlay bg-flax-smoke-50 absolute inset-0 z-2"></div>
-            <img
-              id="profile-img"
-              :src="profile"
-              alt="Ferrel Rashad profile"
-              class="size-full scale-90 rounded-lg object-cover object-top brightness-110 grayscale"
-            />
+            <!-- Top Card Header Pill -->
+            <div
+              class="flex items-center justify-between px-2 py-1 font-mono text-[9px] sm:text-[10px] uppercase text-flax-smoke-600 border-b border-flax-smoke-300/40 mb-1.5 select-none"
+            >
+              <span class="flex items-center gap-1.5">
+                <span class="size-1.5 rounded-full bg-flame"></span>
+                <span class="font-bold text-flax-smoke-900">FERREL.DEV</span>
+              </span>
+              <span class="text-flax-smoke-500 font-semibold">DEV_ID // 01</span>
+            </div>
+
+            <!-- Balanced Crop Image Container -->
+            <div class="relative w-full aspect-[4/4.2] overflow-hidden rounded-xl bg-flax-smoke-200">
+              <div class="overlay bg-flax-smoke-100 absolute inset-0 z-2"></div>
+              <img
+                id="profile-img"
+                :src="profile"
+                alt="Ferrel Rashad profile"
+                class="size-full scale-90 rounded-xl object-cover object-[center_28%] brightness-105 grayscale contrast-105 transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-95"
+              />
+            </div>
           </div>
 
-          <!-- content-end justify-self-end  -->
+          <!-- Column 3: Status & Available Date Lockup -->
           <div
             class="relative col-span-8 size-full overflow-clip text-end sm:col-span-4"
           >
@@ -77,12 +96,13 @@
               class="absolute right-0 bottom-0 flex translate-y-full flex-col items-end"
             >
               <p
-                class="3xl:text-base block leading-snug font-medium -tracking-tight uppercase"
+                class="text-xs sm:text-sm block leading-snug font-medium -tracking-tight uppercase text-flax-smoke-600 font-mono"
               >
                 Available for freelance work
               </p>
+
               <h3
-                class="3xl:heading-1 heading-1-alt font-fancy block leading-none font-bold -tracking-tight"
+                class="3xl:heading-1 heading-1-alt font-title block leading-none font-extrabold text-flame -tracking-tight"
               >
                 {{ AvailableForWorkDate }}
               </h3>
