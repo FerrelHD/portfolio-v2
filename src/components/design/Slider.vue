@@ -1,12 +1,12 @@
 <template>
   <div
     id="slider"
-    class="column-gap relative mt-6 sm:mt-10 lg:mt-[5%] grid w-full grid-cols-12 gap-6 lg:gap-4 max-md:min-h-fit lg:h-auto"
+    class="relative mt-6 sm:mt-10 lg:mt-[5%] grid w-full grid-cols-12 gap-6 lg:gap-8 max-md:min-h-fit lg:h-auto min-w-0"
   >
     <!-- For larger devices, show one person at a time with index -->
     <template v-if="!isSmallScreen">
       <div
-        class="columns-gap relative col-span-full flex flex-col max-lg:h-fit lg:col-span-6 lg:h-full"
+        class="relative col-span-full flex flex-col max-lg:h-fit lg:col-span-6 lg:h-full min-w-0"
       >
         <div>
           <!-- Word-by-word Kinetic Cascading Quote -->
@@ -54,25 +54,25 @@
         </div>
       </div>
       <div
-        class="relative order-first col-span-full flex w-full items-center justify-center max-sm:order-last lg:order-last lg:col-span-6 lg:h-full"
+        class="relative order-first col-span-full flex w-full items-center justify-center max-sm:order-last lg:order-last lg:col-span-6 lg:h-full min-w-0"
       >
         <!-- Ultra-Realistic IDE Editor Window -->
         <div
-          class="relative z-10 w-full max-w-xl overflow-hidden rounded-2xl border border-white/15 bg-[#0e0e0d] shadow-[0_15px_35px_rgba(0,0,0,0.35)] transition-all duration-300"
+          class="relative z-10 w-full max-w-xl overflow-hidden rounded-2xl border border-white/15 bg-[#0e0e0d] shadow-[0_15px_35px_rgba(0,0,0,0.35)] transition-all duration-300 min-w-0"
         >
           <!-- Window Top Bar (macOS Dots & Multi-Tabs) -->
           <div
             class="flex items-center justify-between border-b border-white/10 bg-[#161615] px-4 py-2.5 select-none"
           >
             <!-- 3 macOS Window Controls -->
-            <div class="flex items-center gap-1.5 pr-3">
+            <div class="flex items-center gap-1.5 pr-3 shrink-0">
               <span class="size-2.5 rounded-full bg-[#FF5F56]/90 hover:opacity-100 transition-opacity"></span>
               <span class="size-2.5 rounded-full bg-[#FFBD2E]/90 hover:opacity-100 transition-opacity"></span>
               <span class="size-2.5 rounded-full bg-[#27C93F]/90 hover:opacity-100 transition-opacity"></span>
             </div>
 
             <!-- Clickable Interactive Multi-Tab Bar (No truncation) -->
-            <div class="flex flex-1 items-center gap-1.5 overflow-x-auto">
+            <div class="flex flex-1 items-center gap-1.5 overflow-x-auto min-w-0 scrollbar-none">
               <button
                 v-for="(tab, tabIdx) in people"
                 :key="tabIdx"
@@ -106,10 +106,10 @@
             id="terminal-code-body"
             class="min-h-[300px] overflow-x-auto p-4 sm:p-5 font-mono text-xs sm:text-sm leading-relaxed"
           >
-            <div class="flex items-start">
+            <div class="flex items-start min-w-max">
               <!-- Line Numbers Gutter -->
               <div
-                class="flex flex-col select-none pr-4 text-right font-mono text-flax-smoke-600 border-r border-white/10"
+                class="flex flex-col select-none pr-4 text-right font-mono text-flax-smoke-600 border-r border-white/10 shrink-0"
               >
                 <span
                   v-for="(_, lineIdx) in people[index].codeLines"
@@ -164,70 +164,108 @@
       </div>
     </template>
 
-    <!-- For smaller devices, show all cards -->
+    <!-- For smaller devices, show all cards cleanly formatted -->
     <template v-else>
-      <div class="col-span-full">
-        <template v-for="(p, i) in people" :key="i">
-          <div class="mt-10 grid w-full grid-cols-5 items-start sm:grid-cols-4">
-            <div
-              class="columns-gap heading-2 relative col-span-1 flex h-full flex-col leading-none font-bold"
-            >
-              {{ (i + 1).toString().padStart(2, '0') }}
+      <div class="col-span-full flex flex-col space-y-12 sm:space-y-16 min-w-0 w-full">
+        <article
+          v-for="(p, i) in people"
+          :key="i"
+          class="flex flex-col gap-5 border-b border-flax-smoke-300/60 pb-10 last:border-b-0 last:pb-0 min-w-0 w-full"
+        >
+          <!-- Top Row: Index Badge & Role / Position -->
+          <div class="flex items-start justify-between gap-3 min-w-0">
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-3">
+                <span
+                  class="font-title text-2xl sm:text-3xl font-bold tracking-tight text-flax-smoke-950"
+                >
+                  {{ (i + 1).toString().padStart(2, '0') }}
+                </span>
+                <span class="h-4 w-px bg-flax-smoke-400/50"></span>
+                <h4 class="font-title text-base sm:text-xl font-bold text-flax-smoke-900 truncate">
+                  {{ p.author }}
+                </h4>
+              </div>
+              <p class="text-xs sm:text-sm font-medium text-flax-smoke-500 mt-0.5">
+                {{ p.position }}
+              </p>
             </div>
-            <div class="col-span-4">
-              <div class="columns-gap flex w-full flex-col gap-y-4">
-                <!-- Mobile Code Card -->
+
+            <!-- Language Badge -->
+            <span
+              :class="[
+                p.badgeColor,
+                'rounded-md border px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider shrink-0',
+              ]"
+            >
+              {{ p.badge }}
+            </span>
+          </div>
+
+          <!-- Mobile Code Card with Terminal Header & Horizontal Scroll -->
+          <div
+            class="w-full min-w-0 overflow-hidden rounded-xl border border-white/15 bg-[#0f0f0e] shadow-xl"
+          >
+            <!-- Terminal Header -->
+            <div
+              class="flex items-center justify-between border-b border-white/10 bg-[#181817] px-3.5 py-2.5 select-none"
+            >
+              <div class="flex items-center gap-1.5">
+                <span class="size-2 rounded-full bg-[#FF5F56]/90"></span>
+                <span class="size-2 rounded-full bg-[#FFBD2E]/90"></span>
+                <span class="size-2 rounded-full bg-[#27C93F]/90"></span>
+              </div>
+              <div class="font-mono text-xs text-amber-400/90 font-medium">
+                {{ p.filename }}
+              </div>
+            </div>
+
+            <!-- Code Lines with Line Numbers & Scrollable Box -->
+            <div class="overflow-x-auto p-3 sm:p-4 font-mono text-[11px] leading-relaxed scrollbar-thin">
+              <div class="flex items-start min-w-max">
+                <!-- Line Numbers Gutter -->
                 <div
-                  class="w-full overflow-hidden rounded-xl border border-white/15 bg-[#0f0f0e] shadow-xl"
+                  class="flex flex-col select-none pr-3 text-right text-flax-smoke-600 border-r border-white/10 shrink-0"
                 >
+                  <span
+                    v-for="(_, lineIdx) in p.codeLines"
+                    :key="lineIdx"
+                    class="leading-relaxed"
+                  >
+                    {{ (lineIdx + 1).toString().padStart(2, '0') }}
+                  </span>
+                </div>
+
+                <!-- Code Content -->
+                <div class="flex-1 pl-3">
                   <div
-                    class="flex items-center justify-between border-b border-white/10 bg-[#181817] px-3 py-2"
-                  >
-                    <div class="flex items-center gap-1">
-                      <span class="size-2 rounded-full bg-[#FF5F56]"></span>
-                      <span class="size-2 rounded-full bg-[#FFBD2E]"></span>
-                      <span class="size-2 rounded-full bg-[#27C93F]"></span>
-                    </div>
-                    <div class="font-mono text-xs text-amber-400">
-                      {{ p.filename }}
-                    </div>
-                  </div>
-                  <div class="p-3">
-                    <div
-                      v-for="(line, lineIdx) in p.codeLines"
-                      :key="lineIdx"
-                      class="font-mono text-[11px] leading-relaxed text-flax-smoke-200 whitespace-pre"
-                      v-html="line || '&nbsp;'"
-                    ></div>
-                  </div>
-                </div>
-
-                <p
-                  class="heading-4 mt-2 max-w-[25ch] leading-none font-semibold"
-                >
-                  " {{ p.quote }} "
-                </p>
-
-                <div class="heading-6 font-semibold">
-                  <p>{{ p.author }}</p>
-                  <p class="text-flax-smoke-400">{{ p.position }}</p>
-                </div>
-
-                <div
-                  class="flex max-w-60 flex-wrap gap-2 text-xs uppercase"
-                >
-                  <p
-                    class="border-flax-smoke-400 bg-flax-smoke-300/40 text-flax-smoke-900 font-semibold rounded-full border px-3 py-1 text-xs"
-                    v-for="tag in p.tags"
-                    :key="tag"
-                  >
-                    {{ tag }}
-                  </p>
+                    v-for="(line, lineIdx) in p.codeLines"
+                    :key="lineIdx"
+                    class="leading-relaxed text-flax-smoke-200 whitespace-pre"
+                    v-html="line || '&nbsp;'"
+                  ></div>
                 </div>
               </div>
             </div>
           </div>
-        </template>
+
+          <!-- Quote with Highlighted Keyword Spans -->
+          <div
+            class="text-sm sm:text-base font-normal text-flax-smoke-900 leading-relaxed break-words"
+            v-html="splitWordsIntoSpans(p.quote)"
+          ></div>
+
+          <!-- Tech Tags -->
+          <div class="flex flex-wrap gap-1.5 pt-1">
+            <span
+              v-for="tag in p.tags"
+              :key="tag"
+              class="border border-flax-smoke-400/70 bg-flax-smoke-300/40 text-flax-smoke-900 font-semibold rounded-full px-3 py-1 text-[11px] uppercase tracking-wider select-none"
+            >
+              {{ tag }}
+            </span>
+          </div>
+        </article>
       </div>
     </template>
   </div>

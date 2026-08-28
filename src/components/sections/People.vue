@@ -14,9 +14,9 @@
         Stack /
       </h3>
       <div
-        class="text-flax-smoke-800 col-span-full mt-[5%] flex justify-end gap-10 sm:gap-20 lg:col-span-10"
+        class="text-flax-smoke-800 col-span-full mt-6 sm:mt-[5%] flex flex-col sm:flex-row sm:justify-end gap-3 sm:gap-16 lg:col-span-10"
       >
-        <p class="heading-6 text-center text-nowrap uppercase">
+        <p class="heading-6 text-left sm:text-center text-nowrap uppercase">
           ( Arsenal )
         </p>
         <p class="heading-6 font-fancy w-full text-balance sm:max-w-[40ch]">
