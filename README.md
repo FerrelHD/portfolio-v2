@@ -47,6 +47,7 @@ Built with a focus on fluid 60 FPS motion, responsive macOS-style browser mockup
 
 | Project | Category | Tech Stack | Status |
 | :--- | :--- | :--- | :--- |
+| **[Charles Leclerc #16](https://leclerc-redline.vercel.app/)** | Creative Frontend & Motion Physics | React 18, GSAP, Canvas 2D, Framer Motion | [Live Demo](https://leclerc-redline.vercel.app/) |
 | **[Stock Prediction ML](https://github.com/FerrelHD/Stock-Prediction-System)** | Quant ML & Web Analytics | Python, Streamlit, XGBoost, LightGBM | [Source Code](https://github.com/FerrelHD/Stock-Prediction-System) |
 | **[Spider-Dev Portfolio](https://github.com/FerrelHD/Portofolio)** | Creative Frontend & Web Audio | React 19, GSAP, Tailwind CSS, Web Audio | [Live Repo](https://github.com/FerrelHD/Portofolio) |
 | **[Student Life](https://ferrelhd.github.io/Student-Life/)** | Productivity Web App | React 19, TypeScript, Supabase, Tailwind | [Live Demo](https://ferrelhd.github.io/Student-Life/) |

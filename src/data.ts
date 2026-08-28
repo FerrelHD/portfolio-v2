@@ -52,6 +52,10 @@ const socialLinks = [
 
 const resourceLinks = [
   {
+    label: 'Charles Leclerc #16',
+    url: 'https://leclerc-redline.vercel.app/',
+  },
+  {
     label: 'Spider-Dev Portfolio',
     url: 'https://github.com/FerrelHD/Portofolio',
   },

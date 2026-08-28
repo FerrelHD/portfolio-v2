@@ -233,6 +233,7 @@
   import gsap from 'gsap';
   import { useWindowSize } from '@vueuse/core';
   import {
+    charlesLeclercImg,
     stockPredictionImg,
     spiderDevImg,
     fersyaShopImg,
@@ -264,6 +265,17 @@
   };
 
   const selectedWorksProps = [
+    {
+      name: 'Charles Leclerc #16 Showcase',
+      category: 'Creative Frontend & Motion Physics',
+      tags: ['React 18', 'GSAP', 'Canvas 2D', 'Framer Motion', 'Tailwind CSS'],
+      status: 'live',
+      domain: 'leclerc-redline.vercel.app',
+      previewImg: charlesLeclercImg,
+      primaryUrl: 'https://leclerc-redline.vercel.app/',
+      githubUrl: 'https://github.com/FerrelHD/leclerc-redline',
+      year: '2026',
+    },
     {
       name: 'Stock Prediction ML',
       category: 'Quantitative ML & Web Analytics',
