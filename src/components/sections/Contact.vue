@@ -74,35 +74,59 @@
         <div
           class="col-span-full order-first sm:order-none sm:col-span-6 flex flex-col items-center justify-center relative"
         >
-          <!-- Video Frame Container -->
+          <!-- macOS Window Video Frame -->
           <div
-            class="relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-[420px] aspect-[16/10] overflow-hidden rounded-2xl border border-white/20 bg-[#141413] shadow-2xl shadow-black group"
+            class="relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-[440px] flex flex-col overflow-hidden rounded-2xl border border-white/15 bg-[#141413] shadow-2xl shadow-black/80 group"
           >
-            <video
-              class="size-full object-cover object-center brightness-60 contrast-125 transition-transform duration-700 group-hover:scale-105"
-              :src="contact"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-            ></video>
+            <!-- macOS Window Header Bar -->
             <div
-              class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"
-            ></div>
-
-            <!-- Top Pill Badge in Video -->
-            <div
-              class="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none"
+              class="flex items-center justify-between px-3.5 py-2.5 bg-[#1a1a18]/90 border-b border-white/10 select-none"
             >
+              <!-- 3 Traffic Light Dots -->
+              <div class="flex items-center gap-1.5">
+                <span
+                  class="size-2.5 rounded-full bg-[#ff5f56] border border-[#e0443e]/50 transition-opacity hover:opacity-80"
+                ></span>
+                <span
+                  class="size-2.5 rounded-full bg-[#ffbd2e] border border-[#dea123]/50 transition-opacity hover:opacity-80"
+                ></span>
+                <span
+                  class="size-2.5 rounded-full bg-[#27c93f] border border-[#1aab29]/50 transition-opacity hover:opacity-80"
+                ></span>
+              </div>
+
+              <!-- Window Title -->
               <span
-                class="rounded bg-black/70 px-2 py-0.5 font-mono text-[9px] font-bold uppercase text-flax-smoke-300 backdrop-blur-xs border border-white/10"
+                class="font-mono text-[10px] sm:text-[11px] font-medium text-flax-smoke-400 tracking-tight truncate max-w-[170px] sm:max-w-none"
               >
-                CINEMATIC MESH // 60 FPS
+                spiderman-2-cinematic.mp4
               </span>
+
+              <!-- Live Badge -->
               <span
-                class="size-2 rounded-full bg-emerald-400 animate-pulse"
-              ></span>
+                class="flex items-center gap-1.5 font-mono text-[9px] text-emerald-400 font-bold uppercase"
+              >
+                <span
+                  class="size-1.5 rounded-full bg-emerald-400 animate-pulse"
+                ></span>
+                <span class="hidden sm:inline">60 FPS</span>
+              </span>
+            </div>
+
+            <!-- Video Viewport -->
+            <div class="relative w-full aspect-[16/10] overflow-hidden bg-black">
+              <video
+                class="size-full object-cover object-center brightness-60 contrast-125 transition-transform duration-700 group-hover:scale-105"
+                :src="contact"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+              ></video>
+              <div
+                class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"
+              ></div>
             </div>
           </div>
 
