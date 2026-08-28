@@ -14,6 +14,7 @@ import stockPredictionImg from './stock-prediction.png';
 import fersyaShopImg from './fersya-shop.webp';
 import finesserShopImg from './Shop.webp';
 import studentLifeImg from './student-life.png';
+import studentLifeMobileImg from './studentlife-mobile.jpeg';
 import streetRushImg from './street-rush.webp';
 import gunungGedeImg from './gunung-gede.webp';
 import spiderDevImg from './spider-dev.png';
@@ -27,6 +28,7 @@ export {
   fersyaShopImg,
   finesserShopImg,
   studentLifeImg,
+  studentLifeMobileImg,
   streetRushImg,
   gunungGedeImg,
   spiderDevImg,

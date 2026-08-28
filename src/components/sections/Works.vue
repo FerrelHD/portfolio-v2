@@ -76,12 +76,12 @@
                   <span class="size-2.5 rounded-full bg-[#27C93F]"></span>
                 </div>
 
-                <!-- URL Bar Pill -->
+                <!-- URL Bar Pill (Responsive max-width & truncate) -->
                 <div
-                  class="flex items-center gap-1.5 rounded-md border border-white/10 bg-black/60 px-3.5 py-0.5 text-[11px] font-mono text-flax-smoke-300"
+                  class="flex max-w-[110px] sm:max-w-[180px] md:max-w-[240px] items-center gap-1.5 rounded-md border border-white/10 bg-black/60 px-3 py-0.5 text-[11px] font-mono text-flax-smoke-300"
                 >
                   <svg
-                    class="size-3 text-flax-smoke-500"
+                    class="size-3 shrink-0 text-flax-smoke-500"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -90,11 +90,53 @@
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                   </svg>
-                  <span>{{ work.domain }}</span>
+                  <span class="truncate">{{ work.domain }}</span>
+                </div>
+
+                <!-- Device Switcher Pill (Desktop / Mobile Toggle) if mobile preview available -->
+                <div
+                  v-if="work.mobilePreviewImg"
+                  class="flex items-center rounded-lg border border-white/20 bg-black/80 p-0.5 text-[10px] select-none shrink-0"
+                >
+                  <button
+                    type="button"
+                    @click.prevent.stop="setDeviceView(i, 'web')"
+                    :class="
+                      getDeviceView(work, i) === 'web'
+                        ? 'bg-white/25 text-white font-bold shadow-xs'
+                        : 'text-flax-smoke-400 hover:text-white'
+                    "
+                    class="inline-flex items-center gap-1 rounded px-2 py-0.5 transition-all cursor-pointer"
+                    aria-label="View desktop layout"
+                  >
+                    <svg class="size-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                      <line x1="8" y1="21" x2="16" y2="21"></line>
+                      <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                    <span class="hidden sm:inline">Desktop</span>
+                  </button>
+                  <button
+                    type="button"
+                    @click.prevent.stop="setDeviceView(i, 'mobile')"
+                    :class="
+                      getDeviceView(work, i) === 'mobile'
+                        ? 'bg-white/25 text-white font-bold shadow-xs'
+                        : 'text-flax-smoke-400 hover:text-white'
+                    "
+                    class="inline-flex items-center gap-1 rounded px-2 py-0.5 transition-all cursor-pointer"
+                    aria-label="View mobile layout"
+                  >
+                    <svg class="size-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <rect x="5" y="2" width="14" height="20" rx="2"></rect>
+                      <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                    </svg>
+                    <span class="hidden sm:inline">Mobile</span>
+                  </button>
                 </div>
 
                 <!-- Status Badge -->
-                <div class="flex items-center text-[10px] font-medium tracking-wide">
+                <div class="flex items-center text-[10px] font-medium tracking-wide shrink-0">
                   <span
                     v-if="work.status === 'live'"
                     class="inline-flex items-center gap-1 text-emerald-400"
@@ -127,12 +169,42 @@
               </div>
 
               <!-- Viewport Screenshot Container -->
-              <div class="relative aspect-16/10 w-full overflow-hidden bg-[#0c0c0c]">
+              <!-- WEB LAYOUT (16:9) -->
+              <div
+                v-if="getDeviceView(work, i) === 'web'"
+                class="relative aspect-16/9 w-full overflow-hidden bg-[#0c0c0c]"
+              >
                 <img
                   :src="work.previewImg"
                   :alt="work.name"
                   class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/frame:scale-[1.02]"
                 />
+              </div>
+
+              <!-- MOBILE APP LAYOUT (Studio Showcase with Smartphone Frame) -->
+              <div
+                v-else
+                class="relative aspect-16/9 w-full overflow-hidden bg-gradient-to-b from-[#1c1c1b] via-[#10100f] to-[#080807] flex items-center justify-center p-3 sm:p-4"
+              >
+                <!-- Subtle Radial Ambient Light -->
+                <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_70%)]"></div>
+
+                <!-- Phone Hardware Mockup Frame -->
+                <div
+                  class="relative z-10 h-full aspect-[9/18.4] max-h-full rounded-[1.25rem] sm:rounded-[1.75rem] border-2 sm:border-[3px] border-white/25 bg-black shadow-[0_20px_40px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col transition-transform duration-700 ease-out group-hover/frame:scale-[1.03]"
+                >
+                  <!-- Phone Dynamic Island / Speaker Pill -->
+                  <div class="absolute top-1.5 left-1/2 -translate-x-1/2 z-20 h-2.5 sm:h-3 w-12 sm:w-16 rounded-full bg-black border border-white/10 flex items-center justify-center">
+                    <span class="size-1 rounded-full bg-white/20 ml-auto mr-1.5"></span>
+                  </div>
+
+                  <!-- Phone Screen Content -->
+                  <img
+                    :src="work.mobilePreviewImg || work.previewImg"
+                    :alt="`${work.name} Mobile View`"
+                    class="size-full object-cover object-top"
+                  />
+                </div>
               </div>
             </div>
           </a>
@@ -239,15 +311,44 @@
     fersyaShopImg,
     finesserShopImg,
     studentLifeImg,
+    studentLifeMobileImg,
     streetRushImg,
     gunungGedeImg,
   } from '@/assets/images';
+
+  export type WorkProject = {
+    name: string;
+    category: string;
+    tags: string[];
+    status: 'live' | 'repo' | 'roblox' | 'offline';
+    domain: string;
+    previewImg: string;
+    mobilePreviewImg?: string;
+    primaryUrl: string;
+    githubUrl?: string;
+    year: string;
+    deviceType?: 'web' | 'mobile';
+  };
 
   const isSmallScreen = computed(() => {
     return useWindowSize().width.value < 768;
   });
   const index = ref(0);
   const selectedWorks = ref('Selected Projects /');
+
+  // Track active device view (desktop / mobile) per project card
+  const activeDeviceViews = ref<Record<number, 'web' | 'mobile'>>({});
+
+  const getDeviceView = (work: WorkProject, i: number): 'web' | 'mobile' => {
+    if (activeDeviceViews.value[i]) {
+      return activeDeviceViews.value[i];
+    }
+    return work.deviceType || 'web';
+  };
+
+  const setDeviceView = (i: number, view: 'web' | 'mobile') => {
+    activeDeviceViews.value[i] = view;
+  };
 
   const tl = gsap
     .timeline({ defaults: { duration: 0.25 } })
@@ -264,7 +365,7 @@
     tl.reverse();
   };
 
-  const selectedWorksProps = [
+  const selectedWorksProps: WorkProject[] = [
     {
       name: 'Charles Leclerc #16 Showcase',
       category: 'Creative Frontend & Motion Physics',
@@ -275,6 +376,7 @@
       primaryUrl: 'https://leclerc-redline.vercel.app/',
       githubUrl: 'https://github.com/FerrelHD/leclerc-redline',
       year: '2026',
+      deviceType: 'web',
     },
     {
       name: 'Stock Prediction ML',
@@ -300,14 +402,16 @@
     },
     {
       name: 'Student Life',
-      category: 'Productivity Web App',
-      tags: ['React 19', 'TypeScript', 'Supabase', 'Tailwind'],
+      category: 'Productivity Web & Mobile PWA',
+      tags: ['React 19', 'TypeScript', 'Supabase', 'Tailwind', 'PWA'],
       status: 'live',
       domain: 'student-life.app',
       previewImg: studentLifeImg,
+      mobilePreviewImg: studentLifeMobileImg,
       primaryUrl: 'https://ferrelhd.github.io/Student-Life/',
       githubUrl: 'https://github.com/FerrelHD/Student-Life',
       year: '2025',
+      deviceType: 'web',
     },
     {
       name: 'Fersya Shop',
