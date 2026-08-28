@@ -100,12 +100,7 @@
 
   onMounted(() => {
     document.body.classList.add('stop-scrolling');
-    // TODO:
-    // window.scrollTo(0, 0);
-
-    setTimeout(() => {
-      requestAnimationFrame(raf);
-    }, 2000);
+    requestAnimationFrame(raf);
   });
 </script>
 

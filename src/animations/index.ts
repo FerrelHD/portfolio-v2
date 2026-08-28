@@ -315,39 +315,56 @@ const animateLoadingText = (id: string) => {
 };
 
 // ! Hero
-const animateHeroNav = () => {
-  gsap.to('header', {
-    y: 0,
-    duration: 1.5,
-    ease: 'power4.inOut',
-  });
+const buildHeroTimeline = () => {
+  const tl = gsap.timeline();
 
-  gsap.to('#svg-my-en-name path', {
-    y: 0,
-    delay: 0.2,
-    duration: 1.5,
-    ease: 'power4.inOut',
-    stagger: 0.01,
-  });
+  // 1. Hero container subtle scale settle (camera entering scene)
+  tl.fromTo(
+    '#hero',
+    { scale: 1.05, transformOrigin: 'bottom center' },
+    { scale: 1, duration: 1.4, ease: 'power3.out' },
+    0,
+  );
 
-  gsap.to('#star', {
-    x: 1,
-    delay: 0.2,
-    duration: 1.5,
-    ease: 'power4.inOut',
-  });
+  // 2. Header nav slides down into place
+  tl.to(
+    'header',
+    { y: 0, duration: 1.2, ease: 'power4.out' },
+    0.05,
+  );
 
-  gsap.to(['#down-arrow', '#contact-btn', '#available-for-work'], {
-    x: 0,
-    y: 0,
-    delay: 0.4,
-    duration: 1.5,
-    ease: 'power4.inOut',
-  });
+  // 3. Name SVG paths unmask upward from below
+  tl.to(
+    '#svg-my-en-name path',
+    { y: 0, duration: 1.3, ease: 'power4.out', stagger: 0.015 },
+    0.08,
+  );
 
-  animateSplitText('#whoAmI .letters', '#whoAmI .letters', 1.5, 0.005, 0.4);
+  // 4. Star glides in
+  tl.to(
+    '#star',
+    { x: 0, duration: 1.3, ease: 'power4.out' },
+    0.1,
+  );
 
-  // Hero scroll animation
+  // 5. Arrow, contact button, available for work
+  tl.to(
+    ['#down-arrow', '#contact-btn', '#available-for-work'],
+    { x: 0, y: 0, duration: 1.1, ease: 'power4.out', stagger: 0.06 },
+    0.18,
+  );
+
+  // 6. Subtitle text split reveal
+  tl.to(
+    '#whoAmI .letters',
+    { y: 0, duration: 1.1, ease: 'power4.out', stagger: 0.005 },
+    0.18,
+  );
+
+  return tl;
+};
+
+const initHeroScrollTrigger = () => {
   gsap.to('#hero', {
     scrollTrigger: {
       trigger: '#hero',
@@ -358,6 +375,15 @@ const animateHeroNav = () => {
     scale: 0.9,
     translateZ: 0,
   });
+  ScrollTrigger.refresh();
+};
+
+const animateHeroNav = () => {
+  const tl = buildHeroTimeline();
+  tl.eventCallback('onComplete', () => {
+    initHeroScrollTrigger();
+  });
+  return tl;
 };
 
 // A little bit about me animation
@@ -387,6 +413,9 @@ export {
   animateLoadingText,
   animateLoadingTextContainer,
   animateHeroNav,
+  buildHeroTimeline,
+  initHeroScrollTrigger,
   animateSplitText,
   animateAboutMeSectionLeave,
+  samsungErrorModal,
 };
