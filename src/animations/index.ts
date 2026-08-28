@@ -337,23 +337,6 @@ const animateHeroNav = () => {
     ease: 'power4.inOut',
   });
 
-  gsap.to('.overlay', {
-    y: '100%',
-    delay: 0.2,
-    duration: 1.5,
-    ease: 'power4.inOut',
-    onComplete: () => {
-      gsap.set('.overlay', { display: 'none' });
-    },
-  });
-
-  gsap.to('#profile-img', {
-    scale: 1,
-    delay: 0.4,
-    duration: 1.5,
-    ease: 'power4.inOut',
-  });
-
   gsap.to(['#down-arrow', '#contact-btn', '#available-for-work'], {
     x: 0,
     y: 0,

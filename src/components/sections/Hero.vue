@@ -13,11 +13,13 @@
           </div>
         </div>
 
-        <!-- 3-Column Hero Content Grid -->
-        <div class="lg:column-gap mt-4 sm:mt-6 lg:mt-8 grid w-full grid-cols-12 items-end">
-          <!-- Column 1: Subtitle & CTA -->
+        <!-- Hero Content: Subtitle & CTA on Left, Available Status on Right -->
+        <div
+          class="mt-6 sm:mt-8 lg:mt-10 flex w-full flex-col gap-8 sm:flex-row sm:items-end sm:justify-between"
+        >
+          <!-- Left Column: Subtitle & CTA -->
           <div
-            class="col-span-full flex flex-col items-start gap-3 sm:gap-4 sm:col-span-4"
+            class="flex flex-col items-start gap-3 sm:gap-4"
           >
             <div class="overflow-hidden">
               <svg
@@ -59,41 +61,11 @@
             </div>
           </div>
 
-          <!-- Column 2: Developer Frame with Balanced Portrait Crop -->
-          <div
-            id="profile-container"
-            class="relative col-span-4 mt-4 sm:mt-0 flex w-full max-w-[210px] sm:max-w-[240px] md:max-w-[260px] mx-auto flex-col rounded-2xl border border-flax-smoke-300/80 bg-flax-smoke-100/70 p-2 shadow-xl backdrop-blur-xs select-none group will-change-transform"
-          >
-            <!-- Top Card Header Pill -->
-            <div
-              class="flex items-center justify-between px-2 py-1 font-mono text-[9px] sm:text-[10px] uppercase text-flax-smoke-600 border-b border-flax-smoke-300/40 mb-1.5 select-none"
-            >
-              <span class="flex items-center gap-1.5">
-                <span class="size-1.5 rounded-full bg-flame"></span>
-                <span class="font-bold text-flax-smoke-900">FERREL.DEV</span>
-              </span>
-              <span class="text-flax-smoke-500 font-semibold">DEV_ID // 01</span>
-            </div>
-
-            <!-- Balanced Crop Image Container -->
-            <div class="relative w-full aspect-[4/4.2] overflow-hidden rounded-xl bg-flax-smoke-200">
-              <div class="overlay bg-flax-smoke-100 absolute inset-0 z-2"></div>
-              <img
-                id="profile-img"
-                :src="profile"
-                alt="Ferrel Rashad profile"
-                class="size-full scale-90 rounded-xl object-cover object-[center_28%] brightness-105 grayscale contrast-105 transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-95"
-              />
-            </div>
-          </div>
-
-          <!-- Column 3: Status & Available Date Lockup -->
-          <div
-            class="relative col-span-8 size-full overflow-clip text-end sm:col-span-4"
-          >
+          <!-- Right Column: Status & Available Date Lockup -->
+          <div class="overflow-clip self-end text-end">
             <div
               id="available-for-work"
-              class="absolute right-0 bottom-0 flex translate-y-full flex-col items-end"
+              class="flex translate-y-full flex-col items-end"
             >
               <p
                 class="text-xs sm:text-sm block leading-snug font-medium -tracking-tight uppercase text-flax-smoke-600 font-mono"
@@ -119,7 +91,6 @@
   import { onBeforeMount, ref } from 'vue';
   import { MyName, Star } from '../design';
   import { Button } from '@/components/common';
-  import { profile } from '@/assets/images';
   import { getAvailableForWorkDate, textSplitterIntoChar } from '@/functions';
 
   const whoAmI = ref(
