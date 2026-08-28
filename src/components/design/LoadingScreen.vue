@@ -144,10 +144,10 @@
         </div>
       </div>
 
-      <!-- Fine Bottom Progress Border Line -->
+      <!-- GPU-Accelerated Fine Bottom Progress Line -->
       <div
-        class="absolute bottom-0 left-0 h-[2px] bg-flame transition-[width] duration-75 ease-out shadow-[0_0_10px_#e43d12]"
-        :style="{ width: `${percent}%` }"
+        id="loader-progress-line"
+        class="absolute bottom-0 left-0 h-[2px] w-full bg-flame scale-x-0 origin-left will-change-transform shadow-[0_0_10px_#e43d12]"
       ></div>
     </div>
   </div>
@@ -176,7 +176,7 @@
   const isSamsungBrowser = /samsung/i.test(navigator.userAgent);
 
   onMounted(async () => {
-    // 1. Immediately lock scroll during the intro
+    // 1. Immediately lock scroll during intro
     lenis.stop();
     document.body.classList.add('stop-scrolling');
 
@@ -185,25 +185,38 @@
       '(prefers-reduced-motion: reduce)',
     ).matches;
 
-    // 3. Ensure fonts are ready
-    const fontPromise = document.fonts ? document.fonts.ready : Promise.resolve();
-
-    // 4. SVG Stroke Line Drawing Animation
-    if (!prefersReducedMotion) {
-      gsap.to('.loader-path', {
-        strokeDashoffset: 0,
-        duration: 1.25,
-        ease: 'power2.inOut',
-        stagger: 0.04,
-      });
+    if (prefersReducedMotion) {
+      const heroTl = buildHeroTimeline();
+      heroTl.progress(1);
+      initHeroScrollTrigger();
+      samsungErrorModal(isSamsungBrowser);
+      document.body.classList.remove('stop-scrolling');
+      lenis.start();
+      isVisible.value = false;
+      emit('isLoading', false);
+      return;
     }
 
-    // 5. Subtle, fluid counter (00% -> 100%)
+    // 3. Build ONE Master Continuous Timeline (Zero async gaps)
+    const master = gsap.timeline({
+      paused: true,
+      onComplete: () => {
+        isVisible.value = false;
+        document.body.classList.remove('stop-scrolling');
+        lenis.start();
+        initHeroScrollTrigger();
+        samsungErrorModal(isSamsungBrowser);
+        emit('isLoading', false);
+      },
+    });
+
+    // --- PHASE 1: COUNTING & VECTOR DRAWING ---
     const counterObj = { val: 0 };
-    const counterPromise = new Promise<void>((resolve) => {
-      gsap.to(counterObj, {
+    master.to(
+      counterObj,
+      {
         val: 100,
-        duration: prefersReducedMotion ? 0.3 : 1.35,
+        duration: 1.45,
         ease: 'power2.inOut',
         onUpdate: () => {
           const currentVal = Math.floor(counterObj.val);
@@ -219,82 +232,84 @@
             statusText.value = 'SYSTEM READY';
           }
         },
-        onComplete: () => {
-          resolve();
-        },
-      });
-    });
-
-    // Wait for critical font assets and minimum smooth count
-    await Promise.all([fontPromise, counterPromise]);
-
-    // Fill in the drawn SVG text before lifting the curtain
-    if (!prefersReducedMotion) {
-      await new Promise((r) => {
-        gsap.to('.loader-path', {
-          fill: '#ebe9e1',
-          stroke: 'transparent',
-          duration: 0.25,
-          ease: 'power2.out',
-          onComplete: r,
-        });
-      });
-    }
-
-    // 6. Execute Master Continuous Intro Timeline
-    runMasterIntro(prefersReducedMotion);
-  });
-
-  const runMasterIntro = (reducedMotion: boolean) => {
-    if (reducedMotion) {
-      const heroTl = buildHeroTimeline();
-      heroTl.progress(1);
-      initHeroScrollTrigger();
-      samsungErrorModal(isSamsungBrowser);
-      document.body.classList.remove('stop-scrolling');
-      lenis.start();
-      isVisible.value = false;
-      emit('isLoading', false);
-      return;
-    }
-
-    const master = gsap.timeline({
-      onComplete: () => {
-        isVisible.value = false;
-        document.body.classList.remove('stop-scrolling');
-        lenis.start();
-        initHeroScrollTrigger();
-        samsungErrorModal(isSamsungBrowser);
-        emit('isLoading', false);
       },
-    });
+      0,
+    );
 
-    // Step 1: Preloader content glides upward and fades out
-    master.to('#preloader-content', {
-      y: -40,
-      opacity: 0,
-      duration: 0.45,
-      ease: 'power3.inOut',
-    });
+    // Stroke outline drawing perfectly synchronized
+    master.to(
+      '.loader-path',
+      {
+        strokeDashoffset: 0,
+        duration: 1.25,
+        ease: 'power2.inOut',
+        stagger: 0.035,
+      },
+      0,
+    );
 
-    // Step 2: Curtain physically slides upward
+    // Smooth color fill sweep near completion (no sudden flash)
+    master.to(
+      '.loader-path',
+      {
+        fill: '#ebe9e1',
+        stroke: 'transparent',
+        duration: 0.35,
+        ease: 'power2.out',
+      },
+      1.15,
+    );
+
+    // GPU-accelerated progress line (scaleX instead of width layout reflow)
+    master.to(
+      '#loader-progress-line',
+      {
+        scaleX: 1,
+        duration: 1.45,
+        ease: 'power2.inOut',
+      },
+      0,
+    );
+
+    // --- PHASE 2: SEAMLESS CONTINUOUS CURTAIN REVEAL ---
+    // Preloader content glides upward and fades seamlessly (no stop)
+    master.to(
+      '#preloader-content',
+      {
+        y: -30,
+        opacity: 0,
+        duration: 0.45,
+        ease: 'power2.inOut',
+      },
+      1.45,
+    );
+
+    // Physical curtain glides upward with heavy architectural momentum
     master.to(
       '#preloader-curtain',
       {
         yPercent: -100,
-        duration: 1.1,
-        ease: 'power4.inOut',
+        duration: 1.25,
+        ease: 'power3.inOut',
         onStart: () => {
           window.scrollTo(0, 0);
         },
       },
-      '-=0.15',
+      1.5,
     );
 
-    // Step 3: HERO STARTS IN MID-FLIGHT (while curtain is lifting!)
+    // --- PHASE 3: HERO SECTION LANDS IN MID-FLIGHT ---
     const heroTl = buildHeroTimeline();
-    master.add(heroTl, '-=0.85');
-  };
+    master.add(heroTl, 1.85);
+
+    // Await fonts before starting so text layout is 100% stable
+    if (document.fonts) {
+      await document.fonts.ready;
+    }
+
+    // Launch the single unbroken timeline
+    master.play();
+  });
 </script>
 
 <style scoped>
