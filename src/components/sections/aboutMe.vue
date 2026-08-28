@@ -26,7 +26,7 @@
       <h3
         id="little-bit-about-me"
         v-html="aboutMe"
-        class="heading-1-alt lg:heading-1 section-heading col-span-full leading-[0.95] font-extrabold uppercase md:col-span-8 md:col-start-6"
+        class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] section-heading col-span-full leading-[0.96] font-extrabold uppercase md:col-span-8 md:col-start-6"
       ></h3>
     </div>
 

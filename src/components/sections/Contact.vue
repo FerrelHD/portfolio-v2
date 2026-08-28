@@ -15,7 +15,7 @@
           <span
             class="font-mono text-[10px] xs:text-[11px] sm:text-xs font-bold uppercase tracking-widest text-flax-smoke-300"
           >
-            FERREL.DEV // FINAL_LAP
+            FERREL.DEV // POST_CREDITS
           </span>
         </div>
         <span
@@ -26,7 +26,7 @@
       </div>
 
       <!-- Giant Bold Headline Banner -->
-      <div class="text-center my-3 sm:my-6">
+      <div class="w-full text-center my-3 sm:my-6">
         <p
           class="font-mono text-[10px] xs:text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase text-flame mb-2"
         >
@@ -34,10 +34,9 @@
         </p>
         <h2
           id="make-it-happen"
-          class="font-title text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-flax-smoke-100 leading-tight sm:leading-none text-balance"
+          class="font-title text-2xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[4.75rem] font-black uppercase tracking-tight text-flax-smoke-100 leading-tight sm:leading-none flex items-center justify-center flex-wrap gap-x-2.5 sm:gap-x-4"
         >
           <span v-html="beGreater"></span>
-          <span> </span>
           <span class="text-flame" v-html="together"></span>
         </h2>
       </div>
@@ -321,8 +320,8 @@
   };
 
   onBeforeMount(() => {
-    beGreater.value = textSplitterIntoChar(beGreater.value);
-    together.value = textSplitterIntoChar(together.value);
+    beGreater.value = textSplitterIntoChar(beGreater.value).trim();
+    together.value = textSplitterIntoChar(together.value).trim();
   });
 
   onMounted(() => {
