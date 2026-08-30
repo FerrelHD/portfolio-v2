@@ -9,7 +9,7 @@ import workBg4 from './4.webp';
 import workBg5 from './5.webp';
 
 import ferrelPortrait from './ferrel-portrait.jpg';
-import charlesLeclercImg from './charles-leclerc.png';
+import charlesLeclercImg from './charles-baru.png';
 import stockPredictionImg from './stock-prediction.png';
 import fersyaShopImg from './fersya-shop.webp';
 import finesserShopImg from './Shop.webp';
