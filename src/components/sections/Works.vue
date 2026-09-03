@@ -306,6 +306,7 @@
   import { useWindowSize } from '@vueuse/core';
   import {
     charlesLeclercImg,
+    globalSeismicTrackerImg,
     stockPredictionImg,
     spiderDevImg,
     fersyaShopImg,
@@ -375,6 +376,25 @@
       previewImg: charlesLeclercImg,
       primaryUrl: 'https://leclerc-redline.vercel.app/',
       githubUrl: 'https://github.com/FerrelHD/leclerc-redline',
+      year: '2026',
+      deviceType: 'web',
+    },
+    {
+      name: 'Global Seismic Tracker',
+      category: 'Geospatial 3D & Real-Time Telemetry',
+      tags: [
+        'React 19',
+        'TypeScript',
+        'WebGL',
+        'Cobe',
+        'Supabase',
+        'Tailwind CSS',
+      ],
+      status: 'live',
+      domain: 'global-seismic-tracker.vercel.app',
+      previewImg: globalSeismicTrackerImg,
+      primaryUrl: 'https://global-seismic-tracker.vercel.app/',
+      githubUrl: 'https://github.com/FerrelHD/Global-Seismic-Tracker',
       year: '2026',
       deviceType: 'web',
     },

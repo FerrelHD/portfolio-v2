@@ -10,6 +10,7 @@ import workBg5 from './5.webp';
 
 import ferrelPortrait from './ferrel-portrait.jpg';
 import charlesLeclercImg from './charles-baru.png';
+import globalSeismicTrackerImg from './Global-Seismic-Tracker.png';
 import stockPredictionImg from './stock-prediction.png';
 import fersyaShopImg from './fersya-shop.webp';
 import finesserShopImg from './Shop.webp';
@@ -24,6 +25,7 @@ export {
   profile2,
   ferrelPortrait,
   charlesLeclercImg,
+  globalSeismicTrackerImg,
   stockPredictionImg,
   fersyaShopImg,
   finesserShopImg,

@@ -60,6 +60,10 @@ const resourceLinks = [
     url: 'https://leclerc-redline.vercel.app/',
   },
   {
+    label: 'Global Seismic Tracker',
+    url: 'https://github.com/FerrelHD/Global-Seismic-Tracker',
+  },
+  {
     label: 'Spider-Dev Portfolio',
     url: 'https://github.com/FerrelHD/Portofolio',
   },
