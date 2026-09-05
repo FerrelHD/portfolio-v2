@@ -60,7 +60,7 @@ const resourceLinks = [
     url: 'https://leclerc-redline.vercel.app/',
   },
   {
-    label: 'Global Seismic Tracker',
+    label: 'Indonesian Crustal Observatory',
     url: 'https://github.com/FerrelHD/Global-Seismic-Tracker',
   },
   {

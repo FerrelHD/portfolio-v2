@@ -281,6 +281,14 @@
               </div>
             </div>
 
+            <!-- Project Description -->
+            <p
+              v-if="work.description"
+              class="mt-3 text-sm leading-relaxed text-flax-smoke-300/80 max-w-2xl font-normal"
+            >
+              {{ work.description }}
+            </p>
+
             <!-- Tech Tags -->
             <div class="mt-3 flex flex-wrap gap-1.5 select-none">
               <span
@@ -306,7 +314,7 @@
   import { useWindowSize } from '@vueuse/core';
   import {
     charlesLeclercImg,
-    globalSeismicTrackerImg,
+    indonesianCrustalObservatoryImg,
     stockPredictionImg,
     spiderDevImg,
     fersyaShopImg,
@@ -320,6 +328,7 @@
   export type WorkProject = {
     name: string;
     category: string;
+    description?: string;
     tags: string[];
     status: 'live' | 'repo' | 'roblox' | 'offline';
     domain: string;
@@ -370,6 +379,8 @@
     {
       name: 'Charles Leclerc #16 Showcase',
       category: 'Creative Frontend & Motion Physics',
+      description:
+        'Interactive tribute experience engineered with GSAP scroll triggers, custom 2D canvas telemetry physics, and high-octane editorial motion design.',
       tags: ['React 18', 'GSAP', 'Canvas 2D', 'Framer Motion', 'Tailwind CSS'],
       status: 'live',
       domain: 'leclerc-redline.vercel.app',
@@ -380,19 +391,21 @@
       deviceType: 'web',
     },
     {
-      name: 'Global Seismic Tracker',
-      category: 'Geospatial 3D & Real-Time Telemetry',
+      name: 'Indonesian Crustal Observatory',
+      category: 'Geospatial 3D & Planetary Telemetry',
+      description:
+        'Planetary hazard monitoring observatory combining high-precision interactive vector cartography, live USGS/BMKG seismic telemetry, NASA FIRMS wildfire tracking, and synthetic seismogram oscilloscopy.',
       tags: [
         'React 19',
         'TypeScript',
+        'Three.js',
         'WebGL',
-        'Cobe',
         'Supabase',
         'Tailwind CSS',
       ],
       status: 'live',
       domain: 'global-seismic-tracker.vercel.app',
-      previewImg: globalSeismicTrackerImg,
+      previewImg: indonesianCrustalObservatoryImg,
       primaryUrl: 'https://global-seismic-tracker.vercel.app/',
       githubUrl: 'https://github.com/FerrelHD/Global-Seismic-Tracker',
       year: '2026',
@@ -401,6 +414,8 @@
     {
       name: 'Stock Prediction ML',
       category: 'Quantitative ML & Web Analytics',
+      description:
+        'End-to-end quantitative financial analytics platform featuring ensemble ML forecasting (XGBoost, LightGBM) with interactive technical indicators on Streamlit.',
       tags: ['Python', 'Streamlit', 'XGBoost', 'LightGBM', 'Scikit-Learn'],
       status: 'repo',
       domain: 'stock-ml.system',
@@ -412,6 +427,8 @@
     {
       name: 'Spider-Dev Portfolio',
       category: 'Creative Frontend & Web Audio',
+      description:
+        'Immersive personal portfolio themed around Spider-Man with interactive Web Audio soundscapes, 3D parallax effects, and kinetic typography.',
       tags: ['React 19', 'GSAP', 'Tailwind CSS', 'Web Audio API'],
       status: 'live',
       domain: 'spider-dev.portfolio',
@@ -423,6 +440,8 @@
     {
       name: 'Student Life',
       category: 'Productivity Web & Mobile PWA',
+      description:
+        'All-in-one student productivity ecosystem featuring task management, Pomodoro focus tools, and academic schedules with offline PWA support.',
       tags: ['React 19', 'TypeScript', 'Supabase', 'Tailwind', 'PWA'],
       status: 'live',
       domain: 'student-life.app',
@@ -436,6 +455,8 @@
     {
       name: 'Fersya Shop',
       category: 'Full-Stack Organic E-Commerce',
+      description:
+        'Modern organic and health product storefront with a Filament admin dashboard, role-based access control, and dynamic inventory management.',
       tags: ['Laravel 11', 'Filament Admin', 'Tailwind CSS'],
       status: 'repo',
       domain: 'fersyashop.store',
@@ -447,6 +468,8 @@
     {
       name: 'Finesser Shop',
       category: 'Digital Assets Storefront',
+      description:
+        'Digital storefront system designed for browsing and acquiring creative digital assets, with secure database transactions and streamlined checkout.',
       tags: ['Laravel', 'Bootstrap', 'MySQL'],
       status: 'repo',
       domain: 'finesser.shop',
@@ -458,6 +481,8 @@
     {
       name: 'Street Rush',
       category: '3D Arcade Runner Game',
+      description:
+        'Fast-paced 3D endless runner built in Unity featuring procedural obstacle generation, physics-based character kinematics, and custom shaders.',
       tags: ['Unity', 'C#', 'Mobile 3D', 'Physics Engine'],
       status: 'repo',
       domain: 'streetrush.game',
@@ -469,6 +494,8 @@
     {
       name: 'Gunung Gede Simulation',
       category: '3D Hiking Simulation',
+      description:
+        'Atmospheric 3D hiking simulation on Roblox Studio accurately modeling the Gunung Putri trail with custom terrain generation and survival mechanics.',
       tags: ['Luau', 'Roblox Studio', 'Terrain 3D'],
       status: 'roblox',
       domain: 'roblox.com/gunung-gede',
