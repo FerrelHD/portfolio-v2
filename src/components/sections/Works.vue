@@ -392,14 +392,13 @@
     },
     {
       name: 'Indonesian Crustal Observatory',
-      category: 'Geospatial 3D & Planetary Telemetry',
+      category: 'Geospatial Vector & Planetary Telemetry',
       description:
         'Planetary hazard monitoring observatory combining high-precision interactive vector cartography, live USGS/BMKG seismic telemetry, NASA FIRMS wildfire tracking, and synthetic seismogram oscilloscopy.',
       tags: [
         'React 19',
         'TypeScript',
-        'Three.js',
-        'WebGL',
+        'Canvas 2D',
         'Supabase',
         'Tailwind CSS',
       ],
