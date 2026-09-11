@@ -121,17 +121,16 @@
 </template>
 
 <script setup lang="ts">
-  import { displayNone } from '@/animations';
+  import gsap from 'gsap';
   import { lenis } from '@/lenis';
   import { onMounted } from 'vue';
 
   const handleClick = () => {
-    displayNone('#samsung-error-modal');
+    gsap.set('#samsung-error-modal', { display: 'none' });
+    lenis.start();
   };
 
   onMounted(() => {
     lenis.stop();
   });
-
-  // const showModal = ref(false);
 </script>
