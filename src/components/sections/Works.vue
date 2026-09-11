@@ -111,8 +111,8 @@
           </div>
         </div>
 
-        <!-- Right Column: Project Title, Roles, Systems -->
-        <div class="md:col-span-6 flex flex-col justify-between h-full pt-1 md:pt-0 md:pl-2 lg:pl-4">
+        <!-- Right Column: Project Title, Roles, Systems (Locked as single responsive unit) -->
+        <div class="md:col-span-6 flex flex-col pt-1 md:pt-0 md:pl-2 lg:pl-4">
           <!-- Project Title (Masked Reveal) — Responsive, bold, uppercase, never clips -->
           <div class="overflow-hidden">
             <h3 class="slide-project-title font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal">
@@ -120,8 +120,8 @@
             </h3>
           </div>
 
-          <!-- Role & System Metadata — Offset lower down with mt-auto (Asymmetric Editorial Layout) -->
-          <div class="flex flex-col gap-1.5 mt-auto pt-4 sm:pt-5 md:pt-6 lg:pt-8 self-start md:self-end font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
+          <!-- Role & System Metadata — Cleanly positioned below title matching mockup -->
+          <div class="flex flex-col gap-1.5 mt-5 sm:mt-6 md:mt-7 lg:mt-8 self-start md:self-end font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
             <div class="overflow-hidden py-0.5">
               <div class="slide-project-meta will-change-transform">
                 <span class="font-bold text-[#22201e]">ROLE: </span>
