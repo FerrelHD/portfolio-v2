@@ -4,8 +4,6 @@
     class="shrink-0 w-full md:w-screen h-svh md:h-dvh flex flex-col justify-between select-none
            bg-[#262220] text-[#f3eee8] relative overflow-hidden
            pt-16 pb-10 px-6 md:pt-16 md:pb-14 md:pl-28 md:pr-16 font-sans"
-    @mousemove="onMouseMove"
-    @mouseleave="onMouseLeave"
   >
     <!-- Base Curtain Roll-Up Overlay ala Khanh Nguyen (#262220 -> #3A3632 across entire screen including sidebar) -->
     <div
@@ -183,31 +181,6 @@
 
   const scrollToNext = () => {
     emit('scrollNext');
-  };
-
-  const onMouseMove = (e: MouseEvent) => {
-    if (window.innerWidth < 768 || !heroTitle.value || showIntro.value) return;
-    const { clientX, clientY } = e;
-    const normX = (clientX / window.innerWidth - 0.5) * 2;
-    const normY = (clientY / window.innerHeight - 0.5) * 2;
-    gsap.to(heroTitle.value, {
-      x: normX * 12,
-      y: normY * 7,
-      duration: 0.8,
-      ease: 'power2.out',
-      overwrite: 'auto',
-    });
-  };
-
-  const onMouseLeave = () => {
-    if (!heroTitle.value) return;
-    gsap.to(heroTitle.value, {
-      x: 0,
-      y: 0,
-      duration: 1,
-      ease: 'power2.out',
-      overwrite: 'auto',
-    });
   };
 
   onMounted(() => {
