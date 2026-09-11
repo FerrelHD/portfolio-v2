@@ -122,7 +122,7 @@
 
 <script setup lang="ts">
   import gsap from 'gsap';
-  import { lenis } from '@/lenis';
+  import { lenis } from '../../lenis';
   import { onMounted } from 'vue';
 
   const handleClick = () => {
