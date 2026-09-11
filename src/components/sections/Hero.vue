@@ -14,7 +14,7 @@
     ></div>
 
     <!-- Top Content Row: Giant Title on Left, Left-Aligned Bio on Right -->
-    <div class="relative z-[2] flex flex-col md:flex-row md:items-start md:justify-between gap-8 md:gap-12 mt-2 md:mt-4">
+    <div class="relative z-[2] flex flex-col md:flex-row md:items-start md:justify-between gap-8 md:gap-12 mt-2 md:mt-4 max-w-[1700px] w-full">
       <!-- Big Editorial Title with Intro Counter Slot -->
       <div class="relative flex flex-col font-serif uppercase leading-[0.82] tracking-[-0.05em]">
         
@@ -26,7 +26,7 @@
         >
           <div
             ref="introContent"
-            class="flex items-center h-[1em] text-[17vw] sm:text-[14vw] md:text-[9.5vw] lg:text-[9.2vw] text-[#f3eee8] font-normal will-change-transform leading-none tracking-[-0.045em] pr-4 sm:pr-6"
+            class="flex items-center h-[1em] text-[17vw] sm:text-[14vw] md:text-[clamp(4.5rem,min(11vw,20vh),14rem)] lg:text-[clamp(5rem,min(10.5vw,22vh),15rem)] xl:text-[clamp(5.5rem,min(10.2vw,23vh),16rem)] text-[#f3eee8] font-normal will-change-transform leading-none tracking-[-0.045em] pr-4 sm:pr-6"
           >
             <span class="flex h-[1em] items-center leading-none">20</span>
             <!-- Rolling 2-digit strip -->
@@ -47,20 +47,20 @@
         <!-- Name Title (Always in flow, masked with overflow-hidden) -->
         <h1
           ref="heroTitle"
-          class="font-serif font-normal text-[#f3eee8] will-change-transform leading-[0.88] tracking-[-0.045em]"
+          class="font-serif font-normal text-[#f3eee8] will-change-transform leading-[0.88] tracking-[-0.045em] opacity-0"
         >
-          <span class="block overflow-hidden pr-4 sm:pr-6">
+          <span class="block overflow-hidden pr-4 sm:pr-6 pt-1 pb-1">
             <span
               ref="firstNameEl"
-              class="block will-change-transform text-[17vw] sm:text-[14vw] md:text-[9.5vw] lg:text-[9.2vw] tracking-[-0.045em] pr-2"
+              class="block will-change-transform text-[17vw] sm:text-[14vw] md:text-[clamp(4.5rem,min(11vw,20vh),14rem)] lg:text-[clamp(5rem,min(10.5vw,22vh),15rem)] xl:text-[clamp(5.5rem,min(10.2vw,23vh),16rem)] tracking-[-0.045em] pr-2"
             >
               FERREL
             </span>
           </span>
-          <span class="block overflow-hidden pr-6 sm:pr-8 mt-1 sm:mt-1.5 md:mt-2">
+          <span class="block overflow-hidden pr-6 sm:pr-8 mt-1 sm:mt-1.5 md:mt-2 pt-1 pb-1">
             <span
               ref="lastNameEl"
-              class="block will-change-transform text-[18.5vw] sm:text-[15.2vw] md:text-[10.5vw] lg:text-[10.2vw] tracking-[-0.045em] origin-left pr-4"
+              class="block will-change-transform text-[18.5vw] sm:text-[15.2vw] md:text-[clamp(5rem,min(12vw,22vh),15.5rem)] lg:text-[clamp(5.5rem,min(11.5vw,24vh),16.5rem)] xl:text-[clamp(6rem,min(11.2vw,25vh),18rem)] tracking-[-0.045em] origin-left pr-4"
             >
               RASHAD
             </span>
@@ -73,7 +73,7 @@
         <div class="overflow-hidden">
           <p
             ref="bioEl"
-            class="font-sans text-base sm:text-lg leading-[140%] text-[#f3eee8]/85 font-normal tracking-normal will-change-transform"
+            class="font-sans text-base sm:text-lg leading-[140%] text-[#f3eee8]/85 font-normal tracking-normal will-change-transform opacity-0"
           >
             A fullstack developer & digital creator, crafting highperformance web systems, 3D worlds, and cinematic digital media.
           </p>
@@ -82,7 +82,7 @@
     </div>
 
     <!-- Bottom Row: Depok Live Time, Status, and Italic Scroll Cue -->
-    <div class="relative z-[2] grid grid-cols-2 md:grid-cols-3 items-end gap-4 font-sans text-[#f3eee8]/80">
+    <div class="relative z-[2] grid grid-cols-2 md:grid-cols-3 items-end gap-4 font-sans text-[#f3eee8]/80 max-w-[1700px] w-full">
       <!-- Bottom Left: Location & Live Local Clock -->
       <div class="overflow-hidden">
         <div ref="footerLeftEl" class="flex flex-col text-sm sm:text-base leading-[140%] will-change-transform">
@@ -123,8 +123,8 @@
               class="group flex items-center cursor-pointer will-change-transform"
               @click="scrollToNext"
             >
-              <span class="font-serif uppercase tracking-[0.02em] text-xl sm:text-2xl md:text-3xl lg:text-[32px] font-normal text-[#faf9f6]/90 transition-all duration-300 group-hover:text-white group-hover:tracking-[0.05em] leading-none">
-                SCROLL
+              <span class="font-serif italic tracking-[0.02em] text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-normal text-[#faf9f6]/90 transition-all duration-300 group-hover:text-white group-hover:tracking-[0.05em] leading-none">
+                Scroll
               </span>
             </div>
           </div>
@@ -190,6 +190,8 @@
     gsap.set([firstNameEl.value, lastNameEl.value, bioEl.value], {
       yPercent: 105,
     });
+    if (heroTitle.value) gsap.set(heroTitle.value, { autoAlpha: 0 });
+    if (bioEl.value) gsap.set(bioEl.value, { autoAlpha: 0 });
 
     if (introContent.value) {
       gsap.set(introContent.value, { yPercent: 105 });
@@ -204,8 +206,8 @@
     }
 
     // Hide footer elements during intro, quote prepared for entrance
-    if (footerLeftEl.value) gsap.set(footerLeftEl.value, { yPercent: 105 });
-    if (footerCenterEl.value) gsap.set(footerCenterEl.value, { yPercent: 105 });
+    if (footerLeftEl.value) gsap.set(footerLeftEl.value, { yPercent: 105, autoAlpha: 0 });
+    if (footerCenterEl.value) gsap.set(footerCenterEl.value, { yPercent: 105, autoAlpha: 0 });
     if (scrollCueEl.value) gsap.set(scrollCueEl.value, { yPercent: 120, autoAlpha: 0 });
     if (quoteEl.value) gsap.set(quoteEl.value, { yPercent: 105 });
 
@@ -349,6 +351,14 @@
     // 5. Stage 5: Hero Section Content Reveal
     const heroRevealTime = curtainStartTime + 0.25; // Muncul lebih responsif saat tirai melewati separuh layar
 
+    // Reveal containers from autoAlpha: 0
+    if (heroTitle.value) {
+      tl.set(heroTitle.value, { autoAlpha: 1 }, heroRevealTime);
+    }
+    if (bioEl.value) {
+      tl.set(bioEl.value, { autoAlpha: 1 }, heroRevealTime);
+    }
+
     // Masked Line Reveal for FERREL & RASHAD
     tl.to(
       [firstNameEl.value, lastNameEl.value],
@@ -393,6 +403,7 @@
         footerEls,
         {
           yPercent: 0,
+          autoAlpha: 1,
           duration: 0.9,
           stagger: 0.06,
           ease: 'power4.out',
