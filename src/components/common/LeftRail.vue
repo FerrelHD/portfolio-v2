@@ -134,7 +134,7 @@
     </div>
 
     <!-- Center: Giant Editorial Navigation Links with Masked Reveals -->
-    <nav class="my-auto py-8 flex flex-col gap-3 sm:gap-5 md:gap-7">
+    <nav class="my-auto py-4 sm:py-6 md:py-6 lg:py-8 flex flex-col gap-2.5 sm:gap-3.5 md:gap-4 lg:gap-5 xl:gap-6">
       <div
         v-for="item in navItems"
         :key="item.id"
@@ -148,24 +148,24 @@
         >
           <!-- Interactive Hover Layer (separated from GSAP transform) -->
           <div
-            class="group/nav flex items-baseline gap-4 sm:gap-6 md:gap-8 transition-all duration-300 ease-out hover:translate-x-3 sm:hover:translate-x-5"
+            class="group/nav flex items-baseline gap-3 sm:gap-5 md:gap-6 lg:gap-8 transition-all duration-300 ease-out hover:translate-x-2 sm:hover:translate-x-4"
             :class="activeSection === item.id ? 'opacity-100' : 'opacity-30 hover:opacity-100'"
           >
             <!-- Small Serif Slide Number -->
-            <span class="font-serif text-lg sm:text-2xl md:text-3xl text-inherit transition-colors duration-300">
+            <span class="font-serif text-base sm:text-xl md:text-2xl lg:text-[26px] text-inherit transition-colors duration-300">
               {{ item.num }}
             </span>
             <!-- Giant Editorial Serif Title + Subtle Dynamic Dash Indicator -->
-            <div class="flex items-center gap-4 sm:gap-6">
+            <div class="flex items-center gap-3 sm:gap-5 lg:gap-6">
               <span
-                class="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-[7.5vw] uppercase tracking-[-0.03em] leading-[0.88] text-inherit transition-colors duration-300"
+                class="font-serif text-4xl sm:text-6xl md:text-[54px] lg:text-[68px] xl:text-[76px] 2xl:text-[5.5vw] uppercase tracking-[-0.03em] leading-[0.9] text-inherit transition-colors duration-300"
               >
                 {{ item.label }}
               </span>
               <!-- Subtle editorial accent line: active has resting indicator, hover expands smoothly -->
               <span
                 class="hidden sm:inline-block h-[2px] bg-white/70 transition-all duration-300 ease-out"
-                :class="activeSection === item.id ? 'w-8 bg-white/50 group-hover/nav:w-16' : 'w-0 group-hover/nav:w-14'"
+                :class="activeSection === item.id ? 'w-6 lg:w-8 bg-white/50 group-hover/nav:w-12 lg:group-hover/nav:w-16' : 'w-0 group-hover/nav:w-10 lg:group-hover/nav:w-14'"
               ></span>
             </div>
           </div>
@@ -241,7 +241,8 @@
     { num: '01.', label: 'HOME', id: 'hero' },
     { num: '02.', label: 'ABOUT', id: 'about' },
     { num: '03.', label: 'WORKS', id: 'works' },
-    { num: '04.', label: 'CONTACT', id: 'contact' },
+    { num: '04.', label: 'SERVICES', id: 'capabilities' },
+    { num: '05.', label: 'CONTACT', id: 'contact' },
   ];
 
   const toggleMenu = () => {
