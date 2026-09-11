@@ -25,7 +25,7 @@
         >
           <div
             ref="introContent"
-            class="flex items-center h-[1em] text-[17vw] sm:text-[14vw] md:text-[clamp(4.5rem,min(11vw,20vh),14rem)] lg:text-[clamp(5rem,min(10.5vw,22vh),15rem)] xl:text-[clamp(5.5rem,min(10.2vw,23vh),16rem)] text-[#f3eee8] font-normal will-change-transform leading-none tracking-[-0.045em] pr-4 sm:pr-6"
+            class="flex items-center h-[1em] text-[17vw] sm:text-[14vw] md:text-[clamp(3.75rem,min(9.5vw,16vh),10rem)] lg:text-[clamp(4.25rem,min(9.8vw,17vh),12rem)] xl:text-[clamp(5.2rem,min(10.5vw,21vh),15rem)] text-[#f3eee8] font-normal will-change-transform leading-none tracking-[-0.045em] pr-4 sm:pr-6"
           >
             <span class="flex h-[1em] items-center leading-none">20</span>
             <!-- Rolling 2-digit strip -->
@@ -51,7 +51,7 @@
           <span class="block overflow-hidden pr-4 sm:pr-6 pt-1 pb-1">
             <span
               ref="firstNameEl"
-              class="block will-change-transform text-[17vw] sm:text-[14vw] md:text-[clamp(4.5rem,min(11vw,20vh),14rem)] lg:text-[clamp(5rem,min(10.5vw,22vh),15rem)] xl:text-[clamp(5.5rem,min(10.2vw,23vh),16rem)] tracking-[-0.045em] pr-2"
+              class="block will-change-transform whitespace-nowrap text-[17vw] sm:text-[14vw] md:text-[clamp(3.75rem,min(9.5vw,16vh),10rem)] lg:text-[clamp(4.25rem,min(9.8vw,17vh),12rem)] xl:text-[clamp(5.2rem,min(10.5vw,21vh),15rem)] tracking-[-0.045em] pr-2"
             >
               FERREL
             </span>
@@ -59,7 +59,7 @@
           <span class="block overflow-hidden pr-6 sm:pr-8 mt-1 sm:mt-1.5 md:mt-2 pt-1 pb-1">
             <span
               ref="lastNameEl"
-              class="block will-change-transform whitespace-nowrap text-[18.5vw] sm:text-[15.2vw] md:text-[clamp(5rem,min(12vw,22vh),15.5rem)] lg:text-[clamp(5.5rem,min(11.5vw,24vh),16.5rem)] xl:text-[clamp(6rem,min(11.2vw,25vh),18rem)] tracking-[-0.045em] origin-left pr-4"
+              class="block will-change-transform whitespace-nowrap text-[18.5vw] sm:text-[15.2vw] md:text-[clamp(4.25rem,min(10.5vw,17.5vh),11.5rem)] lg:text-[clamp(4.75rem,min(10.8vw,18.5vh),13.5rem)] xl:text-[clamp(5.8rem,min(11.2vw,22.5vh),16.5rem)] tracking-[-0.045em] origin-left pr-4"
             >
               <span>R</span><span class="inline-block pl-[0.06em]">A</span><span>SHAD</span>
             </span>
@@ -67,12 +67,12 @@
         </h1>
       </div>
 
-      <!-- Bio Paragraph (Top Right, Left-Aligned ~460px) -->
-      <div class="max-w-[340px] md:max-w-[420px] lg:max-w-[480px] md:pt-4 text-left">
+      <!-- Bio Paragraph (Top Right, Left-Aligned ~400px) -->
+      <div class="max-w-[320px] md:max-w-[360px] lg:max-w-[400px] xl:max-w-[450px] md:pt-3 lg:pt-4 text-left">
         <div class="overflow-hidden">
           <p
             ref="bioEl"
-            class="font-sans text-base sm:text-lg md:text-xl lg:text-2xl leading-[135%] text-[#f3eee8]/85 font-normal tracking-normal will-change-transform opacity-0"
+            class="font-sans text-xs sm:text-sm md:text-sm lg:text-[15px] xl:text-lg leading-[145%] lg:leading-[150%] text-[#f3eee8]/80 font-normal tracking-normal will-change-transform opacity-0"
           >
             A fullstack developer & digital creator, crafting highperformance web systems, 3D worlds, and cinematic digital media.
           </p>
