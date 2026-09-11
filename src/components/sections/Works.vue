@@ -7,7 +7,7 @@
       :id="`work-${project.id}`"
       class="work-slide shrink-0 w-full md:w-screen h-svh md:h-dvh flex flex-col justify-between select-none
              bg-[#faf9f6] text-[#22201e] relative overflow-hidden
-             pt-12 pb-5 px-6 md:pt-9 md:pb-5 md:pl-24 md:pr-12 font-sans"
+             pt-10 pb-4 px-6 md:pt-6 md:pb-4 lg:pt-8 lg:pb-5 md:pl-24 md:pr-12 font-sans"
     >
       <!-- Top Row: CHAPTER II on Left, Live Link on Right -->
       <div class="flex items-center justify-between">
@@ -42,18 +42,18 @@
       </div>
 
       <!-- Main Middle Grid: Left Browser Mockup & About, Right Project Title & Meta -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 lg:gap-12 items-start my-auto py-0">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-6 lg:gap-10 items-start my-auto py-0">
         
         <!-- Left Column: macOS Browser Mockup + About Description -->
-        <div class="md:col-span-6 flex flex-col gap-3 lg:gap-4 max-w-[420px] md:max-w-[540px] lg:max-w-[620px] xl:max-w-[680px]">
+        <div class="md:col-span-6 flex flex-col gap-2.5 lg:gap-3 max-w-[420px] md:max-w-[460px] lg:max-w-[520px] xl:max-w-[620px]">
           <!-- Entrance Animation Wrapper for Mockup -->
           <div class="slide-mockup will-change-transform">
-            <!-- macOS Browser Frame Mockup with Rich Hover Micro-Interactions -->
+            <!-- macOS Browser Frame Mockup with Responsive Height Clamping -->
             <a
               :href="project.liveUrl || project.githubUrl"
               target="_blank"
               rel="noreferrer"
-              class="group/mockup relative block w-full overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-2 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
+              class="group/mockup relative block w-full max-h-[25vh] lg:max-h-[28vh] xl:max-h-[32vh] overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
             >
               <!-- Browser Top Bar -->
               <div class="flex items-center justify-between px-3 py-1.5 bg-[#f3f2ee] border-b border-black/10 transition-colors duration-300 group-hover/mockup:bg-[#eae8e3]">
@@ -70,7 +70,7 @@
                 <div class="size-2"></div>
               </div>
               <!-- Screenshot Preview with Micro-Zoom & Subtle Sheen -->
-              <div class="relative aspect-[16/9] w-full overflow-hidden bg-black/5">
+              <div class="relative aspect-[16/9] max-h-[21vh] lg:max-h-[24vh] xl:max-h-[28vh] w-full overflow-hidden bg-black/5">
                 <img
                   :src="project.previewImg"
                   :alt="project.title"
@@ -87,15 +87,15 @@
           <div class="slide-about-container flex flex-col">
             <!-- Section Heading (tightly wrapped) -->
             <div class="slide-about-item relative inline-block self-start overflow-hidden mb-1 pr-1">
-              <span class="slide-about-text block text-sm sm:text-base md:text-lg font-sans font-semibold text-[#22201e]">
+              <span class="slide-about-text block text-xs sm:text-sm md:text-base font-sans font-semibold text-[#22201e]">
                 About
               </span>
               <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
             </div>
 
             <!-- Paragraph 1 -->
-            <div class="slide-about-item relative overflow-hidden mb-1.5 max-w-xl">
-              <p class="slide-about-text font-sans text-xs sm:text-sm md:text-base leading-[145%] text-[#22201e]/85 text-justify">
+            <div class="slide-about-item relative overflow-hidden mb-1 max-w-xl">
+              <p class="slide-about-text font-sans text-xs sm:text-[13px] md:text-[13px] lg:text-sm xl:text-base leading-[140%] text-[#22201e]/85 text-justify">
                 {{ project.aboutP1 }}
               </p>
               <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
@@ -103,7 +103,7 @@
 
             <!-- Paragraph 2 -->
             <div class="slide-about-item relative overflow-hidden max-w-xl">
-              <p class="slide-about-text font-sans text-xs sm:text-sm md:text-base leading-[145%] text-[#22201e]/85 text-justify">
+              <p class="slide-about-text font-sans text-xs sm:text-[13px] md:text-[13px] lg:text-sm xl:text-base leading-[140%] text-[#22201e]/85 text-justify">
                 {{ project.aboutP2 }}
               </p>
               <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
@@ -115,13 +115,13 @@
         <div class="md:col-span-6 flex flex-col justify-between h-full pt-1 md:pt-0 md:pl-2 lg:pl-4">
           <!-- Project Title (Masked Reveal) — Responsive, bold, uppercase, never clips -->
           <div class="overflow-hidden">
-            <h3 class="slide-project-title font-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal">
+            <h3 class="slide-project-title font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal">
               {{ project.title }}
             </h3>
           </div>
 
-          <!-- Role & System Metadata — Offset lower down & shifted to the right (Asymmetric Editorial Layout) -->
-          <div class="flex flex-col gap-2 pt-6 sm:pt-10 md:pt-14 lg:pt-18 self-start md:self-end font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
+          <!-- Role & System Metadata — Offset lower down with mt-auto (Asymmetric Editorial Layout) -->
+          <div class="flex flex-col gap-1.5 mt-auto pt-4 sm:pt-5 md:pt-6 lg:pt-8 self-start md:self-end font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
             <div class="overflow-hidden py-0.5">
               <div class="slide-project-meta will-change-transform">
                 <span class="font-bold text-[#22201e]">ROLE: </span>
@@ -138,21 +138,21 @@
         </div>
       </div>
 
-      <!-- Bottom Row: THE WORK #01 typography — balanced, right-aligned, fully in view -->
+      <!-- Bottom Row: THE WORK #01 typography — balanced, right-aligned, fully in view on laptops -->
       <div class="flex items-end justify-end">
         <div class="flex items-end gap-1 leading-none select-none">
           <!-- THE stacked vertically -->
-          <div class="flex flex-col uppercase font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/25 leading-[0.85] tracking-tight">
+          <div class="flex flex-col uppercase font-sans font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#22201e]/25 leading-[0.85] tracking-tight">
             <span>THE</span>
           </div>
           <!-- WORK massive -->
           <div class="overflow-hidden leading-none">
-            <span class="slide-number font-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-[#22201e]/25 leading-[0.85] tracking-tighter will-change-transform inline-block">
+            <span class="slide-number font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/25 leading-[0.85] tracking-tighter will-change-transform inline-block">
               WORK
             </span>
           </div>
           <!-- Slide number -->
-          <div class="overflow-hidden leading-none ml-2">
+          <div class="overflow-hidden leading-none ml-1.5">
             <span class="slide-number-idx font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/30 leading-[0.85] will-change-transform inline-block">
               {{ project.slideNumber }}
             </span>

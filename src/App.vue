@@ -186,10 +186,17 @@
 
     if (window.innerWidth < 768) {
       if (horizontalScrollTrigger) {
-        horizontalScrollTrigger.kill();
+        horizontalScrollTrigger.kill(true);
         horizontalScrollTrigger = null;
         gsap.set(horizontalTrack.value, { clearProps: 'all' });
+        gsap.set(horizontalPin.value, { clearProps: 'all' });
       }
+      return;
+    }
+
+    // If horizontal scroll is already initialized on desktop, refresh instead of recreating
+    if (horizontalScrollTrigger) {
+      ScrollTrigger.refresh();
       return;
     }
 
@@ -286,8 +293,23 @@
     }
   };
 
+  let wasDesktop = typeof window !== 'undefined' ? window.innerWidth >= 768 : true;
+
   watch([width, height], () => {
-    initHorizontalScroll();
+    const isDesktop = window.innerWidth >= 768;
+
+    if (isDesktop !== wasDesktop) {
+      wasDesktop = isDesktop;
+      if (!isDesktop && horizontalScrollTrigger) {
+        horizontalScrollTrigger.kill(true);
+        horizontalScrollTrigger = null;
+        if (horizontalTrack.value) gsap.set(horizontalTrack.value, { clearProps: 'all' });
+        if (horizontalPin.value) gsap.set(horizontalPin.value, { clearProps: 'all' });
+      } else if (isDesktop && !horizontalScrollTrigger) {
+        initHorizontalScroll();
+      }
+    }
+
     ScrollTrigger.refresh();
     checkRailTheme();
   });
@@ -311,7 +333,7 @@
     window.removeEventListener('scroll', onWindowScroll);
     window.removeEventListener('keydown', handleKeyDown);
     if (horizontalScrollTrigger) {
-      horizontalScrollTrigger.kill();
+      horizontalScrollTrigger.kill(true);
     }
   });
 </script>

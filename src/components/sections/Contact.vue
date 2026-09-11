@@ -3,7 +3,7 @@
     id="contact"
     class="shrink-0 w-full md:w-screen h-svh md:h-dvh flex flex-col justify-between select-none
            bg-[#3A3632] text-[#f3eee8] relative overflow-hidden
-           pt-16 pb-12 px-6 md:pt-16 md:pb-14 md:pl-28 md:pr-16 font-sans"
+           pt-12 pb-8 px-6 md:pt-10 md:pb-10 lg:pt-14 lg:pb-12 md:pl-28 md:pr-16 font-sans"
   >
     <!-- Top Area: Clean Open Editorial Space -->
     <div class="flex items-center justify-between">
@@ -21,11 +21,11 @@
     </div>
 
     <!-- Massive Center Headline: NEXT CHAPTER in Editorial Serif -->
-    <div class="my-auto py-4">
+    <div class="my-auto py-2 sm:py-3 md:py-4">
       <div class="overflow-hidden pr-4 sm:pr-6">
         <h2
           ref="nextEl"
-          class="font-serif text-[18vw] sm:text-[16vw] md:text-[14vw] lg:text-[12vw] xl:text-[11.5vw] font-normal tracking-[-0.03em] text-[#f3eee8] uppercase leading-[0.84] will-change-transform pr-2"
+          class="font-serif text-[18vw] sm:text-[16vw] md:text-[clamp(3.5rem,min(13vw,19vh),13rem)] lg:text-[clamp(4.5rem,min(12vw,21vh),14rem)] font-normal tracking-[-0.03em] text-[#f3eee8] uppercase leading-[0.84] will-change-transform pr-2"
         >
           NEXT
         </h2>
@@ -33,7 +33,7 @@
       <div class="overflow-hidden pr-6 sm:pr-8">
         <h2
           ref="chapterEl"
-          class="font-serif text-[18vw] sm:text-[16vw] md:text-[14vw] lg:text-[12vw] xl:text-[11.5vw] font-normal tracking-[-0.03em] text-[#f3eee8] uppercase leading-[0.84] will-change-transform pr-4"
+          class="font-serif text-[18vw] sm:text-[16vw] md:text-[clamp(3.5rem,min(13vw,19vh),13rem)] lg:text-[clamp(4.5rem,min(12vw,21vh),14rem)] font-normal tracking-[-0.03em] text-[#f3eee8] uppercase leading-[0.84] will-change-transform pr-4"
         >
           CHAPTER
         </h2>
