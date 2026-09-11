@@ -59,9 +59,9 @@
           <span class="block overflow-hidden pr-6 sm:pr-8 mt-1 sm:mt-1.5 md:mt-2 pt-1 pb-1">
             <span
               ref="lastNameEl"
-              class="block will-change-transform text-[18.5vw] sm:text-[15.2vw] md:text-[clamp(5rem,min(12vw,22vh),15.5rem)] lg:text-[clamp(5.5rem,min(11.5vw,24vh),16.5rem)] xl:text-[clamp(6rem,min(11.2vw,25vh),18rem)] tracking-[-0.045em] origin-left pr-4"
+              class="block will-change-transform whitespace-nowrap text-[18.5vw] sm:text-[15.2vw] md:text-[clamp(5rem,min(12vw,22vh),15.5rem)] lg:text-[clamp(5.5rem,min(11.5vw,24vh),16.5rem)] xl:text-[clamp(6rem,min(11.2vw,25vh),18rem)] tracking-[-0.045em] origin-left pr-4"
             >
-              RASHAD
+              <span>R</span><span class="inline-block pl-[0.06em]">A</span><span>SHAD</span>
             </span>
           </span>
         </h1>
