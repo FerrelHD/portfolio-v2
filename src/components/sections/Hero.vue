@@ -1,9 +1,9 @@
 <template>
   <section
     id="hero"
-    class="shrink-0 w-full md:w-screen h-svh md:h-dvh flex flex-col justify-between select-none
+    class="shrink-0 w-full md:w-screen h-dvh flex flex-col justify-between select-none
            bg-[#262220] text-[#f3eee8] relative overflow-hidden
-           pt-16 pb-10 px-6 md:pt-16 md:pb-14 md:pl-28 md:pr-16 font-sans"
+           pt-20 pb-8 px-6 md:pt-16 md:pb-14 md:pl-28 md:pr-16 font-sans"
   >
     <!-- Base Curtain Roll-Up Overlay ala Khanh Nguyen (#262220 -> #3A3632 across entire screen including sidebar) -->
     <div

@@ -1,9 +1,9 @@
 <template>
   <section
     id="capabilities"
-    class="shrink-0 w-full md:w-screen h-svh md:h-dvh flex flex-col md:flex-row items-stretch select-none
+    class="shrink-0 w-full md:w-screen h-dvh flex flex-col md:flex-row items-stretch select-none
            bg-[#282523] text-[#faf9f6] relative overflow-hidden
-           pt-14 pb-6 px-6 md:pt-0 md:pb-0 md:pl-16 md:pr-0 font-sans"
+           pt-20 pb-8 px-6 md:pt-0 md:pb-0 md:pl-16 md:pr-0 font-sans"
   >
     <!-- Left Column: Chapter III Title & "What I do?" Statement -->
     <div

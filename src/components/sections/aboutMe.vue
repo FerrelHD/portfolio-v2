@@ -1,9 +1,9 @@
 <template>
   <section
     id="about"
-    class="shrink-0 w-full md:w-screen h-svh md:h-dvh flex flex-col justify-between select-none
+    class="shrink-0 w-full md:w-screen h-dvh flex flex-col justify-between select-none
            bg-[#faf9f6] text-[#22201e] relative overflow-hidden
-           pt-12 pb-6 px-6 md:pt-10 md:pb-7 md:pl-24 md:pr-12 font-sans"
+           pt-20 pb-8 px-6 md:pt-10 md:pb-7 md:pl-24 md:pr-12 font-sans"
   >
     <!-- Top Row: CHAPTER I on Left, QUICK INTRO on Right -->
     <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-8">
