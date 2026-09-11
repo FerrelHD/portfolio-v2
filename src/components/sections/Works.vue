@@ -120,8 +120,8 @@
             </h3>
           </div>
 
-          <!-- Role & System Metadata — Cleanly positioned below title matching mockup -->
-          <div class="flex flex-col gap-1.5 mt-5 sm:mt-6 md:mt-7 lg:mt-8 self-start md:self-end font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
+          <!-- Role & System Metadata — Left-aligned directly beneath title -->
+          <div class="flex flex-col gap-1.5 mt-4 sm:mt-5 md:mt-6 lg:mt-7 font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
             <div class="overflow-hidden py-0.5">
               <div class="slide-project-meta will-change-transform">
                 <span class="font-bold text-[#22201e]">ROLE: </span>
