@@ -47,11 +47,11 @@
       </div>
     </div>
 
-    <!-- Middle Section: Quote Left, Portrait Photo Right -->
+    <!-- Middle Section: Quote in Center, Portrait Photo Right -->
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-end my-auto py-1">
-      <!-- Quote Center/Left — Line Mask Reveal -->
-      <div class="md:col-span-6 lg:col-span-6">
-        <blockquote class="font-sans text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[34px] text-[#22201e] font-normal leading-[1.3] tracking-normal uppercase">
+      <!-- Quote Center — Line Mask Reveal -->
+      <div class="md:col-start-4 md:col-span-4 lg:col-start-5 lg:col-span-3 self-center">
+        <blockquote class="font-sans text-xs sm:text-sm md:text-[13px] lg:text-sm xl:text-[15px] text-[#22201e]/80 font-medium leading-[1.4] tracking-[0.04em] uppercase">
           <span class="block overflow-hidden">
             <span class="quote-line block will-change-transform">
               "CODE WITH PRECISION,
@@ -66,7 +66,7 @@
       </div>
 
       <!-- Passport-style B&W Portrait Photo on Right — responsive to viewport height -->
-      <div class="md:col-span-6 lg:col-span-6 flex justify-start md:justify-end">
+      <div class="md:col-start-8 md:col-span-5 lg:col-start-8 lg:col-span-5 flex justify-start md:justify-end">
         <div
           ref="photoEl"
           class="group/photo relative w-48 sm:w-60 md:w-72 lg:w-80 xl:w-[420px] max-h-[48vh] lg:max-h-[52vh] aspect-[3/4] bg-[#22201e]/5 overflow-hidden shadow-md hover:shadow-2xl border border-black/5 hover:border-black/15 transition-all duration-700 ease-out will-change-transform rounded-sm cursor-pointer"
