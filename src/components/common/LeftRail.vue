@@ -81,11 +81,11 @@
         FOLIO — EDITION
       </span>
 
-      <!-- Center: FERREL RASHAD (Title Font - Instrument Serif) - Perfectly Centered at 50% Midpoint & X-Axis -->
+      <!-- Center: FERREL RASHAD - Matches FOLIO — EDITION size (10px) and tracking -->
       <div class="absolute inset-x-0 w-full top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none">
         <span
-          class="vt-rl vt-reading-up font-serif text-[15px] lg:text-[16px] uppercase tracking-[0.18em] font-normal transition-colors duration-500 whitespace-nowrap cursor-default select-none pointer-events-auto"
-          :class="isDark && !isOpen ? 'text-[#f3eee8]/90 hover:text-[#f3eee8]' : (isOpen ? 'text-[#f3eee8]/90 hover:text-[#f3eee8]' : 'text-[#22201e]/90 hover:text-[#22201e]')"
+          class="vt-rl vt-reading-up font-sans text-[10px] uppercase tracking-[0.22em] font-medium transition-colors duration-500 whitespace-nowrap cursor-default select-none pointer-events-auto"
+          :class="isDark && !isOpen ? 'text-[#f3eee8]/80 hover:text-[#f3eee8]' : (isOpen ? 'text-[#f3eee8]/80 hover:text-[#f3eee8]' : 'text-[#22201e]/80 hover:text-[#22201e]')"
         >
           FERREL RASHAD
         </span>
