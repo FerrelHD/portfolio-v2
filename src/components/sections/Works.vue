@@ -12,40 +12,40 @@
       <!-- Top Row: CHAPTER II on Left, Live Link on Right -->
       <div class="flex items-center justify-between">
         <div class="overflow-hidden">
-          <h2 class="slide-chapter-title font-serif text-xl sm:text-2xl md:text-2xl lg:text-[26px] font-normal tracking-tight text-[#22201e] uppercase leading-none will-change-transform">
+          <h2 class="slide-chapter-title font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#22201e] uppercase leading-none will-change-transform">
             CHAPTER II
           </h2>
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-5">
           <a
             v-if="project.liveUrl"
             :href="project.liveUrl"
             target="_blank"
             rel="noreferrer"
-            class="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors"
+            class="hidden sm:inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors"
           >
             <span>Live Project</span>
-            <span class="text-sm">↗</span>
+            <span class="text-sm md:text-base">↗</span>
           </a>
           <a
             v-if="project.githubUrl"
             :href="project.githubUrl"
             target="_blank"
             rel="noreferrer"
-            class="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors"
+            class="hidden sm:inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors"
           >
             <span>GitHub</span>
-            <span class="text-sm">↗</span>
+            <span class="text-sm md:text-base">↗</span>
           </a>
         </div>
       </div>
 
       <!-- Main Middle Grid: Left Browser Mockup & About, Right Project Title & Meta -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 lg:gap-10 items-start my-auto py-0">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 lg:gap-12 items-start my-auto py-0">
         
         <!-- Left Column: macOS Browser Mockup + About Description -->
-        <div class="md:col-span-6 flex flex-col gap-3 lg:gap-4 max-w-[360px] lg:max-w-[410px] xl:max-w-[450px]">
+        <div class="md:col-span-6 flex flex-col gap-3 lg:gap-4 max-w-[420px] md:max-w-[540px] lg:max-w-[620px] xl:max-w-[680px]">
           <!-- Entrance Animation Wrapper for Mockup -->
           <div class="slide-mockup will-change-transform">
             <!-- macOS Browser Frame Mockup with Rich Hover Micro-Interactions -->
@@ -87,23 +87,23 @@
           <div class="slide-about-container flex flex-col">
             <!-- Section Heading (tightly wrapped) -->
             <div class="slide-about-item relative inline-block self-start overflow-hidden mb-1 pr-1">
-              <span class="slide-about-text block text-sm sm:text-base font-sans font-semibold text-[#22201e]">
+              <span class="slide-about-text block text-sm sm:text-base md:text-lg font-sans font-semibold text-[#22201e]">
                 About
               </span>
               <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
             </div>
 
             <!-- Paragraph 1 -->
-            <div class="slide-about-item relative overflow-hidden mb-1.5 max-w-lg">
-              <p class="slide-about-text font-sans text-xs sm:text-[13px] leading-[145%] text-[#22201e]/80 text-justify">
+            <div class="slide-about-item relative overflow-hidden mb-1.5 max-w-xl">
+              <p class="slide-about-text font-sans text-xs sm:text-sm md:text-base leading-[145%] text-[#22201e]/85 text-justify">
                 {{ project.aboutP1 }}
               </p>
               <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
             </div>
 
             <!-- Paragraph 2 -->
-            <div class="slide-about-item relative overflow-hidden max-w-lg">
-              <p class="slide-about-text font-sans text-xs sm:text-[13px] leading-[145%] text-[#22201e]/80 text-justify">
+            <div class="slide-about-item relative overflow-hidden max-w-xl">
+              <p class="slide-about-text font-sans text-xs sm:text-sm md:text-base leading-[145%] text-[#22201e]/85 text-justify">
                 {{ project.aboutP2 }}
               </p>
               <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
@@ -115,13 +115,13 @@
         <div class="md:col-span-6 flex flex-col justify-between h-full pt-1 md:pt-0 md:pl-2 lg:pl-4">
           <!-- Project Title (Masked Reveal) — Responsive, bold, uppercase, never clips -->
           <div class="overflow-hidden">
-            <h3 class="slide-project-title font-sans font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-[3vw] xl:text-5xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal">
+            <h3 class="slide-project-title font-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal">
               {{ project.title }}
             </h3>
           </div>
 
           <!-- Role & System Metadata — Offset lower down & shifted to the right (Asymmetric Editorial Layout) -->
-          <div class="flex flex-col gap-1.5 pt-6 sm:pt-10 md:pt-14 lg:pt-18 self-start md:self-end font-sans text-[10px] sm:text-[11px] md:text-xs uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
+          <div class="flex flex-col gap-2 pt-6 sm:pt-10 md:pt-14 lg:pt-18 self-start md:self-end font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
             <div class="overflow-hidden py-0.5">
               <div class="slide-project-meta will-change-transform">
                 <span class="font-bold text-[#22201e]">ROLE: </span>
@@ -140,20 +140,20 @@
 
       <!-- Bottom Row: THE WORK #01 typography — balanced, right-aligned, fully in view -->
       <div class="flex items-end justify-end">
-        <div class="flex items-end gap-0 leading-none select-none">
+        <div class="flex items-end gap-1 leading-none select-none">
           <!-- THE stacked vertically -->
-          <div class="flex flex-col uppercase font-sans font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#22201e]/25 leading-[0.85] tracking-tight">
+          <div class="flex flex-col uppercase font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/25 leading-[0.85] tracking-tight">
             <span>THE</span>
           </div>
           <!-- WORK massive -->
           <div class="overflow-hidden leading-none">
-            <span class="slide-number font-sans font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#22201e]/25 leading-[0.85] tracking-tighter will-change-transform inline-block">
+            <span class="slide-number font-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-[#22201e]/25 leading-[0.85] tracking-tighter will-change-transform inline-block">
               WORK
             </span>
           </div>
           <!-- Slide number -->
-          <div class="overflow-hidden leading-none ml-1.5">
-            <span class="slide-number-idx font-sans font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#22201e]/25 leading-[0.85] will-change-transform inline-block">
+          <div class="overflow-hidden leading-none ml-2">
+            <span class="slide-number-idx font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/30 leading-[0.85] will-change-transform inline-block">
               {{ project.slideNumber }}
             </span>
           </div>

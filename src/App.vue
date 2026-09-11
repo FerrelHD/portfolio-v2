@@ -235,20 +235,12 @@
     }
   };
 
-  const handleNavigate = (sectionId: string) => {
+  const navigateToSlideIndex = (targetSlide: number) => {
     isSidebarSolid.value = true;
-    const slideTargets: Record<string, number> = {
-      hero: 0,
-      about: 1,
-      works: 2,
-      capabilities: 6,
-      contact: 7,
-    };
-
-    const targetSlide = slideTargets[sectionId] ?? 0;
+    const clampedSlide = Math.min(TOTAL_SLIDES - 1, Math.max(0, targetSlide));
 
     if (window.innerWidth >= 768 && horizontalScrollTrigger) {
-      const targetRatio = targetSlide / (TOTAL_SLIDES - 1);
+      const targetRatio = clampedSlide / (TOTAL_SLIDES - 1);
       const targetScroll =
         horizontalScrollTrigger.start +
         targetRatio * (horizontalScrollTrigger.end - horizontalScrollTrigger.start);
@@ -258,8 +250,39 @@
         behavior: 'smooth',
       });
     } else {
-      const el = document.getElementById(sectionId);
+      const slideIds = ['hero', 'about', 'work-1', 'work-2', 'work-3', 'work-4', 'capabilities', 'contact'];
+      const targetId = slideIds[clampedSlide] ?? 'hero';
+      const el = document.getElementById(targetId);
       el?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleNavigate = (sectionId: string) => {
+    const slideTargets: Record<string, number> = {
+      hero: 0,
+      about: 1,
+      works: 2,
+      capabilities: 6,
+      contact: 7,
+    };
+
+    const targetSlide = slideTargets[sectionId] ?? 0;
+    navigateToSlideIndex(targetSlide);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as HTMLElement)?.tagName)) return;
+
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      if (currentSlideIndex.value < TOTAL_SLIDES - 1) {
+        e.preventDefault();
+        navigateToSlideIndex(currentSlideIndex.value + 1);
+      }
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      if (currentSlideIndex.value > 0) {
+        e.preventDefault();
+        navigateToSlideIndex(currentSlideIndex.value - 1);
+      }
     }
   };
 
@@ -272,6 +295,7 @@
   onMounted(() => {
     requestAnimationFrame(raf);
     window.addEventListener('scroll', onWindowScroll, { passive: true });
+    window.addEventListener('keydown', handleKeyDown);
 
     setTimeout(() => {
       initHorizontalScroll();
@@ -285,6 +309,7 @@
 
   onUnmounted(() => {
     window.removeEventListener('scroll', onWindowScroll);
+    window.removeEventListener('keydown', handleKeyDown);
     if (horizontalScrollTrigger) {
       horizontalScrollTrigger.kill();
     }

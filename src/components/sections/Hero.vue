@@ -4,6 +4,8 @@
     class="shrink-0 w-full md:w-screen h-svh md:h-dvh flex flex-col justify-between select-none
            bg-[#262220] text-[#f3eee8] relative overflow-hidden
            pt-16 pb-10 px-6 md:pt-16 md:pb-14 md:pl-28 md:pr-16 font-sans"
+    @mousemove="onMouseMove"
+    @mouseleave="onMouseLeave"
   >
     <!-- Base Curtain Roll-Up Overlay ala Khanh Nguyen (#262220 -> #3A3632 across entire screen including sidebar) -->
     <div
@@ -67,12 +69,12 @@
         </h1>
       </div>
 
-      <!-- Bio Paragraph (Top Right, Left-Aligned ~360px) -->
-      <div class="max-w-[340px] md:max-w-[380px] md:pt-4 text-left">
+      <!-- Bio Paragraph (Top Right, Left-Aligned ~460px) -->
+      <div class="max-w-[340px] md:max-w-[420px] lg:max-w-[480px] md:pt-4 text-left">
         <div class="overflow-hidden">
           <p
             ref="bioEl"
-            class="font-sans text-base sm:text-lg leading-[140%] text-[#f3eee8]/85 font-normal tracking-normal will-change-transform opacity-0"
+            class="font-sans text-base sm:text-lg md:text-xl lg:text-2xl leading-[135%] text-[#f3eee8]/85 font-normal tracking-normal will-change-transform opacity-0"
           >
             A fullstack developer & digital creator, crafting highperformance web systems, 3D worlds, and cinematic digital media.
           </p>
@@ -84,7 +86,7 @@
     <div class="relative z-[2] grid grid-cols-2 md:grid-cols-3 items-end gap-4 font-sans text-[#f3eee8]/80 max-w-[1700px] w-full">
       <!-- Bottom Left: Location & Live Local Clock -->
       <div class="overflow-hidden">
-        <div ref="footerLeftEl" class="flex flex-col text-sm sm:text-base leading-[140%] will-change-transform">
+        <div ref="footerLeftEl" class="flex flex-col text-sm sm:text-base md:text-lg leading-[140%] will-change-transform">
           <span class="text-[#f3eee8]">Depok, Indonesia</span>
           <span class="text-[#f3eee8]/60 tabular-nums">
             (GMT+7) {{ currentTime }}
@@ -92,10 +94,14 @@
         </div>
       </div>
 
-      <!-- Bottom Center: Availability Status -->
-      <div class="hidden md:flex flex-col items-center text-sm sm:text-base text-center leading-[140%] overflow-hidden">
-        <span ref="footerCenterEl" class="text-[#f3eee8]/90 will-change-transform">
-          Open for collaborations
+      <!-- Bottom Center: Availability Status with Live Pulsing Dot -->
+      <div class="hidden md:flex flex-col items-center text-sm sm:text-base md:text-lg text-center leading-[140%] overflow-hidden">
+        <span ref="footerCenterEl" class="inline-flex items-center gap-2 text-[#f3eee8]/90 will-change-transform">
+          <span class="relative flex size-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+          </span>
+          <span>Open for collaborations</span>
         </span>
       </div>
 
@@ -115,15 +121,18 @@
             </div>
           </div>
 
-          <!-- Hero Scroll Cue ala Khanh Nguyen: tightly masked container -->
-          <div class="overflow-hidden select-none">
+          <!-- Hero Scroll Cue: tightly masked container with animated arrow -->
+          <div class="overflow-hidden select-none pr-4">
             <div
               ref="scrollCueEl"
-              class="group flex items-center cursor-pointer will-change-transform"
+              class="group flex items-center gap-2.5 cursor-pointer will-change-transform pr-1"
               @click="scrollToNext"
             >
               <span class="font-serif italic tracking-[0.02em] text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-normal text-[#faf9f6]/90 transition-all duration-300 group-hover:text-white group-hover:tracking-[0.05em] leading-none">
                 Scroll
+              </span>
+              <span class="inline-block font-sans text-xl sm:text-2xl md:text-3xl text-[#faf9f6]/60 transition-all duration-300 group-hover:translate-x-1.5 group-hover:text-white leading-none">
+                →
               </span>
             </div>
           </div>
@@ -178,6 +187,31 @@
 
   const scrollToNext = () => {
     emit('scrollNext');
+  };
+
+  const onMouseMove = (e: MouseEvent) => {
+    if (window.innerWidth < 768 || !heroTitle.value || showIntro.value) return;
+    const { clientX, clientY } = e;
+    const normX = (clientX / window.innerWidth - 0.5) * 2;
+    const normY = (clientY / window.innerHeight - 0.5) * 2;
+    gsap.to(heroTitle.value, {
+      x: normX * 12,
+      y: normY * 7,
+      duration: 0.8,
+      ease: 'power2.out',
+      overwrite: 'auto',
+    });
+  };
+
+  const onMouseLeave = () => {
+    if (!heroTitle.value) return;
+    gsap.to(heroTitle.value, {
+      x: 0,
+      y: 0,
+      duration: 1,
+      ease: 'power2.out',
+      overwrite: 'auto',
+    });
   };
 
   onMounted(() => {
@@ -389,6 +423,11 @@
           autoAlpha: 1,
           duration: 0.95,
           ease: 'power4.out',
+          onComplete: () => {
+            if (scrollCueEl.value?.parentElement) {
+              scrollCueEl.value.parentElement.style.overflow = 'visible';
+            }
+          },
         },
         heroRevealTime + 0.08,
       );

@@ -11,18 +11,18 @@
       <div class="overflow-hidden">
         <h2
           ref="chapterTitle"
-          class="font-serif text-xl sm:text-2xl md:text-2xl lg:text-[26px] font-normal tracking-tight text-[#22201e] uppercase leading-none will-change-transform"
+          class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#22201e] uppercase leading-none will-change-transform"
         >
           CHAPTER I
         </h2>
       </div>
 
       <!-- Quick Intro Block (Top Right) -->
-      <div class="max-w-[360px] md:max-w-[460px] text-justify md:pt-1">
-        <span class="block font-sans text-[11px] uppercase tracking-[0.2em] text-[#22201e]/60 mb-1.5 font-medium">
+      <div class="max-w-[360px] md:max-w-[560px] lg:max-w-[660px] text-justify md:pt-1">
+        <span class="block font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.2em] text-[#22201e]/60 mb-2 font-medium">
           QUICK INTRO
         </span>
-        <p class="font-sans text-sm sm:text-base md:text-lg leading-[145%] text-[#22201e]/90 font-normal text-justify">
+        <p class="font-sans text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[26px] leading-[135%] text-[#22201e]/90 font-normal text-justify">
           <span class="block overflow-hidden">
             <span class="intro-line block will-change-transform">
               Hi, I'm Ferrel — a software engineer and creative
@@ -51,7 +51,7 @@
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-end my-auto py-1">
       <!-- Quote Center/Left — Line Mask Reveal -->
       <div class="md:col-span-6 lg:col-span-6">
-        <blockquote class="font-sans text-base sm:text-lg md:text-xl text-[#22201e] font-normal leading-[1.35] tracking-normal uppercase">
+        <blockquote class="font-sans text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[34px] text-[#22201e] font-normal leading-[1.3] tracking-normal uppercase">
           <span class="block overflow-hidden">
             <span class="quote-line block will-change-transform">
               "CODE WITH PRECISION,
@@ -69,7 +69,7 @@
       <div class="md:col-span-6 lg:col-span-6 flex justify-start md:justify-end">
         <div
           ref="photoEl"
-          class="group/photo relative w-36 sm:w-44 md:w-52 lg:w-60 max-h-[35vh] aspect-[3/4] bg-[#22201e]/5 overflow-hidden shadow-sm hover:shadow-xl border border-black/5 hover:border-black/15 transition-all duration-700 ease-out will-change-transform rounded-sm cursor-pointer"
+          class="group/photo relative w-48 sm:w-60 md:w-72 lg:w-80 xl:w-[420px] max-h-[48vh] lg:max-h-[52vh] aspect-[3/4] bg-[#22201e]/5 overflow-hidden shadow-md hover:shadow-2xl border border-black/5 hover:border-black/15 transition-all duration-700 ease-out will-change-transform rounded-sm cursor-pointer"
         >
           <img
             ref="photoImgEl"
@@ -86,11 +86,11 @@
 
     <!-- Bottom Row: Beyond Engineering Note (Bottom Left) -->
     <div class="flex items-end justify-between">
-      <div class="max-w-[340px] md:max-w-[420px]">
+      <div class="max-w-[340px] md:max-w-[480px] lg:max-w-[560px]">
         <div class="overflow-hidden">
           <p
             ref="bottomNoteEl"
-            class="font-sans text-xs sm:text-sm md:text-base leading-[145%] text-[#22201e]/80 font-normal text-justify will-change-transform"
+            class="font-sans text-sm sm:text-base md:text-lg leading-[140%] text-[#22201e]/80 font-normal text-justify will-change-transform"
           >
             Beyond engineering: 3D modeling, game environments, and interactive graphics.
           </p>
