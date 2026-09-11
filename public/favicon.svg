@@ -1,22 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
   <defs>
-    <linearGradient id="bgGradLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#2c2825" />
       <stop offset="100%" stop-color="#1e1c1a" />
     </linearGradient>
-    <filter id="subtleShadowLogo" x="-10%" y="-10%" width="120%" height="120%">
+    <filter id="subtleShadow" x="-10%" y="-10%" width="120%" height="120%">
       <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.35" />
     </filter>
   </defs>
 
   <!-- Continuous Curvature Squircle Background -->
-  <rect width="512" height="512" rx="120" fill="url(#bgGradLogo)" />
+  <rect width="512" height="512" rx="120" fill="url(#bgGrad)" />
   
   <!-- Subtle Editorial Border -->
   <rect width="504" height="504" x="4" y="4" rx="116" fill="none" stroke="#FAF9F6" stroke-opacity="0.12" stroke-width="4" />
 
   <!-- Monogram Mark "FR" in High-End Editorial Serif Style -->
-  <g transform="translate(256, 266) scale(0.92)" filter="url(#subtleShadowLogo)">
+  <g transform="translate(256, 266) scale(0.92)" filter="url(#subtleShadow)">
     <!-- Letter 'F' -->
     <path
       d="M -150 120 L -150 100 C -120 100 -116 94 -116 70 L -116 -70 C -116 -94 -120 -100 -150 -100 L -150 -120 L -20 -120 C 0 -120 10 -108 14 -86 L 2 -86 C -4 -102 -14 -106 -36 -106 L -82 -106 L -82 -16 L -40 -16 C -20 -16 -12 -22 -8 -38 L 4 -38 L 4 36 L -8 36 C -12 20 -20 14 -40 14 L -82 14 L -82 70 C -82 94 -78 100 -48 100 L -48 120 Z"
@@ -30,6 +30,6 @@
     />
   </g>
 
-  <!-- Distinctive Flame Accent Dot -->
+  <!-- Distinctive Flame Accent Dot (Digital Creator / Software Engineer spark) -->
   <circle cx="396" cy="116" r="14" fill="#e43d12" />
 </svg>
