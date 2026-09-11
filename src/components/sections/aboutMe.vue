@@ -69,14 +69,17 @@
       <div class="md:col-span-6 lg:col-span-6 flex justify-start md:justify-end">
         <div
           ref="photoEl"
-          class="relative w-36 sm:w-44 md:w-52 lg:w-60 max-h-[35vh] aspect-[3/4] bg-[#22201e]/5 overflow-hidden shadow-sm will-change-transform"
+          class="group/photo relative w-36 sm:w-44 md:w-52 lg:w-60 max-h-[35vh] aspect-[3/4] bg-[#22201e]/5 overflow-hidden shadow-sm hover:shadow-xl border border-black/5 hover:border-black/15 transition-all duration-700 ease-out will-change-transform rounded-sm cursor-pointer"
         >
           <img
+            ref="photoImgEl"
             :src="ferrelPortrait"
             alt="Ferrel Rashad"
-            class="size-full object-cover object-top grayscale contrast-[115%] brightness-95"
+            class="size-full object-cover object-top grayscale contrast-[115%] brightness-95 transition-all duration-700 ease-out group-hover/photo:grayscale-0 group-hover/photo:contrast-[105%] group-hover/photo:scale-105 will-change-transform"
             loading="lazy"
           />
+          <!-- Subtle editorial corner crosshairs / viewfinder accent on hover -->
+          <div class="pointer-events-none absolute inset-2.5 border border-white/25 opacity-0 transition-opacity duration-500 group-hover/photo:opacity-100"></div>
         </div>
       </div>
     </div>
@@ -104,6 +107,7 @@
 
   const chapterTitle = ref<HTMLElement | null>(null);
   const photoEl = ref<HTMLElement | null>(null);
+  const photoImgEl = ref<HTMLElement | null>(null);
   const bottomNoteEl = ref<HTMLElement | null>(null);
 
   // Method to trigger masked reveal animation when slide enters view
@@ -145,7 +149,20 @@
     }
 
     if (photoEl.value) {
-      tl.to(photoEl.value, { opacity: 1, duration: 1.0, ease: 'power2.out' }, 0.3);
+      tl.fromTo(
+        photoEl.value,
+        { y: 35, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.1, ease: 'power3.out' },
+        0.2,
+      );
+    }
+    if (photoImgEl.value) {
+      tl.fromTo(
+        photoImgEl.value,
+        { scale: 1.25, yPercent: -8 },
+        { scale: 1.0, yPercent: 0, duration: 1.25, ease: 'power3.out' },
+        0.2,
+      );
     }
     if (bottomNoteEl.value) {
       tl.to(bottomNoteEl.value, { yPercent: 0, duration: 1.0 }, 0.25);
@@ -160,7 +177,8 @@
     // Set initial hidden state
     if (chapterTitle.value) gsap.set(chapterTitle.value, { yPercent: 105 });
     if (bottomNoteEl.value) gsap.set(bottomNoteEl.value, { yPercent: 105 });
-    if (photoEl.value) gsap.set(photoEl.value, { opacity: 0 });
+    if (photoEl.value) gsap.set(photoEl.value, { y: 35, opacity: 0 });
+    if (photoImgEl.value) gsap.set(photoImgEl.value, { scale: 1.25, yPercent: -8 });
 
     const introLines = document.querySelectorAll('#about .intro-line');
     const quoteLines = document.querySelectorAll('#about .quote-line');
