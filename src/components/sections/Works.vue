@@ -19,8 +19,8 @@
 
         <div class="flex items-center gap-4">
           <a
-            v-if="project.primaryUrl && project.primaryUrl !== '#'"
-            :href="project.primaryUrl"
+            v-if="project.liveUrl"
+            :href="project.liveUrl"
             target="_blank"
             rel="noreferrer"
             class="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors"
@@ -50,7 +50,7 @@
           <div class="slide-mockup will-change-transform">
             <!-- macOS Browser Frame Mockup with Rich Hover Micro-Interactions -->
             <a
-              :href="project.primaryUrl !== '#' ? project.primaryUrl : project.githubUrl"
+              :href="project.liveUrl || project.githubUrl"
               target="_blank"
               rel="noreferrer"
               class="group/mockup relative block w-full overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-2 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
@@ -112,28 +112,26 @@
         </div>
 
         <!-- Right Column: Project Title, Roles, Systems -->
-        <div class="md:col-span-6 flex flex-col justify-between h-full pt-1 md:pt-0">
-          <div class="flex flex-col gap-2.5 md:pl-2 lg:pl-4">
-            <!-- Project Title (Masked Reveal) — Responsive, bold, uppercase, never clips -->
-            <div class="overflow-hidden">
-              <h3 class="slide-project-title font-sans font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-[3vw] xl:text-5xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal">
-                {{ project.title }}
-              </h3>
-            </div>
+        <div class="md:col-span-6 flex flex-col justify-between h-full pt-1 md:pt-0 md:pl-2 lg:pl-4">
+          <!-- Project Title (Masked Reveal) — Responsive, bold, uppercase, never clips -->
+          <div class="overflow-hidden">
+            <h3 class="slide-project-title font-sans font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-[3vw] xl:text-5xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal">
+              {{ project.title }}
+            </h3>
+          </div>
 
-            <!-- Role & System Metadata — compact, uppercase -->
-            <div class="flex flex-col gap-1 pt-1 font-sans text-xs sm:text-[13px] uppercase tracking-[0.08em] text-[#22201e]/80">
-              <div class="overflow-hidden">
-                <div class="slide-project-meta will-change-transform">
-                  <span class="font-semibold text-[#22201e]">ROLE: </span>
-                  <span>{{ project.role }}</span>
-                </div>
+          <!-- Role & System Metadata — Offset lower down & shifted to the right (Asymmetric Editorial Layout) -->
+          <div class="flex flex-col gap-1.5 pt-6 sm:pt-10 md:pt-14 lg:pt-18 self-start md:self-end font-sans text-[10px] sm:text-[11px] md:text-xs uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
+            <div class="overflow-hidden py-0.5">
+              <div class="slide-project-meta will-change-transform">
+                <span class="font-bold text-[#22201e]">ROLE: </span>
+                <span class="font-medium text-[#22201e]/80">{{ project.role }}</span>
               </div>
-              <div class="overflow-hidden">
-                <div class="slide-project-meta will-change-transform">
-                  <span class="font-semibold text-[#22201e]">SYSTEM: </span>
-                  <span>{{ project.system }}</span>
-                </div>
+            </div>
+            <div class="overflow-hidden py-0.5">
+              <div class="slide-project-meta will-change-transform">
+                <span class="font-bold text-[#22201e]">SYSTEM: </span>
+                <span class="font-medium text-[#22201e]/80">{{ project.system }}</span>
               </div>
             </div>
           </div>
@@ -165,8 +163,8 @@
       <!-- Bottom Row Metadata (Mobile Links fallback) -->
       <div class="flex items-center justify-between sm:hidden pt-2 border-t border-black/10 text-xs">
         <a
-          v-if="project.primaryUrl && project.primaryUrl !== '#'"
-          :href="project.primaryUrl"
+          v-if="project.liveUrl"
+          :href="project.liveUrl"
           target="_blank"
           class="font-medium text-[#22201e] underline"
         >
@@ -177,6 +175,7 @@
           :href="project.githubUrl"
           target="_blank"
           class="font-medium text-[#22201e] underline"
+          :class="{ 'ml-auto': !project.liveUrl }"
         >
           GitHub ↗
         </a>
@@ -205,7 +204,7 @@
     system: string;
     domain: string;
     previewImg: string;
-    primaryUrl: string;
+    liveUrl?: string;
     githubUrl?: string;
   }
 
@@ -222,7 +221,7 @@
       system: 'React 19 · TypeScript · Canvas 2D',
       domain: 'nusantara-observatory.vercel.app',
       previewImg: indonesianCrustalObservatoryImg,
-      primaryUrl: 'https://global-seismic-tracker.vercel.app/',
+      liveUrl: 'https://nusantara-observatory.vercel.app/',
       githubUrl: 'https://github.com/FerrelHD/Global-Seismic-Tracker',
     },
     {
@@ -235,9 +234,9 @@
         'I designed and developed an interactive Spider-Man-themed showcase with Web Audio soundscapes, 3D parallax effects, kinetic typography, and fluid GSAP transitions that bring the interface to life.',
       role: 'Creative Developer',
       system: 'React 19 · GSAP · Web Audio API',
-      domain: 'spider-dev.portfolio',
+      domain: 'spidey-portfolio-ferrel.vercel.app',
       previewImg: spiderDevImg,
-      primaryUrl: 'https://github.com/FerrelHD/Portofolio',
+      liveUrl: 'https://spidey-portfolio-ferrel.vercel.app/',
       githubUrl: 'https://github.com/FerrelHD/Portofolio',
     },
     {
@@ -249,10 +248,9 @@
       aboutP2:
         'I built a modern organic product storefront with a Filament admin dashboard, granular role-based access control, and dynamic inventory management — giving shop owners full control without touching code.',
       role: 'Full-Stack Developer',
-      system: 'Laravel 11 · Filament · MySQL',
-      domain: 'fersyashop.store',
+      system: 'Laravel 11 · Filament · Tailwind',
+      domain: 'localhost:8000/admin',
       previewImg: fersyaShopImg,
-      primaryUrl: 'https://github.com/FerrelHD/Fersya-Shop',
       githubUrl: 'https://github.com/FerrelHD/Fersya-Shop',
     },
     {
@@ -267,7 +265,7 @@
       system: 'React 19 · TypeScript · Supabase · PWA',
       domain: 'student-life.app',
       previewImg: studentLifeImg,
-      primaryUrl: 'https://ferrelhd.github.io/Student-Life/',
+      liveUrl: 'https://ferrelhd.github.io/Student-Life/',
       githubUrl: 'https://github.com/FerrelHD/Student-Life',
     },
   ];
@@ -291,7 +289,12 @@
     if (chapter) tl.to(chapter, { yPercent: 0, duration: 1.1 }, 0);
     if (title) tl.to(title, { yPercent: 0, duration: 1.1 }, 0.1);
     if (metaLines.length) {
-      tl.to(metaLines, { yPercent: 0, duration: 0.9, stagger: 0.08 }, 0.2);
+      tl.fromTo(
+        metaLines,
+        { yPercent: 120, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 0.85, stagger: 0.12, ease: 'power3.out' },
+        0.22,
+      );
     }
     if (mockup) {
       tl.to(mockup, { y: 0, scale: 1, opacity: 1, duration: 1.0 }, 0.15);
@@ -354,7 +357,7 @@
 
       if (chapter) gsap.set(chapter, { yPercent: 105 });
       if (title) gsap.set(title, { yPercent: 105 });
-      if (metaLines.length) gsap.set(metaLines, { yPercent: 105 });
+      if (metaLines.length) gsap.set(metaLines, { yPercent: 120, opacity: 0 });
       if (num) gsap.set(num, { yPercent: 105 });
       if (numIdx) gsap.set(numIdx, { yPercent: 105 });
       if (mockup) gsap.set(mockup, { y: 35, scale: 0.96, opacity: 0 });
