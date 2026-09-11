@@ -1,112 +1,298 @@
 <template>
-  <LoadingScreen v-cloak="true" />
-
   <template v-if="isSamsungBrowser">
     <SamsungError />
   </template>
 
-  <div class="pointer-events-none fixed inset-0 z-50">
+  <!-- Film Grain / Noise Overlay (Applied across ALL sections - Light & Dark) -->
+  <div class="pointer-events-none fixed inset-0 z-[120] overflow-hidden" aria-hidden="true">
     <svg
-      class="h-[150vh] w-full object-cover object-center"
+      class="h-full w-full"
       xmlns="http://www.w3.org/2000/svg"
+      style="opacity: 0.08;"
     >
-      <filter id="noise">
+      <filter id="film-grain">
         <feTurbulence
           type="fractalNoise"
-          baseFrequency="0.65"
-          numOctaves="1"
+          baseFrequency="0.8"
+          numOctaves="3"
           stitchTiles="stitch"
         />
-        <feBlend mode="screen" />
+        <feColorMatrix type="saturate" values="0" />
       </filter>
-      <rect ref="noise" class="size-full" filter="url(#noise)" opacity="0.15" />
-
-      <filter id="noise">
-        <feTurbulence
-          type="fractalNoise"
-          base-frequency="0.8"
-          numOctaves="1"
-          stitchTiles="stitch"
-        />
-        <feBlend mode="screen" />
-      </filter>
-      <rect
-        ref="noise"
-        class="size-full"
-        filter="url(#noise)"
-        opacity="-0.88"
-      />
+      <rect width="100%" height="100%" filter="url(#film-grain)" />
     </svg>
   </div>
 
   <Cursor />
-  <Navbar @isLocked="LockeScroll" />
 
-  <main class="relative min-h-full">
-    <Hero />
+  <!-- Fixed Left Rail Navigation & Frame (Adaptive isDark theme, transparent during intro then solid) -->
+  <LeftRail
+    :progress="scrollProgress"
+    :isDark="isDarkRail"
+    :isSolid="isSidebarSolid"
+    :activeSection="currentSectionId"
+    @navigate="handleNavigate"
+  />
+
+  <!-- Main Viewport Container (Desktop Horizontal Pinned Track, Mobile Vertical Stack) -->
+  <main class="relative min-h-full bg-[#3A3632]">
     <div
-      class="text-flax-smoke-200 relative rounded-t-3xl bg-[#0B0B0A] py-[5%]"
+      ref="horizontalPin"
+      class="relative w-full md:h-dvh overflow-hidden"
     >
-      <Services />
-      <Marquee />
-      <Works />
-    </div>
+      <div
+        ref="horizontalTrack"
+        class="flex w-full flex-col md:h-dvh md:flex-row md:flex-nowrap will-change-transform"
+      >
+        <!-- Slide 0: Hero (Dark #22201e) -->
+        <Hero
+          ref="heroRef"
+          @scrollNext="() => handleNavigate('about')"
+          @introComplete="handleIntroComplete"
+        />
 
-    <aboutMe />
-    <People />
-    <Contact />
+        <!-- Slide 1: Chapter I - Quick Intro (Light #faf9f6) -->
+        <aboutMe ref="aboutMeRef" />
+
+        <!-- Slides 2, 3, 4, 5: Chapter II - 4 Project Slides (Light #faf9f6) -->
+        <Works ref="worksRef" />
+
+        <!-- Slide 6: Chapter III - Capabilities & Workflow (Light #faf9f6) -->
+        <Capabilities ref="capabilitiesRef" />
+
+        <!-- Slide 7: Closing - Thank You & Contact (Dark #22201e) -->
+        <Contact ref="contactRef" @scrollToStart="() => handleNavigate('hero')" />
+      </div>
+    </div>
   </main>
 </template>
 
 <script setup lang="ts">
   import {
     Hero,
-    People,
-    Services,
     Works,
     aboutMe,
+    Capabilities,
     Contact,
   } from '@/components/sections';
-  import { onMounted, type Ref, ref, watch } from 'vue';
-  import {
-    LoadingScreen,
-    Marquee,
-    SamsungError,
-    Cursor,
-  } from '@/components/design';
+  import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+  import { SamsungError, Cursor } from '@/components/design';
+  import { LeftRail } from './components/common';
   import { useWindowSize } from '@vueuse/core';
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/all';
+  import { raf } from './lenis';
 
-  import { Navbar } from './components/common';
-  import { lenis, raf } from './lenis';
+  gsap.registerPlugin(ScrollTrigger);
+
   const { width, height } = useWindowSize();
-  const noise: Ref<HTMLElement | null> = ref(null);
+  const horizontalPin = ref<HTMLElement | null>(null);
+  const horizontalTrack = ref<HTMLElement | null>(null);
 
+  const heroRef = ref<any>(null);
+  const aboutMeRef = ref<any>(null);
+  const worksRef = ref<any>(null);
+  const capabilitiesRef = ref<any>(null);
+  const contactRef = ref<any>(null);
+
+  const scrollProgress = ref(0);
+  const currentSlideIndex = ref(0);
+  const isDarkRail = ref(true);
+  const isSidebarSolid = ref(false);
+
+  const handleIntroComplete = () => {
+    isSidebarSolid.value = true;
+  };
+
+  let horizontalScrollTrigger: ScrollTrigger | null = null;
   const isSamsungBrowser = /samsung/i.test(navigator.userAgent);
 
-  const LockeScroll = (isLocked: boolean) => {
-    if (isLocked) {
-      lenis.stop();
+  const checkRailTheme = () => {
+    const heroEl = document.getElementById('hero');
+    const capEl = document.getElementById('capabilities');
+    const contactEl = document.getElementById('contact');
+    if (!heroEl || !contactEl) return;
+
+    const isDesktop = window.innerWidth >= 768;
+    if (isDesktop) {
+      const railWidth = 64;
+      const heroRight = heroEl.getBoundingClientRect().right;
+      const capLeft = capEl ? capEl.getBoundingClientRect().left : 9999;
+      const capRight = capEl ? capEl.getBoundingClientRect().right : -9999;
+      const contactLeft = contactEl.getBoundingClientRect().left;
+
+      // Dark if Hero covers rail, or Chapter III (Capabilities) covers rail, or Contact has reached rail
+      if (heroRight > railWidth) {
+        isDarkRail.value = true;
+      } else if (capLeft <= railWidth && capRight > 0) {
+        isDarkRail.value = true;
+      } else if (contactLeft <= railWidth) {
+        isDarkRail.value = true;
+      } else {
+        isDarkRail.value = false;
+      }
     } else {
-      lenis.start();
+      const railHeight = 56;
+      const heroBottom = heroEl.getBoundingClientRect().bottom;
+      const capTop = capEl ? capEl.getBoundingClientRect().top : 9999;
+      const capBottom = capEl ? capEl.getBoundingClientRect().bottom : -9999;
+      const contactTop = contactEl.getBoundingClientRect().top;
+
+      if (heroBottom > railHeight) {
+        isDarkRail.value = true;
+      } else if (capTop <= railHeight && capBottom > 0) {
+        isDarkRail.value = true;
+      } else if (contactTop <= railHeight) {
+        isDarkRail.value = true;
+      } else {
+        isDarkRail.value = false;
+      }
+    }
+  };
+
+  const currentSectionId = computed(() => {
+    if (currentSlideIndex.value === 0) return 'hero';
+    if (currentSlideIndex.value === 1) return 'about';
+    if (currentSlideIndex.value >= 2 && currentSlideIndex.value <= 5) return 'works';
+    if (currentSlideIndex.value === 6) return 'capabilities';
+    return 'contact';
+  });
+
+  const TOTAL_SLIDES = 8;
+
+  const triggerSlideAnimation = (index: number) => {
+    if (index === 1) {
+      aboutMeRef.value?.revealSlide();
+    } else if (index >= 2 && index <= 5) {
+      worksRef.value?.revealSlideIndex(index - 2);
+    } else if (index === 6) {
+      capabilitiesRef.value?.revealSlide();
+    } else if (index === 7) {
+      contactRef.value?.revealSlide();
+    }
+  };
+
+  const updateSlideIndex = (progress: number) => {
+    const rawIndex = Math.round(progress * (TOTAL_SLIDES - 1));
+    const clampedIndex = Math.min(TOTAL_SLIDES - 1, Math.max(0, rawIndex));
+    if (clampedIndex !== currentSlideIndex.value) {
+      currentSlideIndex.value = clampedIndex;
+      triggerSlideAnimation(clampedIndex);
+    }
+  };
+
+  const initHorizontalScroll = () => {
+    if (!horizontalPin.value || !horizontalTrack.value) return;
+
+    if (window.innerWidth < 768) {
+      if (horizontalScrollTrigger) {
+        horizontalScrollTrigger.kill();
+        horizontalScrollTrigger = null;
+        gsap.set(horizontalTrack.value, { clearProps: 'all' });
+      }
+      return;
+    }
+
+    const track = horizontalTrack.value;
+    const pin = horizontalPin.value;
+
+    const getScrollAmount = () => track.scrollWidth - window.innerWidth;
+
+    const tween = gsap.to(track, {
+      x: () => -getScrollAmount(),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: pin,
+        pin: true,
+        scrub: 0.8,
+        start: 'top top',
+        end: () => `+=${getScrollAmount()}`,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          scrollProgress.value = self.progress;
+          if (self.progress > 0.01) {
+            isSidebarSolid.value = true;
+          }
+          updateSlideIndex(self.progress);
+          checkRailTheme();
+        },
+      },
+    });
+
+    horizontalScrollTrigger = tween.scrollTrigger as ScrollTrigger;
+  };
+
+  const onWindowScroll = () => {
+    if (window.innerWidth < 768) {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = max > 0 ? window.scrollY / max : 0;
+      scrollProgress.value = progress;
+      if (progress > 0.01) {
+        isSidebarSolid.value = true;
+      }
+      updateSlideIndex(progress);
+      checkRailTheme();
+    }
+  };
+
+  const handleNavigate = (sectionId: string) => {
+    isSidebarSolid.value = true;
+    const slideTargets: Record<string, number> = {
+      hero: 0,
+      about: 1,
+      works: 2,
+      capabilities: 6,
+      contact: 7,
+    };
+
+    const targetSlide = slideTargets[sectionId] ?? 0;
+
+    if (window.innerWidth >= 768 && horizontalScrollTrigger) {
+      const targetRatio = targetSlide / (TOTAL_SLIDES - 1);
+      const targetScroll =
+        horizontalScrollTrigger.start +
+        targetRatio * (horizontalScrollTrigger.end - horizontalScrollTrigger.start);
+
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth',
+      });
+    } else {
+      const el = document.getElementById(sectionId);
+      el?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   watch([width, height], () => {
-    if (noise.value) {
-      noise.value.style.height = `${height.value * 2}px`;
-      noise.value.style.width = `${width.value}px`;
-    }
+    initHorizontalScroll();
+    ScrollTrigger.refresh();
+    checkRailTheme();
   });
 
   onMounted(() => {
-    document.body.classList.add('stop-scrolling');
     requestAnimationFrame(raf);
+    window.addEventListener('scroll', onWindowScroll, { passive: true });
+
+    setTimeout(() => {
+      initHorizontalScroll();
+      ScrollTrigger.refresh();
+      if (horizontalScrollTrigger) {
+        updateSlideIndex(horizontalScrollTrigger.progress);
+      }
+      checkRailTheme();
+    }, 150);
+  });
+
+  onUnmounted(() => {
+    window.removeEventListener('scroll', onWindowScroll);
+    if (horizontalScrollTrigger) {
+      horizontalScrollTrigger.kill();
+    }
   });
 </script>
 
 <style>
-  .stop-scrolling #app {
-    max-height: 100svh !important;
-    overflow: hidden !important;
+  html, body {
+    background-color: #3A3632;
   }
 </style>

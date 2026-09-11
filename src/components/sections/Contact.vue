@@ -1,336 +1,116 @@
 <template>
   <section
-    id="contact-section"
-    class="relative w-full min-h-svh p-2.5 xs:p-4 sm:p-6 md:p-8 flex flex-col justify-between select-none"
+    id="contact"
+    class="shrink-0 w-full md:w-screen h-svh md:h-dvh flex flex-col justify-between select-none
+           bg-[#3A3632] text-[#f3eee8] relative overflow-hidden
+           pt-16 pb-12 px-6 md:pt-16 md:pb-14 md:pl-28 md:pr-16 font-sans"
   >
-    <div
-      class="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-white/15 bg-[#0a0a09] p-5 xs:p-6 sm:p-10 md:p-12 shadow-2xl flex flex-col justify-between min-h-[92vh]"
-    >
-      <!-- Top Monogram & Meta Bar -->
-      <div
-        class="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2 xs:gap-0 border-b border-white/10 pb-4 sm:pb-5 mb-4 select-none"
+    <!-- Top Area: Clean Open Editorial Space -->
+    <div class="flex items-center justify-between">
+      <span class="font-sans text-xs uppercase tracking-[0.25em] text-[#f3eee8]/40 font-medium">
+        CLOSING // 2026
+      </span>
+      <button
+        type="button"
+        @click="scrollToTop"
+        class="group flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#f3eee8]/60 hover:text-white transition-colors cursor-pointer"
       >
-        <div class="flex items-center gap-2">
-          <span class="size-2 rounded-full bg-flame animate-pulse"></span>
-          <span
-            class="font-mono text-[10px] xs:text-[11px] sm:text-xs font-bold uppercase tracking-widest text-flax-smoke-300"
-          >
-            FERREL.DEV // POST_CREDITS
-          </span>
-        </div>
-        <span
-          class="font-mono text-[9px] xs:text-[10px] sm:text-xs uppercase tracking-wider text-flax-smoke-500"
-        >
-          DEPOK, ID • GMT+7
-        </span>
-      </div>
+        <span>Back to start</span>
+        <span class="font-serif italic text-sm transition-transform group-hover:-translate-y-0.5">↑</span>
+      </button>
+    </div>
 
-      <!-- Giant Bold Headline Banner -->
-      <div class="w-full text-center my-3 sm:my-6">
-        <p
-          class="font-mono text-[10px] xs:text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase text-flame mb-2"
-        >
-          ( LET'S CREATE SOMETHING GREATER )
-        </p>
+    <!-- Massive Center Headline: THANK YOU in Instrument Serif -->
+    <div class="my-auto py-4">
+      <div class="overflow-hidden">
         <h2
-          id="make-it-happen"
-          class="font-title text-2xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[4.75rem] font-black uppercase tracking-tight text-flax-smoke-100 leading-tight sm:leading-none flex items-center justify-center flex-wrap gap-x-2.5 sm:gap-x-4"
+          ref="thankEl"
+          class="font-serif text-[18vw] sm:text-[16vw] md:text-[14vw] lg:text-[13vw] font-normal tracking-tight text-[#f3eee8] uppercase leading-[0.84] will-change-transform"
         >
-          <span v-html="beGreater"></span>
-          <span class="text-flame" v-html="together"></span>
+          THANK
         </h2>
       </div>
-
-      <!-- 3-Column Symmetrical Grid ala Lando Norris -->
-      <div
-        class="grid grid-cols-12 gap-5 sm:gap-8 items-center my-4 sm:my-8 relative z-10"
-      >
-        <!-- Left Column: PAGES -->
-        <div
-          class="col-span-6 sm:col-span-3 flex flex-col items-start gap-3 sm:gap-4 select-none"
+      <div class="overflow-hidden">
+        <h2
+          ref="youEl"
+          class="font-serif text-[18vw] sm:text-[16vw] md:text-[14vw] lg:text-[13vw] font-normal tracking-tight text-[#f3eee8] uppercase leading-[0.84] will-change-transform"
         >
-          <p
-            class="font-mono text-[9px] xs:text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-flax-smoke-500"
+          YOU
+        </h2>
+      </div>
+    </div>
+
+    <!-- Bottom Row: Contact To, Email with hover underline, and GitHub -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
+      
+      <!-- Contact Information (Bottom-Left) -->
+      <div class="flex flex-col gap-2">
+        <span class="font-sans text-xs uppercase tracking-[0.2em] text-[#f3eee8]/50 font-medium">
+          Contact To
+        </span>
+        <div class="flex flex-col gap-1">
+          <a
+            href="mailto:ferrelrashadakeyla2014@gmail.com"
+            class="group inline-flex items-center gap-2 text-base sm:text-lg md:text-xl font-normal text-[#f3eee8] hover:text-white transition-colors cursor-pointer w-fit"
           >
-            [ PAGES ]
-          </p>
-          <ul
-            class="flex flex-col gap-2 xs:gap-2.5 font-fancy text-sm xs:text-base sm:text-xl md:text-2xl font-bold uppercase text-flax-smoke-300"
+            <span class="border-b border-white/20 group-hover:border-white transition-colors pb-0.5">
+              ferrelrashadakeyla2014@gmail.com
+            </span>
+            <span class="text-sm opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
+          </a>
+
+          <!-- GitHub Link with SVG -->
+          <a
+            href="https://github.com/FerrelHD"
+            target="_blank"
+            rel="noreferrer"
+            class="group inline-flex items-center gap-2 text-sm sm:text-base text-[#f3eee8]/70 hover:text-white transition-colors cursor-pointer mt-1 w-fit"
           >
-            <li v-for="page in pagesNav" :key="page.label">
-              <button
-                type="button"
-                @click="navigateTo(page.url)"
-                class="group flex items-center gap-1.5 xs:gap-2 transition-all hover:text-white hover:translate-x-1.5 cursor-pointer text-left"
-              >
-                <span
-                  class="size-1.5 rounded-full bg-flame opacity-0 transition-opacity group-hover:opacity-100"
-                ></span>
-                <span>{{ page.label }}</span>
-              </button>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Center Column: Cinematic Video Centerpiece & CTA Button -->
-        <div
-          class="col-span-full order-first sm:order-none sm:col-span-6 flex flex-col items-center justify-center relative mb-2 sm:mb-0"
-        >
-          <!-- macOS Window Video Frame -->
-          <div
-            class="relative w-full max-w-[280px] xs:max-w-[330px] sm:max-w-[380px] md:max-w-[440px] flex flex-col overflow-hidden rounded-xl sm:rounded-2xl border border-white/15 bg-[#141413] shadow-2xl shadow-black/80 group"
-          >
-            <!-- macOS Window Header Bar -->
-            <div
-              class="relative flex items-center justify-between px-3 sm:px-3.5 py-2 xs:py-2.5 bg-[#1a1a18]/90 border-b border-white/10 select-none"
-            >
-              <!-- 3 Traffic Light Dots -->
-              <div class="flex items-center gap-1.5 z-10">
-                <span
-                  class="size-2 xs:size-2.5 rounded-full bg-[#ff5f56] border border-[#e0443e]/50 transition-opacity hover:opacity-80"
-                ></span>
-                <span
-                  class="size-2 xs:size-2.5 rounded-full bg-[#ffbd2e] border border-[#dea123]/50 transition-opacity hover:opacity-80"
-                ></span>
-                <span
-                  class="size-2 xs:size-2.5 rounded-full bg-[#27c93f] border border-[#1aab29]/50 transition-opacity hover:opacity-80"
-                ></span>
-              </div>
-
-              <!-- Window Title (Dead Center) -->
-              <span
-                class="absolute left-1/2 -translate-x-1/2 font-mono text-[10px] sm:text-[11px] font-semibold text-flax-smoke-300 tracking-wide pointer-events-none select-none"
-              >
-                spiderman 2
-              </span>
-
-              <!-- Live Badge -->
-              <span
-                class="flex items-center gap-1 xs:gap-1.5 font-mono text-[8px] xs:text-[9px] text-emerald-400 font-bold uppercase whitespace-nowrap z-10"
-              >
-                <span
-                  class="size-1.5 rounded-full bg-emerald-400 animate-pulse"
-                ></span>
-                <span>EDITED BY FERREL</span>
-              </span>
-            </div>
-
-            <!-- Video Viewport -->
-            <div class="relative w-full aspect-[16/10] overflow-hidden bg-black">
-              <video
-                class="size-full object-cover object-center brightness-60 contrast-125 transition-transform duration-700 group-hover:scale-105"
-                :src="contact"
-                autoplay
-                muted
-                loop
-                playsinline
-                preload="metadata"
-              ></video>
-              <div
-                class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"
-              ></div>
-            </div>
-          </div>
-
-          <!-- Business Enquiries CTA Button (Floating overlapping the centerpiece) -->
-          <div class="relative -mt-5 xs:-mt-6 z-20 flex flex-col items-center">
-            <!-- Floating Copied Badge -->
-            <Transition
-              enter-active-class="transition duration-200 ease-out"
-              enter-from-class="opacity-0 -translate-y-1 scale-95"
-              enter-to-class="opacity-100 translate-y-0 scale-100"
-              leave-active-class="transition duration-200 ease-in"
-              leave-from-class="opacity-100 translate-y-0 scale-100"
-              leave-to-class="opacity-0 -translate-y-1 scale-95"
-            >
-              <div
-                v-if="emailCopied"
-                class="absolute -top-7 z-30 flex items-center gap-1.5 rounded-full border border-flame bg-flame px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-white shadow-lg shadow-flame/40 pointer-events-none select-none"
-              >
-                <span
-                  class="size-1.5 rounded-full bg-white animate-pulse"
-                ></span>
-                <span>Copied // Clipboard</span>
-              </div>
-            </Transition>
-
-            <a
-              href="mailto:ferrelrashadakeyla2014@gmail.com"
-              @click="copyEmail"
-              class="group relative inline-flex items-center gap-2.5 xs:gap-3 rounded-full border border-flame bg-flame px-5 xs:px-7 py-3 xs:py-3.5 font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-flame/25 transition-all duration-300 hover:bg-white hover:text-black hover:border-white active:scale-95 cursor-pointer select-none"
-            >
-              <span>Business Enquiries</span>
-              <svg
-                class="size-3.5 xs:size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-              >
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17"></polyline>
-              </svg>
-            </a>
-
-            <p
-              class="mt-2 font-mono text-[9px] xs:text-[10px] text-flax-smoke-500 uppercase tracking-wider text-center"
-            >
-              CLICK TO SEND OR COPY EMAIL
-            </p>
-          </div>
-        </div>
-
-        <!-- Right Column: FOLLOW ON -->
-        <div
-          class="col-span-6 sm:col-span-3 flex flex-col items-end sm:items-end gap-3 sm:gap-4 text-right select-none"
-        >
-          <p
-            class="font-mono text-[9px] xs:text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-flax-smoke-500"
-          >
-            [ FOLLOW ON ]
-          </p>
-          <ul
-            class="flex flex-col gap-2 xs:gap-2.5 font-fancy text-sm xs:text-base sm:text-xl md:text-2xl font-bold uppercase text-flax-smoke-300"
-          >
-            <li v-for="social in socialLinks" :key="social.label">
-              <a
-                :href="social.url"
-                target="_blank"
-                class="group flex items-center justify-end gap-1.5 xs:gap-2 transition-all hover:text-white hover:-translate-x-1.5 cursor-pointer"
-              >
-                <span>{{ social.label }}</span>
-                <svg
-                  class="size-3 xs:size-3.5 opacity-40 transition-all group-hover:opacity-100 group-hover:text-flame"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                >
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17"></polyline>
-                </svg>
-              </a>
-            </li>
-          </ul>
+            <svg class="size-4 fill-current opacity-70 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+            <span class="border-b border-transparent group-hover:border-white/40 transition-colors">
+              FerrelHD
+            </span>
+          </a>
         </div>
       </div>
 
-      <!-- Running Tech Ticker Marquee Ribbon -->
-      <div
-        class="relative w-full overflow-hidden border-y border-white/10 py-2.5 my-3 bg-white/[0.02] select-none"
-      >
-        <div
-          class="flex items-center gap-8 whitespace-nowrap font-mono text-[11px] font-semibold uppercase tracking-widest text-flax-smoke-400 animate-marquee"
-        >
-          <span v-for="n in 2" :key="n" class="flex items-center gap-8">
-            <span>REACT 19</span>
-            <span class="size-1 rounded-full bg-flame"></span>
-            <span>TYPESCRIPT</span>
-            <span class="size-1 rounded-full bg-flame"></span>
-            <span>LARAVEL 11</span>
-            <span class="size-1 rounded-full bg-flame"></span>
-            <span>PYTHON ML</span>
-            <span class="size-1 rounded-full bg-flame"></span>
-            <span>UNITY 3D</span>
-            <span class="size-1 rounded-full bg-flame"></span>
-            <span>GSAP MOTION</span>
-            <span class="size-1 rounded-full bg-flame"></span>
-            <span>SUPABASE</span>
-            <span class="size-1 rounded-full bg-flame"></span>
-            <span>TAILWIND CSS</span>
-            <span class="size-1 rounded-full bg-flame"></span>
-          </span>
-        </div>
-      </div>
-
-      <!-- Bottom Edge Bar -->
-      <div
-        class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10 font-mono text-[11px] text-flax-smoke-500 select-none"
-      >
-        <p>© 2026 Ferrel Rashad Akeyla. All rights reserved.</p>
-        <div class="flex items-center gap-6">
-          <span class="flex items-center gap-1.5 text-flax-smoke-400">
-            <span class="size-1.5 rounded-full bg-emerald-400"></span>
-            <span>Depok, Indonesia • GMT+7</span>
-          </span>
-          <button
-            type="button"
-            @click="scrollToTop"
-            class="group flex items-center gap-1 text-flax-smoke-300 hover:text-white cursor-pointer uppercase transition-colors"
-          >
-            <span>Back to top</span>
-            <span class="transition-transform group-hover:-translate-y-0.5"
-              >↑</span
-            >
-          </button>
-        </div>
+      <!-- Copyright Note (Bottom-Right) -->
+      <div class="text-xs text-[#f3eee8]/40 font-sans sm:text-right">
+        <span>© 2026 Ferrel Rashad Akeyla</span>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-  import { contact } from '@/assets/videos';
-  import { onBeforeMount, onMounted, ref } from 'vue';
-  import { textSplitterIntoChar } from '@/functions';
-  import { animateSplitText } from '@/animations';
-  import { lenis } from '@/lenis';
+  import { onMounted, ref } from 'vue';
+  import gsap from 'gsap';
 
-  const beGreater = ref('Be Greater.');
-  const together = ref('Together.');
-  const emailCopied = ref(false);
+  const emit = defineEmits<{
+    (e: 'scrollToStart'): void;
+  }>();
 
-  const pagesNav = [
-    { label: 'Home', url: '#app' },
-    { label: 'Services', url: '#services' },
-    { label: 'Projects', url: '#works' },
-    { label: 'About', url: '#about-me-section' },
-    { label: 'Arsenal', url: '#slider' },
-  ];
-
-  const socialLinks = [
-    { label: 'GitHub', url: 'https://github.com/FerrelHD' },
-    {
-      label: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/ferrel-rashad-8a165514b/',
-    },
-    { label: 'Instagram', url: 'https://www.instagram.com/ferrelrshd' },
-    { label: 'YouTube', url: 'https://www.youtube.com/@ferrelrashad3399' },
-  ];
-
-  const navigateTo = (url: string) => {
-    lenis.start();
-    lenis.scrollTo(url, { duration: 2 });
-  };
+  const thankEl = ref<HTMLElement | null>(null);
+  const youEl = ref<HTMLElement | null>(null);
 
   const scrollToTop = () => {
-    lenis.start();
-    lenis.scrollTo(0, { duration: 2 });
+    emit('scrollToStart');
   };
 
-  const copyEmail = () => {
-    navigator.clipboard
-      .writeText('ferrelrashadakeyla2014@gmail.com')
-      .then(() => {
-        emailCopied.value = true;
-        setTimeout(() => {
-          emailCopied.value = false;
-        }, 2000);
-      });
+  const revealSlide = () => {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    if (thankEl.value) tl.to(thankEl.value, { yPercent: 0, duration: 1.2 }, 0);
+    if (youEl.value) tl.to(youEl.value, { yPercent: 0, duration: 1.2 }, 0.1);
   };
 
-  onBeforeMount(() => {
-    beGreater.value = textSplitterIntoChar(beGreater.value).trim();
-    together.value = textSplitterIntoChar(together.value).trim();
+  defineExpose({
+    revealSlide,
   });
 
   onMounted(() => {
-    animateSplitText(
-      '#make-it-happen .letters',
-      '#make-it-happen',
-      1.5,
-      0.01,
-      0,
-    );
+    if (thankEl.value) gsap.set(thankEl.value, { yPercent: 105 });
+    if (youEl.value) gsap.set(youEl.value, { yPercent: 105 });
   });
 </script>

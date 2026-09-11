@@ -1,55 +1,47 @@
 <template>
-  <!-- common-padding  -->
   <section
     id="testimonials-section"
-    class="common-padding relative mx-auto min-h-fit lg:min-h-svh py-10 lg:py-16 -translate-y-0 overflow-y-clip will-change-transform"
+    class="shrink-0 w-full md:min-w-[110vw] lg:min-w-[100vw] md:h-dvh flex flex-col justify-between select-none
+           px-6 py-16 md:py-12 md:pl-28 md:pr-16 bg-[#161413] text-[#f3eee8] border-b md:border-b-0 md:border-r border-white/5"
   >
-    <div
-      class="border-flax-smoke-300 grid w-full grid-cols-12 border-b-[1px] pb-[clamp(2.25rem,2.1786rem_+_0.3571vi,2.5rem)]"
-    >
-      <h3
-        class="heading-1 max-sm:heading-2 text-flax-smoke-950 col-span-full leading-none font-bold uppercase will-change-auto"
-      >
-        Tech Arsenal & <br />
-        Stack /
-      </h3>
-      <div
-        class="text-flax-smoke-800 col-span-full mt-6 sm:mt-[5%] flex flex-col sm:flex-row sm:justify-end gap-3 sm:gap-16 lg:col-span-10"
-      >
-        <p class="heading-6 text-left sm:text-center text-nowrap uppercase">
-          ( Arsenal )
-        </p>
-        <p class="heading-6 font-fancy w-full text-balance sm:max-w-[40ch]">
-          A curated ecosystem of modern frameworks, programming languages, and creative tooling I utilize to build scalable and high-performance digital products.
-        </p>
+    <!-- Chapter Header -->
+    <div class="flex items-center justify-between border-b border-white/10 pb-4">
+      <div class="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-flame">
+        <span class="size-1.5 rounded-full bg-flame animate-pulse"></span>
+        <span>CHAPTER // 04</span>
+      </div>
+      <span class="font-mono text-xs text-[#f3eee8]/40 uppercase tracking-widest">
+        ARSENAL // STACK
+      </span>
+    </div>
+
+    <!-- Middle Content -->
+    <div class="my-auto py-6 flex flex-col gap-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal uppercase tracking-tight text-[#f3eee8] leading-[0.95]">
+            TECH ARSENAL & STACK
+          </h2>
+          <p class="font-sans text-xs sm:text-sm text-[#f3eee8]/60 mt-2 max-w-lg">
+            A curated ecosystem of modern frameworks, cloud backends, and creative tooling I utilize to build scalable and high-performance digital products.
+          </p>
+        </div>
+      </div>
+
+      <!-- Slider Component -->
+      <div class="w-full mt-2">
+        <Slider />
       </div>
     </div>
 
-    <Slider />
+    <!-- Bottom Section Bar -->
+    <div class="flex items-center justify-between border-t border-white/10 pt-4 font-mono text-xs text-[#f3eee8]/40">
+      <span>MODERN DEVELOPMENT ECOSYSTEM</span>
+      <span>60 FPS STANDARDS</span>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
-  // import gsap from 'gsap';
-  // import { ScrollTrigger } from 'gsap/all';
-  // import { onMounted } from 'vue';
   import { Slider } from '../design';
-
-  // gsap.registerPlugin(ScrollTrigger);
-
-  // const animatePeopleSectionLeave = (id: string) => {
-  //   gsap.to(id, {
-  //     scrollTrigger: {
-  //       trigger: id,
-  //       markers: true,
-  //       start: 'top 80%',
-  //       end: '100% end',
-  //     },
-  //     duration: 0.7,
-  //     y: '0',
-  //   });
-  // };
-  // onMounted(() => {
-  //   animatePeopleSectionLeave('#testimonials-section');
-  // });
 </script>

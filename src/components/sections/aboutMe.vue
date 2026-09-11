@@ -1,61 +1,95 @@
 <template>
   <section
-    id="about-me-section"
-    class="common-padding text-flax-smoke-200 relative z-10 overflow-y-clip rounded-b-3xl bg-[#0B0B0A] shadow-2xl will-change-auto sm:mt-0"
+    id="about"
+    class="shrink-0 w-full md:w-screen h-svh md:h-dvh flex flex-col justify-between select-none
+           bg-[#faf9f6] text-[#22201e] relative overflow-hidden
+           pt-12 pb-6 px-6 md:pt-10 md:pb-7 md:pl-24 md:pr-12 font-sans"
   >
-    <div class="md:column-gap grid grid-cols-12">
-      <div class="hide-on-mobile overflow-hidden md:col-span-4">
-        <svg
-          id="down-arrow-2"
-          stroke="currentColor"
-          fill="none"
-          stroke-width="1.25"
-          viewBox="6 6 12 12"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="hide-on-mobile m-0 size-20 -translate-x-full p-0"
-          height="1em"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
+    <!-- Top Row: CHAPTER I on Left, QUICK INTRO on Right -->
+    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-8">
+      <!-- Chapter Heading in Instrument Serif -->
+      <div class="overflow-hidden">
+        <h2
+          ref="chapterTitle"
+          class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight text-[#22201e] uppercase will-change-transform"
         >
-          <line x1="7" y1="7" x2="17" y2="17"></line>
-          <polyline points="17 7 17 17 7 17"></polyline>
-        </svg>
+          CHAPTER I
+        </h2>
       </div>
 
-      <h3
-        id="little-bit-about-me"
-        v-html="aboutMe"
-        class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] section-heading col-span-full leading-[0.96] font-extrabold uppercase md:col-span-8 md:col-start-6"
-      ></h3>
+      <!-- Quick Intro Block (Top Right) -->
+      <div class="max-w-[360px] md:max-w-[460px] text-justify md:pt-1">
+        <span class="block font-sans text-[11px] uppercase tracking-[0.2em] text-[#22201e]/60 mb-1.5 font-medium">
+          QUICK INTRO
+        </span>
+        <p class="font-sans text-sm sm:text-base md:text-lg leading-[145%] text-[#22201e]/90 font-normal text-justify">
+          <span class="block overflow-hidden">
+            <span class="intro-line block will-change-transform">
+              Hi, I'm Ferrel — a software engineer and creative
+            </span>
+          </span>
+          <span class="block overflow-hidden">
+            <span class="intro-line block will-change-transform">
+              technologist focused on crafting fluid web interfaces,
+            </span>
+          </span>
+          <span class="block overflow-hidden">
+            <span class="intro-line block will-change-transform">
+              real-time data visualisations, and interactive digital
+            </span>
+          </span>
+          <span class="block overflow-hidden">
+            <span class="intro-line block will-change-transform">
+              experiences.
+            </span>
+          </span>
+        </p>
+      </div>
     </div>
 
-    <div class="padding-y md:column-gap mt-6 grid grid-cols-12">
-      <div
-        class="pointer-events-none col-span-full content-end rounded-lg select-none md:col-span-4"
-      >
-        <img
-          :src="profile2"
-          class="aspect-[1/1.5] rounded-lg object-cover object-top mix-blend-screen brightness-90 grayscale"
-          alt="Ferrel Rashad Akeyla portrait"
-        />
+    <!-- Middle Section: Quote Left, Portrait Photo Right -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-end my-auto py-1">
+      <!-- Quote Center/Left — Line Mask Reveal -->
+      <div class="md:col-span-6 lg:col-span-6">
+        <blockquote class="font-sans text-base sm:text-lg md:text-xl text-[#22201e] font-normal leading-[1.35] tracking-normal uppercase">
+          <span class="block overflow-hidden">
+            <span class="quote-line block will-change-transform">
+              "CODE WITH PRECISION,
+            </span>
+          </span>
+          <span class="block overflow-hidden">
+            <span class="quote-line block will-change-transform">
+              DESIGN FOR PEOPLE."
+            </span>
+          </span>
+        </blockquote>
       </div>
-      <div class="col-span-11 mt-10 md:col-span-8 md:col-start-6">
-        <p
-          class="heading-4 relative w-full max-w-[40ch] leading-snug font-medium text-balance"
-        >
-          Combining rigorous software engineering with creative visual storytelling, I take ideas from concept to production-ready deployment across web, 3D, and interactive media.
-        </p>
 
+      <!-- Passport-style B&W Portrait Photo on Right — responsive to viewport height -->
+      <div class="md:col-span-6 lg:col-span-6 flex justify-start md:justify-end">
         <div
-          class="text-flax-smoke-300 mt-[5%] flex justify-start gap-10 sm:gap-20"
+          ref="photoEl"
+          class="relative w-36 sm:w-44 md:w-52 lg:w-60 max-h-[35vh] aspect-[3/4] bg-[#22201e]/5 overflow-hidden shadow-sm will-change-transform"
         >
-          <p class="heading-6 text-flax-smoke-300/85 text-center text-nowrap">
-            ( ABOUT ME )
-          </p>
-          <p class="heading-6 font-fancy w-full text-balance sm:max-w-[40ch]">
-            I am Ferrel Rashad Akeyla, a multidisciplinary digital creator specializing in high-performance Full-Stack Web Applications (React 19, TypeScript, Laravel 11), Machine Learning quantitative systems, Unity C# game loops, and cinematic visual media. <br /><br />
-            Based in Depok, Jawa Barat, I focus on building applications that are blazingly fast, aesthetically memorable, and engineered with precision.
+          <img
+            :src="ferrelPortrait"
+            alt="Ferrel Rashad"
+            class="size-full object-cover object-top grayscale contrast-[115%] brightness-95"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Row: Beyond Engineering Note (Bottom Left) -->
+    <div class="flex items-end justify-between">
+      <div class="max-w-[340px] md:max-w-[420px]">
+        <div class="overflow-hidden">
+          <p
+            ref="bottomNoteEl"
+            class="font-sans text-xs sm:text-sm md:text-base leading-[145%] text-[#22201e]/80 font-normal text-justify will-change-transform"
+          >
+            Beyond engineering: 3D modeling, game environments, and interactive graphics.
           </p>
         </div>
       </div>
@@ -64,43 +98,73 @@
 </template>
 
 <script setup lang="ts">
-  import {
-    animateSplitText,
-    xToZero,
-    animateAboutMeSectionLeave,
-  } from '@/animations';
-  import { profile2 } from '@/assets/images';
-  import { textSplitterIntoChar } from '@/functions';
-  import { onBeforeMount, onMounted, ref } from 'vue';
+  import { onMounted, ref } from 'vue';
+  import gsap from 'gsap';
+  import { ferrelPortrait } from '@/assets/images';
 
-  const aboutMe = ref('');
+  const chapterTitle = ref<HTMLElement | null>(null);
+  const photoEl = ref<HTMLElement | null>(null);
+  const bottomNoteEl = ref<HTMLElement | null>(null);
 
-  onBeforeMount(() => {
-    const lines = [
-      'Full-Stack Developer,',
-      '3D & Creative',
-      'Engineer/',
-    ];
-    aboutMe.value = lines
-      .map(
-        (line) =>
-          `<span class="block">${textSplitterIntoChar(line, true, false)}</span>`,
-      )
-      .join('');
+  // Method to trigger masked reveal animation when slide enters view
+  const revealSlide = () => {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    if (chapterTitle.value) {
+      tl.to(chapterTitle.value, { yPercent: 0, duration: 1.1 }, 0);
+    }
+
+    // 1. Quick Intro Split-Line Stagger Reveal
+    const introLines = document.querySelectorAll('#about .intro-line');
+    if (introLines.length) {
+      tl.to(
+        introLines,
+        {
+          yPercent: 0,
+          duration: 1.0,
+          stagger: 0.08,
+          ease: 'power3.out',
+        },
+        0.1,
+      );
+    }
+
+    // 2. Quote Split-Line Stagger Reveal
+    const quoteLines = document.querySelectorAll('#about .quote-line');
+    if (quoteLines.length) {
+      tl.to(
+        quoteLines,
+        {
+          yPercent: 0,
+          duration: 1.1,
+          stagger: 0.1,
+          ease: 'power3.out',
+        },
+        0.2,
+      );
+    }
+
+    if (photoEl.value) {
+      tl.to(photoEl.value, { opacity: 1, duration: 1.0, ease: 'power2.out' }, 0.3);
+    }
+    if (bottomNoteEl.value) {
+      tl.to(bottomNoteEl.value, { yPercent: 0, duration: 1.0 }, 0.25);
+    }
+  };
+
+  defineExpose({
+    revealSlide,
   });
 
   onMounted(() => {
-    animateSplitText(
-      '#little-bit-about-me .letters',
-      '#little-bit-about-me',
-      1,
-      0.01,
-      0,
-      () => {
-        xToZero('#down-arrow-2');
-      },
-    );
+    // Set initial hidden state
+    if (chapterTitle.value) gsap.set(chapterTitle.value, { yPercent: 105 });
+    if (bottomNoteEl.value) gsap.set(bottomNoteEl.value, { yPercent: 105 });
+    if (photoEl.value) gsap.set(photoEl.value, { opacity: 0 });
 
-    animateAboutMeSectionLeave('#about-me-section');
+    const introLines = document.querySelectorAll('#about .intro-line');
+    const quoteLines = document.querySelectorAll('#about .quote-line');
+    if (introLines.length) gsap.set(introLines, { yPercent: 105 });
+    if (quoteLines.length) gsap.set(quoteLines, { yPercent: 105 });
   });
 </script>

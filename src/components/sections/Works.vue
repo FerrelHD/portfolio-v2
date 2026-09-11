@@ -1,604 +1,369 @@
 <template>
-  <section id="works" class="common-padding mb-20">
-    <div class="flex flex-col">
-      <h3
-        id="selectedWorks"
-        v-html="selectedWorks"
-        class="heading-1 text-start leading-none font-bold uppercase"
-      ></h3>
-      <p
-        class="heading-1 text-flax-smoke-400 text-opacity-50 hidden w-4/5 text-end font-extrabold sm:block"
-      >
-        ( {{ selectedWorksProps.length }} )
-      </p>
-
-      <div
-        id="selected-works-text"
-        class="md:column-gap text-flax-smoke-300 mt-[5%] grid grid-cols-12 justify-end opacity-0 lg:grid"
-      >
-        <p
-          class="heading-6 text-flax-smoke-300/85 col-span-4 text-center text-nowrap lg:col-start-2"
-        >
-          (
-          <span class="inline sm:hidden">{{ selectedWorksProps.length }} </span>
-          PROJECTS )
-        </p>
-        <p
-          class="heading-4 font-fancy col-span-8 w-full text-balance sm:font-semibold lg:col-span-7"
-        >
-          A curated collection of web apps, 3D interactive experiences, and
-          machine learning systems I’ve engineered and shipped.
-        </p>
-      </div>
-    </div>
-
-    <div
-      class="sm:column-gap relative mt-12 grid size-full grid-cols-12 lg:mt-[10%]"
+  <!-- Chapter II - 4 Fullscreen Slides -->
+  <div class="contents">
+    <section
+      v-for="project in workProjects"
+      :key="project.id"
+      :id="`work-${project.id}`"
+      class="work-slide shrink-0 w-full md:w-screen h-svh md:h-dvh flex flex-col justify-between select-none
+             bg-[#faf9f6] text-[#22201e] relative overflow-hidden
+             pt-12 pb-5 px-6 md:pt-9 md:pb-5 md:pl-24 md:pr-12 font-sans"
     >
-      <div
-        class="text-flax-smoke-100 sticky top-12 col-span-5 hidden h-fit w-full overflow-hidden text-[22vw] leading-[0.8] font-semibold md:flex"
-      >
-        <span class="font-title! relative -tracking-wider">0</span>
-        <span
-          id="index"
-          class="font-title! relative -tracking-wider will-change-transform"
-          >{{ index + 1 }}.</span
-        >
-      </div>
-      <aside
-        @mouseenter="showCursor"
-        @mouseleave="hideCursor"
-        class="relative col-span-full flex flex-col space-y-16 md:col-span-7"
-      >
-        <div
-          v-for="(work, i) in selectedWorksProps"
-          :key="i"
-          class="work-card group @container"
-        >
-          <!-- macOS-Style Browser Frame Direct Container -->
+      <!-- Top Row: CHAPTER II on Left, Live Link on Right -->
+      <div class="flex items-center justify-between">
+        <div class="overflow-hidden">
+          <h2 class="slide-chapter-title font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#22201e] uppercase will-change-transform">
+            CHAPTER II
+          </h2>
+        </div>
+
+        <div class="flex items-center gap-4">
           <a
-            :href="work.primaryUrl !== '#' ? work.primaryUrl : undefined"
-            :target="work.primaryUrl !== '#' ? '_blank' : undefined"
-            :aria-label="`Open ${work.name} project live preview or repository`"
-            class="group/frame relative block w-full select-none active:scale-[0.99] transition-transform duration-200"
+            v-if="project.primaryUrl && project.primaryUrl !== '#'"
+            :href="project.primaryUrl"
+            target="_blank"
+            rel="noreferrer"
+            class="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors"
           >
-            <div
-              class="relative w-full overflow-hidden rounded-2xl border border-white/15 bg-[#121211] shadow-[0_20px_50px_rgba(0,0,0,0.85)] transition-all duration-500 hover:-translate-y-1.5 hover:border-white/35 hover:shadow-[0_30px_70px_rgba(0,0,0,0.95)]"
-            >
-              <!-- Browser Header / Title Bar -->
-              <div
-                class="flex items-center justify-between border-b border-white/10 bg-[#1a1a19] px-4 py-3"
-              >
-                <!-- 3 Window Dots -->
-                <div class="flex items-center gap-1.5">
-                  <span class="size-2.5 rounded-full bg-[#FF5F56]"></span>
-                  <span class="size-2.5 rounded-full bg-[#FFBD2E]"></span>
-                  <span class="size-2.5 rounded-full bg-[#27C93F]"></span>
-                </div>
-
-                <!-- URL Bar Pill (Responsive max-width & truncate) -->
-                <div
-                  class="flex max-w-[110px] sm:max-w-[180px] md:max-w-[240px] items-center gap-1.5 rounded-md border border-white/10 bg-black/60 px-3 py-0.5 text-[11px] font-mono text-flax-smoke-300"
-                >
-                  <svg
-                    class="size-3 shrink-0 text-flax-smoke-500"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                  </svg>
-                  <span class="truncate">{{ work.domain }}</span>
-                </div>
-
-                <!-- Device Switcher Pill (Desktop / Mobile Toggle) if mobile preview available -->
-                <div
-                  v-if="work.mobilePreviewImg"
-                  class="flex items-center rounded-lg border border-white/20 bg-black/80 p-0.5 text-[10px] select-none shrink-0"
-                >
-                  <button
-                    type="button"
-                    @click.prevent.stop="setDeviceView(i, 'web')"
-                    :class="
-                      getDeviceView(work, i) === 'web'
-                        ? 'bg-white/25 text-white font-bold shadow-xs'
-                        : 'text-flax-smoke-400 hover:text-white'
-                    "
-                    class="inline-flex items-center gap-1 rounded px-2 py-0.5 transition-all cursor-pointer"
-                    aria-label="View desktop layout"
-                  >
-                    <svg class="size-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                      <rect x="2" y="3" width="20" height="14" rx="2"></rect>
-                      <line x1="8" y1="21" x2="16" y2="21"></line>
-                      <line x1="12" y1="17" x2="12" y2="21"></line>
-                    </svg>
-                    <span class="hidden sm:inline">Desktop</span>
-                  </button>
-                  <button
-                    type="button"
-                    @click.prevent.stop="setDeviceView(i, 'mobile')"
-                    :class="
-                      getDeviceView(work, i) === 'mobile'
-                        ? 'bg-white/25 text-white font-bold shadow-xs'
-                        : 'text-flax-smoke-400 hover:text-white'
-                    "
-                    class="inline-flex items-center gap-1 rounded px-2 py-0.5 transition-all cursor-pointer"
-                    aria-label="View mobile layout"
-                  >
-                    <svg class="size-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                      <rect x="5" y="2" width="14" height="20" rx="2"></rect>
-                      <line x1="12" y1="18" x2="12.01" y2="18"></line>
-                    </svg>
-                    <span class="hidden sm:inline">Mobile</span>
-                  </button>
-                </div>
-
-                <!-- Status Badge -->
-                <div class="flex items-center text-[10px] font-medium tracking-wide shrink-0">
-                  <span
-                    v-if="work.status === 'live'"
-                    class="inline-flex items-center gap-1 text-emerald-400"
-                  >
-                    <span class="size-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>Live</span>
-                  </span>
-                  <span
-                    v-else-if="work.status === 'roblox'"
-                    class="inline-flex items-center gap-1 text-amber-400"
-                  >
-                    <span class="size-1.5 rounded-full bg-amber-400"></span>
-                    <span>Roblox</span>
-                  </span>
-                  <span
-                    v-else-if="work.status === 'repo'"
-                    class="inline-flex items-center gap-1 text-sky-400"
-                  >
-                    <span class="size-1.5 rounded-full bg-sky-400"></span>
-                    <span>GitHub</span>
-                  </span>
-                  <span
-                    v-else
-                    class="inline-flex items-center gap-1 text-flax-smoke-500"
-                  >
-                    <span class="size-1.5 rounded-full bg-flax-smoke-500"></span>
-                    <span>Archived</span>
-                  </span>
-                </div>
-              </div>
-
-              <!-- Viewport Screenshot Container -->
-              <!-- WEB LAYOUT (16:9) -->
-              <div
-                v-if="getDeviceView(work, i) === 'web'"
-                class="relative aspect-16/9 w-full overflow-hidden bg-[#0c0c0c]"
-              >
-                <img
-                  :src="work.previewImg"
-                  :alt="work.name"
-                  class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/frame:scale-[1.02]"
-                />
-              </div>
-
-              <!-- MOBILE APP LAYOUT (Studio Showcase with Smartphone Frame) -->
-              <div
-                v-else
-                class="relative aspect-16/9 w-full overflow-hidden bg-gradient-to-b from-[#1c1c1b] via-[#10100f] to-[#080807] flex items-center justify-center p-3 sm:p-4"
-              >
-                <!-- Subtle Radial Ambient Light -->
-                <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_70%)]"></div>
-
-                <!-- Phone Hardware Mockup Frame -->
-                <div
-                  class="relative z-10 h-full aspect-[9/18.4] max-h-full rounded-[1.25rem] sm:rounded-[1.75rem] border-2 sm:border-[3px] border-white/25 bg-black shadow-[0_20px_40px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col transition-transform duration-700 ease-out group-hover/frame:scale-[1.03]"
-                >
-                  <!-- Phone Dynamic Island / Speaker Pill -->
-                  <div class="absolute top-1.5 left-1/2 -translate-x-1/2 z-20 h-2.5 sm:h-3 w-12 sm:w-16 rounded-full bg-black border border-white/10 flex items-center justify-center">
-                    <span class="size-1 rounded-full bg-white/20 ml-auto mr-1.5"></span>
-                  </div>
-
-                  <!-- Phone Screen Content -->
-                  <img
-                    :src="work.mobilePreviewImg || work.previewImg"
-                    :alt="`${work.name} Mobile View`"
-                    class="size-full object-cover object-top"
-                  />
-                </div>
-              </div>
-            </div>
+            <span>Live Project</span>
+            <span class="text-sm">↗</span>
           </a>
+          <a
+            v-if="project.githubUrl"
+            :href="project.githubUrl"
+            target="_blank"
+            rel="noreferrer"
+            class="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors"
+          >
+            <span>GitHub</span>
+            <span class="text-sm">↗</span>
+          </a>
+        </div>
+      </div>
 
-          <!-- Project Information & Action Links -->
-          <div class="mt-5">
-            <div class="flex items-center justify-between">
-              <p class="heading-6 font-title! leading-none text-flax-smoke-400">
-                {{ work.category }}
-              </p>
-              <p class="text-xs font-mono text-flax-smoke-500">
-                {{ work.year }}
-              </p>
-            </div>
-
-            <div class="mt-2 items-center justify-between gap-4 sm:flex">
-              <h3
-                class="heading-3 font-title! font-bold uppercase transition-colors group-hover:text-flax-smoke-100"
-              >
-                {{ work.name }}
-              </h3>
-
-              <!-- Action Link Buttons -->
-              <div class="mt-3 flex flex-wrap items-center gap-2 select-none sm:mt-0">
-                <!-- Primary Action Link -->
-                <a
-                  v-if="work.primaryUrl && work.primaryUrl !== '#'"
-                  :href="work.primaryUrl"
-                  target="_blank"
-                  class="inline-flex items-center gap-1.5 rounded-full border border-flax-smoke-300 bg-flax-smoke-300 px-4 py-1.5 text-xs font-semibold text-flax-smoke-900 transition-all duration-300 hover:bg-transparent hover:text-flax-smoke-100 hover:border-flax-smoke-100"
-                >
-                  <span v-if="work.status === 'live'">Live Demo</span>
-                  <span v-else-if="work.status === 'roblox'">Play Game</span>
-                  <span v-else>Source Code</span>
-                  <svg
-                    class="size-3"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                  >
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
-                </a>
-
-                <!-- GitHub Secondary Link if available -->
-                <a
-                  v-if="work.githubUrl && work.status === 'live'"
-                  :href="work.githubUrl"
-                  target="_blank"
-                  class="inline-flex items-center gap-1.5 rounded-full border border-flax-smoke-500/60 px-3.5 py-1.5 text-xs font-medium text-flax-smoke-300 transition-all duration-300 hover:border-flax-smoke-300 hover:text-flax-smoke-100"
-                >
-                  <span>GitHub</span>
-                  <svg
-                    class="size-3"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                  >
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
-                </a>
-
-                <!-- Offline / Archived badge -->
-                <span
-                  v-if="work.status === 'offline'"
-                  class="inline-flex items-center rounded-full border border-flax-smoke-500/40 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-flax-smoke-400"
-                >
-                  Archived Project
-                </span>
-              </div>
-            </div>
-
-            <!-- Project Description -->
-            <p
-              v-if="work.description"
-              class="mt-3 text-sm leading-relaxed text-flax-smoke-300/80 max-w-2xl font-normal"
+      <!-- Main Middle Grid: Left Browser Mockup & About, Right Project Title & Meta -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 lg:gap-10 items-start my-auto py-0">
+        
+        <!-- Left Column: macOS Browser Mockup + About Description -->
+        <div class="md:col-span-6 flex flex-col gap-3 lg:gap-4 max-w-[360px] lg:max-w-[410px] xl:max-w-[450px]">
+          <!-- Entrance Animation Wrapper for Mockup -->
+          <div class="slide-mockup will-change-transform">
+            <!-- macOS Browser Frame Mockup with Rich Hover Micro-Interactions -->
+            <a
+              :href="project.primaryUrl !== '#' ? project.primaryUrl : project.githubUrl"
+              target="_blank"
+              rel="noreferrer"
+              class="group/mockup relative block w-full overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-2 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
             >
-              {{ work.description }}
-            </p>
+              <!-- Browser Top Bar -->
+              <div class="flex items-center justify-between px-3 py-1.5 bg-[#f3f2ee] border-b border-black/10 transition-colors duration-300 group-hover/mockup:bg-[#eae8e3]">
+                <!-- Window Dots -->
+                <div class="flex items-center gap-1.5">
+                  <span class="size-2 rounded-full bg-[#ff5f56]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
+                  <span class="size-2 rounded-full bg-[#ffbd2e]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
+                  <span class="size-2 rounded-full bg-[#27c93f]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
+                </div>
+                <!-- URL Pill -->
+                <div class="px-2.5 py-0.5 rounded-md bg-white text-[10px] sm:text-[11px] font-mono text-[#22201e]/60 border border-black/5 truncate max-w-[180px] transition-colors duration-300 group-hover/mockup:text-[#22201e]">
+                  {{ project.domain }}
+                </div>
+                <div class="size-2"></div>
+              </div>
+              <!-- Screenshot Preview with Micro-Zoom & Subtle Sheen -->
+              <div class="relative aspect-[16/9] w-full overflow-hidden bg-black/5">
+                <img
+                  :src="project.previewImg"
+                  :alt="project.title"
+                  class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.05]"
+                  loading="lazy"
+                />
+                <!-- Subtle Glass Sheen on Hover -->
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/25 opacity-0 transition-opacity duration-500 group-hover/mockup:opacity-100"></div>
+              </div>
+            </a>
+          </div>
 
-            <!-- Tech Tags -->
-            <div class="mt-3 flex flex-wrap gap-1.5 select-none">
-              <span
-                v-for="tag in work.tags"
-                :key="tag"
-                class="rounded-full border border-flax-smoke-500/40 bg-black/40 px-3.5 py-1 text-xs text-flax-smoke-400 transition-colors hover:border-flax-smoke-300 hover:text-flax-smoke-200"
-              >
-                {{ tag }}
+          <!-- About Project Section with Text Box Reveal -->
+          <div class="slide-about-container flex flex-col">
+            <!-- Section Heading (tightly wrapped) -->
+            <div class="slide-about-item relative inline-block self-start overflow-hidden mb-1 pr-1">
+              <span class="slide-about-text block text-sm sm:text-base font-sans font-semibold text-[#22201e]">
+                About
               </span>
+              <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
+            </div>
+
+            <!-- Paragraph 1 -->
+            <div class="slide-about-item relative overflow-hidden mb-1.5 max-w-lg">
+              <p class="slide-about-text font-sans text-xs sm:text-[13px] leading-[145%] text-[#22201e]/80 text-justify">
+                {{ project.aboutP1 }}
+              </p>
+              <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
+            </div>
+
+            <!-- Paragraph 2 -->
+            <div class="slide-about-item relative overflow-hidden max-w-lg">
+              <p class="slide-about-text font-sans text-xs sm:text-[13px] leading-[145%] text-[#22201e]/80 text-justify">
+                {{ project.aboutP2 }}
+              </p>
+              <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
             </div>
           </div>
         </div>
-      </aside>
-    </div>
-  </section>
+
+        <!-- Right Column: Project Title, Roles, Systems -->
+        <div class="md:col-span-6 flex flex-col justify-between h-full pt-1 md:pt-0">
+          <div class="flex flex-col gap-2.5 md:pl-2 lg:pl-4">
+            <!-- Project Title (Masked Reveal) — Responsive, bold, uppercase, never clips -->
+            <div class="overflow-hidden">
+              <h3 class="slide-project-title font-sans font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-[3vw] xl:text-5xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal">
+                {{ project.title }}
+              </h3>
+            </div>
+
+            <!-- Role & System Metadata — compact, uppercase -->
+            <div class="flex flex-col gap-1 pt-1 font-sans text-xs sm:text-[13px] uppercase tracking-[0.08em] text-[#22201e]/80">
+              <div class="overflow-hidden">
+                <div class="slide-project-meta will-change-transform">
+                  <span class="font-semibold text-[#22201e]">ROLE: </span>
+                  <span>{{ project.role }}</span>
+                </div>
+              </div>
+              <div class="overflow-hidden">
+                <div class="slide-project-meta will-change-transform">
+                  <span class="font-semibold text-[#22201e]">SYSTEM: </span>
+                  <span>{{ project.system }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Row: THE WORK #01 typography — balanced, right-aligned, fully in view -->
+      <div class="flex items-end justify-end">
+        <div class="flex items-end gap-0 leading-none select-none">
+          <!-- THE stacked vertically -->
+          <div class="flex flex-col uppercase font-sans font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#22201e]/25 leading-[0.85] tracking-tight">
+            <span>THE</span>
+          </div>
+          <!-- WORK massive -->
+          <div class="overflow-hidden leading-none">
+            <span class="slide-number font-sans font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#22201e]/25 leading-[0.85] tracking-tighter will-change-transform inline-block">
+              WORK
+            </span>
+          </div>
+          <!-- Slide number -->
+          <div class="overflow-hidden leading-none ml-1.5">
+            <span class="slide-number-idx font-sans font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#22201e]/25 leading-[0.85] will-change-transform inline-block">
+              {{ project.slideNumber }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Row Metadata (Mobile Links fallback) -->
+      <div class="flex items-center justify-between sm:hidden pt-2 border-t border-black/10 text-xs">
+        <a
+          v-if="project.primaryUrl && project.primaryUrl !== '#'"
+          :href="project.primaryUrl"
+          target="_blank"
+          class="font-medium text-[#22201e] underline"
+        >
+          Live Preview ↗
+        </a>
+        <a
+          v-if="project.githubUrl"
+          :href="project.githubUrl"
+          target="_blank"
+          class="font-medium text-[#22201e] underline"
+        >
+          GitHub ↗
+        </a>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script setup lang="ts">
-  import { animateSplitText } from '@/animations';
-  import { textSplitterIntoChar } from '@/functions';
-  import { computed, onBeforeMount, onMounted, ref } from 'vue';
+  import { onMounted } from 'vue';
   import gsap from 'gsap';
-  import { useWindowSize } from '@vueuse/core';
   import {
-    charlesLeclercImg,
     indonesianCrustalObservatoryImg,
-    stockPredictionImg,
     spiderDevImg,
     fersyaShopImg,
-    finesserShopImg,
     studentLifeImg,
-    studentLifeMobileImg,
-    streetRushImg,
-    gunungGedeImg,
   } from '@/assets/images';
 
-  export type WorkProject = {
-    name: string;
-    category: string;
-    description?: string;
-    tags: string[];
-    status: 'live' | 'repo' | 'roblox' | 'offline';
+  export interface WorkSlideProject {
+    id: string;
+    slideNumber: string;
+    title: string;
+    aboutP1: string;
+    aboutP2: string;
+    role: string;
+    system: string;
     domain: string;
     previewImg: string;
-    mobilePreviewImg?: string;
     primaryUrl: string;
     githubUrl?: string;
-    year: string;
-    deviceType?: 'web' | 'mobile';
-  };
+  }
 
-  const isSmallScreen = computed(() => {
-    return useWindowSize().width.value < 768;
-  });
-  const index = ref(0);
-  const selectedWorks = ref('Selected Projects /');
-
-  // Track active device view (desktop / mobile) per project card
-  const activeDeviceViews = ref<Record<number, 'web' | 'mobile'>>({});
-
-  const getDeviceView = (work: WorkProject, i: number): 'web' | 'mobile' => {
-    if (activeDeviceViews.value[i]) {
-      return activeDeviceViews.value[i];
-    }
-    return work.deviceType || 'web';
-  };
-
-  const setDeviceView = (i: number, view: 'web' | 'mobile') => {
-    activeDeviceViews.value[i] = view;
-  };
-
-  const tl = gsap
-    .timeline({ defaults: { duration: 0.25 } })
-    .to(['#cursor', '#inner'], {
-      scale: 1,
-      opacity: 1,
-    })
-    .paused(true);
-
-  const showCursor = () => {
-    tl.play();
-  };
-  const hideCursor = () => {
-    tl.reverse();
-  };
-
-  const selectedWorksProps: WorkProject[] = [
+  const workProjects: WorkSlideProject[] = [
     {
-      name: 'Charles Leclerc #16 Showcase',
-      category: 'Creative Frontend & Motion Physics',
-      description:
-        'Interactive tribute experience engineered with GSAP scroll triggers, custom 2D canvas telemetry physics, and high-octane editorial motion design.',
-      tags: ['React 18', 'GSAP', 'Canvas 2D', 'Framer Motion', 'Tailwind CSS'],
-      status: 'live',
-      domain: 'leclerc-redline.vercel.app',
-      previewImg: charlesLeclercImg,
-      primaryUrl: 'https://leclerc-redline.vercel.app/',
-      githubUrl: 'https://github.com/FerrelHD/leclerc-redline',
-      year: '2026',
-      deviceType: 'web',
-    },
-    {
-      name: 'Indonesian Crustal Observatory',
-      category: 'Geospatial Vector & Planetary Telemetry',
-      description:
-        'Planetary hazard monitoring observatory combining high-precision interactive vector cartography, live USGS/BMKG seismic telemetry, NASA FIRMS wildfire tracking, and synthetic seismogram oscilloscopy.',
-      tags: [
-        'React 19',
-        'TypeScript',
-        'Canvas 2D',
-        'Supabase',
-        'Tailwind CSS',
-      ],
-      status: 'live',
-      domain: 'global-seismic-tracker.vercel.app',
+      id: 'nusantara-observatory',
+      slideNumber: '#01',
+      title: 'Nusantara Observatory',
+      aboutP1:
+        'Hazard information is often scattered across different sources, making it difficult to see what is happening across Indonesia in one place. I wanted to turn fragmented hazard data into a single visual experience that makes complex events easier to explore.',
+      aboutP2:
+        'I built an interactive geospatial observatory integrating multiple live data sources into a real-time 2D map with event replay and proximity analysis. This project pushed me to think beyond interfaces — combining data, performance, visualization, and usability into one system.',
+      role: 'Frontend & Geospatial Engineer',
+      system: 'React 19 · TypeScript · Canvas 2D',
+      domain: 'nusantara-observatory.vercel.app',
       previewImg: indonesianCrustalObservatoryImg,
       primaryUrl: 'https://global-seismic-tracker.vercel.app/',
       githubUrl: 'https://github.com/FerrelHD/Global-Seismic-Tracker',
-      year: '2026',
-      deviceType: 'web',
     },
     {
-      name: 'Stock Prediction ML',
-      category: 'Quantitative ML & Web Analytics',
-      description:
-        'End-to-end quantitative financial analytics platform featuring ensemble ML forecasting (XGBoost, LightGBM) with interactive technical indicators on Streamlit.',
-      tags: ['Python', 'Streamlit', 'XGBoost', 'LightGBM', 'Scikit-Learn'],
-      status: 'repo',
-      domain: 'stock-ml.system',
-      previewImg: stockPredictionImg,
-      primaryUrl: 'https://github.com/FerrelHD/Stock-Prediction-System',
-      githubUrl: 'https://github.com/FerrelHD/Stock-Prediction-System',
-      year: '2026',
-    },
-    {
-      name: 'Spider-Dev Portfolio',
-      category: 'Creative Frontend & Web Audio',
-      description:
-        'Immersive personal portfolio themed around Spider-Man with interactive Web Audio soundscapes, 3D parallax effects, and kinetic typography.',
-      tags: ['React 19', 'GSAP', 'Tailwind CSS', 'Web Audio API'],
-      status: 'live',
+      id: 'spidey-dev',
+      slideNumber: '#02',
+      title: 'Spidey Dev Portfolio',
+      aboutP1:
+        'Most developer portfolios feel the same — clean grids, neutral colors, safe layouts. I wanted to build something that felt immersive and cinematic, a portfolio that doubles as a creative playground.',
+      aboutP2:
+        'I designed and developed an interactive Spider-Man-themed showcase with Web Audio soundscapes, 3D parallax effects, kinetic typography, and fluid GSAP transitions that bring the interface to life.',
+      role: 'Creative Developer',
+      system: 'React 19 · GSAP · Web Audio API',
       domain: 'spider-dev.portfolio',
       previewImg: spiderDevImg,
       primaryUrl: 'https://github.com/FerrelHD/Portofolio',
       githubUrl: 'https://github.com/FerrelHD/Portofolio',
-      year: '2026',
     },
     {
-      name: 'Student Life',
-      category: 'Productivity Web & Mobile PWA',
-      description:
-        'All-in-one student productivity ecosystem featuring task management, Pomodoro focus tools, and academic schedules with offline PWA support.',
-      tags: ['React 19', 'TypeScript', 'Supabase', 'Tailwind', 'PWA'],
-      status: 'live',
-      domain: 'student-life.app',
-      previewImg: studentLifeImg,
-      mobilePreviewImg: studentLifeMobileImg,
-      primaryUrl: 'https://ferrelhd.github.io/Student-Life/',
-      githubUrl: 'https://github.com/FerrelHD/Student-Life',
-      year: '2025',
-      deviceType: 'web',
-    },
-    {
-      name: 'Fersya Shop',
-      category: 'Full-Stack Organic E-Commerce',
-      description:
-        'Modern organic and health product storefront with a Filament admin dashboard, role-based access control, and dynamic inventory management.',
-      tags: ['Laravel 11', 'Filament Admin', 'Tailwind CSS'],
-      status: 'repo',
+      id: 'fersya-shop',
+      slideNumber: '#03',
+      title: 'Fersya Shop',
+      aboutP1:
+        'Small businesses often struggle with managing products, orders, and user roles without expensive enterprise tools. I wanted to create a storefront that is both beautiful for customers and powerful for administrators.',
+      aboutP2:
+        'I built a modern organic product storefront with a Filament admin dashboard, granular role-based access control, and dynamic inventory management — giving shop owners full control without touching code.',
+      role: 'Full-Stack Developer',
+      system: 'Laravel 11 · Filament · MySQL',
       domain: 'fersyashop.store',
       previewImg: fersyaShopImg,
       primaryUrl: 'https://github.com/FerrelHD/Fersya-Shop',
       githubUrl: 'https://github.com/FerrelHD/Fersya-Shop',
-      year: '2025',
     },
     {
-      name: 'Finesser Shop',
-      category: 'Digital Assets Storefront',
-      description:
-        'Digital storefront system designed for browsing and acquiring creative digital assets, with secure database transactions and streamlined checkout.',
-      tags: ['Laravel', 'Bootstrap', 'MySQL'],
-      status: 'repo',
-      domain: 'finesser.shop',
-      previewImg: finesserShopImg,
-      primaryUrl: 'https://github.com/FerrelHD/Finesser-Shop',
-      githubUrl: 'https://github.com/FerrelHD/Finesser-Shop',
-      year: '2024',
-    },
-    {
-      name: 'Street Rush',
-      category: '3D Arcade Runner Game',
-      description:
-        'Fast-paced 3D endless runner built in Unity featuring procedural obstacle generation, physics-based character kinematics, and custom shaders.',
-      tags: ['Unity', 'C#', 'Mobile 3D', 'Physics Engine'],
-      status: 'repo',
-      domain: 'streetrush.game',
-      previewImg: streetRushImg,
-      primaryUrl: 'https://github.com/FerrelHD/Street-Rush-Unity',
-      githubUrl: 'https://github.com/FerrelHD/Street-Rush-Unity',
-      year: '2024',
-    },
-    {
-      name: 'Gunung Gede Simulation',
-      category: '3D Hiking Simulation',
-      description:
-        'Atmospheric 3D hiking simulation on Roblox Studio accurately modeling the Gunung Putri trail with custom terrain generation and survival mechanics.',
-      tags: ['Luau', 'Roblox Studio', 'Terrain 3D'],
-      status: 'roblox',
-      domain: 'roblox.com/gunung-gede',
-      previewImg: gunungGedeImg,
-      primaryUrl:
-        'https://www.roblox.com/games/125712163693709/Mount-Gede-Via-Gunung-Putri',
-      year: '2024',
+      id: 'student-life',
+      slideNumber: '#04',
+      title: 'Student Life',
+      aboutP1:
+        'Students juggle tasks, schedules, and focus sessions across multiple apps. I wanted to consolidate everything into one focused, offline-first productivity ecosystem.',
+      aboutP2:
+        'I designed and developed an all-in-one student tool featuring smart task management, Pomodoro focus cycles, and schedule tracking with PWA offline support — so students can stay productive anywhere.',
+      role: 'Lead Developer & Product Designer',
+      system: 'React 19 · TypeScript · Supabase · PWA',
+      domain: 'student-life.app',
+      previewImg: studentLifeImg,
+      primaryUrl: 'https://ferrelhd.github.io/Student-Life/',
+      githubUrl: 'https://github.com/FerrelHD/Student-Life',
     },
   ];
 
-  // Reusable function to handle forward scroll animation
-  const createForwardTimeline = (
-    index: any,
-    i: any,
-    selectedWorksProps: any[],
-  ) => {
-    const tl = gsap.timeline({
-      defaults: { duration: 0.3 },
-    });
+  const revealedSlideIndices = new Set<number>();
 
-    // Set and move the #index element
-    tl.set('#index', {
-      yPercent: 100,
-      onComplete: () => {
-        index.value = Math.min(i, selectedWorksProps.length - 1);
-      },
-    }).to('#index', {
-      yPercent: 0,
-      ease: 'power1.inOut',
-    });
+  // Function to reveal text animation for a specific slide
+  const revealSlideIndex = (index: number) => {
+    const slides = document.querySelectorAll('.work-slide');
+    if (!slides[index]) return;
 
-    return tl;
+    const slide = slides[index];
+    const chapter = slide.querySelector('.slide-chapter-title');
+    const title = slide.querySelector('.slide-project-title');
+    const metaLines = slide.querySelectorAll('.slide-project-meta');
+    const num = slide.querySelector('.slide-number');
+    const numIdx = slide.querySelector('.slide-number-idx');
+    const mockup = slide.querySelector('.slide-mockup');
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    if (chapter) tl.to(chapter, { yPercent: 0, duration: 1.1 }, 0);
+    if (title) tl.to(title, { yPercent: 0, duration: 1.1 }, 0.1);
+    if (metaLines.length) {
+      tl.to(metaLines, { yPercent: 0, duration: 0.9, stagger: 0.08 }, 0.2);
+    }
+    if (mockup) {
+      tl.to(mockup, { y: 0, scale: 1, opacity: 1, duration: 1.0 }, 0.15);
+    }
+    if (num) tl.to(num, { yPercent: 0, duration: 1.2 }, 0.2);
+    if (numIdx) tl.to(numIdx, { yPercent: 0, duration: 1.2 }, 0.25);
+
+    // Text box reveal for About section (once per slide entrance)
+    if (!revealedSlideIndices.has(index)) {
+      revealedSlideIndices.add(index);
+      const aboutItems = slide.querySelectorAll('.slide-about-item');
+      aboutItems.forEach((item, i) => {
+        const box = item.querySelector('.slide-about-box');
+        const text = item.querySelector('.slide-about-text');
+        if (!box || !text) return;
+
+        const startTime = 0.25 + i * 0.14;
+        const boxDuration = 0.42;
+
+        // 1. Box expands left -> right
+        tl.to(
+          box,
+          {
+            scaleX: 1,
+            duration: boxDuration,
+            ease: 'power2.inOut',
+          },
+          startTime,
+        );
+
+        // 2. Unhide text and flip box origin to right edge
+        tl.set(text, { opacity: 1 }, startTime + boxDuration);
+        tl.set(box, { transformOrigin: 'right center' }, startTime + boxDuration);
+
+        // 3. Box collapses left -> right away from the text
+        tl.to(
+          box,
+          {
+            scaleX: 0,
+            duration: boxDuration,
+            ease: 'power2.inOut',
+          },
+          startTime + boxDuration,
+        );
+      });
+    }
   };
-
-  // Reusable function to handle backward scroll animation
-  const createBackwardTimeline = (index: any, i: any) => {
-    const tl = gsap.timeline({ defaults: { duration: 0.3 } });
-
-    // Set and move the #index element
-    tl.set('#index', {
-      yPercent: -100,
-      onComplete: () => {
-        index.value = Math.max(i, 0);
-      },
-    }).to('#index', {
-      yPercent: 0,
-      duration: 0.3,
-      ease: 'power1.inOut',
-    });
-
-    return tl;
-  };
-
-  onBeforeMount(() => {
-    selectedWorks.value = textSplitterIntoChar('Selected Works / ', true);
-  });
 
   onMounted(() => {
-    animateSplitText(
-      '#selectedWorks .letters',
-      '#selected-works-text',
-      0.7,
-      0.01,
-      0,
-    );
+    // Set initial hidden state via GSAP (not CSS classes) so reveal animation works
+    document.querySelectorAll('.work-slide').forEach((slide) => {
+      const chapter = slide.querySelector('.slide-chapter-title');
+      const title = slide.querySelector('.slide-project-title');
+      const metaLines = slide.querySelectorAll('.slide-project-meta');
+      const num = slide.querySelector('.slide-number');
+      const numIdx = slide.querySelector('.slide-number-idx');
+      const mockup = slide.querySelector('.slide-mockup');
+      const aboutBoxes = slide.querySelectorAll('.slide-about-box');
+      const aboutTexts = slide.querySelectorAll('.slide-about-text');
 
-    // Apply GSAP animations to each div
-    if (!isSmallScreen.value)
-      gsap.utils.toArray('.work-card').forEach((div: any, i: any) => {
-        gsap.timeline({ defaults: { duration: 0.7 } }).to(div, {
-          scrollTrigger: {
-            trigger: div,
-            start: 'top 25%',
-            end: 'bottom 25%',
-            scrub: 0.01,
-            onLeaveBack: () => {
-              // Backward scroll animation
-              if (index.value !== 0) {
-                gsap.to('#index', {
-                  yPercent: 100,
-                  duration: 0.3,
-                  ease: 'power4.inOut',
-                  onComplete: () => {
-                    createBackwardTimeline(index, i - 1);
-                  },
-                });
-              }
-            },
-          },
-          ease: 'power1.inOut',
-          onComplete: () => {
-            // Forward scroll animation
-            if (index.value !== selectedWorksProps.length - 1) {
-              gsap.to('#index', {
-                yPercent: -100,
-                duration: 0.3,
-                ease: 'power4.inOut',
-                onComplete: () => {
-                  createForwardTimeline(index, i + 1, selectedWorksProps);
-                },
-              });
-            }
-          },
-        });
-      });
+      if (chapter) gsap.set(chapter, { yPercent: 105 });
+      if (title) gsap.set(title, { yPercent: 105 });
+      if (metaLines.length) gsap.set(metaLines, { yPercent: 105 });
+      if (num) gsap.set(num, { yPercent: 105 });
+      if (numIdx) gsap.set(numIdx, { yPercent: 105 });
+      if (mockup) gsap.set(mockup, { y: 35, scale: 0.96, opacity: 0 });
+      if (aboutBoxes.length) gsap.set(aboutBoxes, { scaleX: 0, transformOrigin: 'left center' });
+      if (aboutTexts.length) gsap.set(aboutTexts, { opacity: 0 });
+    });
+  });
+
+  defineExpose({
+    revealSlideIndex,
   });
 </script>

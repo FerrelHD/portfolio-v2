@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap')
 layer(base);
 
 @layer utilities {
@@ -13,6 +13,8 @@ layer(base);
 
 @theme {
   /* Font families */
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Instrument Sans', system-ui, sans-serif;
   --font-title: 'title';
   --font-body: 'body';
 
@@ -65,6 +67,22 @@ layer(base);
 
 @utility font-fancy {
   font-family: var(--font-fancy) !important;
+}
+
+@utility font-serif {
+  font-family: var(--font-serif) !important;
+}
+
+@utility font-sans {
+  font-family: var(--font-sans) !important;
+}
+
+@utility vt-rl {
+  writing-mode: vertical-rl;
+}
+
+@utility vt-reading-up {
+  transform: rotate(180deg);
 }
 
 @utility light-theme {
@@ -212,28 +230,33 @@ layer(base);
     @apply pointer-events-none fixed left-0 top-0 z-[99999999] size-full text-[#aeae9d] opacity-20;
   } */
 
-  span,
-  p,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-fancy!;
+  body {
+    font-family: var(--font-sans);
+    line-height: 1.4;
+    letter-spacing: 0;
   }
 
-  a {
-    @apply font-body;
+  /* Masked text reveal utility */
+  .mask-reveal-wrap {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+
+  .mask-reveal-child {
+    display: inline-block;
+    will-change: transform;
+    transform: translateY(105%);
+    transition: none;
   }
 
   ::-moz-selection {
     /* Code for Firefox */
-    @apply bg-flame text-white;
+    @apply bg-[#22201e] text-[#faf9f6];
   }
 
   ::selection {
-    @apply bg-flame text-white;
+    @apply bg-[#22201e] text-[#faf9f6];
   }
 }
 
