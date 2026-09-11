@@ -21,7 +21,6 @@
         <!-- Year Intro Roll (2022 -> 2026) - Absolute Overlay masked ala Khanh Nguyen -->
         <div
           v-if="showIntro"
-          ref="introContainer"
           class="absolute top-0 left-0 z-10 overflow-hidden pointer-events-none select-none pr-8 sm:pr-12 pb-2"
         >
           <div
@@ -159,7 +158,6 @@
 
   const years = ['22', '23', '24', '25', '26'];
 
-  const introContainer = ref<HTMLElement | null>(null);
   const introContent = ref<HTMLElement | null>(null);
   const introProgressLine = ref<HTMLElement | null>(null);
   const baseCurtain = ref<HTMLElement | null>(null);
