@@ -7,14 +7,14 @@
   >
     <!-- Left Column: Chapter III Title & "What I do?" Statement -->
     <div
-      class="w-full md:w-[320px] lg:w-[360px] xl:w-[400px] shrink-0 flex flex-col justify-between
-             p-0 md:p-10 lg:p-12 md:pt-14 md:pb-12 mb-8 md:mb-0"
+      class="w-full md:w-[280px] lg:w-[310px] xl:w-[340px] shrink-0 flex flex-col justify-between
+             p-0 md:p-8 lg:p-10 md:pt-14 md:pb-12 mb-8 md:mb-0"
     >
       <!-- Top: CHAPTER III Heading -->
       <div class="overflow-hidden">
         <h2
           ref="chapterTitle"
-          class="font-serif text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-normal tracking-tight text-[#faf9f6] uppercase will-change-transform"
+          class="font-serif text-xl sm:text-2xl md:text-2xl lg:text-[26px] font-normal tracking-tight text-[#faf9f6] uppercase leading-none will-change-transform"
         >
           CHAPTER III
         </h2>
@@ -25,7 +25,7 @@
         <span class="font-sans text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#faf9f6]/60 font-medium">
           WHAT I DO?
         </span>
-        <p class="font-sans text-xl sm:text-2xl lg:text-[28px] font-normal leading-[1.3] text-[#faf9f6] max-w-sm">
+        <p class="font-sans text-xl sm:text-2xl lg:text-[26px] font-normal leading-[1.3] text-[#faf9f6] max-w-sm">
           Designing digital experiences with clarity, structure, and intention.
         </p>
       </div>
@@ -40,7 +40,7 @@
         @pointerenter="onMouseEnter(index)"
         @pointerleave="onMouseLeave(index)"
         class="relative flex-1 flex flex-col justify-between
-               p-6 sm:p-8 lg:p-10 xl:p-12
+               p-6 sm:p-7 md:p-6 lg:p-7 xl:p-8
                border-t md:border-t-0 md:border-l border-white/10
                overflow-hidden cursor-pointer group select-none"
       >
@@ -63,16 +63,16 @@
         <!-- Top: Huge Serif Number -->
         <div class="relative z-10 overflow-hidden">
           <span
-            class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-none text-[#faf9f6] inline-block transition-transform duration-500 ease-out group-hover:translate-x-1"
+            class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[76px] font-normal leading-none text-[#faf9f6] inline-block transition-transform duration-500 ease-out group-hover:translate-x-1"
           >
             {{ item.num }}
           </span>
         </div>
 
         <!-- Middle: Editorial Serif Title -->
-        <div class="relative z-10 my-auto py-6 sm:py-8">
+        <div class="relative z-10 my-auto py-6 sm:py-8 pr-2">
           <h3
-            class="font-serif text-2xl sm:text-3xl md:text-3xl lg:text-4xl uppercase tracking-[-0.02em] leading-[1.05] text-[#faf9f6] transition-transform duration-500 ease-out group-hover:translate-x-2"
+            class="font-serif text-xl sm:text-2xl md:text-[26px] lg:text-[28px] xl:text-[32px] uppercase tracking-[-0.02em] leading-[1.08] text-[#faf9f6] transition-transform duration-500 ease-out group-hover:translate-x-1.5 break-words"
           >
             {{ item.name }}
           </h3>

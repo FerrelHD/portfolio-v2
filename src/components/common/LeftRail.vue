@@ -66,23 +66,25 @@
 
     <!-- Mobile Center Branding -->
     <div class="flex items-center gap-2 md:hidden">
-      <span class="font-serif text-lg tracking-wider font-normal">FERREL RASHAD</span>
+      <span class="font-serif text-lg tracking-wider font-normal">
+        FERREL RASHAD
+      </span>
     </div>
 
     <!-- Desktop Middle Vertical Rail Content: Folio — Edition, FERREL RASHAD (Title font), © 2026 -->
     <div class="relative hidden md:flex flex-1 flex-col items-center justify-between py-8 w-full">
       <!-- Top: FOLIO — EDITION -->
       <span
-        class="vt-rl vt-reading-up font-sans text-[10px] uppercase tracking-[0.25em] transition-colors duration-500 whitespace-nowrap cursor-default"
+        class="vt-rl vt-reading-up font-sans text-[10px] uppercase tracking-[0.22em] transition-colors duration-500 whitespace-nowrap cursor-default select-none"
         :class="isDark && !isOpen ? 'text-[#f3eee8]/50' : (isOpen ? 'text-[#f3eee8]/50' : 'text-[#22201e]/50')"
       >
         FOLIO — EDITION
       </span>
 
-      <!-- Center: FERREL RASHAD (Title Font - Instrument Serif) - Perfectly Centered at 50% Midpoint -->
-      <div class="absolute top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none">
+      <!-- Center: FERREL RASHAD (Title Font - Instrument Serif) - Perfectly Centered at 50% Midpoint & X-Axis -->
+      <div class="absolute inset-x-0 w-full top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none">
         <span
-          class="vt-rl vt-reading-up font-serif text-[16px] lg:text-[17px] uppercase tracking-[0.2em] font-normal transition-colors duration-500 whitespace-nowrap cursor-default select-none pointer-events-auto"
+          class="vt-rl vt-reading-up font-serif text-[15px] lg:text-[16px] uppercase tracking-[0.18em] font-normal transition-colors duration-500 whitespace-nowrap cursor-default select-none pointer-events-auto"
           :class="isDark && !isOpen ? 'text-[#f3eee8]/90 hover:text-[#f3eee8]' : (isOpen ? 'text-[#f3eee8]/90 hover:text-[#f3eee8]' : 'text-[#22201e]/90 hover:text-[#22201e]')"
         >
           FERREL RASHAD
@@ -91,7 +93,7 @@
 
       <!-- Bottom: Copyright Year -->
       <span
-        class="vt-rl vt-reading-up font-sans text-[10px] tracking-widest uppercase transition-colors duration-500 cursor-default"
+        class="vt-rl vt-reading-up font-sans text-[10px] tracking-[0.2em] tabular-nums uppercase transition-colors duration-500 cursor-default select-none"
         :class="isDark && !isOpen ? 'text-[#f3eee8]/50' : (isOpen ? 'text-[#f3eee8]/50' : 'text-[#22201e]/50')"
       >
         © 2026

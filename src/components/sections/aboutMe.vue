@@ -11,7 +11,7 @@
       <div class="overflow-hidden">
         <h2
           ref="chapterTitle"
-          class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight text-[#22201e] uppercase will-change-transform"
+          class="font-serif text-xl sm:text-2xl md:text-2xl lg:text-[26px] font-normal tracking-tight text-[#22201e] uppercase leading-none will-change-transform"
         >
           CHAPTER I
         </h2>

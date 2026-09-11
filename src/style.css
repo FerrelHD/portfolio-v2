@@ -3,6 +3,14 @@ layer(base);
 
 @layer utilities {
   @font-face {
+    font-family: 'PP Editorial Old';
+    src: url('./assets/fonts/PPEditorialOld-Light.woff2') format('woff2');
+    font-weight: 300 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
     font-family: 'title';
     src: url('./assets/fonts/CabinetGrotesk-Variable.ttf') format('truetype');
     font-style: normal;
@@ -13,7 +21,7 @@ layer(base);
 
 @theme {
   /* Font families */
-  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-serif: 'PP Editorial Old', 'Instrument Serif', Georgia, serif;
   --font-sans: 'Instrument Sans', system-ui, sans-serif;
   --font-title: 'title';
   --font-body: 'body';

@@ -12,7 +12,7 @@
       <!-- Top Row: CHAPTER II on Left, Live Link on Right -->
       <div class="flex items-center justify-between">
         <div class="overflow-hidden">
-          <h2 class="slide-chapter-title font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#22201e] uppercase will-change-transform">
+          <h2 class="slide-chapter-title font-serif text-xl sm:text-2xl md:text-2xl lg:text-[26px] font-normal tracking-tight text-[#22201e] uppercase leading-none will-change-transform">
             CHAPTER II
           </h2>
         </div>

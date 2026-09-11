@@ -20,22 +20,22 @@
       </button>
     </div>
 
-    <!-- Massive Center Headline: THANK YOU in Instrument Serif -->
+    <!-- Massive Center Headline: NEXT CHAPTER in Editorial Serif -->
     <div class="my-auto py-4">
-      <div class="overflow-hidden">
+      <div class="overflow-hidden pr-4 sm:pr-6">
         <h2
-          ref="thankEl"
-          class="font-serif text-[18vw] sm:text-[16vw] md:text-[14vw] lg:text-[13vw] font-normal tracking-tight text-[#f3eee8] uppercase leading-[0.84] will-change-transform"
+          ref="nextEl"
+          class="font-serif text-[17vw] sm:text-[15vw] md:text-[12.5vw] lg:text-[11vw] font-normal tracking-[-0.03em] text-[#f3eee8] uppercase leading-[0.84] will-change-transform pr-2"
         >
-          THANK
+          NEXT
         </h2>
       </div>
-      <div class="overflow-hidden">
+      <div class="overflow-hidden pr-6 sm:pr-8">
         <h2
-          ref="youEl"
-          class="font-serif text-[18vw] sm:text-[16vw] md:text-[14vw] lg:text-[13vw] font-normal tracking-tight text-[#f3eee8] uppercase leading-[0.84] will-change-transform"
+          ref="chapterEl"
+          class="font-serif text-[17vw] sm:text-[15vw] md:text-[12.5vw] lg:text-[11vw] font-normal tracking-[-0.03em] text-[#f3eee8] uppercase leading-[0.84] will-change-transform pr-4"
         >
-          YOU
+          CHAPTER
         </h2>
       </div>
     </div>
@@ -92,8 +92,8 @@
     (e: 'scrollToStart'): void;
   }>();
 
-  const thankEl = ref<HTMLElement | null>(null);
-  const youEl = ref<HTMLElement | null>(null);
+  const nextEl = ref<HTMLElement | null>(null);
+  const chapterEl = ref<HTMLElement | null>(null);
 
   const scrollToTop = () => {
     emit('scrollToStart');
@@ -101,8 +101,8 @@
 
   const revealSlide = () => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    if (thankEl.value) tl.to(thankEl.value, { yPercent: 0, duration: 1.2 }, 0);
-    if (youEl.value) tl.to(youEl.value, { yPercent: 0, duration: 1.2 }, 0.1);
+    if (nextEl.value) tl.to(nextEl.value, { yPercent: 0, duration: 1.2 }, 0);
+    if (chapterEl.value) tl.to(chapterEl.value, { yPercent: 0, duration: 1.2 }, 0.1);
   };
 
   defineExpose({
@@ -110,7 +110,7 @@
   });
 
   onMounted(() => {
-    if (thankEl.value) gsap.set(thankEl.value, { yPercent: 105 });
-    if (youEl.value) gsap.set(youEl.value, { yPercent: 105 });
+    if (nextEl.value) gsap.set(nextEl.value, { yPercent: 105 });
+    if (chapterEl.value) gsap.set(chapterEl.value, { yPercent: 105 });
   });
 </script>

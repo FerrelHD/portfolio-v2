@@ -16,26 +16,26 @@
     <!-- Top Content Row: Giant Title on Left, Left-Aligned Bio on Right -->
     <div class="relative z-[2] flex flex-col md:flex-row md:items-start md:justify-between gap-8 md:gap-12 mt-2 md:mt-4">
       <!-- Big Editorial Title with Intro Counter Slot -->
-      <div class="relative flex flex-col font-serif uppercase leading-[0.84] tracking-[-0.04em]">
+      <div class="relative flex flex-col font-serif uppercase leading-[0.82] tracking-[-0.05em]">
         
-        <!-- Year Intro Roll (2019 -> 2026) - Absolute Overlay masked ala Khanh Nguyen -->
+        <!-- Year Intro Roll (2022 -> 2026) - Absolute Overlay masked ala Khanh Nguyen -->
         <div
           v-if="showIntro"
           ref="introContainer"
-          class="absolute top-0 left-0 z-10 overflow-hidden pointer-events-none select-none"
+          class="absolute top-0 left-0 z-10 overflow-hidden pointer-events-none select-none pr-8 sm:pr-12 pb-2"
         >
           <div
             ref="introContent"
-            class="flex items-baseline text-[19vw] sm:text-[16vw] md:text-[14vw] lg:text-[14.2vw] text-[#f3eee8] font-normal will-change-transform leading-none tracking-[-0.04em]"
+            class="flex items-center h-[1em] text-[17vw] sm:text-[14vw] md:text-[9.5vw] lg:text-[9.2vw] text-[#f3eee8] font-normal will-change-transform leading-none tracking-[-0.045em] pr-4 sm:pr-6"
           >
-            <span>20</span>
+            <span class="flex h-[1em] items-center leading-none">20</span>
             <!-- Rolling 2-digit strip -->
-            <div class="inline-block h-[0.84em] overflow-hidden align-baseline">
+            <div class="h-[1em] overflow-hidden flex flex-col justify-start pr-4 sm:pr-6">
               <div ref="yearStrip" class="flex flex-col will-change-transform">
                 <span
                   v-for="yr in years"
                   :key="yr"
-                  class="h-[0.84em] flex items-center tabular-nums"
+                  class="h-[1em] flex items-center leading-none tabular-nums pr-2"
                 >
                   {{ yr }}
                 </span>
@@ -47,20 +47,20 @@
         <!-- Name Title (Always in flow, masked with overflow-hidden) -->
         <h1
           ref="heroTitle"
-          class="font-normal text-[#f3eee8] will-change-transform leading-[0.84] tracking-[-0.04em]"
+          class="font-serif font-normal text-[#f3eee8] will-change-transform leading-[0.88] tracking-[-0.045em]"
         >
-          <span class="block overflow-hidden">
+          <span class="block overflow-hidden pr-4 sm:pr-6">
             <span
               ref="firstNameEl"
-              class="block will-change-transform text-[19vw] sm:text-[16vw] md:text-[14vw] lg:text-[14.2vw]"
+              class="block will-change-transform text-[17vw] sm:text-[14vw] md:text-[9.5vw] lg:text-[9.2vw] tracking-[-0.045em] pr-2"
             >
               FERREL
             </span>
           </span>
-          <span class="block overflow-hidden">
+          <span class="block overflow-hidden pr-6 sm:pr-8 mt-1 sm:mt-1.5 md:mt-2">
             <span
               ref="lastNameEl"
-              class="block will-change-transform text-[21vw] sm:text-[18vw] md:text-[15.8vw] lg:text-[16vw] tracking-[-0.03em] origin-left"
+              class="block will-change-transform text-[18.5vw] sm:text-[15.2vw] md:text-[10.5vw] lg:text-[10.2vw] tracking-[-0.045em] origin-left pr-4"
             >
               RASHAD
             </span>
@@ -106,7 +106,7 @@
           <!-- Intro Quote: tightly masked container, entrance from below, exit to below -->
           <div
             ref="quoteWrapperEl"
-            class="absolute right-0 bottom-0 overflow-hidden py-0.5 pointer-events-none select-none max-w-[280px] sm:max-w-none w-max"
+            class="absolute right-0 bottom-0 overflow-hidden pointer-events-none select-none max-w-[280px] sm:max-w-none w-max z-10"
           >
             <div
               ref="quoteEl"
@@ -117,13 +117,13 @@
           </div>
 
           <!-- Hero Scroll Cue ala Khanh Nguyen: tightly masked container -->
-          <div class="overflow-hidden py-1 select-none">
+          <div class="overflow-hidden select-none">
             <div
               ref="scrollCueEl"
               class="group flex items-center cursor-pointer will-change-transform"
               @click="scrollToNext"
             >
-              <span class="font-serif uppercase tracking-[0.15em] text-base sm:text-lg md:text-xl font-normal text-[#faf9f6]/90 transition-all duration-300 group-hover:text-white group-hover:tracking-[0.22em]">
+              <span class="font-serif uppercase tracking-[0.02em] text-xl sm:text-2xl md:text-3xl lg:text-[32px] font-normal text-[#faf9f6]/90 transition-all duration-300 group-hover:text-white group-hover:tracking-[0.05em] leading-none">
                 SCROLL
               </span>
             </div>
@@ -206,7 +206,7 @@
     // Hide footer elements during intro, quote prepared for entrance
     if (footerLeftEl.value) gsap.set(footerLeftEl.value, { yPercent: 105 });
     if (footerCenterEl.value) gsap.set(footerCenterEl.value, { yPercent: 105 });
-    if (scrollCueEl.value) gsap.set(scrollCueEl.value, { yPercent: 105 });
+    if (scrollCueEl.value) gsap.set(scrollCueEl.value, { yPercent: 120, autoAlpha: 0 });
     if (quoteEl.value) gsap.set(quoteEl.value, { yPercent: 105 });
 
     // 5-Stage Intro Animation Timeline:
@@ -378,6 +378,7 @@
         scrollCueEl.value,
         {
           yPercent: 0,
+          autoAlpha: 1,
           duration: 0.95,
           ease: 'power4.out',
         },
