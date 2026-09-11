@@ -94,14 +94,10 @@
         </div>
       </div>
 
-      <!-- Bottom Center: Availability Status with Live Pulsing Dot -->
+      <!-- Bottom Center: Availability Status -->
       <div class="hidden md:flex flex-col items-center text-sm sm:text-base md:text-lg text-center leading-[140%] overflow-hidden">
-        <span ref="footerCenterEl" class="inline-flex items-center gap-2 text-[#f3eee8]/90 will-change-transform">
-          <span class="relative flex size-2">
-            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-            <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
-          </span>
-          <span>Open for collaborations</span>
+        <span ref="footerCenterEl" class="text-[#f3eee8]/80 will-change-transform">
+          Open for collaborations
         </span>
       </div>
 
