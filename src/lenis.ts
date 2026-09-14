@@ -2,12 +2,12 @@ import Lenis from 'lenis';
 
 // smooth scroll
 const lenis = new Lenis({
-  duration: 0.8,
+  duration: 1.0,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 });
 
 function raf(time: number) {
   lenis.raf(time);
-  requestAnimationFrame(raf);
 }
 
 export { lenis, raf };

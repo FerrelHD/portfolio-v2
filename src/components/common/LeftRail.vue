@@ -65,11 +65,16 @@
     </button>
 
     <!-- Mobile Center Branding -->
-    <div class="flex items-center gap-2 md:hidden">
+    <button
+      type="button"
+      @click="navigateTo('hero')"
+      class="flex items-center gap-2 md:hidden cursor-pointer outline-none select-none transition-opacity hover:opacity-80"
+      aria-label="Go to home"
+    >
       <span class="font-serif text-lg tracking-wider font-normal">
         FERREL RASHAD
       </span>
-    </div>
+    </button>
 
     <!-- Desktop Middle Vertical Rail Content: Folio — Edition, FERREL RASHAD (Title font), © 2026 -->
     <div class="relative hidden md:flex flex-1 flex-col items-center justify-between py-8 w-full">
@@ -83,12 +88,15 @@
 
       <!-- Center: FERREL RASHAD - Matches FOLIO — EDITION size (10px) and tracking -->
       <div class="absolute inset-x-0 w-full top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none">
-        <span
-          class="vt-rl vt-reading-up font-sans text-[10px] uppercase tracking-[0.22em] font-medium transition-colors duration-500 whitespace-nowrap cursor-default select-none pointer-events-auto"
+        <button
+          type="button"
+          @click="navigateTo('hero')"
+          class="vt-rl vt-reading-up font-sans text-[10px] uppercase tracking-[0.22em] font-medium transition-colors duration-500 whitespace-nowrap cursor-pointer select-none pointer-events-auto outline-none"
           :class="isDark && !isOpen ? 'text-[#f3eee8]/80 hover:text-[#f3eee8]' : (isOpen ? 'text-[#f3eee8]/80 hover:text-[#f3eee8]' : 'text-[#22201e]/80 hover:text-[#22201e]')"
+          aria-label="Back to home"
         >
           FERREL RASHAD
-        </span>
+        </button>
       </div>
 
       <!-- Bottom: Copyright Year -->
@@ -245,8 +253,9 @@
     { num: '05.', label: 'CONTACT', id: 'contact' },
   ];
 
+  let activeMenuTl: gsap.core.Timeline | null = null;
+
   const toggleMenu = () => {
-    if (isAnimating.value) return;
     if (isOpen.value) {
       closeMenu();
     } else {
@@ -255,7 +264,11 @@
   };
 
   const openMenu = () => {
-    if (isAnimating.value || isOpen.value) return;
+    if (isOpen.value && !isAnimating.value) return;
+    if (activeMenuTl) {
+      activeMenuTl.kill();
+      activeMenuTl = null;
+    }
     isOpen.value = true;
     isAnimating.value = true;
     document.body.style.overflow = 'hidden';
@@ -275,15 +288,16 @@
         gsap.set(socialLinks.value, { yPercent: 105, opacity: 0 });
       }
 
-      const tl = gsap.timeline({
+      activeMenuTl = gsap.timeline({
         defaults: { ease: 'power3.inOut' },
         onComplete: () => {
           isAnimating.value = false;
+          activeMenuTl = null;
         },
       });
 
       // 1. Curtain roll-up / wipe from the left (ala loading screen)
-      tl.to(menuPanel.value, {
+      activeMenuTl.to(menuPanel.value, {
         clipPath: 'inset(0 0% 0 0)',
         duration: 0.85,
         ease: 'power3.inOut',
@@ -291,7 +305,7 @@
 
       // 2. Reveal Close Button
       if (closeBtn.value) {
-        tl.to(
+        activeMenuTl.to(
           closeBtn.value,
           {
             yPercent: 0,
@@ -302,14 +316,14 @@
         );
       }
 
-      // 3. Staggered reveal for 01. HOME to 04. CONTACT
+      // 3. Staggered reveal for 01. HOME to 05. CONTACT
       if (navItemLines.value && navItemLines.value.length) {
-        tl.to(
+        activeMenuTl.to(
           navItemLines.value,
           {
             yPercent: 0,
-            duration: 0.9,
-            stagger: 0.08,
+            duration: 0.8,
+            stagger: 0.06,
             ease: 'power4.out',
           },
           0.22,
@@ -318,45 +332,50 @@
 
       // 4. Reveal Social Links
       if (socialLinks.value) {
-        tl.to(
+        activeMenuTl.to(
           socialLinks.value,
           {
             yPercent: 0,
             opacity: 1,
-            duration: 0.7,
+            duration: 0.6,
             ease: 'power4.out',
           },
-          0.35,
+          0.32,
         );
       }
     });
   };
 
   const closeMenu = (callback?: () => void) => {
-    if (isAnimating.value || !isOpen.value) {
+    if (!isOpen.value) {
       callback?.();
       return;
     }
+    if (activeMenuTl) {
+      activeMenuTl.kill();
+      activeMenuTl = null;
+    }
     isAnimating.value = true;
 
-    const tl = gsap.timeline({
+    activeMenuTl = gsap.timeline({
       onComplete: () => {
         isOpen.value = false;
         isAnimating.value = false;
         document.body.style.overflow = '';
+        activeMenuTl = null;
         callback?.();
       },
     });
 
     // 1. Text slides cleanly down behind mask & fades
     if (navItemLines.value && navItemLines.value.length) {
-      tl.to(
+      activeMenuTl.to(
         navItemLines.value,
         {
           yPercent: 105,
           opacity: 0,
-          duration: 0.35,
-          stagger: 0.02,
+          duration: 0.25,
+          stagger: 0.015,
           ease: 'power3.in',
         },
         0,
@@ -364,23 +383,23 @@
     }
 
     if (closeBtn.value) {
-      tl.to(closeBtn.value, { yPercent: -105, opacity: 0, duration: 0.25, ease: 'power2.in' }, 0);
+      activeMenuTl.to(closeBtn.value, { yPercent: -105, opacity: 0, duration: 0.2, ease: 'power2.in' }, 0);
     }
 
     if (socialLinks.value) {
-      tl.to(socialLinks.value, { yPercent: 105, opacity: 0, duration: 0.25, ease: 'power2.in' }, 0);
+      activeMenuTl.to(socialLinks.value, { yPercent: 105, opacity: 0, duration: 0.2, ease: 'power2.in' }, 0);
     }
 
     // 2. Curtain rolls back to left (inset(0 100% 0 0))
     if (menuPanel.value) {
-      tl.to(
+      activeMenuTl.to(
         menuPanel.value,
         {
           clipPath: 'inset(0 100% 0 0)',
-          duration: 0.5,
+          duration: 0.35,
           ease: 'power3.inOut',
         },
-        0.08,
+        0.05,
       );
     }
   };

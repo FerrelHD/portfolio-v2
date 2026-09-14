@@ -46,7 +46,6 @@
       >
         <!-- Slide 0: Hero (Dark #22201e) -->
         <Hero
-          ref="heroRef"
           @scrollNext="() => handleNavigate('about')"
           @introComplete="handleIntroComplete"
         />
@@ -81,7 +80,7 @@
   import { useWindowSize } from '@vueuse/core';
   import gsap from 'gsap';
   import { ScrollTrigger } from 'gsap/all';
-  import { raf } from './lenis';
+  import { lenis } from './lenis';
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -89,7 +88,6 @@
   const horizontalPin = ref<HTMLElement | null>(null);
   const horizontalTrack = ref<HTMLElement | null>(null);
 
-  const heroRef = ref<any>(null);
   const aboutMeRef = ref<any>(null);
   const worksRef = ref<any>(null);
   const capabilitiesRef = ref<any>(null);
@@ -107,14 +105,24 @@
   let horizontalScrollTrigger: ScrollTrigger | null = null;
   const isSamsungBrowser = /samsung/i.test(navigator.userAgent);
 
-  const checkRailTheme = () => {
-    const heroEl = document.getElementById('hero');
-    const capEl = document.getElementById('capabilities');
-    const contactEl = document.getElementById('contact');
-    if (!heroEl || !contactEl) return;
+  const setRailThemeForSlide = (slideIndex: number) => {
+    // Slide 0 (Hero), Slide 6 (Capabilities), Slide 7 (Contact) are Dark
+    // Slides 1-5 (About, Works 1-4) are Light (#faf9f6)
+    if (slideIndex === 0 || slideIndex >= 6) {
+      isDarkRail.value = true;
+    } else {
+      isDarkRail.value = false;
+    }
+  };
 
+  const checkRailTheme = () => {
     const isDesktop = window.innerWidth >= 768;
     if (isDesktop) {
+      const heroEl = document.getElementById('hero');
+      const capEl = document.getElementById('capabilities');
+      const contactEl = document.getElementById('contact');
+      if (!heroEl || !contactEl) return;
+
       const railWidth = 64;
       const heroRight = heroEl.getBoundingClientRect().right;
       const capLeft = capEl ? capEl.getBoundingClientRect().left : 9999;
@@ -122,27 +130,32 @@
       const contactLeft = contactEl.getBoundingClientRect().left;
 
       // Dark if Hero covers rail, or Chapter III (Capabilities) covers rail, or Contact has reached rail
-      if (heroRight > railWidth) {
+      if (heroRight > railWidth + 5) {
         isDarkRail.value = true;
-      } else if (capLeft <= railWidth && capRight > 0) {
+      } else if (capLeft <= railWidth && capRight > 5) {
         isDarkRail.value = true;
-      } else if (contactLeft <= railWidth) {
+      } else if (contactLeft <= railWidth + 5) {
         isDarkRail.value = true;
       } else {
         isDarkRail.value = false;
       }
     } else {
       const railHeight = 56;
+      const heroEl = document.getElementById('hero');
+      const capEl = document.getElementById('capabilities');
+      const contactEl = document.getElementById('contact');
+      if (!heroEl || !contactEl) return;
+
       const heroBottom = heroEl.getBoundingClientRect().bottom;
       const capTop = capEl ? capEl.getBoundingClientRect().top : 9999;
       const capBottom = capEl ? capEl.getBoundingClientRect().bottom : -9999;
       const contactTop = contactEl.getBoundingClientRect().top;
 
-      if (heroBottom > railHeight) {
+      if (heroBottom > railHeight + 5) {
         isDarkRail.value = true;
-      } else if (capTop <= railHeight && capBottom > 0) {
+      } else if (capTop <= railHeight && capBottom > 5) {
         isDarkRail.value = true;
-      } else if (contactTop <= railHeight) {
+      } else if (contactTop <= railHeight + 5) {
         isDarkRail.value = true;
       } else {
         isDarkRail.value = false;
@@ -245,6 +258,9 @@
   const navigateToSlideIndex = (targetSlide: number) => {
     isSidebarSolid.value = true;
     const clampedSlide = Math.min(TOTAL_SLIDES - 1, Math.max(0, targetSlide));
+    currentSlideIndex.value = clampedSlide;
+    setRailThemeForSlide(clampedSlide);
+    triggerSlideAnimation(clampedSlide);
 
     if (window.innerWidth >= 768 && horizontalScrollTrigger) {
       const targetRatio = clampedSlide / (TOTAL_SLIDES - 1);
@@ -252,15 +268,34 @@
         horizontalScrollTrigger.start +
         targetRatio * (horizontalScrollTrigger.end - horizontalScrollTrigger.start);
 
-      window.scrollTo({
-        top: targetScroll,
-        behavior: 'smooth',
+      lenis.scrollTo(targetScroll, {
+        duration: 1.0,
+        onComplete: () => {
+          checkRailTheme();
+        },
       });
     } else {
-      const slideIds = ['hero', 'about', 'work-1', 'work-2', 'work-3', 'work-4', 'capabilities', 'contact'];
+      const slideIds = [
+        'hero',
+        'about',
+        'works',
+        'work-spidey-dev',
+        'work-fersya-shop',
+        'work-student-life',
+        'capabilities',
+        'contact',
+      ];
       const targetId = slideIds[clampedSlide] ?? 'hero';
       const el = document.getElementById(targetId);
-      el?.scrollIntoView({ behavior: 'smooth' });
+      if (el) {
+        lenis.scrollTo(el, {
+          duration: 0.9,
+          offset: -56,
+          onComplete: () => {
+            checkRailTheme();
+          },
+        });
+      }
     }
   };
 
@@ -314,8 +349,15 @@
     checkRailTheme();
   });
 
+  const onTickerUpdate = (time: number) => {
+    lenis.raf(time * 1000);
+  };
+
   onMounted(() => {
-    requestAnimationFrame(raf);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(onTickerUpdate);
+    gsap.ticker.lagSmoothing(0);
+
     window.addEventListener('scroll', onWindowScroll, { passive: true });
     window.addEventListener('keydown', handleKeyDown);
 
@@ -330,6 +372,8 @@
   });
 
   onUnmounted(() => {
+    lenis.off('scroll', ScrollTrigger.update);
+    gsap.ticker.remove(onTickerUpdate);
     window.removeEventListener('scroll', onWindowScroll);
     window.removeEventListener('keydown', handleKeyDown);
     if (horizontalScrollTrigger) {

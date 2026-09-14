@@ -2,9 +2,9 @@
   <!-- Chapter II - 4 Fullscreen Slides -->
   <div class="contents">
     <section
-      v-for="project in workProjects"
+      v-for="(project, index) in workProjects"
       :key="project.id"
-      :id="`work-${project.id}`"
+      :id="index === 0 ? 'works' : `work-${project.id}`"
       class="work-slide shrink-0 w-full md:w-screen h-dvh flex flex-col justify-between select-none
              bg-[#faf9f6] text-[#22201e] relative overflow-hidden
              pt-20 pb-6 px-6 md:pt-6 md:pb-4 lg:pt-8 lg:pb-5 md:pl-24 md:pr-12 font-sans"
