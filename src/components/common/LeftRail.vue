@@ -181,8 +181,17 @@
       </div>
     </nav>
 
-    <!-- Bottom Right: Social Links (GitHub, LinkedIn, Email only) -->
-    <div class="overflow-hidden">
+    <!-- Bottom Row: Left Archive Link, Right Social Links -->
+    <div class="overflow-hidden pt-4 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <button
+        type="button"
+        @click="openArchiveModal"
+        class="group inline-flex items-center gap-2 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer outline-none"
+      >
+        <span class="border-b border-white/20 group-hover:border-white transition-colors">All Works Archive (8+)</span>
+        <span class="font-serif italic text-sm transition-transform group-hover:translate-x-0.5">↗</span>
+      </button>
+
       <div
         ref="socialLinks"
         class="flex items-center justify-end gap-6 sm:gap-8 text-xs sm:text-sm font-sans font-medium text-[#faf9f6]/70 will-change-transform"
@@ -235,7 +244,14 @@
 
   const emit = defineEmits<{
     (e: 'navigate', sectionId: string): void;
+    (e: 'openArchive'): void;
   }>();
+
+  const openArchiveModal = () => {
+    closeMenu(() => {
+      emit('openArchive');
+    });
+  };
 
   const isOpen = ref(false);
   const isAnimating = ref(false);

@@ -138,8 +138,21 @@
         </div>
       </div>
 
-      <!-- Bottom Row: THE WORK #01 typography — balanced, right-aligned, fully in view on laptops -->
-      <div class="flex items-end justify-end">
+      <!-- Bottom Row: Bottom Left Action on Slide #4, THE WORK #01 typography on Right -->
+      <div class="flex items-end justify-between">
+        <!-- On last slide (#04 Student Life): Editorial link matching LIVE PROJECT style -->
+        <div v-if="index === workProjects.length - 1" class="hidden sm:flex items-center">
+          <button
+            type="button"
+            @click="emit('openArchive')"
+            class="group inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors cursor-pointer outline-none select-none pb-0.5"
+          >
+            <span>Explore All Works (8+)</span>
+            <span class="text-sm md:text-base transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+          </button>
+        </div>
+        <div v-else class="hidden sm:block"></div>
+
         <div class="flex items-end gap-1 leading-none select-none">
           <!-- THE stacked vertically -->
           <div class="flex flex-col uppercase font-sans font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#22201e]/25 leading-[0.85] tracking-tight">
@@ -158,6 +171,18 @@
             </span>
           </div>
         </div>
+      </div>
+
+      <!-- Mobile Archive trigger on last slide -->
+      <div v-if="index === workProjects.length - 1" class="sm:hidden flex items-center justify-start pt-2">
+        <button
+          type="button"
+          @click="emit('openArchive')"
+          class="group inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors cursor-pointer outline-none select-none pb-0.5"
+        >
+          <span>Explore All Works (8+)</span>
+          <span class="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+        </button>
       </div>
 
       <!-- Bottom Row Metadata (Mobile Links fallback) -->
@@ -187,6 +212,10 @@
 <script setup lang="ts">
   import { onMounted } from 'vue';
   import gsap from 'gsap';
+
+  const emit = defineEmits<{
+    (e: 'openArchive'): void;
+  }>();
   import {
     indonesianCrustalObservatoryImg,
     spiderDevImg,

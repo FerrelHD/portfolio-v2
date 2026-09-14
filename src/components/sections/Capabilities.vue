@@ -131,8 +131,9 @@
   const chapterTitle = ref<HTMLElement | null>(null);
   const columnRefs = ref<HTMLElement[]>([]);
 
-  // Hover Entrance: Bottom-to-Top Reveal Animation
+  // Hover Entrance: Bottom-to-Top Reveal Animation (Desktop hover only)
   const onMouseEnter = (index: number) => {
+    if (window.matchMedia('(hover: none)').matches) return;
     const col = columnRefs.value[index];
     if (!col) return;
     const revealLayer = col.querySelector('.service-bg-reveal');
@@ -146,8 +147,9 @@
       .to(mediaImg, { yPercent: -4, duration: 0.8 }, 0);
   };
 
-  // Hover Exit: Upward Sweep Wipe Out
+  // Hover Exit: Upward Sweep Wipe Out (Desktop hover only)
   const onMouseLeave = (index: number) => {
+    if (window.matchMedia('(hover: none)').matches) return;
     const col = columnRefs.value[index];
     if (!col) return;
     const revealLayer = col.querySelector('.service-bg-reveal');

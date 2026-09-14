@@ -64,7 +64,7 @@ Built with a focus on fluid 60 FPS motion, seamless horizontal parallax scrollin
 
 | Project | Category | Tech Stack | Status / Links |
 | :--- | :--- | :--- | :--- |
-| **[Nusantara Observatory](https://global-seismic-tracker.vercel.app/)** | Geospatial Hazard & Event Replay | React 19, TypeScript, Canvas 2D | [Live Demo](https://global-seismic-tracker.vercel.app/) • [Source](https://github.com/FerrelHD/Global-Seismic-Tracker) |
+| **[Nusantara Observatory](https://nusantara-observatory.vercel.app/)** | Geospatial Hazard & Event Replay | React 19, TypeScript, Canvas 2D | [Live Demo](https://nusantara-observatory.vercel.app/) • [Source](https://github.com/FerrelHD/Global-Seismic-Tracker) |
 | **[Spidey Dev Portfolio](https://github.com/FerrelHD/Portofolio)** | Creative Frontend & Web Audio | React 19, GSAP, Web Audio API | [Source Code](https://github.com/FerrelHD/Portofolio) |
 | **[Fersya Shop](https://github.com/FerrelHD/Fersya-Shop)** | Organic E-Commerce Storefront | Laravel 11, Filament Admin, MySQL | [Source Code](https://github.com/FerrelHD/Fersya-Shop) |
 | **[Student Life](https://ferrelhd.github.io/Student-Life/)** | All-in-One Productivity PWA | React 19, TypeScript, Supabase, PWA | [Live Demo](https://ferrelhd.github.io/Student-Life/) • [Source](https://github.com/FerrelHD/Student-Life) |

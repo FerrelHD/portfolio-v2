@@ -23,8 +23,6 @@
     </svg>
   </div>
 
-  <Cursor />
-
   <!-- Fixed Left Rail Navigation & Frame (Adaptive isDark theme, transparent during intro then solid) -->
   <LeftRail
     :progress="scrollProgress"
@@ -32,6 +30,7 @@
     :isSolid="isSidebarSolid"
     :activeSection="currentSectionId"
     @navigate="handleNavigate"
+    @openArchive="openArchive"
   />
 
   <!-- Main Viewport Container (Desktop Horizontal Pinned Track, Mobile Vertical Stack) -->
@@ -54,7 +53,7 @@
         <aboutMe ref="aboutMeRef" />
 
         <!-- Slides 2, 3, 4, 5: Chapter II - 4 Project Slides (Light #faf9f6) -->
-        <Works ref="worksRef" />
+        <Works ref="worksRef" @openArchive="openArchive" />
 
         <!-- Slide 6: Chapter III - Capabilities & Workflow (Light #faf9f6) -->
         <Capabilities ref="capabilitiesRef" />
@@ -64,6 +63,9 @@
       </div>
     </div>
   </main>
+
+  <!-- Fullscreen Project Archive Modal (Light Paper Edition) -->
+  <ProjectArchive :isOpen="isArchiveOpen" @close="closeArchive" />
 </template>
 
 <script setup lang="ts">
@@ -75,8 +77,8 @@
     Contact,
   } from '@/components/sections';
   import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
-  import { SamsungError, Cursor } from '@/components/design';
-  import { LeftRail } from './components/common';
+  import { SamsungError } from '@/components/design';
+  import { LeftRail, ProjectArchive } from './components/common';
   import { useWindowSize } from '@vueuse/core';
   import gsap from 'gsap';
   import { ScrollTrigger } from 'gsap/all';
@@ -97,6 +99,17 @@
   const currentSlideIndex = ref(0);
   const isDarkRail = ref(true);
   const isSidebarSolid = ref(false);
+  const isArchiveOpen = ref(false);
+
+  const openArchive = () => {
+    isArchiveOpen.value = true;
+    lenis.stop();
+  };
+
+  const closeArchive = () => {
+    isArchiveOpen.value = false;
+    lenis.start();
+  };
 
   const handleIntroComplete = () => {
     isSidebarSolid.value = true;
@@ -313,6 +326,7 @@
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
+    if (isArchiveOpen.value) return;
     if (['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as HTMLElement)?.tagName)) return;
 
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
