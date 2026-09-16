@@ -3,7 +3,7 @@
     <div
       v-if="isOpen"
       ref="archiveOverlay"
-      class="fixed inset-0 z-[115] flex flex-col bg-[#faf9f6] text-[#22201e] select-none will-change-[clip-path]"
+      class="fixed inset-0 z-[115] flex flex-col bg-[#faf9f6] text-[#22201e] select-none will-change-[clip-path] overflow-hidden"
       style="clip-path: inset(100% 0 0 0);"
       tabindex="-1"
       role="dialog"
@@ -27,17 +27,15 @@
           ref="closeBtn"
           type="button"
           @click="handleClose"
-          class="group flex items-center gap-2.5 font-serif text-lg sm:text-xl md:text-2xl uppercase tracking-tight text-[#22201e]/75 hover:text-[#22201e] transition-colors cursor-pointer outline-none"
+          class="group flex items-center justify-center w-9 h-9 rounded-full text-[#22201e]/60 hover:text-[#22201e] hover:bg-black/[0.06] transition-all duration-200 cursor-pointer outline-none"
           aria-label="Close archive dialog"
         >
-          <span>CLOSE</span>
-          <span class="font-sans text-xs md:text-sm tracking-normal text-black/40 group-hover:text-black transition-colors hidden sm:inline">[ESC]</span>
-          <span class="text-base sm:text-lg transition-transform duration-300 group-hover:rotate-90">✕</span>
+          <span class="text-lg transition-transform duration-300 group-hover:rotate-90 inline-block">✕</span>
         </button>
       </header>
 
       <!-- Scrollable Main Content -->
-      <main class="flex-1 overflow-y-auto px-6 sm:px-10 md:px-16 lg:px-24 py-8 md:py-12">
+      <main class="flex-1 min-h-0 overflow-y-auto px-6 sm:px-10 md:px-16 lg:px-24 py-8 md:py-12">
         <div class="max-w-[1500px] mx-auto flex flex-col gap-8 md:gap-10">
           <!-- Introduction Paragraph & Filter Controls -->
           <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-4 border-b border-black/10">
@@ -74,11 +72,11 @@
             <table class="w-full text-left border-collapse">
               <thead>
                 <tr class="border-b border-black/15 text-[11px] font-sans uppercase tracking-[0.2em] text-[#22201e]/50">
-                  <th class="py-4 pr-6 w-20 font-medium">Year</th>
-                  <th class="py-4 pr-8 w-72 font-medium">Project</th>
-                  <th class="py-4 pr-8 w-60 font-medium">Category</th>
-                  <th class="py-4 pr-8 font-medium">Built With</th>
-                  <th class="py-4 text-right w-36 font-medium">Link</th>
+                  <th class="py-4 pr-4 w-16 shrink-0 font-medium">Year</th>
+                  <th class="py-4 pr-6 font-medium">Project</th>
+                  <th class="py-4 pr-6 hidden lg:table-cell font-medium">Category</th>
+                  <th class="py-4 pr-4 hidden xl:table-cell font-medium">Built With</th>
+                  <th class="py-4 text-right w-28 shrink-0 font-medium">Link</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-black/10">
@@ -90,35 +88,37 @@
                   class="group transition-colors duration-200 hover:bg-black/[0.03] cursor-pointer"
                 >
                   <!-- Year -->
-                  <td class="py-5 pr-6 font-sans text-sm tabular-nums text-[#22201e]/60 group-hover:text-[#22201e] transition-colors">
+                  <td class="py-5 pr-4 font-sans text-sm tabular-nums text-[#22201e]/60 group-hover:text-[#22201e] transition-colors whitespace-nowrap">
                     {{ project.year }}
                   </td>
 
                   <!-- Project Title -->
-                  <td class="py-5 pr-8">
+                  <td class="py-5 pr-6">
                     <a
                       :href="project.liveUrl || project.githubUrl"
                       target="_blank"
                       rel="noreferrer"
-                      class="font-serif text-xl lg:text-2xl tracking-tight text-[#22201e] group-hover:underline underline-offset-4 decoration-1 decoration-black/30 transition-colors inline-flex items-baseline gap-2"
+                      class="font-serif text-lg lg:text-xl xl:text-2xl tracking-tight text-[#22201e] group-hover:underline underline-offset-4 decoration-1 decoration-black/30 transition-colors inline-flex items-baseline gap-2"
                     >
                       <span>{{ project.title }}</span>
                       <span class="opacity-0 group-hover:opacity-100 transition-opacity text-xs font-sans text-black/50">↗</span>
                     </a>
+                    <!-- Category shown inline on md, hidden on lg where it has its own column -->
+                    <p class="lg:hidden mt-0.5 text-xs font-sans text-[#22201e]/55">{{ project.category }}</p>
                   </td>
 
-                  <!-- Category -->
-                  <td class="py-5 pr-8 font-sans text-sm text-[#22201e]/75">
+                  <!-- Category (lg+) -->
+                  <td class="py-5 pr-6 font-sans text-sm text-[#22201e]/75 hidden lg:table-cell">
                     {{ project.category }}
                   </td>
 
-                  <!-- Built With -->
-                  <td class="py-5 pr-8">
+                  <!-- Built With (xl+) -->
+                  <td class="py-5 pr-4 hidden xl:table-cell">
                     <div class="flex flex-wrap gap-1.5">
                       <span
                         v-for="tech in project.techStack"
                         :key="tech"
-                        class="px-2.5 py-0.5 rounded text-xs font-sans bg-black/[0.05] text-[#22201e]/80 border border-black/5"
+                        class="px-2.5 py-0.5 rounded text-xs font-sans bg-black/[0.05] text-[#22201e]/80 border border-black/5 whitespace-nowrap"
                       >
                         {{ tech }}
                       </span>
@@ -126,7 +126,7 @@
                   </td>
 
                   <!-- Links -->
-                  <td class="py-5 text-right">
+                  <td class="py-5 text-right whitespace-nowrap">
                     <div class="inline-flex items-center justify-end gap-3 text-xs font-sans font-medium uppercase tracking-wider">
                       <a
                         v-if="project.liveUrl"
@@ -134,7 +134,7 @@
                         target="_blank"
                         rel="noreferrer"
                         class="inline-flex items-center gap-1 text-[#22201e]/80 hover:text-black border-b border-black/20 hover:border-black transition-colors"
-                        aria-label="View live demo for {{ project.title }}"
+                        :aria-label="`View live demo for ${project.title}`"
                       >
                         <span>Live</span>
                         <span class="text-xs">↗</span>
@@ -145,7 +145,7 @@
                         target="_blank"
                         rel="noreferrer"
                         class="inline-flex items-center gap-1 text-[#22201e]/80 hover:text-black border-b border-black/20 hover:border-black transition-colors"
-                        aria-label="View source code on GitHub for {{ project.title }}"
+                        :aria-label="`View source code on GitHub for ${project.title}`"
                       >
                         <span>GitHub</span>
                         <span class="text-xs">↗</span>
