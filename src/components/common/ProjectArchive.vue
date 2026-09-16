@@ -3,7 +3,8 @@
     <div
       v-if="isOpen"
       ref="archiveOverlay"
-      class="fixed inset-0 z-[115] flex flex-col bg-[#faf9f6] text-[#22201e] select-none will-change-[clip-path] overflow-hidden"
+      data-lenis-prevent
+      class="fixed inset-0 z-[115] flex flex-col bg-[#faf9f6] text-[#22201e] will-change-[clip-path] overflow-hidden"
       style="clip-path: inset(100% 0 0 0);"
       tabindex="-1"
       role="dialog"
@@ -35,18 +36,21 @@
       </header>
 
       <!-- Scrollable Main Content -->
-      <main class="flex-1 min-h-0 overflow-y-auto px-6 sm:px-10 md:px-16 lg:px-24 py-8 md:py-12">
+      <main
+        data-lenis-prevent
+        class="flex-1 min-h-0 overflow-y-auto overscroll-contain px-6 sm:px-10 md:px-16 lg:px-24 py-8 md:py-12"
+      >
         <div class="max-w-[1500px] mx-auto flex flex-col gap-8 md:gap-10">
-          <!-- Introduction Paragraph & Filter Controls -->
-          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-4 border-b border-black/10">
-            <div class="max-w-2xl">
+          <!-- Introduction Paragraph & Filter Controls (Option A: Clean Stacked Layout) -->
+          <div class="flex flex-col gap-6 pb-6 border-b border-black/10">
+            <div class="max-w-3xl">
               <p class="font-sans text-sm sm:text-base md:text-lg text-[#22201e]/75 leading-relaxed font-normal">
                 A complete catalog of fullstack web architectures, creative motion experiments, machine learning systems, and 3D simulations built between 2024 and 2026.
               </p>
             </div>
 
-            <!-- Filter Pills -->
-            <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
+            <!-- Filter Pills (Full Horizontal Row) -->
+            <div class="flex flex-wrap items-center gap-2 sm:gap-2.5 pt-1">
               <button
                 v-for="cat in archiveCategories"
                 :key="cat.id"
