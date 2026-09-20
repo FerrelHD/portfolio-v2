@@ -147,7 +147,7 @@
             @click="emit('openArchive')"
             class="group inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors cursor-pointer outline-none select-none pb-0.5"
           >
-            <span>Explore All Works (8+)</span>
+            <span>Explore All Works (9+)</span>
             <span class="text-sm md:text-base transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
           </button>
         </div>
@@ -180,7 +180,7 @@
           @click="emit('openArchive')"
           class="group inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors cursor-pointer outline-none select-none pb-0.5"
         >
-          <span>Explore All Works (8+)</span>
+          <span>Explore All Works (9+)</span>
           <span class="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
         </button>
       </div>
@@ -218,7 +218,7 @@
   }>();
   import {
     indonesianCrustalObservatoryImg,
-    spiderDevImg,
+    ecoBiteImg,
     fersyaShopImg,
     studentLifeImg,
   } from '@/assets/images';
@@ -254,19 +254,18 @@
       githubUrl: 'https://github.com/FerrelHD/Global-Seismic-Tracker',
     },
     {
-      id: 'spidey-dev',
+      id: 'ecobite',
       slideNumber: '#02',
-      title: 'Spidey Dev Portfolio',
+      title: 'EcoBite',
       aboutP1:
-        'Most developer portfolios feel the same — clean grids, neutral colors, safe layouts. I wanted to build something that felt immersive and cinematic, a portfolio that doubles as a creative playground.',
+        'Food waste in campus canteens surges before closing hours, while university students need access to nutritious, affordable meals. I wanted to turn this challenge into a collaborative sustainability ecosystem that creates real impact.',
       aboutP2:
-        'I designed and developed an interactive Spider-Man-themed showcase with Web Audio soundscapes, 3D parallax effects, kinetic typography, and fluid GSAP transitions that bring the interface to life.',
-      role: 'Creative Developer',
-      system: 'React 19 · GSAP · Web Audio API',
-      domain: 'spidey-portfolio-ferrel.vercel.app',
-      previewImg: spiderDevImg,
-      liveUrl: 'https://spidey-portfolio-ferrel.vercel.app/',
-      githubUrl: 'https://github.com/FerrelHD/Portofolio',
+        'I engineered a full-stack campus food rescue platform featuring real-time GPS radar with Haversine geolocation, dynamic HMAC QR rescue passes with in-browser camera verification, and an ESG sustainability tracking engine measuring CO2 reduction and EcoPoints.',
+      role: 'Full-Stack Developer & Product Designer',
+      system: 'Next.js 14 · TypeScript · Prisma · Tailwind',
+      domain: 'ecobite.app',
+      previewImg: ecoBiteImg,
+      githubUrl: 'https://github.com/FerrelHD/Eco-Bite',
     },
     {
       id: 'fersya-shop',

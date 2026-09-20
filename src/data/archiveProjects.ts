@@ -7,6 +7,7 @@ import {
   gunungGedeImg,
   stockPredictionImg,
   streetRushImg,
+  ecoBiteImg,
 } from '@/assets/images';
 
 export type ArchiveCategoryFilter = 'all' | 'web' | 'creative' | 'ml' | 'games';
@@ -44,6 +45,17 @@ export const archiveProjects: ArchiveProject[] = [
     githubUrl: 'https://github.com/FerrelHD/Global-Seismic-Tracker',
     previewImg: indonesianCrustalObservatoryImg,
     description: 'Interactive geospatial hazard tracker integrating real-time disaster feeds into visual 2D mapping.',
+  },
+  {
+    id: 'ecobite',
+    year: '2026',
+    title: 'EcoBite',
+    category: 'Campus Food Rescue & SDG 12 Platform',
+    categoryFilter: 'web',
+    techStack: ['Next.js 14', 'TypeScript', 'Prisma', 'Tailwind'],
+    githubUrl: 'https://github.com/FerrelHD/Eco-Bite',
+    previewImg: ecoBiteImg,
+    description: 'Campus food rescue platform with real-time GPS radar, dynamic QR rescue passes, and ESG carbon reduction & EcoPoints tracking.',
   },
   {
     id: 'spidey-dev',

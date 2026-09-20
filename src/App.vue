@@ -292,7 +292,7 @@
         'hero',
         'about',
         'works',
-        'work-spidey-dev',
+        'work-ecobite',
         'work-fersya-shop',
         'work-student-life',
         'capabilities',

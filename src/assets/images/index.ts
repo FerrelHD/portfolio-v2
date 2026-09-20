@@ -7,6 +7,7 @@ import charlesLeclercImg from './Charles-Leclerc.png';
 import gunungGedeImg from './Gunung-Gede.webp';
 import stockPredictionImg from './stock-prediction.png';
 import streetRushImg from './street-rush.webp';
+import ecoBiteImg from './Eco-Bite.png';
 
 export {
   ferrelPortrait,
@@ -18,5 +19,6 @@ export {
   gunungGedeImg,
   stockPredictionImg,
   streetRushImg,
+  ecoBiteImg,
 };
 
