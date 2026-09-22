@@ -21,13 +21,19 @@
         </h2>
       </div>
 
-      <!-- Bottom: WHAT I DO? & Mission Statement -->
-      <div class="flex flex-col gap-3 md:gap-4 mt-6 md:mt-auto">
-        <span class="font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.25em] text-[#faf9f6]/60 font-medium">
+      <!-- Bottom: WHAT I DO? & Mission Statement with Scramble Decoder -->
+      <div
+        class="flex flex-col gap-3 md:gap-4 mt-6 md:mt-auto cursor-pointer group/statement select-none"
+        @mouseenter="triggerScramble"
+      >
+        <span
+          ref="whatIDoRef"
+          class="font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.25em] text-[#faf9f6]/60 font-medium transition-colors duration-300 group-hover/statement:text-[#faf9f6]"
+        >
           WHAT I DO?
         </span>
         <p class="font-sans text-xl sm:text-2xl lg:text-[26px] xl:text-[28px] font-normal leading-[1.3] text-[#faf9f6] max-w-sm">
-          Designing digital experiences with clarity, structure, and intention.
+          {{ displayedStatement }}
         </p>
       </div>
     </div>
@@ -140,6 +146,46 @@
     },
   ];
 
+  const statementText = 'Designing digital experiences with clarity, structure, and intention.';
+  const displayedStatement = ref(statementText);
+  const whatIDoRef = ref<HTMLElement | null>(null);
+  const isScrambling = ref(false);
+  const scrambleChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ#@%&*+';
+  const scrambleState = { progress: 0 };
+
+  const triggerScramble = () => {
+    if (isScrambling.value) return;
+    isScrambling.value = true;
+    gsap.killTweensOf(scrambleState);
+    scrambleState.progress = 0;
+    const totalLen = statementText.length;
+
+    gsap.to(scrambleState, {
+      progress: 1,
+      duration: 0.9,
+      ease: 'power2.out',
+      onUpdate: () => {
+        const resolved = Math.floor(scrambleState.progress * totalLen);
+        let result = '';
+        for (let i = 0; i < totalLen; i++) {
+          const targetChar = statementText[i];
+          if (targetChar === ' ') {
+            result += ' ';
+          } else if (i < resolved) {
+            result += targetChar;
+          } else {
+            result += scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+          }
+        }
+        displayedStatement.value = result;
+      },
+      onComplete: () => {
+        displayedStatement.value = statementText;
+        isScrambling.value = false;
+      },
+    });
+  };
+
   const chapterTitle = ref<HTMLElement | null>(null);
   const columnRefs = ref<HTMLElement[]>([]);
 
@@ -185,10 +231,19 @@
     if (chapterTitle.value) {
       gsap.fromTo(chapterTitle.value, { yPercent: 105 }, { yPercent: 0, duration: 1.1, ease: 'power3.out' });
     }
+    if (whatIDoRef.value) {
+      gsap.fromTo(
+        whatIDoRef.value,
+        { opacity: 0, x: -10 },
+        { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' }
+      );
+    }
+    triggerScramble();
   };
 
   onMounted(() => {
     if (chapterTitle.value) gsap.set(chapterTitle.value, { yPercent: 105 });
+    if (whatIDoRef.value) gsap.set(whatIDoRef.value, { opacity: 0, x: -10 });
     columnRefs.value.forEach((col) => {
       const revealLayer = col.querySelector('.service-bg-reveal');
       const mediaImg = col.querySelector('.service-bg-media');
