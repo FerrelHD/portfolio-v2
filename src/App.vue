@@ -53,7 +53,11 @@
         <aboutMe ref="aboutMeRef" />
 
         <!-- Slides 2, 3, 4, 5: Chapter II - 4 Project Slides (Light #faf9f6) -->
-        <Works ref="worksRef" @openArchive="openArchive" />
+        <Works
+          ref="worksRef"
+          @openArchive="openArchive"
+          @goToProject="(idx: number) => navigateToSlideIndex(2 + idx)"
+        />
 
         <!-- Slide 6: Chapter III - Capabilities & Workflow (Light #faf9f6) -->
         <Capabilities ref="capabilitiesRef" />

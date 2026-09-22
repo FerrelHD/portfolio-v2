@@ -3,12 +3,13 @@
     id="capabilities"
     class="shrink-0 w-full md:w-screen min-h-[100svh] md:h-dvh flex flex-col md:flex-row items-stretch select-none
            bg-[#282523] text-[#faf9f6] relative overflow-hidden
-           pt-20 pb-8 px-6 md:pt-0 md:pb-0 md:pl-16 md:pr-0 font-sans"
+           pt-16 pb-8 px-0 md:pt-0 md:pb-0 md:pl-16 md:pr-0 font-sans"
   >
     <!-- Left Column: Chapter III Title & "What I do?" Statement -->
     <div
       class="w-full md:w-[280px] lg:w-[340px] xl:w-[400px] shrink-0 flex flex-col justify-between
-             p-0 md:p-6 lg:p-8 xl:p-10 md:pt-14 md:pb-12 mb-8 md:mb-0"
+             p-6 sm:p-7 md:p-6 lg:p-8 xl:p-10 md:pt-14 md:pb-12
+             border-b md:border-b-0 md:border-r border-white/10"
     >
       <!-- Top: CHAPTER III Heading -->
       <div class="overflow-hidden">
@@ -40,8 +41,8 @@
         @pointerenter="onMouseEnter(index)"
         @pointerleave="onMouseLeave(index)"
         class="relative flex-1 flex flex-col justify-between
-               px-5 py-6 sm:px-6 sm:py-7 md:px-5 md:py-8 lg:px-7 lg:py-10 xl:px-9 xl:py-12
-               border-t md:border-t-0 md:border-l border-white/10
+               px-6 py-6 sm:px-7 sm:py-7 md:px-5 md:py-8 lg:px-7 lg:py-10 xl:px-9 xl:py-12
+               border-b md:border-b-0 md:border-l border-white/10 last:border-b-0
                overflow-hidden cursor-pointer group select-none"
       >
         <!-- Background Reveal Media Layer (Wipe reveal from bottom to top) -->
@@ -50,7 +51,7 @@
           style="clip-path: inset(100% 0% 0% 0%);"
         >
           <!-- Darkened Contrast Layer -->
-          <div class="absolute inset-0 bg-[#1a1816]/70 z-10"></div>
+          <div class="absolute inset-0 bg-[#1a1816]/75 z-10"></div>
           <!-- Background Image -->
           <img
             :src="item.image"
@@ -60,13 +61,20 @@
           />
         </div>
 
-        <!-- Top: Huge Serif Number -->
-        <div class="relative z-10 overflow-hidden">
-          <span
-            class="font-serif text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-normal leading-none text-[#faf9f6] inline-block transition-transform duration-500 ease-out group-hover:translate-x-1"
-          >
-            {{ item.num }}
-          </span>
+        <!-- Top Row: Number on Left, Category Index & Arrow on Right -->
+        <div class="relative z-10 flex items-start justify-between">
+          <div class="overflow-hidden">
+            <span
+              class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal leading-none text-[#faf9f6] inline-block transition-transform duration-500 ease-out group-hover:translate-x-1"
+            >
+              {{ item.num }}
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2 pt-1 font-mono text-[10px] sm:text-[11px] text-[#faf9f6]/40 uppercase tracking-widest transition-colors duration-300 group-hover:text-[#faf9f6]/80">
+            <span>{{ item.category }}</span>
+            <span class="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+          </div>
         </div>
 
         <!-- Middle: Editorial Serif Title (Responsive scaling, never breaks words awkwardly) -->
@@ -78,13 +86,24 @@
           </h3>
         </div>
 
-        <!-- Bottom: Descriptive Paragraph -->
-        <div class="relative z-10">
+        <!-- Bottom: Descriptive Paragraph & Tech Badges -->
+        <div class="relative z-10 flex flex-col gap-3">
           <p
             class="font-sans text-xs sm:text-sm md:text-sm lg:text-base leading-[145%] text-[#faf9f6]/75 max-w-sm transition-colors duration-300 group-hover:text-[#faf9f6]"
           >
             {{ item.desc }}
           </p>
+
+          <!-- Architectural Tech Stack Tags -->
+          <div class="flex flex-wrap gap-1.5 pt-2 border-t border-white/10">
+            <span
+              v-for="tag in item.tags"
+              :key="tag"
+              class="px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-mono text-[#faf9f6]/60 bg-white/[0.04] border border-white/5 transition-colors duration-300 group-hover:text-[#faf9f6]/90 group-hover:border-white/20"
+            >
+              {{ tag }}
+            </span>
+          </div>
         </div>
       </article>
     </div>
@@ -103,28 +122,36 @@
   interface CapabilityItem {
     num: string;
     name: string;
+    category: string;
     image: string;
     desc: string;
+    tags: string[];
   }
 
   const capabilityItems: CapabilityItem[] = [
     {
       num: '01',
       name: 'Frontend Engineering',
+      category: 'ARCHITECTURE',
       image: indonesianCrustalObservatoryImg,
       desc: 'High-speed web platforms with React 19, Next.js 15, Vue, TypeScript, and GSAP. Type-safe APIs, responsive design, and 60 FPS motion.',
+      tags: ['React 19', 'Next.js 15', 'Vue 3', 'TypeScript', 'GSAP'],
     },
     {
       num: '02',
       name: 'Creative Development',
+      category: 'INTERACTION',
       image: spiderDevImg,
       desc: 'Tailored GSAP choreographies, Canvas 2D telemetry, Three.js visualizations, and Web Audio — designed for cinematic impact.',
+      tags: ['GSAP Motion', 'Canvas 2D', 'WebGL', 'Web Audio'],
     },
     {
       num: '03',
       name: 'Full-Stack Architecture',
+      category: 'ENGINEERING',
       image: fersyaShopImg,
       desc: 'End-to-end systems with Laravel, PostgreSQL, real-time APIs, and zero-downtime deployments. Clean, maintainable codebases.',
+      tags: ['Laravel 11', 'PostgreSQL', 'Prisma', 'REST APIs'],
     },
   ];
 

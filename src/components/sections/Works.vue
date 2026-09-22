@@ -41,11 +41,37 @@
         </div>
       </div>
 
-      <!-- Main Middle Grid: Left Browser Mockup & About, Right Project Title & Meta -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-6 lg:gap-10 items-start my-auto py-0">
+      <!-- Main Middle Grid: Mobile: Title first -> Mockup -> About. Desktop: Mockup+About on Left, Title+Meta on Right -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5 sm:gap-5 md:gap-6 lg:gap-10 items-start my-auto py-0">
         
-        <!-- Left Column: macOS Browser Mockup + About Description -->
-        <div class="md:col-span-6 flex flex-col gap-2.5 lg:gap-3 max-w-[420px] md:max-w-[460px] lg:max-w-[520px] xl:max-w-[620px]">
+        <!-- Right Column on Desktop (Title & Meta) -> On Mobile goes FIRST (order-1 md:order-2) -->
+        <div class="order-1 md:order-2 md:col-span-6 flex flex-col pt-0 md:pl-2 lg:pl-4">
+          <!-- Project Title (Masked Reveal) — Responsive, bold, uppercase, never clips -->
+          <div class="overflow-hidden">
+            <h3 class="slide-project-title font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal">
+              {{ project.title }}
+            </h3>
+          </div>
+
+          <!-- Role & System Metadata — Left-aligned directly beneath title -->
+          <div class="flex flex-col gap-1 sm:gap-1.5 mt-2 sm:mt-4 md:mt-6 lg:mt-7 font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
+            <div class="overflow-hidden py-0.5">
+              <div class="slide-project-meta will-change-transform">
+                <span class="font-bold text-[#22201e]">ROLE: </span>
+                <span class="font-medium text-[#22201e]/80">{{ project.role }}</span>
+              </div>
+            </div>
+            <div class="overflow-hidden py-0.5">
+              <div class="slide-project-meta will-change-transform">
+                <span class="font-bold text-[#22201e]">SYSTEM: </span>
+                <span class="font-medium text-[#22201e]/80">{{ project.system }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Left Column on Desktop (Mockup & About) -> On Mobile goes SECOND (order-2 md:order-1) -->
+        <div class="order-2 md:order-1 md:col-span-6 flex flex-col gap-2 sm:gap-2.5 lg:gap-3 max-w-[420px] md:max-w-[460px] lg:max-w-[520px] xl:max-w-[620px]">
           <!-- Entrance Animation Wrapper for Mockup -->
           <div class="slide-mockup will-change-transform">
             <!-- macOS Browser Frame Mockup with Responsive Height Clamping -->
@@ -53,7 +79,7 @@
               :href="project.liveUrl || project.githubUrl"
               target="_blank"
               rel="noreferrer"
-              class="group/mockup relative block w-full max-h-[25vh] lg:max-h-[28vh] xl:max-h-[32vh] overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
+              class="group/mockup relative block w-full max-h-[19vh] sm:max-h-[22vh] md:max-h-[25vh] lg:max-h-[28vh] xl:max-h-[32vh] overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
             >
               <!-- Browser Top Bar -->
               <div class="flex items-center justify-between px-3 py-1.5 bg-[#f3f2ee] border-b border-black/10 transition-colors duration-300 group-hover/mockup:bg-[#eae8e3]">
@@ -70,7 +96,7 @@
                 <div class="size-2"></div>
               </div>
               <!-- Screenshot Preview with Micro-Zoom & Subtle Sheen -->
-              <div class="relative aspect-[16/9] max-h-[21vh] lg:max-h-[24vh] xl:max-h-[28vh] w-full overflow-hidden bg-black/5">
+              <div class="relative aspect-[16/9] max-h-[16vh] sm:max-h-[19vh] md:max-h-[21vh] lg:max-h-[24vh] xl:max-h-[28vh] w-full overflow-hidden bg-black/5">
                 <img
                   :src="project.previewImg"
                   :alt="project.title"
@@ -79,6 +105,14 @@
                 />
                 <!-- Subtle Glass Sheen on Hover -->
                 <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/25 opacity-0 transition-opacity duration-500 group-hover/mockup:opacity-100"></div>
+
+                <!-- Hover Floating Pill "VIEW PROJECT ↗" -->
+                <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover/mockup:opacity-100 transition-all duration-300">
+                  <div class="px-3.5 py-1.5 rounded-full bg-[#22201e]/90 text-[#faf9f6] text-[10px] md:text-xs font-mono tracking-wider backdrop-blur-md shadow-xl flex items-center gap-1.5 transform scale-90 group-hover/mockup:scale-100 transition-transform duration-300">
+                    <span>VIEW PROJECT</span>
+                    <span class="text-sm leading-none">↗</span>
+                  </div>
+                </div>
               </div>
             </a>
           </div>
@@ -101,8 +135,8 @@
               <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
             </div>
 
-            <!-- Paragraph 2 -->
-            <div class="slide-about-item relative overflow-hidden max-w-xl">
+            <!-- Paragraph 2 (Collapsed on small mobile to preserve vertical breathing room) -->
+            <div class="slide-about-item relative overflow-hidden max-w-xl hidden sm:block">
               <p class="slide-about-text font-sans text-xs sm:text-[13px] md:text-[13px] lg:text-sm xl:text-base leading-[140%] text-[#22201e]/85 text-justify">
                 {{ project.aboutP2 }}
               </p>
@@ -110,50 +144,46 @@
             </div>
           </div>
         </div>
-
-        <!-- Right Column: Project Title, Roles, Systems (Locked as single responsive unit) -->
-        <div class="md:col-span-6 flex flex-col pt-1 md:pt-0 md:pl-2 lg:pl-4">
-          <!-- Project Title (Masked Reveal) — Responsive, bold, uppercase, never clips -->
-          <div class="overflow-hidden">
-            <h3 class="slide-project-title font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal">
-              {{ project.title }}
-            </h3>
-          </div>
-
-          <!-- Role & System Metadata — Left-aligned directly beneath title -->
-          <div class="flex flex-col gap-1.5 mt-4 sm:mt-5 md:mt-6 lg:mt-7 font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
-            <div class="overflow-hidden py-0.5">
-              <div class="slide-project-meta will-change-transform">
-                <span class="font-bold text-[#22201e]">ROLE: </span>
-                <span class="font-medium text-[#22201e]/80">{{ project.role }}</span>
-              </div>
-            </div>
-            <div class="overflow-hidden py-0.5">
-              <div class="slide-project-meta will-change-transform">
-                <span class="font-bold text-[#22201e]">SYSTEM: </span>
-                <span class="font-medium text-[#22201e]/80">{{ project.system }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
-      <!-- Bottom Row: Bottom Left Action on Slide #4, THE WORK #01 typography on Right -->
-      <div class="flex items-end justify-between">
-        <!-- On last slide (#04 Student Life): Editorial link matching LIVE PROJECT style -->
-        <div v-if="index === workProjects.length - 1" class="hidden sm:flex items-center">
+      <!-- Bottom Row: Project Step Indicators & Explore Archive on Left, THE WORK #01 on Right -->
+      <div class="flex items-end justify-between pt-1">
+        <!-- Left Side: Interactive Project Pagination & Archive Link -->
+        <div class="hidden sm:flex items-center gap-6">
+          <!-- Step Pagination Dots / Lines -->
+          <div class="flex items-center gap-2 font-mono text-[11px] tracking-wider text-[#22201e]/60">
+            <span class="font-sans uppercase text-[10px] tracking-[0.2em] text-[#22201e]/40 font-semibold mr-1">PROJECT</span>
+            <button
+              v-for="(p, pIdx) in workProjects"
+              :key="p.id"
+              type="button"
+              @click="emit('goToProject', pIdx)"
+              class="group/step flex items-center gap-1.5 transition-colors cursor-pointer outline-none select-none py-1"
+              :class="pIdx === index ? 'text-[#22201e] font-bold' : 'text-[#22201e]/40 hover:text-[#22201e]/80'"
+              :aria-label="`Go to project ${p.title}`"
+            >
+              <span
+                class="inline-block h-1 transition-all duration-300 rounded-full"
+                :class="pIdx === index ? 'w-6 bg-[#22201e]' : 'w-2 bg-black/20 group-hover/step:bg-black/50 group-hover/step:w-3.5'"
+              ></span>
+              <span class="text-[10px] md:text-[11px]">0{{ pIdx + 1 }}</span>
+            </button>
+          </div>
+
+          <!-- Archive Link on Last Slide -->
           <button
+            v-if="index === workProjects.length - 1"
             type="button"
             @click="emit('openArchive')"
-            class="group inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors cursor-pointer outline-none select-none pb-0.5"
+            class="group inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors cursor-pointer outline-none select-none pb-0.5 ml-2"
           >
             <span>Explore All Works (9+)</span>
             <span class="text-sm md:text-base transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
           </button>
         </div>
-        <div v-else class="hidden sm:block"></div>
 
-        <div class="flex items-end gap-1 leading-none select-none">
+        <!-- Right Side: THE WORK #01 typography -->
+        <div class="flex items-end gap-1 leading-none select-none ml-auto">
           <!-- THE stacked vertically -->
           <div class="flex flex-col uppercase font-sans font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#22201e]/25 leading-[0.85] tracking-tight">
             <span>THE</span>
@@ -215,6 +245,7 @@
 
   const emit = defineEmits<{
     (e: 'openArchive'): void;
+    (e: 'goToProject', index: number): void;
   }>();
   import {
     indonesianCrustalObservatoryImg,
