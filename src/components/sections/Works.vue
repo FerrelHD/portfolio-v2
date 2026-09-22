@@ -23,20 +23,20 @@
             :href="project.liveUrl"
             target="_blank"
             rel="noreferrer"
-            class="hidden sm:inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors"
+            class="group hidden sm:inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors"
           >
             <span>Live Project</span>
-            <span class="text-sm md:text-base">↗</span>
+            <span class="text-sm md:text-base inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
           </a>
           <a
             v-if="project.githubUrl"
             :href="project.githubUrl"
             target="_blank"
             rel="noreferrer"
-            class="hidden sm:inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors"
+            class="group hidden sm:inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors"
           >
             <span>GitHub</span>
-            <span class="text-sm md:text-base">↗</span>
+            <span class="text-sm md:text-base inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
           </a>
         </div>
       </div>
@@ -110,7 +110,7 @@
                 <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover/mockup:opacity-100 transition-all duration-300">
                   <div class="px-3.5 py-1.5 rounded-full bg-[#22201e]/90 text-[#faf9f6] text-[10px] md:text-xs font-mono tracking-wider backdrop-blur-md shadow-xl flex items-center gap-1.5 transform scale-90 group-hover/mockup:scale-100 transition-transform duration-300">
                     <span>VIEW PROJECT</span>
-                    <span class="text-sm leading-none">↗</span>
+                    <span class="text-sm leading-none inline-block transition-transform duration-300 ease-out group-hover/mockup:translate-x-0.5 group-hover/mockup:-translate-y-0.5">↗</span>
                   </div>
                 </div>
               </div>
@@ -241,18 +241,20 @@
           v-if="project.liveUrl"
           :href="project.liveUrl"
           target="_blank"
-          class="font-medium text-[#22201e] hover:underline transition-all"
+          class="group font-medium text-[#22201e] hover:underline transition-all inline-flex items-center gap-1"
         >
-          Live Preview ↗
+          <span>Live Preview</span>
+          <span class="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
         </a>
         <a
           v-if="project.githubUrl"
           :href="project.githubUrl"
           target="_blank"
-          class="font-medium text-[#22201e] hover:underline transition-all"
+          class="group font-medium text-[#22201e] hover:underline transition-all inline-flex items-center gap-1"
           :class="{ 'ml-auto': !project.liveUrl }"
         >
-          GitHub ↗
+          <span>GitHub</span>
+          <span class="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
         </a>
       </div>
     </section>

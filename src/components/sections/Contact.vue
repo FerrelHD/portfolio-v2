@@ -16,7 +16,7 @@
         class="group flex items-center gap-2 text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] text-[#f3eee8]/60 hover:text-white transition-colors cursor-pointer"
       >
         <span>Back to start</span>
-        <span class="font-serif italic text-sm md:text-base transition-transform group-hover:-translate-y-0.5">↑</span>
+        <span class="font-serif italic text-sm md:text-base inline-block transition-transform duration-300 ease-out group-hover:-translate-y-1">↑</span>
       </button>
     </div>
 
@@ -56,7 +56,7 @@
             <span class="border-b border-white/20 group-hover:border-white transition-colors pb-0.5">
               ferrelrashadakeyla2014@gmail.com
             </span>
-            <span class="text-xs sm:text-sm md:text-base opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
+            <span class="text-xs sm:text-sm md:text-base opacity-60 group-hover:opacity-100 inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
           </a>
 
           <!-- GitHub Link with SVG -->

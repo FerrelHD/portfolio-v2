@@ -73,7 +73,7 @@
 
           <div class="flex items-center gap-2 pt-1 font-mono text-[10px] sm:text-[11px] text-[#faf9f6]/40 uppercase tracking-widest transition-colors duration-300 group-hover:text-[#faf9f6]/80">
             <span>{{ item.category }}</span>
-            <span class="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+            <span class="text-xs inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
           </div>
         </div>
 

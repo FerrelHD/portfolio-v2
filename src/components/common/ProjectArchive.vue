@@ -105,7 +105,7 @@
                       class="font-serif text-lg lg:text-xl xl:text-2xl tracking-tight text-[#22201e] group-hover:underline underline-offset-4 decoration-1 decoration-black/30 transition-colors inline-flex items-baseline gap-2"
                     >
                       <span>{{ project.title }}</span>
-                      <span class="opacity-0 group-hover:opacity-100 transition-opacity text-xs font-sans text-black/50">↗</span>
+                      <span class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-xs font-sans text-black/50 inline-block group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                     </a>
                     <!-- Category shown inline on md, hidden on lg where it has its own column -->
                     <p class="lg:hidden mt-0.5 text-xs font-sans text-[#22201e]/55">{{ project.category }}</p>
@@ -137,22 +137,22 @@
                         :href="project.liveUrl"
                         target="_blank"
                         rel="noreferrer"
-                        class="inline-flex items-center gap-1 text-[#22201e]/80 hover:text-black border-b border-black/20 hover:border-black transition-colors"
+                        class="group/link inline-flex items-center gap-1 text-[#22201e]/80 hover:text-black border-b border-transparent hover:border-black transition-colors"
                         :aria-label="`View live demo for ${project.title}`"
                       >
                         <span>Live</span>
-                        <span class="text-xs">↗</span>
+                        <span class="text-xs inline-block transition-transform duration-300 ease-out group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">↗</span>
                       </a>
                       <a
                         v-if="project.githubUrl"
                         :href="project.githubUrl"
                         target="_blank"
                         rel="noreferrer"
-                        class="inline-flex items-center gap-1 text-[#22201e]/80 hover:text-black border-b border-black/20 hover:border-black transition-colors"
+                        class="group/link inline-flex items-center gap-1 text-[#22201e]/80 hover:text-black border-b border-transparent hover:border-black transition-colors"
                         :aria-label="`View source code on GitHub for ${project.title}`"
                       >
                         <span>GitHub</span>
-                        <span class="text-xs">↗</span>
+                        <span class="text-xs inline-block transition-transform duration-300 ease-out group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">↗</span>
                       </a>
                     </div>
                   </td>
@@ -202,20 +202,20 @@
                   :href="project.liveUrl"
                   target="_blank"
                   rel="noreferrer"
-                  class="inline-flex items-center gap-1 text-[#22201e] border-b border-black/30 py-0.5"
+                  class="group inline-flex items-center gap-1 text-[#22201e] border-b border-transparent hover:border-black/60 py-0.5 transition-colors"
                 >
                   <span>Live Demo</span>
-                  <span>↗</span>
+                  <span class="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                 </a>
                 <a
                   v-if="project.githubUrl"
                   :href="project.githubUrl"
                   target="_blank"
                   rel="noreferrer"
-                  class="inline-flex items-center gap-1 text-[#22201e]/70 border-b border-black/20 py-0.5"
+                  class="group inline-flex items-center gap-1 text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 py-0.5 transition-colors"
                 >
                   <span>GitHub</span>
-                  <span>↗</span>
+                  <span class="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                 </a>
               </div>
             </article>

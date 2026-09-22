@@ -189,7 +189,7 @@
         class="group inline-flex items-center gap-2 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer outline-none"
       >
         <span class="border-b border-white/20 group-hover:border-white transition-colors">All Works Archive (8+)</span>
-        <span class="font-serif italic text-sm transition-transform group-hover:translate-x-0.5">↗</span>
+        <span class="font-serif italic text-sm inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
       </button>
 
       <div
