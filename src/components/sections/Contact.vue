@@ -54,14 +54,11 @@
             <button
               type="button"
               @click="copyEmail"
-              class="group/btn inline-flex items-center gap-2 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-normal text-[#f3eee8] hover:text-white transition-colors cursor-pointer text-left select-none"
+              class="group/btn inline-flex items-center text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-normal text-[#f3eee8] hover:text-white transition-colors cursor-pointer text-left select-none"
               title="Click to copy email address"
             >
               <span class="border-b border-white/20 group-hover/btn:border-white transition-colors pb-0.5">
                 {{ emailAddress }}
-              </span>
-              <span class="text-xs uppercase tracking-widest text-[#f3eee8]/40 group-hover/btn:text-amber-200 transition-colors hidden sm:inline-block font-mono">
-                [copy]
               </span>
             </button>
 
