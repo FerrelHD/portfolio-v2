@@ -43,18 +43,18 @@
           <div class="overflow-hidden">
             <span ref="statementLine2" class="statement-line block will-change-transform">
               experiences with
-              <span class="inline-block transition-all duration-500 ease-out group-hover/statement:font-serif group-hover/statement:italic group-hover/statement:text-amber-200/90 group-hover/statement:scale-105 origin-left">
+              <span class="inline-block font-serif italic text-[#faf9f6]/90 transition-all duration-300 ease-out group-hover/statement:text-amber-200 group-hover/statement:drop-shadow-[0_0_10px_rgba(251,191,36,0.3)]">
                 clarity
               </span>,
             </span>
           </div>
           <div class="overflow-hidden">
             <span ref="statementLine3" class="statement-line block will-change-transform">
-              <span class="inline-block transition-all duration-500 ease-out group-hover/statement:font-serif group-hover/statement:italic group-hover/statement:text-amber-200/90 group-hover/statement:scale-105 origin-left">
+              <span class="inline-block font-serif italic text-[#faf9f6]/90 transition-all duration-300 ease-out group-hover/statement:text-amber-200 group-hover/statement:drop-shadow-[0_0_10px_rgba(251,191,36,0.3)]">
                 structure
               </span>,
               and
-              <span class="inline-block transition-all duration-500 ease-out group-hover/statement:font-serif group-hover/statement:italic group-hover/statement:text-amber-200/90 group-hover/statement:scale-105 origin-left">
+              <span class="inline-block font-serif italic text-[#faf9f6]/90 transition-all duration-300 ease-out group-hover/statement:text-amber-200 group-hover/statement:drop-shadow-[0_0_10px_rgba(251,191,36,0.3)]">
                 intention
               </span>.
             </span>
