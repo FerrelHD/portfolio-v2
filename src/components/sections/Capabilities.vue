@@ -43,34 +43,19 @@
           <div class="overflow-hidden">
             <span ref="statementLine2" class="statement-line block will-change-transform">
               experiences with
-              <span class="inline-grid grid-cols-1 grid-rows-1 items-baseline align-baseline justify-items-start">
-                <span class="col-start-1 row-start-1 font-sans transition-opacity duration-300 ease-out group-hover/statement:opacity-0">
-                  clarity
-                </span>
-                <span class="col-start-1 row-start-1 font-serif italic text-amber-200 transition-opacity duration-300 ease-out opacity-0 group-hover/statement:opacity-100 drop-shadow-[0_0_10px_rgba(251,191,36,0.35)] pointer-events-none">
-                  clarity
-                </span>
+              <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">
+                clarity
               </span>,
             </span>
           </div>
           <div class="overflow-hidden">
             <span ref="statementLine3" class="statement-line block will-change-transform">
-              <span class="inline-grid grid-cols-1 grid-rows-1 items-baseline align-baseline justify-items-start">
-                <span class="col-start-1 row-start-1 font-sans transition-opacity duration-300 ease-out group-hover/statement:opacity-0">
-                  structure
-                </span>
-                <span class="col-start-1 row-start-1 font-serif italic text-amber-200 transition-opacity duration-300 ease-out opacity-0 group-hover/statement:opacity-100 drop-shadow-[0_0_10px_rgba(251,191,36,0.35)] pointer-events-none">
-                  structure
-                </span>
+              <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">
+                structure
               </span>,
               and
-              <span class="inline-grid grid-cols-1 grid-rows-1 items-baseline align-baseline justify-items-start">
-                <span class="col-start-1 row-start-1 font-sans transition-opacity duration-300 ease-out group-hover/statement:opacity-0">
-                  intention
-                </span>
-                <span class="col-start-1 row-start-1 font-serif italic text-amber-200 transition-opacity duration-300 ease-out opacity-0 group-hover/statement:opacity-100 drop-shadow-[0_0_10px_rgba(251,191,36,0.35)] pointer-events-none">
-                  intention
-                </span>
+              <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">
+                intention
               </span>.
             </span>
           </div>
