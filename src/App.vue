@@ -3,8 +3,8 @@
     <SamsungError />
   </template>
 
-  <!-- Film Grain / Noise Overlay (Applied across ALL sections - Light & Dark) -->
-  <div class="pointer-events-none fixed inset-0 z-[120] overflow-hidden" aria-hidden="true">
+  <!-- Film Grain / Noise Overlay (Applied across ALL sections - Light & Dark, desktop only to avoid mobile GPU lag) -->
+  <div class="pointer-events-none fixed inset-0 z-[120] overflow-hidden hidden md:block" aria-hidden="true">
     <svg
       class="h-full w-full"
       xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@
     >
       <div
         ref="horizontalTrack"
-        class="flex w-full flex-col md:h-dvh md:flex-row md:flex-nowrap will-change-transform"
+        class="flex w-full flex-col md:h-dvh md:flex-row md:flex-nowrap md:will-change-transform"
       >
         <!-- Slide 0: Hero (Dark #22201e) -->
         <Hero
@@ -85,8 +85,9 @@
   import { lenis } from './lenis';
 
   gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize: true });
 
-  const { width, height } = useWindowSize();
+  const { width } = useWindowSize();
   const horizontalPin = ref<HTMLElement | null>(null);
   const horizontalTrack = ref<HTMLElement | null>(null);
 
@@ -255,16 +256,23 @@
     horizontalScrollTrigger = tween.scrollTrigger as ScrollTrigger;
   };
 
+  let scrollTicking = false;
   const onWindowScroll = () => {
     if (window.innerWidth < 768) {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = max > 0 ? window.scrollY / max : 0;
-      scrollProgress.value = progress;
-      if (progress > 0.01) {
-        isSidebarSolid.value = true;
+      if (!scrollTicking) {
+        requestAnimationFrame(() => {
+          const max = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = max > 0 ? window.scrollY / max : 0;
+          scrollProgress.value = progress;
+          if (progress > 0.01) {
+            isSidebarSolid.value = true;
+          }
+          updateSlideIndex(progress);
+          checkRailTheme();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
       }
-      updateSlideIndex(progress);
-      checkRailTheme();
     }
   };
 
@@ -343,9 +351,13 @@
   };
 
   let wasDesktop = typeof window !== 'undefined' ? window.innerWidth >= 768 : true;
+  let prevWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
 
-  watch([width, height], () => {
-    const isDesktop = window.innerWidth >= 768;
+  watch(width, (newWidth) => {
+    if (newWidth === prevWidth) return;
+    prevWidth = newWidth;
+
+    const isDesktop = newWidth >= 768;
 
     if (isDesktop !== wasDesktop) {
       wasDesktop = isDesktop;
@@ -359,7 +371,9 @@
       }
     }
 
-    ScrollTrigger.refresh();
+    if (isDesktop) {
+      ScrollTrigger.refresh();
+    }
     checkRailTheme();
   });
 
