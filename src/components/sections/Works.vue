@@ -150,23 +150,43 @@
       <div class="flex items-end justify-between pt-1">
         <!-- Left Side: Interactive Project Pagination & Archive Link -->
         <div class="hidden sm:flex items-center gap-6">
-          <!-- Step Pagination Dots / Lines -->
-          <div class="flex items-center gap-2 font-mono text-[11px] tracking-wider text-[#22201e]/60">
+          <!-- Step Pagination Dots / Lines with Rolling Number & Spring Pill -->
+          <div class="flex items-center gap-2.5 font-mono text-[11px] tracking-wider text-[#22201e]/60">
             <span class="font-sans uppercase text-[10px] tracking-[0.2em] text-[#22201e]/40 font-semibold mr-1">PROJECT</span>
             <button
               v-for="(p, pIdx) in workProjects"
               :key="p.id"
               type="button"
               @click="emit('goToProject', pIdx)"
-              class="group/step flex items-center gap-1.5 transition-colors cursor-pointer outline-none select-none py-1"
-              :class="pIdx === index ? 'text-[#22201e] font-bold' : 'text-[#22201e]/40 hover:text-[#22201e]/80'"
+              class="group/step relative flex items-center gap-1.5 transition-colors cursor-pointer outline-none select-none py-1"
+              :class="pIdx === index ? 'text-[#22201e] font-bold' : 'text-[#22201e]/40 hover:text-[#22201e]'"
               :aria-label="`Go to project ${p.title}`"
             >
+              <!-- Active Spring Pill vs Inactive Magnetic Dash -->
               <span
-                class="inline-block h-1 transition-all duration-300 rounded-full"
-                :class="pIdx === index ? 'w-6 bg-[#22201e]' : 'w-2 bg-black/20 group-hover/step:bg-black/50 group-hover/step:w-3.5'"
+                v-if="pIdx === index"
+                class="step-pill-active inline-block h-1 w-7 bg-[#22201e] rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.15)] will-change-transform origin-left"
               ></span>
-              <span class="text-[10px] md:text-[11px]">0{{ pIdx + 1 }}</span>
+              <span
+                v-else
+                class="inline-block h-1 w-2.5 bg-black/20 rounded-full transition-all duration-300 ease-out group-hover/step:w-4 group-hover/step:bg-black/60"
+              ></span>
+
+              <!-- Masked Rolling Counter for Number -->
+              <div class="overflow-hidden h-[15px] leading-none inline-flex items-center">
+                <span
+                  v-if="pIdx === index"
+                  class="step-num-roll-active inline-block will-change-transform text-[10px] md:text-[11px] font-black text-[#22201e]"
+                >
+                  0{{ pIdx + 1 }}
+                </span>
+                <span
+                  v-else
+                  class="inline-block text-[10px] md:text-[11px] transition-transform duration-300 ease-out group-hover/step:-translate-y-0.5"
+                >
+                  0{{ pIdx + 1 }}
+                </span>
+              </div>
             </button>
           </div>
 
@@ -361,6 +381,26 @@
     if (num) tl.to(num, { yPercent: 0, duration: 1.2 }, 0.2);
     if (numIdx) tl.to(numIdx, { yPercent: 0, duration: 1.2 }, 0.25);
 
+    // Concept 1: Pagination Active Spring Pill & Rolling Number Reveal
+    const activePill = slide.querySelector('.step-pill-active');
+    const activeNumRoll = slide.querySelector('.step-num-roll-active');
+    if (activePill) {
+      tl.fromTo(
+        activePill,
+        { scaleX: 0.15, transformOrigin: 'left center' },
+        { scaleX: 1, duration: 0.85, ease: 'back.out(2)' },
+        0.18,
+      );
+    }
+    if (activeNumRoll) {
+      tl.fromTo(
+        activeNumRoll,
+        { yPercent: 120, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 0.75, ease: 'power3.out' },
+        0.22,
+      );
+    }
+
     // Text box reveal for About section (once per slide entrance)
     if (!revealedSlideIndices.has(index)) {
       revealedSlideIndices.add(index);
@@ -422,6 +462,11 @@
       if (mockup) gsap.set(mockup, { y: 35, scale: 0.96, opacity: 0 });
       if (aboutBoxes.length) gsap.set(aboutBoxes, { scaleX: 0, transformOrigin: 'left center' });
       if (aboutTexts.length) gsap.set(aboutTexts, { opacity: 0 });
+
+      const activePill = slide.querySelector('.step-pill-active');
+      const activeNumRoll = slide.querySelector('.step-num-roll-active');
+      if (activePill) gsap.set(activePill, { scaleX: 0.15, transformOrigin: 'left center' });
+      if (activeNumRoll) gsap.set(activeNumRoll, { yPercent: 120, opacity: 0 });
     });
   });
 
