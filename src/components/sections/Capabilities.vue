@@ -36,28 +36,16 @@
 
         <div class="font-sans text-xl sm:text-2xl lg:text-[26px] xl:text-[28px] font-normal leading-[1.3] text-[#faf9f6] max-w-sm flex flex-col">
           <div class="overflow-hidden">
-            <span ref="statementLine1" class="statement-line block will-change-transform">
-              Designing digital
-            </span>
+            <span ref="statementLine1" class="statement-line block whitespace-nowrap will-change-transform">Designing digital</span>
           </div>
           <div class="overflow-hidden">
-            <span ref="statementLine2" class="statement-line block will-change-transform">
-              experiences with
-              <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">
-                clarity
-              </span>,
-            </span>
+            <span ref="statementLine2" class="statement-line block whitespace-nowrap will-change-transform">experiences with</span>
           </div>
           <div class="overflow-hidden">
-            <span ref="statementLine3" class="statement-line block will-change-transform">
-              <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">
-                structure
-              </span>,
-              and
-              <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">
-                intention
-              </span>.
-            </span>
+            <span ref="statementLine3" class="statement-line block whitespace-nowrap will-change-transform"><span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">clarity</span>, <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">structure</span>,</span>
+          </div>
+          <div class="overflow-hidden">
+            <span ref="statementLine4" class="statement-line block whitespace-nowrap will-change-transform">and <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">intention</span>.</span>
           </div>
         </div>
       </div>
@@ -175,6 +163,7 @@
   const statementLine1 = ref<HTMLElement | null>(null);
   const statementLine2 = ref<HTMLElement | null>(null);
   const statementLine3 = ref<HTMLElement | null>(null);
+  const statementLine4 = ref<HTMLElement | null>(null);
 
   const chapterTitle = ref<HTMLElement | null>(null);
   const columnRefs = ref<HTMLElement[]>([]);
@@ -226,14 +215,14 @@
     if (whatIDoRef.value) {
       tl.to(whatIDoRef.value, { yPercent: 0, duration: 0.9 }, 0.1);
     }
-    const lines = [statementLine1.value, statementLine2.value, statementLine3.value].filter(Boolean);
+    const lines = [statementLine1.value, statementLine2.value, statementLine3.value, statementLine4.value].filter(Boolean);
     if (lines.length) {
       tl.to(
         lines,
         {
           yPercent: 0,
           duration: 1.05,
-          stagger: 0.1,
+          stagger: 0.08,
           ease: 'power3.out',
         },
         0.18,
@@ -244,7 +233,7 @@
   onMounted(() => {
     if (chapterTitle.value) gsap.set(chapterTitle.value, { yPercent: 105 });
     if (whatIDoRef.value) gsap.set(whatIDoRef.value, { yPercent: 105 });
-    const lines = [statementLine1.value, statementLine2.value, statementLine3.value].filter(Boolean);
+    const lines = [statementLine1.value, statementLine2.value, statementLine3.value, statementLine4.value].filter(Boolean);
     if (lines.length) gsap.set(lines, { yPercent: 105 });
 
     columnRefs.value.forEach((col) => {
