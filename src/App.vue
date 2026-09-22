@@ -341,12 +341,12 @@
     if (isArchiveOpen.value) return;
     if (['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as HTMLElement)?.tagName)) return;
 
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+    if (['ArrowRight', 'ArrowDown', 'PageDown'].includes(e.key) || (e.key === ' ' && !e.shiftKey)) {
       if (currentSlideIndex.value < TOTAL_SLIDES - 1) {
         e.preventDefault();
         navigateToSlideIndex(currentSlideIndex.value + 1);
       }
-    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key) || (e.key === ' ' && e.shiftKey)) {
       if (currentSlideIndex.value > 0) {
         e.preventDefault();
         navigateToSlideIndex(currentSlideIndex.value - 1);

@@ -129,7 +129,7 @@
 
             <!-- Paragraph 1 -->
             <div class="slide-about-item relative overflow-hidden mb-1 max-w-xl">
-              <p class="slide-about-text font-sans text-xs sm:text-[13px] md:text-[13px] lg:text-sm xl:text-base leading-[140%] text-[#22201e]/85 text-justify">
+              <p class="slide-about-text font-sans text-xs sm:text-[13px] md:text-[13px] lg:text-sm xl:text-base leading-[140%] text-[#22201e]/85 text-left">
                 {{ project.aboutP1 }}
               </p>
               <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
@@ -137,7 +137,7 @@
 
             <!-- Paragraph 2 (Collapsed on small mobile to preserve vertical breathing room) -->
             <div class="slide-about-item relative overflow-hidden max-w-xl hidden sm:block">
-              <p class="slide-about-text font-sans text-xs sm:text-[13px] md:text-[13px] lg:text-sm xl:text-base leading-[140%] text-[#22201e]/85 text-justify">
+              <p class="slide-about-text font-sans text-xs sm:text-[13px] md:text-[13px] lg:text-sm xl:text-base leading-[140%] text-[#22201e]/85 text-left">
                 {{ project.aboutP2 }}
               </p>
               <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
@@ -149,40 +149,40 @@
       <!-- Bottom Row: Project Step Indicators & Explore Archive on Left, THE WORK #01 on Right -->
       <div class="flex items-end justify-between pt-1">
         <!-- Left Side: Interactive Project Pagination & Archive Link -->
-        <div class="hidden sm:flex items-center gap-6">
+        <div class="flex items-center gap-3 sm:gap-6">
           <!-- Step Pagination Dots / Lines with Rolling Number & Spring Pill -->
-          <div class="flex items-center gap-2.5 font-mono text-[11px] tracking-wider text-[#22201e]/60">
-            <span class="font-sans uppercase text-[10px] tracking-[0.2em] text-[#22201e]/40 font-semibold mr-1">PROJECT</span>
+          <div class="flex items-center gap-1.5 sm:gap-2.5 font-mono text-[10px] sm:text-[11px] tracking-wider text-[#22201e]/60">
+            <span class="font-sans uppercase text-[9px] sm:text-[10px] tracking-[0.2em] text-[#22201e]/40 font-semibold mr-0.5 sm:mr-1">PROJECT</span>
             <button
               v-for="(p, pIdx) in workProjects"
               :key="p.id"
               type="button"
               @click="emit('goToProject', pIdx)"
-              class="group/step relative flex items-center gap-1.5 transition-colors cursor-pointer outline-none select-none py-1"
+              class="group/step relative flex items-center gap-1 sm:gap-1.5 transition-colors cursor-pointer outline-none select-none py-1"
               :class="pIdx === index ? 'text-[#22201e] font-bold' : 'text-[#22201e]/40 hover:text-[#22201e]'"
               :aria-label="`Go to project ${p.title}`"
             >
               <!-- Active Spring Pill vs Inactive Magnetic Dash -->
               <span
                 v-if="pIdx === index"
-                class="step-pill-active inline-block h-1 w-7 bg-[#22201e] rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.15)] will-change-transform origin-left"
+                class="step-pill-active inline-block h-1 w-5 sm:w-7 bg-[#22201e] rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.15)] will-change-transform origin-left"
               ></span>
               <span
                 v-else
-                class="inline-block h-1 w-2.5 bg-black/20 rounded-full transition-all duration-300 ease-out group-hover/step:w-4 group-hover/step:bg-black/60"
+                class="inline-block h-1 w-2 sm:w-2.5 bg-black/20 rounded-full transition-all duration-300 ease-out group-hover/step:w-3.5 sm:group-hover/step:w-4 group-hover/step:bg-black/60"
               ></span>
 
               <!-- Masked Rolling Counter for Number -->
               <div class="overflow-hidden h-[15px] leading-none inline-flex items-center">
                 <span
                   v-if="pIdx === index"
-                  class="step-num-roll-active inline-block will-change-transform text-[10px] md:text-[11px] font-black text-[#22201e]"
+                  class="step-num-roll-active inline-block will-change-transform text-[9px] sm:text-[10px] md:text-[11px] font-black text-[#22201e]"
                 >
                   0{{ pIdx + 1 }}
                 </span>
                 <span
                   v-else
-                  class="inline-block text-[10px] md:text-[11px] transition-transform duration-300 ease-out group-hover/step:-translate-y-0.5"
+                  class="inline-block text-[9px] sm:text-[10px] md:text-[11px] transition-transform duration-300 ease-out group-hover/step:-translate-y-0.5"
                 >
                   0{{ pIdx + 1 }}
                 </span>

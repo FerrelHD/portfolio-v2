@@ -74,7 +74,7 @@
             ref="bioEl"
             class="font-sans text-xs sm:text-sm md:text-sm lg:text-[15px] xl:text-lg leading-[145%] lg:leading-[150%] text-[#f3eee8]/80 font-normal tracking-normal will-change-transform opacity-0"
           >
-            A fullstack developer & digital creator, crafting highperformance web systems, 3D worlds, and cinematic digital media.
+            A fullstack developer & digital creator, crafting high-performance web systems, 3D worlds, and cinematic digital media.
           </p>
         </div>
       </div>

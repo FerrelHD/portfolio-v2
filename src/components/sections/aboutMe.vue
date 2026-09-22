@@ -18,11 +18,11 @@
       </div>
 
       <!-- Quick Intro Block (Top Right) -->
-      <div class="max-w-[360px] md:max-w-[560px] lg:max-w-[660px] text-justify md:pt-1">
+      <div class="max-w-[360px] md:max-w-[560px] lg:max-w-[660px] text-left md:pt-1">
         <span class="block font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.2em] text-[#22201e]/60 mb-2 font-medium">
           QUICK INTRO
         </span>
-        <p class="font-sans text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[26px] leading-[135%] text-[#22201e]/90 font-normal text-justify">
+        <p class="font-sans text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[26px] leading-[135%] text-[#22201e]/90 font-normal text-left">
           <span class="block overflow-hidden">
             <span class="intro-line block will-change-transform">
               Hi, I'm Ferrel — a software engineer and creative
@@ -90,7 +90,7 @@
         <div class="overflow-hidden">
           <p
             ref="bottomNoteEl"
-            class="font-sans text-sm sm:text-base md:text-lg leading-[140%] text-[#22201e]/80 font-normal text-justify will-change-transform"
+            class="font-sans text-sm sm:text-base md:text-lg leading-[140%] text-[#22201e]/80 font-normal text-left will-change-transform"
           >
             Beyond engineering: 3D modeling, game environments, and interactive graphics.
           </p>

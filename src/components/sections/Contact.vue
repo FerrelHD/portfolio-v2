@@ -49,15 +49,50 @@
           Contact To
         </span>
         <div class="flex flex-col gap-1.5">
-          <a
-            href="mailto:ferrelrashadakeyla2014@gmail.com"
-            class="group inline-flex items-center gap-2 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-normal text-[#f3eee8] hover:text-white transition-colors cursor-pointer w-fit"
-          >
-            <span class="border-b border-white/20 group-hover:border-white transition-colors pb-0.5">
-              ferrelrashadakeyla2014@gmail.com
-            </span>
-            <span class="text-xs sm:text-sm md:text-base opacity-60 group-hover:opacity-100 inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-          </a>
+          <!-- Email Container with Click-to-Copy and Mailto Option -->
+          <div class="relative group/email inline-flex items-center gap-2">
+            <button
+              type="button"
+              @click="copyEmail"
+              class="group/btn inline-flex items-center gap-2 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-normal text-[#f3eee8] hover:text-white transition-colors cursor-pointer text-left select-none"
+              title="Click to copy email address"
+            >
+              <span class="border-b border-white/20 group-hover/btn:border-white transition-colors pb-0.5">
+                {{ emailAddress }}
+              </span>
+              <span class="text-xs uppercase tracking-widest text-[#f3eee8]/40 group-hover/btn:text-amber-200 transition-colors hidden sm:inline-block font-mono">
+                [copy]
+              </span>
+            </button>
+
+            <!-- External Mailto Arrow Link -->
+            <a
+              :href="'mailto:' + emailAddress"
+              class="text-xs sm:text-sm md:text-base text-[#f3eee8]/60 hover:text-white transition-colors inline-block p-1"
+              title="Open in mail app"
+              aria-label="Open in mail app"
+            >
+              <span class="inline-block transition-transform duration-300 ease-out hover:translate-x-0.5 hover:-translate-y-0.5">↗</span>
+            </a>
+
+            <!-- Copied Toast Badge -->
+            <transition
+              enter-active-class="transition duration-200 ease-out"
+              enter-from-class="opacity-0 -translate-y-1 scale-95"
+              enter-to-class="opacity-100 translate-y-0 scale-100"
+              leave-active-class="transition duration-150 ease-in"
+              leave-from-class="opacity-100 translate-y-0 scale-100"
+              leave-to-class="opacity-0 -translate-y-1 scale-95"
+            >
+              <div
+                v-if="isCopied"
+                class="absolute -top-8 left-0 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#1e1c1a] border border-white/20 text-[#f3eee8] text-[11px] font-mono tracking-wider shadow-lg pointer-events-none whitespace-nowrap"
+              >
+                <span class="text-emerald-400">✓</span>
+                <span>Copied to clipboard!</span>
+              </div>
+            </transition>
+          </div>
 
           <!-- GitHub Link with SVG -->
           <a
@@ -94,6 +129,24 @@
 
   const nextEl = ref<HTMLElement | null>(null);
   const chapterEl = ref<HTMLElement | null>(null);
+
+  const emailAddress = 'ferrelrashadakeyla2014@gmail.com';
+  const isCopied = ref(false);
+  let copyTimeout: any = null;
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(emailAddress);
+      isCopied.value = true;
+      if (copyTimeout) clearTimeout(copyTimeout);
+      copyTimeout = setTimeout(() => {
+        isCopied.value = false;
+      }, 2200);
+    } catch {
+      // Fallback: window.location if clipboard permission denied
+      window.location.href = `mailto:${emailAddress}`;
+    }
+  };
 
   const scrollToTop = () => {
     emit('scrollToStart');
