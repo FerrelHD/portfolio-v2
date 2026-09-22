@@ -23,7 +23,7 @@
             :href="project.liveUrl"
             target="_blank"
             rel="noreferrer"
-            class="hidden sm:inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors"
+            class="hidden sm:inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors"
           >
             <span>Live Project</span>
             <span class="text-sm md:text-base">↗</span>
@@ -33,7 +33,7 @@
             :href="project.githubUrl"
             target="_blank"
             rel="noreferrer"
-            class="hidden sm:inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors"
+            class="hidden sm:inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors"
           >
             <span>GitHub</span>
             <span class="text-sm md:text-base">↗</span>
@@ -175,7 +175,7 @@
             v-if="index === workProjects.length - 1"
             type="button"
             @click="emit('openArchive')"
-            class="group inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors cursor-pointer outline-none select-none pb-0.5 ml-2"
+            class="group inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer outline-none select-none pb-0.5 ml-2"
           >
             <span>Explore All Works (9+)</span>
             <span class="text-sm md:text-base transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -208,7 +208,7 @@
         <button
           type="button"
           @click="emit('openArchive')"
-          class="group inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-black/20 hover:border-black transition-colors cursor-pointer outline-none select-none pb-0.5"
+          class="group inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer outline-none select-none pb-0.5"
         >
           <span>Explore All Works (9+)</span>
           <span class="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -221,7 +221,7 @@
           v-if="project.liveUrl"
           :href="project.liveUrl"
           target="_blank"
-          class="font-medium text-[#22201e] underline"
+          class="font-medium text-[#22201e] hover:underline transition-all"
         >
           Live Preview ↗
         </a>
@@ -229,7 +229,7 @@
           v-if="project.githubUrl"
           :href="project.githubUrl"
           target="_blank"
-          class="font-medium text-[#22201e] underline"
+          class="font-medium text-[#22201e] hover:underline transition-all"
           :class="{ 'ml-auto': !project.liveUrl }"
         >
           GitHub ↗
