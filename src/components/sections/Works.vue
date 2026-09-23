@@ -197,7 +197,7 @@
             @click="emit('openArchive')"
             class="group inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer outline-none select-none pb-0.5 ml-2"
           >
-            <span>Explore All Works (9+)</span>
+            <span>Explore All Works (10+)</span>
             <span class="text-sm md:text-base transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
           </button>
         </div>
@@ -230,7 +230,7 @@
           @click="emit('openArchive')"
           class="group inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer outline-none select-none pb-0.5"
         >
-          <span>Explore All Works (9+)</span>
+          <span>Explore All Works (10+)</span>
           <span class="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
         </button>
       </div>
@@ -272,7 +272,7 @@
   import {
     indonesianCrustalObservatoryImg,
     ecoBiteImg,
-    fersyaShopImg,
+    personaImg,
     studentLifeImg,
   } from '@/assets/images';
 
@@ -321,18 +321,19 @@
       githubUrl: 'https://github.com/FerrelHD/Eco-Bite',
     },
     {
-      id: 'fersya-shop',
+      id: 'persona-5',
       slideNumber: '#03',
-      title: 'Fersya Shop',
+      title: 'Persona 5 Royal',
       aboutP1:
-        'Small businesses often struggle with managing products, orders, and user roles without expensive enterprise tools. I wanted to create a storefront that is both beautiful for customers and powerful for administrators.',
+        'Most developer portfolios follow identical grid patterns and neutral aesthetics. I wanted to break the mold entirely by building an authentic, 60 FPS console experience inspired by Persona 5 Royal that pushes web interactivity to its absolute limit.',
       aboutP2:
-        'I built a modern organic product storefront with a Filament admin dashboard, granular role-based access control, and dynamic inventory management — giving shop owners full control without touching code.',
-      role: 'Full-Stack Developer',
-      system: 'Laravel 11 · Filament · Tailwind',
-      domain: 'localhost:8000/admin',
-      previewImg: fersyaShopImg,
-      githubUrl: 'https://github.com/FerrelHD/Fersya-Shop',
+        'I engineered a zero-scroll 1080p viewport interface featuring procedural Web Audio synthesis for zero-latency acoustic feedback, ransom-note typography, 1080p character background video loops, and responsive game-menu state machines.',
+      role: 'Creative Developer & UI Engineer',
+      system: 'React 18 · TypeScript · Web Audio · Tailwind',
+      domain: 'persona-lilac-mu.vercel.app',
+      previewImg: personaImg,
+      liveUrl: 'https://persona-lilac-mu.vercel.app/',
+      githubUrl: 'https://github.com/FerrelHD/Persona',
     },
     {
       id: 'student-life',

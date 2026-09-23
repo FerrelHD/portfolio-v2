@@ -8,6 +8,7 @@ import {
   stockPredictionImg,
   streetRushImg,
   ecoBiteImg,
+  personaImg,
 } from '@/assets/images';
 
 export type ArchiveCategoryFilter = 'all' | 'web' | 'creative' | 'ml' | 'games';
@@ -34,6 +35,18 @@ export const archiveCategories: { id: ArchiveCategoryFilter; label: string }[] =
 ];
 
 export const archiveProjects: ArchiveProject[] = [
+  {
+    id: 'persona-5',
+    year: '2026',
+    title: 'Persona 5 Royal Portfolio',
+    category: 'Game Console UI & Web Audio Engine',
+    categoryFilter: 'creative',
+    techStack: ['React 18', 'TypeScript', 'Tailwind', 'Web Audio API'],
+    liveUrl: 'https://persona-lilac-mu.vercel.app/',
+    githubUrl: 'https://github.com/FerrelHD/Persona',
+    previewImg: personaImg,
+    description: 'Cinematic game-console developer portfolio inspired by Persona 5 Royal, featuring procedural Web Audio synthesis, 1080p character loop videos, and zero-scroll canvas navigation.',
+  },
   {
     id: 'nusantara-observatory',
     year: '2026',

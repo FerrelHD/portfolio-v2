@@ -8,6 +8,7 @@ import gunungGedeImg from './Gunung-Gede.webp';
 import stockPredictionImg from './stock-prediction.png';
 import streetRushImg from './street-rush.webp';
 import ecoBiteImg from './Eco-Bite.png';
+import personaImg from './Persona.png';
 
 export {
   ferrelPortrait,
@@ -20,5 +21,6 @@ export {
   stockPredictionImg,
   streetRushImg,
   ecoBiteImg,
+  personaImg,
 };
 

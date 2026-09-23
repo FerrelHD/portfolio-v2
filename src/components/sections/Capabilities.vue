@@ -123,7 +123,7 @@
   import gsap from 'gsap';
   import {
     indonesianCrustalObservatoryImg,
-    spiderDevImg,
+    personaImg,
     fersyaShopImg,
   } from '@/assets/images';
 
@@ -147,8 +147,8 @@
       num: '02',
       name: 'Creative Development',
       category: 'INTERACTION',
-      image: spiderDevImg,
-      desc: 'Tailored GSAP choreographies, Canvas 2D telemetry, Three.js visualizations, and Web Audio — designed for cinematic impact.',
+      image: personaImg,
+      desc: 'Console-grade game UI architectures, procedural Web Audio synthesis, kinetic typography, and fluid GSAP choreographies — engineered for cinematic immersion.',
     },
     {
       num: '03',

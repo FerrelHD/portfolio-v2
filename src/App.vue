@@ -305,7 +305,7 @@
         'about',
         'works',
         'work-ecobite',
-        'work-fersya-shop',
+        'work-persona-5',
         'work-student-life',
         'capabilities',
         'contact',
