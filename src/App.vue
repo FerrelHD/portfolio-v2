@@ -304,7 +304,7 @@
         'hero',
         'about',
         'works',
-        'work-ecobite',
+        'work-tactiq',
         'work-persona-5',
         'work-student-life',
         'capabilities',

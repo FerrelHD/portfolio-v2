@@ -9,6 +9,7 @@ import stockPredictionImg from './stock-prediction.png';
 import streetRushImg from './street-rush.webp';
 import ecoBiteImg from './Eco-Bite.png';
 import personaImg from './Persona.png';
+import tactiqImg from './TactIQ.png';
 
 export {
   ferrelPortrait,
@@ -22,5 +23,7 @@ export {
   streetRushImg,
   ecoBiteImg,
   personaImg,
+  tactiqImg,
 };
+
 

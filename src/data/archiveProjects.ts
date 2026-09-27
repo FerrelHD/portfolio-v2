@@ -9,6 +9,7 @@ import {
   streetRushImg,
   ecoBiteImg,
   personaImg,
+  tactiqImg,
 } from '@/assets/images';
 
 export type ArchiveCategoryFilter = 'all' | 'web' | 'creative' | 'ml' | 'games';
@@ -58,6 +59,17 @@ export const archiveProjects: ArchiveProject[] = [
     githubUrl: 'https://github.com/FerrelHD/Global-Seismic-Tracker',
     previewImg: indonesianCrustalObservatoryImg,
     description: 'Interactive geospatial hazard tracker integrating real-time disaster feeds into visual 2D mapping.',
+  },
+  {
+    id: 'tactiq',
+    year: '2026',
+    title: 'TactIQ',
+    category: 'Football Analytics & Tactical Tracking Platform',
+    categoryFilter: 'web',
+    techStack: ['Next.js 14', 'TypeScript', 'HTML5 Canvas', 'Socket.io', 'Chart.js'],
+    githubUrl: 'https://github.com/LuthfiMirza/TactIQ',
+    previewImg: tactiqImg,
+    description: 'Enterprise-grade football intelligence platform featuring real-time 2D pitch tracking overlay, multi-criteria player scouting, and AI match probability forecasting.',
   },
   {
     id: 'ecobite',

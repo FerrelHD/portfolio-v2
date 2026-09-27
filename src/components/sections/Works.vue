@@ -271,7 +271,7 @@
   }>();
   import {
     indonesianCrustalObservatoryImg,
-    ecoBiteImg,
+    tactiqImg,
     personaImg,
     studentLifeImg,
   } from '@/assets/images';
@@ -307,18 +307,18 @@
       githubUrl: 'https://github.com/FerrelHD/Global-Seismic-Tracker',
     },
     {
-      id: 'ecobite',
+      id: 'tactiq',
       slideNumber: '#02',
-      title: 'EcoBite',
+      title: 'TactIQ',
       aboutP1:
-        'Food waste in campus canteens surges before closing hours, while university students need access to nutritious, affordable meals. I wanted to turn this challenge into a collaborative sustainability ecosystem that creates real impact.',
+        'Modern football operations increasingly depend on granular performance data, yet tools unifying predictive ML modeling, multivariate player analytics, and live video tactical tracking remain gatekept from mainstream analysts. I wanted to design an integrated telemetry intelligence hub that bridges high-performance data systems with intuitive pitch visualization.',
       aboutP2:
-        'I engineered a full-stack campus food rescue platform featuring real-time GPS radar with Haversine geolocation, dynamic HMAC QR rescue passes with in-browser camera verification, and an ESG sustainability tracking engine measuring CO2 reduction and EcoPoints.',
-      role: 'Full-Stack Developer & Product Designer',
-      system: 'Next.js 14 · TypeScript · Prisma · Tailwind',
-      domain: 'ecobite.app',
-      previewImg: ecoBiteImg,
-      githubUrl: 'https://github.com/FerrelHD/Eco-Bite',
+        'As Front-End Lead, I engineered the Next.js 14 telemetry platform — architecting dynamic 7-axis Chart.js radar comparisons, an AI-powered player similarity engine, and an interactive HTML5 Canvas 2D overlay synchronized with computer vision tracking feeds via WebSockets at 60 FPS.',
+      role: 'Front-End Lead & UI Engineer',
+      system: 'Next.js 14 · TypeScript · HTML5 Canvas · Socket.io · Tailwind',
+      domain: 'tactiq.analytics',
+      previewImg: tactiqImg,
+      githubUrl: 'https://github.com/LuthfiMirza/TactIQ',
     },
     {
       id: 'persona-5',
