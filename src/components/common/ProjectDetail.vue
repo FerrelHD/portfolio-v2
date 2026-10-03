@@ -52,13 +52,14 @@
       <main
         ref="scrollContainer"
         data-lenis-prevent
+        @scroll.passive="handleScroll"
         class="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 sm:px-8 md:px-12 lg:px-16 py-8 md:py-12"
       >
         <div class="max-w-[1360px] mx-auto">
           
           <!-- Editorial Top Hero Header -->
           <div class="flex flex-col gap-4 pb-8 md:pb-12 border-b border-black/10">
-            <div class="flex items-center gap-3">
+            <div class="case-study-hero-meta flex items-center gap-3">
               <span class="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-widest bg-black/[0.06] text-[#22201e]/80">
                 CASE STUDY · {{ project.number }}
               </span>
@@ -67,11 +68,13 @@
               </span>
             </div>
 
-            <h1 class="font-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#22201e] uppercase tracking-tight leading-[0.95] max-w-4xl">
-              {{ project.title }}
-            </h1>
+            <div class="overflow-hidden">
+              <h1 class="case-study-hero-title font-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#22201e] uppercase tracking-tight leading-[0.95] max-w-4xl">
+                {{ project.title }}
+              </h1>
+            </div>
 
-            <p class="font-serif text-lg sm:text-xl md:text-2xl text-[#22201e]/80 leading-snug max-w-3xl italic">
+            <p class="case-study-hero-tagline font-serif text-lg sm:text-xl md:text-2xl text-[#22201e]/80 leading-snug max-w-3xl italic">
               "{{ project.tagline }}"
             </p>
           </div>
@@ -82,19 +85,19 @@
             <!-- Left Column: Sticky Sidebar on Desktop -->
             <aside class="lg:col-span-4 lg:sticky lg:top-8 flex flex-col gap-8">
               
-              <!-- Metadata Matrix Card -->
-              <div class="flex flex-col rounded-xl border border-black/10 bg-black/[0.02] p-5 sm:p-6 divide-y divide-black/10 text-xs sm:text-[13px]">
-                <div class="pb-3.5 flex flex-col gap-1">
+              <!-- Metadata Matrix (Clean Minimalist Spec with Hairline Dividers) -->
+              <div class="flex flex-col divide-y divide-black/10 border-b border-black/10 text-xs sm:text-[13px]">
+                <div class="case-study-meta-item pb-3.5 flex flex-col gap-1">
                   <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/40 font-semibold">ROLE</span>
                   <span class="font-sans font-medium text-[#22201e]">{{ project.role }}</span>
                 </div>
 
-                <div class="py-3.5 flex flex-col gap-1">
+                <div class="case-study-meta-item py-3.5 flex flex-col gap-1">
                   <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/40 font-semibold">SYSTEM / ARCHITECTURE</span>
                   <span class="font-sans font-medium text-[#22201e]">{{ project.system }}</span>
                 </div>
 
-                <div class="py-3.5 flex flex-col gap-1">
+                <div class="case-study-meta-item py-3.5 flex flex-col gap-1">
                   <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/40 font-semibold">CONTEXT & YEAR</span>
                   <div class="flex items-center justify-between">
                     <span class="font-sans font-medium text-[#22201e]">{{ project.context }}</span>
@@ -102,7 +105,7 @@
                   </div>
                 </div>
 
-                <div class="pt-3.5 flex flex-col gap-2">
+                <div class="case-study-meta-item py-3.5 flex flex-col gap-2">
                   <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/40 font-semibold">TECH STACK</span>
                   <div class="flex flex-wrap gap-1.5">
                     <span
@@ -144,37 +147,41 @@
               <!-- Table of Contents (Desktop Jump Links) -->
               <div class="hidden lg:flex flex-col gap-3 pt-2">
                 <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/50 font-semibold">TABLE OF CONTENTS</span>
-                <nav class="flex flex-col gap-2 font-sans text-xs">
+                <nav class="flex flex-col gap-1 font-sans text-xs border-l border-black/10">
                   <a
                     href="#section-overview"
                     @click.prevent="scrollToSection('section-overview')"
-                    class="text-[#22201e]/60 hover:text-[#22201e] transition-colors py-0.5 flex items-center gap-2"
+                    class="transition-all duration-200 py-1 flex items-center gap-2 -ml-[1px] pl-3 border-l-2"
+                    :class="activeSection === 'section-overview' ? 'border-[#22201e] text-[#22201e] font-semibold' : 'border-transparent text-[#22201e]/50 hover:text-[#22201e]'"
                   >
-                    <span class="font-mono text-xs text-[#22201e]/50 font-medium">01.</span>
+                    <span class="font-mono text-xs opacity-60">01.</span>
                     <span>Problem & Context</span>
                   </a>
                   <a
                     href="#section-architecture"
                     @click.prevent="scrollToSection('section-architecture')"
-                    class="text-[#22201e]/60 hover:text-[#22201e] transition-colors py-0.5 flex items-center gap-2"
+                    class="transition-all duration-200 py-1 flex items-center gap-2 -ml-[1px] pl-3 border-l-2"
+                    :class="activeSection === 'section-architecture' ? 'border-[#22201e] text-[#22201e] font-semibold' : 'border-transparent text-[#22201e]/50 hover:text-[#22201e]'"
                   >
-                    <span class="font-mono text-xs text-[#22201e]/50 font-medium">02.</span>
+                    <span class="font-mono text-xs opacity-60">02.</span>
                     <span>System Architecture</span>
                   </a>
                   <a
                     href="#section-features"
                     @click.prevent="scrollToSection('section-features')"
-                    class="text-[#22201e]/60 hover:text-[#22201e] transition-colors py-0.5 flex items-center gap-2"
+                    class="transition-all duration-200 py-1 flex items-center gap-2 -ml-[1px] pl-3 border-l-2"
+                    :class="activeSection === 'section-features' ? 'border-[#22201e] text-[#22201e] font-semibold' : 'border-transparent text-[#22201e]/50 hover:text-[#22201e]'"
                   >
-                    <span class="font-mono text-xs text-[#22201e]/50 font-medium">03.</span>
+                    <span class="font-mono text-xs opacity-60">03.</span>
                     <span>Key Features</span>
                   </a>
                   <a
                     href="#section-takeaways"
                     @click.prevent="scrollToSection('section-takeaways')"
-                    class="text-[#22201e]/60 hover:text-[#22201e] transition-colors py-0.5 flex items-center gap-2"
+                    class="transition-all duration-200 py-1 flex items-center gap-2 -ml-[1px] pl-3 border-l-2"
+                    :class="activeSection === 'section-takeaways' ? 'border-[#22201e] text-[#22201e] font-semibold' : 'border-transparent text-[#22201e]/50 hover:text-[#22201e]'"
                   >
-                    <span class="font-mono text-xs text-[#22201e]/50 font-medium">04.</span>
+                    <span class="font-mono text-xs opacity-60">04.</span>
                     <span>Learnings & Outcomes</span>
                   </a>
                 </nav>
@@ -185,7 +192,7 @@
             <div class="lg:col-span-8 flex flex-col gap-12 sm:gap-16">
               
               <!-- Hero Preview Media (Browser Frame Mockup) -->
-              <div class="flex flex-col gap-2">
+              <div class="case-study-mockup flex flex-col gap-2">
                 <div class="overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_12px_36px_rgba(0,0,0,0.08)]">
                   <!-- Browser Bar -->
                   <div class="flex items-center justify-between px-3.5 py-2 bg-[#f3f2ee] border-b border-black/10">
@@ -291,12 +298,12 @@
                   <div
                     v-for="feat in project.features"
                     :key="feat.title"
-                    class="py-5 sm:py-6 grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-8 items-start"
+                    class="group py-5 sm:py-6 px-3 -mx-3 rounded-lg grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-8 items-start transition-colors duration-200 hover:bg-black/[0.02]"
                   >
                     <!-- Left: Number + Title + Tag -->
                     <div class="md:col-span-5 flex items-baseline gap-3">
                       <div class="flex flex-col gap-1">
-                        <h4 class="font-sans font-bold text-sm sm:text-base text-[#22201e] leading-snug">
+                        <h4 class="font-sans font-bold text-sm sm:text-base text-[#22201e] leading-snug transition-transform duration-200 group-hover:translate-x-1">
                           {{ feat.title }}
                         </h4>
                         <span
@@ -403,6 +410,7 @@
   const detailOverlay = ref<HTMLElement | null>(null);
   const scrollContainer = ref<HTMLElement | null>(null);
   const closeBtn = ref<HTMLButtonElement | null>(null);
+  const activeSection = ref<string>('section-overview');
 
   const project = computed<ProjectCaseStudy | null>(() => {
     if (!props.projectId) return null;
@@ -428,39 +436,114 @@
     return caseStudies[prevId] || null;
   });
 
+  const handleScroll = () => {
+    if (!scrollContainer.value) return;
+    const sections = ['section-overview', 'section-architecture', 'section-features', 'section-takeaways'];
+    const containerTop = scrollContainer.value.getBoundingClientRect().top;
+
+    const { scrollTop, scrollHeight, clientHeight } = scrollContainer.value;
+    if (scrollHeight - scrollTop - clientHeight < 80) {
+      activeSection.value = 'section-takeaways';
+      return;
+    }
+
+    for (const id of sections) {
+      const el = document.getElementById(id);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        const relativeTop = rect.top - containerTop;
+        if (relativeTop <= 160) {
+          activeSection.value = id;
+        }
+      }
+    }
+  };
+
   const scrollToSection = (sectionId: string) => {
     const el = document.getElementById(sectionId);
     if (el && scrollContainer.value) {
+      activeSection.value = sectionId;
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
-  const goToProject = (targetId: string) => {
+  const goToProject = async (targetId: string) => {
     if (scrollContainer.value) {
       scrollContainer.value.scrollTop = 0;
     }
+    activeSection.value = 'section-overview';
     emit('navigate', targetId);
+    await nextTick();
+    gsap.fromTo(
+      ['.case-study-hero-title', '.case-study-hero-tagline', '.case-study-mockup'],
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.35, stagger: 0.05, ease: 'power2.out' }
+    );
   };
 
-  let animationTween: gsap.core.Tween | null = null;
+  let animationTl: gsap.core.Timeline | gsap.core.Tween | null = null;
 
   const animateIn = () => {
     if (!detailOverlay.value) return;
 
-    if (animationTween) animationTween.kill();
+    if (animationTl) animationTl.kill();
+
+    activeSection.value = 'section-overview';
 
     gsap.set(detailOverlay.value, {
       clipPath: 'inset(100% 0 0 0)',
     });
 
-    animationTween = gsap.to(detailOverlay.value, {
-      clipPath: 'inset(0% 0 0 0)',
-      duration: 0.65,
-      ease: 'power3.inOut',
+    const tl = gsap.timeline({
       onComplete: () => {
         closeBtn.value?.focus();
       },
     });
+
+    // 1. Unveil modal overlay
+    tl.to(detailOverlay.value, {
+      clipPath: 'inset(0% 0 0 0)',
+      duration: 0.65,
+      ease: 'power3.inOut',
+    });
+
+    // 2. Choreographed entrance of header elements & mockup
+    tl.fromTo(
+      '.case-study-hero-meta',
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' },
+      '-=0.25'
+    );
+
+    tl.fromTo(
+      '.case-study-hero-title',
+      { opacity: 0, y: 24 },
+      { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' },
+      '-=0.28'
+    );
+
+    tl.fromTo(
+      '.case-study-hero-tagline',
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' },
+      '-=0.28'
+    );
+
+    tl.fromTo(
+      '.case-study-meta-item',
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, stagger: 0.04, duration: 0.3, ease: 'power2.out' },
+      '-=0.3'
+    );
+
+    tl.fromTo(
+      '.case-study-mockup',
+      { opacity: 0, y: 20, scale: 0.985 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'power3.out' },
+      '-=0.3'
+    );
+
+    animationTl = tl;
   };
 
   const handleClose = () => {
@@ -469,11 +552,11 @@
       return;
     }
 
-    if (animationTween) animationTween.kill();
+    if (animationTl) animationTl.kill();
 
-    animationTween = gsap.to(detailOverlay.value, {
+    animationTl = gsap.to(detailOverlay.value, {
       clipPath: 'inset(100% 0 0 0)',
-      duration: 0.5,
+      duration: 0.45,
       ease: 'power3.inOut',
       onComplete: () => {
         emit('close');
@@ -519,6 +602,6 @@
 
   onUnmounted(() => {
     window.removeEventListener('keydown', handleKeyDown);
-    if (animationTween) animationTween.kill();
+    if (animationTl) animationTl.kill();
   });
 </script>
