@@ -56,6 +56,7 @@
         <Works
           ref="worksRef"
           @openArchive="openArchive"
+          @openCaseStudy="openCaseStudy"
           @goToProject="(idx: number) => navigateToSlideIndex(2 + idx)"
         />
 
@@ -69,7 +70,18 @@
   </main>
 
   <!-- Fullscreen Project Archive Modal (Light Paper Edition) -->
-  <ProjectArchive :isOpen="isArchiveOpen" @close="closeArchive" />
+  <ProjectArchive
+    :isOpen="isArchiveOpen"
+    @close="closeArchive"
+    @openCaseStudy="openCaseStudy"
+  />
+
+  <!-- Fullscreen Project Case Study View (Option A: The Editorial Longform) -->
+  <ProjectDetail
+    :projectId="activeCaseStudyId"
+    @close="closeCaseStudy"
+    @navigate="openCaseStudy"
+  />
 </template>
 
 <script setup lang="ts">
@@ -82,7 +94,7 @@
   } from '@/components/sections';
   import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
   import { SamsungError } from '@/components/design';
-  import { LeftRail, ProjectArchive } from './components/common';
+  import { LeftRail, ProjectArchive, ProjectDetail } from './components/common';
   import { useWindowSize } from '@vueuse/core';
   import gsap from 'gsap';
   import { ScrollTrigger } from 'gsap/all';
@@ -105,6 +117,7 @@
   const isDarkRail = ref(true);
   const isSidebarSolid = ref(false);
   const isArchiveOpen = ref(false);
+  const activeCaseStudyId = ref<string | null>(null);
 
   const openArchive = () => {
     isArchiveOpen.value = true;
@@ -113,7 +126,47 @@
 
   const closeArchive = () => {
     isArchiveOpen.value = false;
-    lenis.start();
+    if (!activeCaseStudyId.value) {
+      lenis.start();
+    }
+  };
+
+  const openCaseStudy = (projectId: string) => {
+    activeCaseStudyId.value = projectId;
+    lenis.stop();
+    if (window.location.hash !== `#project/${projectId}`) {
+      window.location.hash = `project/${projectId}`;
+    }
+  };
+
+  const closeCaseStudy = () => {
+    activeCaseStudyId.value = null;
+    if (!isArchiveOpen.value) {
+      lenis.start();
+    }
+    if (window.location.hash.startsWith('#project/')) {
+      history.pushState(
+        '',
+        document.title,
+        window.location.pathname + window.location.search
+      );
+    }
+  };
+
+  const syncCaseStudyFromHash = () => {
+    const hash = window.location.hash;
+    if (hash.startsWith('#project/')) {
+      const id = hash.replace('#project/', '');
+      if (id && id !== activeCaseStudyId.value) {
+        activeCaseStudyId.value = id;
+        lenis.stop();
+      }
+    } else if (activeCaseStudyId.value) {
+      activeCaseStudyId.value = null;
+      if (!isArchiveOpen.value) {
+        lenis.start();
+      }
+    }
   };
 
   const handleIntroComplete = () => {
@@ -338,7 +391,7 @@
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (isArchiveOpen.value) return;
+    if (isArchiveOpen.value || activeCaseStudyId.value) return;
     if (['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as HTMLElement)?.tagName)) return;
 
     if (['ArrowRight', 'ArrowDown', 'PageDown'].includes(e.key) || (e.key === ' ' && !e.shiftKey)) {
@@ -392,6 +445,9 @@
 
     window.addEventListener('scroll', onWindowScroll, { passive: true });
     window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('popstate', syncCaseStudyFromHash);
+    window.addEventListener('hashchange', syncCaseStudyFromHash);
+    syncCaseStudyFromHash();
 
     setTimeout(() => {
       initHorizontalScroll();
@@ -408,6 +464,8 @@
     gsap.ticker.remove(onTickerUpdate);
     window.removeEventListener('scroll', onWindowScroll);
     window.removeEventListener('keydown', handleKeyDown);
+    window.removeEventListener('popstate', syncCaseStudyFromHash);
+    window.removeEventListener('hashchange', syncCaseStudyFromHash);
     if (horizontalScrollTrigger) {
       horizontalScrollTrigger.kill(true);
     }

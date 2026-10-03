@@ -98,15 +98,14 @@
 
                   <!-- Project Title -->
                   <td class="py-5 pr-6">
-                    <a
-                      :href="project.liveUrl || project.githubUrl"
-                      target="_blank"
-                      rel="noreferrer"
-                      class="font-serif text-lg lg:text-xl xl:text-2xl tracking-tight text-[#22201e] group-hover:underline underline-offset-4 decoration-1 decoration-black/30 transition-colors inline-flex items-baseline gap-2"
+                    <button
+                      type="button"
+                      @click="emit('openCaseStudy', project.id)"
+                      class="font-serif text-lg lg:text-xl xl:text-2xl tracking-tight text-[#22201e] group-hover:underline underline-offset-4 decoration-1 decoration-black/30 transition-colors inline-flex items-baseline gap-2 text-left cursor-pointer outline-none"
                     >
                       <span>{{ project.title }}</span>
-                      <span class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-xs font-sans text-black/50 inline-block group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-                    </a>
+                      <span class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-xs font-sans text-black/50 inline-block group-hover:translate-x-0.5">→</span>
+                    </button>
                     <!-- Category shown inline on md, hidden on lg where it has its own column -->
                     <p class="lg:hidden mt-0.5 text-xs font-sans text-[#22201e]/55">{{ project.category }}</p>
                   </td>
@@ -132,12 +131,21 @@
                   <!-- Links -->
                   <td class="py-5 text-right whitespace-nowrap">
                     <div class="inline-flex items-center justify-end gap-3 text-xs font-sans font-medium uppercase tracking-wider">
+                      <button
+                        type="button"
+                        @click="emit('openCaseStudy', project.id)"
+                        class="group/link inline-flex items-center gap-1 text-[#22201e] font-semibold hover:underline underline-offset-2 transition-colors cursor-pointer outline-none"
+                        :aria-label="`View case study for ${project.title}`"
+                      >
+                        <span>Case Study</span>
+                        <span class="text-xs inline-block transition-transform duration-300 ease-out group-hover/link:translate-x-0.5">→</span>
+                      </button>
                       <a
                         v-if="project.liveUrl"
                         :href="project.liveUrl"
                         target="_blank"
                         rel="noreferrer"
-                        class="group/link inline-flex items-center gap-1 text-[#22201e]/80 hover:text-black border-b border-transparent hover:border-black transition-colors"
+                        class="group/link inline-flex items-center gap-1 text-[#22201e]/70 hover:text-black border-b border-transparent hover:border-black transition-colors"
                         :aria-label="`View live demo for ${project.title}`"
                       >
                         <span>Live</span>
@@ -148,7 +156,7 @@
                         :href="project.githubUrl"
                         target="_blank"
                         rel="noreferrer"
-                        class="group/link inline-flex items-center gap-1 text-[#22201e]/80 hover:text-black border-b border-transparent hover:border-black transition-colors"
+                        class="group/link inline-flex items-center gap-1 text-[#22201e]/70 hover:text-black border-b border-transparent hover:border-black transition-colors"
                         :aria-label="`View source code on GitHub for ${project.title}`"
                       >
                         <span>GitHub</span>
@@ -176,9 +184,13 @@
 
               <!-- Project Title & Description -->
               <div>
-                <h3 class="font-serif text-2xl tracking-tight text-[#22201e]">
+                <button
+                  type="button"
+                  @click="emit('openCaseStudy', project.id)"
+                  class="font-serif text-2xl tracking-tight text-[#22201e] text-left hover:underline cursor-pointer outline-none block"
+                >
                   {{ project.title }}
-                </h3>
+                </button>
                 <p v-if="project.description" class="mt-1 text-xs font-sans text-[#22201e]/70 leading-relaxed">
                   {{ project.description }}
                 </p>
@@ -197,12 +209,20 @@
 
               <!-- Mobile Action Links -->
               <div class="flex items-center gap-4 pt-2 border-t border-black/5 text-xs font-sans font-medium uppercase tracking-wider">
+                <button
+                  type="button"
+                  @click="emit('openCaseStudy', project.id)"
+                  class="font-semibold text-[#22201e] underline underline-offset-2 py-0.5 cursor-pointer outline-none inline-flex items-center gap-1"
+                >
+                  <span>Case Study</span>
+                  <span>→</span>
+                </button>
                 <a
                   v-if="project.liveUrl"
                   :href="project.liveUrl"
                   target="_blank"
                   rel="noreferrer"
-                  class="group inline-flex items-center gap-1 text-[#22201e] border-b border-transparent hover:border-black/60 py-0.5 transition-colors"
+                  class="group inline-flex items-center gap-1 text-[#22201e]/80 border-b border-transparent hover:border-black/60 py-0.5 transition-colors"
                 >
                   <span>Live Demo</span>
                   <span class="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -287,6 +307,7 @@
 
   const emit = defineEmits<{
     (e: 'close'): void;
+    (e: 'openCaseStudy', projectId: string): void;
   }>();
 
   const activeCategory = ref<ArchiveCategoryFilter>('all');

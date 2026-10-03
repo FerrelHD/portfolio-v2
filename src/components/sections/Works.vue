@@ -17,7 +17,15 @@
           </h2>
         </div>
 
-        <div class="flex items-center gap-5">
+        <div class="flex items-center gap-3 sm:gap-5">
+          <button
+            type="button"
+            @click="emit('openCaseStudy', project.id)"
+            class="group inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer outline-none"
+          >
+            <span>Case Study</span>
+            <span class="text-sm md:text-base inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+          </button>
           <a
             v-if="project.liveUrl"
             :href="project.liveUrl"
@@ -48,7 +56,10 @@
         <div class="order-1 md:order-2 md:col-span-6 flex flex-col pt-0 md:pl-2 lg:pl-4">
           <!-- Project Title (Masked Reveal) — Responsive, bold, uppercase, never clips -->
           <div class="overflow-hidden">
-            <h3 class="slide-project-title font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal">
+            <h3
+              @click="emit('openCaseStudy', project.id)"
+              class="slide-project-title font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal cursor-pointer hover:opacity-85 transition-opacity"
+            >
               {{ project.title }}
             </h3>
           </div>
@@ -75,10 +86,11 @@
           <!-- Entrance Animation Wrapper for Mockup -->
           <div class="slide-mockup will-change-transform">
             <!-- macOS Browser Frame Mockup with Responsive Height Clamping -->
-            <a
-              :href="project.liveUrl || project.githubUrl"
-              target="_blank"
-              rel="noreferrer"
+            <div
+              role="button"
+              tabindex="0"
+              @click="emit('openCaseStudy', project.id)"
+              @keydown.enter="emit('openCaseStudy', project.id)"
               class="group/mockup relative block w-full max-h-[19vh] sm:max-h-[22vh] md:max-h-[25vh] lg:max-h-[28vh] xl:max-h-[32vh] overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
             >
               <!-- Browser Top Bar -->
@@ -106,15 +118,15 @@
                 <!-- Subtle Glass Sheen on Hover -->
                 <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/25 opacity-0 transition-opacity duration-500 group-hover/mockup:opacity-100"></div>
 
-                <!-- Hover Floating Pill "VIEW PROJECT ↗" -->
+                <!-- Hover Floating Pill "READ CASE STUDY →" -->
                 <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover/mockup:opacity-100 transition-all duration-300">
                   <div class="px-3.5 py-1.5 rounded-full bg-[#22201e]/90 text-[#faf9f6] text-[10px] md:text-xs font-mono tracking-wider backdrop-blur-md shadow-xl flex items-center gap-1.5 transform scale-90 group-hover/mockup:scale-100 transition-transform duration-300">
-                    <span>VIEW PROJECT</span>
-                    <span class="text-sm leading-none inline-block transition-transform duration-300 ease-out group-hover/mockup:translate-x-0.5 group-hover/mockup:-translate-y-0.5">↗</span>
+                    <span>READ CASE STUDY</span>
+                    <span class="text-sm leading-none inline-block transition-transform duration-300 ease-out group-hover/mockup:translate-x-0.5">→</span>
                   </div>
                 </div>
               </div>
-            </a>
+            </div>
           </div>
 
           <!-- About Project Section with Text Box Reveal -->
@@ -237,25 +249,34 @@
 
       <!-- Bottom Row Metadata (Mobile Links fallback) -->
       <div class="flex items-center justify-between sm:hidden pt-2 border-t border-black/10 text-xs">
-        <a
-          v-if="project.liveUrl"
-          :href="project.liveUrl"
-          target="_blank"
-          class="group font-medium text-[#22201e] hover:underline transition-all inline-flex items-center gap-1"
+        <button
+          type="button"
+          @click="emit('openCaseStudy', project.id)"
+          class="font-medium text-[#22201e] underline underline-offset-2 transition-all inline-flex items-center gap-1 cursor-pointer outline-none"
         >
-          <span>Live Preview</span>
-          <span class="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-        </a>
-        <a
-          v-if="project.githubUrl"
-          :href="project.githubUrl"
-          target="_blank"
-          class="group font-medium text-[#22201e] hover:underline transition-all inline-flex items-center gap-1"
-          :class="{ 'ml-auto': !project.liveUrl }"
-        >
-          <span>GitHub</span>
-          <span class="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-        </a>
+          <span>Case Study</span>
+          <span class="inline-block transition-transform duration-300 ease-out">→</span>
+        </button>
+        <div class="flex items-center gap-3">
+          <a
+            v-if="project.liveUrl"
+            :href="project.liveUrl"
+            target="_blank"
+            class="group font-medium text-[#22201e]/80 hover:text-[#22201e] transition-all inline-flex items-center gap-1"
+          >
+            <span>Live</span>
+            <span class="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+          </a>
+          <a
+            v-if="project.githubUrl"
+            :href="project.githubUrl"
+            target="_blank"
+            class="group font-medium text-[#22201e]/80 hover:text-[#22201e] transition-all inline-flex items-center gap-1"
+          >
+            <span>GitHub</span>
+            <span class="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+          </a>
+        </div>
       </div>
     </section>
   </div>
@@ -268,6 +289,7 @@
   const emit = defineEmits<{
     (e: 'openArchive'): void;
     (e: 'goToProject', index: number): void;
+    (e: 'openCaseStudy', projectId: string): void;
   }>();
   import {
     indonesianCrustalObservatoryImg,
