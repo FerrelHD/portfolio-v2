@@ -22,18 +22,7 @@
           <span class="inline-block transition-transform duration-200 group-hover:-translate-x-1">←</span>
           <span>Back to Works</span>
         </button>
-
-        <!-- Center: Project Title & Index Badge (Desktop) -->
-        <div class="hidden md:flex items-center gap-3">
-          <span class="font-mono text-xs text-[#22201e]/40 tracking-wider">{{ project.number }}</span>
-          <span class="font-sans font-bold text-xs uppercase tracking-widest text-[#22201e] truncate max-w-[280px]">
-            {{ project.title }}
-          </span>
-          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-black/[0.05] text-[#22201e]/70">
-            {{ project.year }}
-          </span>
-        </div>
-
+        
         <!-- Right: Close Button -->
         <div class="flex items-center gap-3">
           <button
