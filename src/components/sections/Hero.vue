@@ -134,40 +134,6 @@
       </div>
     </div>
 
-    <!-- Center Stage Multilingual Greetings - Mask Reveal & Rolling Strip ala Khanh Nguyen -->
-    <div
-      v-if="showIntro"
-      class="pointer-events-none absolute inset-0 z-10 flex items-center justify-center select-none overflow-hidden px-6"
-      aria-hidden="true"
-    >
-      <!-- Outer Mask Slit Box: overflow-hidden sets the horizontal slit mask boundary -->
-      <div
-        class="overflow-hidden flex items-center justify-center h-[1.15em] text-[clamp(2.75rem,min(8vw,11vh),7rem)] lg:text-[clamp(3.75rem,min(9vw,13vh),8.5rem)] leading-none text-[#f3eee8] pointer-events-none select-none"
-      >
-        <!-- greetingContent: rises from below (yPercent: 105 -> 0) in Stage 1 & wipes up (0 -> -105) in Stage 3 -->
-        <div
-          ref="greetingContent"
-          class="flex items-center justify-center h-[1.15em] will-change-transform leading-none"
-        >
-          <!-- Inner Rolling Window: overflow-hidden so greetings roll inside -->
-          <div class="h-[1.15em] overflow-hidden flex flex-col justify-start">
-            <div
-              ref="greetingStrip"
-              class="flex flex-col items-center will-change-transform"
-            >
-              <span
-                v-for="greeting in greetings"
-                :key="greeting"
-                class="h-[1.15em] flex items-center justify-center font-serif italic font-normal tracking-tight whitespace-nowrap leading-none text-center px-4"
-              >
-                {{ greeting }}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Base Progress Line ala Khanh Nguyen -->
     <div
       v-if="showIntro"
@@ -203,20 +169,6 @@
   const showIntro = ref(true);
 
   const years = ['22', '23', '24', '25', '26'];
-
-  const greetings = [
-    'Hello',
-    'Hola',
-    'Bonjour',
-    'Ciao',
-    'Olà',
-    'Guten Tag',
-    'こんにちは',
-    'Halo',
-  ];
-  const greetingContent = ref<HTMLElement | null>(null);
-  const greetingStrip = ref<HTMLElement | null>(null);
-
   const introContent = ref<HTMLElement | null>(null);
   const introProgressLine = ref<HTMLElement | null>(null);
   const baseCurtain = ref<HTMLElement | null>(null);
@@ -246,9 +198,9 @@
     introStarted = true;
 
     // 5-Stage Intro Animation Timeline:
-    // 1. Stage 1: Mask reveal dari bawah untuk 2022, quote kanan bawah, dan sapaan "Hello" di tengah layar
-    // 2. Stage 2: Settle sejenak, lalu gulungan kontinu sinematik sinkron penuh (22 -> 26, Hello -> Halo, progress line)
-    // 3. Stage 3: SEMUA teks animasi loading screen (2026, progress line, quote, sapaan "Halo") KELAR & EXIT SERENTAK
+    // 1. Stage 1: Mask reveal dari bawah untuk 2022 dan quote kanan bawah
+    // 2. Stage 2: Settle sejenak, lalu gulungan kontinu sinematik sinkron penuh (22 -> 26, progress line)
+    // 3. Stage 3: SEMUA teks animasi loading screen (2026, progress line, quote) KELAR & EXIT SERENTAK
     // 4. Stage 4: Setelah layar bersih dari teks loading, BARU transisi warna (curtain rise #262220 -> #3A3632)
     // 5. Stage 5: Hero text reveal (FERREL RASHAD, bio, SCROLL, footer info)
     const tl = gsap.timeline({
@@ -259,19 +211,6 @@
     if (introContent.value) {
       tl.to(
         introContent.value,
-        {
-          yPercent: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-        },
-        0.08,
-      );
-    }
-
-    // Mask reveal dari bawah untuk kata sapaan awal ("Hello") di tengah layar
-    if (greetingContent.value) {
-      tl.to(
-        greetingContent.value,
         {
           yPercent: 0,
           duration: 0.8,
@@ -295,10 +234,6 @@
     }
 
     // 2. Stage 2: Gulungan Kontinu Sinematik Sinkron Penuh ala Year Rolling Strip
-    // Menghitung target gulungan persis ke kata terakhir ("Halo")
-    const totalGreetingSteps = greetings.length - 1; // 7 langkah (dari 0 ke 7)
-    const scrollTargetGreetingY = -(totalGreetingSteps / greetings.length) * 100; // -87.5% mendarat presisi di "Halo"
-
     const totalSteps = years.length - 1; // 4 steps (22 -> 26)
     const scrollTargetY = -(totalSteps / years.length) * 100; // Lands cleanly on 26
 
@@ -311,20 +246,6 @@
         yearStrip.value,
         {
           yPercent: scrollTargetY,
-          duration: countDuration,
-          ease: 'power4.inOut',
-        },
-        countStartTime,
-      );
-    }
-
-    // Rolling strip sapaan di tengah layar (Hello -> Hola -> Bonjour -> Ciao -> Olà -> Guten Tag -> こんにちは -> Halo)
-    // Berputar dengan akselerasi yang sama, lalu melambat anggun (decelerates) dan mendarat mantap di "Halo"
-    if (greetingStrip.value) {
-      tl.to(
-        greetingStrip.value,
-        {
-          yPercent: scrollTargetGreetingY,
           duration: countDuration,
           ease: 'power4.inOut',
         },
@@ -345,8 +266,8 @@
       );
     }
 
-    // 3. Stage 3: SEMUA teks loading screen (2026, Halo, progress line, quote) KELAR & EXIT SERENTAK
-    // Diberi jeda tenang (hold time ~450ms) di 2.50s s/d 2.95s agar pengunjung membaca "Halo" & "2026" dengan tenang tanpa terpotong
+    // 3. Stage 3: SEMUA teks loading screen (2026, progress line, quote) KELAR & EXIT SERENTAK
+    // Diberi jeda tenang (hold time ~450ms) di 2.50s s/d 2.95s agar pengunjung membaca "2026" dengan tenang tanpa terpotong
     const exitStartTime = countStartTime + countDuration + 0.45; // 2.95s
     const exitDuration = 0.55;
 
@@ -361,19 +282,6 @@
           onComplete: () => {
             showIntro.value = false;
           },
-        },
-        exitStartTime,
-      );
-    }
-
-    // Sapaan tengah ("Halo") wipes up and disappears serentak dengan mask yang sama
-    if (greetingContent.value) {
-      tl.to(
-        greetingContent.value,
-        {
-          yPercent: -105,
-          duration: exitDuration,
-          ease: 'power3.inOut',
         },
         exitStartTime,
       );
@@ -526,14 +434,6 @@
     if (footerCenterEl.value) gsap.set(footerCenterEl.value, { yPercent: 105, autoAlpha: 0 });
     if (scrollCueEl.value) gsap.set(scrollCueEl.value, { yPercent: 120, autoAlpha: 0 });
     if (quoteEl.value) gsap.set(quoteEl.value, { yPercent: 105 });
-
-    // Initial state for center stage multilingual greetings (masked down like year counter)
-    if (greetingContent.value) {
-      gsap.set(greetingContent.value, { yPercent: 105 });
-    }
-    if (greetingStrip.value) {
-      gsap.set(greetingStrip.value, { yPercent: 0 });
-    }
 
     if (!props.delayIntro) {
       playIntro();
