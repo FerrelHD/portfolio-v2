@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate:pdf": "node scripts/generate-deck-pdf.cjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.14",

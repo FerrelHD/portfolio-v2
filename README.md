@@ -107,6 +107,26 @@ npm run build
 
 ---
 
+## 📑 Generating Portfolio Slide Deck PDF
+
+You can automatically generate an editorial **16:9 Landscape PDF Slide Deck** showcasing the 4 featured case studies (Nusantara Observatory, TactIQ, Persona 5, and Student Life) using the built-in headless export engine:
+
+```bash
+# Generate the 16:9 presentation PDF slide deck
+npm run generate:pdf
+```
+
+### Outputs:
+- **`public/Ferrel_Rashad_Portfolio_Deck.pdf`**: High-resolution 16:9 presentation PDF with vector-sharp text, custom typography, and interactive clickable links.
+- **`public/portfolio-deck.html`**: Standalone HTML slide deck preview that can be opened directly in any browser.
+
+### Customizing Slide Content:
+To update slide details, project descriptions, metrics, or links in the future:
+1. Open and edit `scripts/generate-deck-pdf.cjs`.
+2. Re-run `npm run generate:pdf`.
+
+---
+
 ## 🎨 Acknowledgments & Credits
 
 - **Editorial UI/UX Inspiration:** [Khanh Nguyen](https://khanhnguyen.design) & [Huy Nguyen](https://www.huyng.xyz)

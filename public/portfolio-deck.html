@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ferrel Rashad Akeyla — Portfolio Slide Deck</title>
+  <style>
+    @font-face {
+      font-family: 'PPEditorialOld';
+      src: url('file:///E:/College Stuff/Career/portfolio/src/assets/fonts/PPEditorialOld-Light.woff2') format('woff2');
+      font-weight: 300 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'CabinetGrotesk';
+      src: url('file:///E:/College Stuff/Career/portfolio/src/assets/fonts/CabinetGrotesk-Variable.ttf') format('truetype');
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Switzer';
+      src: url('file:///E:/College Stuff/Career/portfolio/src/assets/fonts/Switzer-Variable.ttf') format('truetype');
+      font-style: normal;
+    }
+
+    @page {
+      size: 1920px 1080px;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html, body {
+      width: 1920px;
+      background: #22201e;
+      color: #22201e;
+      font-family: 'Switzer', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .slide {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px 80px;
+    }
+
+    .slide:last-child {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    /* THEMES */
+    .theme-dark {
+      background: #22201e;
+      color: #faf9f6;
+    }
+
+    .theme-bronze {
+      background: #282523;
+      color: #faf9f6;
+    }
+
+    .theme-closing {
+      background: #3A3632;
+      color: #faf9f6;
+    }
+
+    .theme-light {
+      background: #faf9f6;
+      color: #22201e;
+    }
+
+    /* TYPOGRAPHY */
+    .font-serif {
+      font-family: 'PPEditorialOld', Georgia, serif;
+    }
+
+    .font-title {
+      font-family: 'CabinetGrotesk', 'Switzer', sans-serif;
+      font-weight: 800;
+    }
+
+    .font-mono {
+      font-family: ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    /* COMMON HEADER */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      padding-bottom: 24px;
+    }
+
+    .theme-dark .slide-header,
+    .theme-bronze .slide-header,
+    .theme-closing .slide-header {
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .header-tag {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-weight: 600;
+      opacity: 0.6;
+    }
+
+    .header-chapter {
+      font-family: 'PPEditorialOld', serif;
+      font-size: 32px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      opacity: 0.7;
+    }
+
+    /* COMMON FOOTER */
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 100%;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      padding-top: 24px;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      opacity: 0.65;
+    }
+
+    .theme-dark .slide-footer,
+    .theme-bronze .slide-footer,
+    .theme-closing .slide-footer {
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a.link-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.15);
+      background: rgba(0,0,0,0.03);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .theme-dark a.link-badge,
+    .theme-bronze a.link-badge,
+    .theme-closing a.link-badge {
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* MOCKUP WINDOW */
+    .mockup-window {
+      background: #1e1e1e;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mockup-bar {
+      height: 38px;
+      background: #e8e6e3;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 8px;
+      border-bottom: 1px solid #d4d0c9;
+    }
+
+    .traffic-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .mockup-url {
+      margin-left: 12px;
+      background: #fbfaf9;
+      border: 1px solid #dcd9d3;
+      border-radius: 6px;
+      padding: 3px 18px;
+      font-size: 11px;
+      font-family: ui-monospace, monospace;
+      color: #666;
+      letter-spacing: 0.05em;
+    }
+
+    .mockup-content {
+      width: 100%;
+      height: 480px;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mockup-content img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    /* TWO COLUMN PROJECT LAYOUT */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 70px;
+      align-items: center;
+      margin: auto 0;
+    }
+
+    .project-meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .project-meta-list .row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .project-meta-list .label {
+      font-weight: 800;
+      color: #22201e;
+      min-width: 80px;
+    }
+
+    .project-meta-list .val {
+      font-weight: 500;
+      opacity: 0.8;
+    }
+
+    .project-title {
+      font-family: 'CabinetGrotesk', sans-serif;
+      font-size: 56px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      margin-bottom: 16px;
+    }
+
+    .project-story {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-size: 15px;
+      line-height: 1.6;
+      opacity: 0.88;
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+
+    .metric-badges {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .metric-badge {
+      background: rgba(0,0,0,0.035);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .metric-value {
+      font-family: 'CabinetGrotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: #22201e;
+    }
+
+    .metric-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      opacity: 0.6;
+    }
+
+    /* SLIDE 1 COVER */
+    .cover-center {
+      margin: auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .cover-name {
+      font-family: 'PPEditorialOld', serif;
+      font-size: 110px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 0.9;
+      color: #faf9f6;
+    }
+
+    .cover-tagline {
+      font-family: 'CabinetGrotesk', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #efb11d;
+    }
+
+    .cover-desc {
+      font-size: 20px;
+      max-width: 900px;
+      line-height: 1.5;
+      opacity: 0.75;
+      font-weight: 400;
+      margin-top: 8px;
+    }
+
+    /* SLIDE 2 ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 80px;
+      align-items: center;
+      margin: auto 0;
+    }
+
+    .quote-box {
+      font-family: 'CabinetGrotesk', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.35;
+      border-left: 3px solid #22201e;
+      padding-left: 24px;
+      margin: 28px 0;
+    }
+
+    .portrait-card {
+      width: 420px;
+      aspect-ratio: 3/4;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      border: 1px solid rgba(0,0,0,0.1);
+      margin-left: auto;
+    }
+
+    .portrait-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(110%);
+    }
+
+    /* SLIDE 7 CAPABILITIES */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+      margin: auto 0;
+    }
+
+    .cap-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 520px;
+    }
+
+    .cap-num {
+      font-family: 'PPEditorialOld', serif;
+      font-size: 40px;
+      opacity: 0.4;
+      line-height: 1;
+    }
+
+    .cap-title {
+      font-family: 'PPEditorialOld', serif;
+      font-size: 38px;
+      font-weight: 400;
+      line-height: 1.15;
+      margin: 18px 0 12px 0;
+      color: #faf9f6;
+    }
+
+    .cap-desc {
+      font-size: 15px;
+      line-height: 1.6;
+      opacity: 0.75;
+      margin-bottom: 24px;
+    }
+
+    .pill-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-pill {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 5px 12px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+      color: #efb11d;
+    }
+
+    /* SLIDE 8 CLOSING */
+    .closing-center {
+      margin: auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .closing-title {
+      font-family: 'PPEditorialOld', serif;
+      font-size: 130px;
+      font-weight: 400;
+      text-transform: uppercase;
+      line-height: 0.85;
+      letter-spacing: -0.03em;
+    }
+
+    .contact-card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .contact-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .contact-card .c-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      opacity: 0.5;
+      font-weight: 600;
+    }
+
+    .contact-card .c-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: #faf9f6;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SLIDE 1: COVER -->
+  <section class="slide theme-dark">
+    <div class="slide-header">
+      <span class="header-tag">FERREL RASHAD AKEYLA — PORTFOLIO // 2022 — 2026</span>
+      <div class="header-right">
+        <span>DEPOK & JAKARTA, ID (GMT+7)</span>
+      </div>
+    </div>
+
+    <div class="cover-center">
+      <h1 class="cover-name">FERREL RASHAD<br/>AKEYLA</h1>
+      <p class="cover-desc">
+        Crafting high-performance web systems, interactive physics-driven experiences, and scalable data solutions. Selected works, technical architecture, and engineering showcase.
+      </p>
+    </div>
+
+    <div class="slide-footer">
+      <span>16:9 PRESENTATION SLIDE DECK</span>
+      <div style="display:flex; gap:16px;">
+        <a href="https://github.com/FerrelHD" class="link-badge">GITHUB: @FerrelHD ↗</a>
+        <a href="https://linkedin.com/in/ferrel-rashad" class="link-badge">LINKEDIN: Ferrel Rashad ↗</a>
+        <a href="mailto:ferrelrashadakeyla2014@gmail.com" class="link-badge">EMAIL: ferrelrashadakeyla2014@gmail.com ↗</a>
+      </div>
+      <span>[ 01 / 08 ]</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: CHAPTER I - ABOUT ME -->
+  <section class="slide theme-light">
+    <div class="slide-header">
+      <div style="display:flex; align-items:baseline; gap:18px;">
+        <h2 class="header-chapter">CHAPTER I</h2>
+        <span class="header-tag">BIOGRAPHY & CORE PHILOSOPHY</span>
+      </div>
+      <div class="header-right">
+        <span>ABOUT THE ENGINEER</span>
+      </div>
+    </div>
+
+    <div class="about-grid">
+      <div>
+        <p style="font-size: 26px; line-height: 1.45; font-weight: 400; color: #22201e; margin-bottom: 24px;">
+          Hi, I'm Ferrel — a software engineer and creative technologist focused on crafting fluid web interfaces, real-time data visualisations, and interactive digital experiences.
+        </p>
+        <div class="quote-box">
+          "CODE WITH PRECISION, DESIGN FOR PEOPLE."
+        </div>
+        <p style="font-size: 16px; line-height: 1.7; opacity: 0.85; margin-bottom: 24px;">
+          As an undergraduate Computer Science student at Universitas Indonesia, my work bridges rigorous systems engineering with high-fidelity interaction design. Whether building high-frequency WebSockets telemetry engines, training quantitative machine learning models, or crafting 60 FPS Canvas visualisations, I strive for clarity, performance, and craftsmanship.
+        </p>
+        <div style="display: flex; gap: 12px;">
+          <span class="link-badge" style="background:#22201e; color:#faf9f6; border:none;">FULL-STACK SYSTEMS</span>
+          <span class="link-badge" style="background:#22201e; color:#faf9f6; border:none;">QUANTITATIVE ML</span>
+          <span class="link-badge" style="background:#22201e; color:#faf9f6; border:none;">CREATIVE 3D & AUDIO</span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: flex-end;">
+        <div class="portrait-card">
+          <img src="file:///E:/College Stuff/Career/portfolio/src/assets/images/ferrel-portrait.jpg" alt="Ferrel Rashad Akeyla">
+        </div>
+        <div style="width: 420px; margin-top: 12px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; display: flex; justify-content: space-between;">
+          <span>FERREL RASHAD AKEYLA</span>
+          <span>JAKARTA / DEPOK</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span>DIGITAL PORTFOLIO</span>
+      <span>CHAPTER I — ABOUT ME</span>
+      <span>[ 02 / 08 ]</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: PROJECT 01 - NUSANTARA OBSERVATORY -->
+  <section class="slide theme-light">
+    <div class="slide-header">
+      <div style="display:flex; align-items:baseline; gap:18px;">
+        <h2 class="header-chapter">CHAPTER II</h2>
+        <span class="header-tag">THE WORK #01 // GEOSPATIAL HAZARD OBSERVATORY</span>
+      </div>
+      <div class="header-right">
+        <a href="https://nusantara-observatory.vercel.app/" class="link-badge">LIVE DEMO ↗</a>
+        <a href="https://github.com/FerrelHD/Global-Seismic-Tracker" class="link-badge">GITHUB ↗</a>
+      </div>
+    </div>
+
+    <div class="project-grid">
+      <!-- Left: Mockup + Metrics -->
+      <div>
+        <div class="mockup-window">
+          <div class="mockup-bar">
+            <span class="traffic-dot dot-red"></span>
+            <span class="traffic-dot dot-yellow"></span>
+            <span class="traffic-dot dot-green"></span>
+            <span class="mockup-url">nusantara-observatory.vercel.app</span>
+          </div>
+          <div class="mockup-content">
+            <img src="file:///E:/College Stuff/Career/portfolio/src/assets/images/Indonesian Crustal Observatory.png" alt="Nusantara Observatory">
+          </div>
+        </div>
+
+        <div class="metric-badges">
+          <div class="metric-badge">
+            <span class="metric-value">60 FPS</span>
+            <span class="metric-label">Canvas 2D Engine</span>
+          </div>
+          <div class="metric-badge">
+            <span class="metric-value">&lt; 50ms</span>
+            <span class="metric-label">Proximity Analysis</span>
+          </div>
+          <div class="metric-badge">
+            <span class="metric-value">1,000+</span>
+            <span class="metric-label">Seismic Events</span>
+          </div>
+          <div class="metric-badge">
+            <span class="metric-value">Live Feed</span>
+            <span class="metric-label">BMKG & USGS Ingestion</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Story & Details -->
+      <div>
+        <h3 class="project-title">NUSANTARA OBSERVATORY</h3>
+        <div class="project-meta-list">
+          <div class="row">
+            <span class="label">ROLE:</span>
+            <span class="val">Frontend & Geospatial Engineer</span>
+          </div>
+          <div class="row">
+            <span class="label">SYSTEM:</span>
+            <span class="val">React 19 · TypeScript · Canvas 2D · WebSockets · Tailwind</span>
+          </div>
+          <div class="row">
+            <span class="label">DOMAIN:</span>
+            <span class="val">nusantara-observatory.vercel.app</span>
+          </div>
+        </div>
+
+        <div class="project-story">
+          <p>
+            Hazard information is often scattered across different sources, making it difficult to see what is happening across Indonesia in one place. I turned fragmented hazard feeds into a single unified visual experience that makes complex geospatial events intuitive to explore.
+          </p>
+          <p>
+            I engineered an interactive geospatial observatory integrating multiple live data sources into a real-time 2D map with temporal event replay, fault line vector overlays, and proximity radius calculation. This project required combining high-performance data pipelines, WebGL/Canvas rendering, and responsive interaction into one cohesive system.
+          </p>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+          <span class="link-badge" style="background:#22201e; color:#faf9f6; border:none;">PARTICLE REPLAY ENGINE</span>
+          <span class="link-badge" style="background:#22201e; color:#faf9f6; border:none;">BMKG / USGS MULTI-INGESTION</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span>SELECTED WORKS // #01</span>
+      <span>NUSANTARA OBSERVATORY</span>
+      <span>[ 03 / 08 ]</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: PROJECT 02 - TACTIQ -->
+  <section class="slide theme-light">
+    <div class="slide-header">
+      <div style="display:flex; align-items:baseline; gap:18px;">
+        <h2 class="header-chapter">CHAPTER II</h2>
+        <span class="header-tag">THE WORK #02 // FOOTBALL ANALYTICS & TELEMETRY</span>
+      </div>
+      <div class="header-right">
+        <a href="https://github.com/LuthfiMirza/TactIQ" class="link-badge">GITHUB REPOSITORY ↗</a>
+      </div>
+    </div>
+
+    <div class="project-grid">
+      <!-- Left: Mockup + Metrics -->
+      <div>
+        <div class="mockup-window">
+          <div class="mockup-bar">
+            <span class="traffic-dot dot-red"></span>
+            <span class="traffic-dot dot-yellow"></span>
+            <span class="traffic-dot dot-green"></span>
+            <span class="mockup-url">tactiq.analytics</span>
+          </div>
+          <div class="mockup-content">
+            <img src="file:///E:/College Stuff/Career/portfolio/src/assets/images/TactIQ.png" alt="TactIQ Analytics">
+          </div>
+        </div>
+
+        <div class="metric-badges">
+          <div class="metric-badge">
+            <span class="metric-value">60 FPS</span>
+            <span class="metric-label">Double-Buffered Canvas</span>
+          </div>
+          <div class="metric-badge">
+            <span class="metric-value">&lt; 45ms</span>
+            <span class="metric-label">Socket.io Transport</span>
+          </div>
+          <div class="metric-badge">
+            <span class="metric-value">7 Axes</span>
+            <span class="metric-label">Multivariate Radar</span>
+          </div>
+          <div class="metric-badge">
+            <span class="metric-value">10K+ / match</span>
+            <span class="metric-label">Tracking Coordinate Vectors</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Story & Details -->
+      <div>
+        <h3 class="project-title">TACTIQ</h3>
+        <div class="project-meta-list">
+          <div class="row">
+            <span class="label">ROLE:</span>
+            <span class="val">Front-End Lead & UI Engineer</span>
+          </div>
+          <div class="row">
+            <span class="label">SYSTEM:</span>
+            <span class="val">Next.js 14 · TypeScript · HTML5 Canvas · Socket.io · Chart.js · Tailwind</span>
+          </div>
+          <div class="row">
+            <span class="label">CONTEXT:</span>
+            <span class="val">Telemetry Engineering & Football Analytics Platform</span>
+          </div>
+        </div>
+
+        <div class="project-story">
+          <p>
+            Modern football coaching staff and analysts face an information overload: telemetry data streams, raw tracking coordinates, and delayed video recordings exist in fragmented silos. Analysts spent hours reconciling coordinate feeds without real-time spatial vectors.
+          </p>
+          <p>
+            As Front-End Lead, I architected the core visualization pipeline in Next.js 14. We isolated high-frequency coordinate broadcasts from React DOM reconciliations by utilizing a double-buffered HTML5 Canvas 2D engine driven by requestAnimationFrame. Synchronized linear interpolation prevents packet jitter, rendering live pitch heatmaps and passing corridors smoothly.
+          </p>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+          <span class="link-badge" style="background:#22201e; color:#faf9f6; border:none;">PITCH HEATMAPS</span>
+          <span class="link-badge" style="background:#22201e; color:#faf9f6; border:none;">SIMILARITY ENGINE</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span>SELECTED WORKS // #02</span>
+      <span>TACTIQ TELEMETRY</span>
+      <span>[ 04 / 08 ]</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: PROJECT 03 - PERSONA 5 ROYAL -->
+  <section class="slide theme-light">
+    <div class="slide-header">
+      <div style="display:flex; align-items:baseline; gap:18px;">
+        <h2 class="header-chapter">CHAPTER II</h2>
+        <span class="header-tag">THE WORK #03 // CREATIVE FRONTEND & GAME UI</span>
+      </div>
+      <div class="header-right">
+        <a href="https://persona-lilac-mu.vercel.app/" class="link-badge">LIVE DEMO ↗</a>
+        <a href="https://github.com/FerrelHD/Persona" class="link-badge">GITHUB ↗</a>
+      </div>
+    </div>
+
+    <div class="project-grid">
+      <!-- Left: Mockup + Metrics -->
+      <div>
+        <div class="mockup-window">
+          <div class="mockup-bar">
+            <span class="traffic-dot dot-red"></span>
+            <span class="traffic-dot dot-yellow"></span>
+            <span class="traffic-dot dot-green"></span>
+            <span class="mockup-url">persona-lilac-mu.vercel.app</span>
+          </div>
+          <div class="mockup-content">
+            <img src="file:///E:/College Stuff/Career/portfolio/src/assets/images/Persona.png" alt="Persona 5 Royal Web">
+          </div>
+        </div>
+
+        <div class="metric-badges">
+          <div class="metric-badge">
+            <span class="metric-value">0ms</span>
+            <span class="metric-label">Procedural Web Audio</span>
+          </div>
+          <div class="metric-badge">
+            <span class="metric-value">1080p</span>
+            <span class="metric-label">Zero-Scroll Viewport</span>
+          </div>
+          <div class="metric-badge">
+            <span class="metric-value">60 FPS</span>
+            <span class="metric-label">Kinetic Mask Physics</span>
+          </div>
+          <div class="metric-badge">
+            <span class="metric-value">Stateful</span>
+            <span class="metric-label">Console Menu Machine</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Story & Details -->
+      <div>
+        <h3 class="project-title">PERSONA 5 ROYAL</h3>
+        <div class="project-meta-list">
+          <div class="row">
+            <span class="label">ROLE:</span>
+            <span class="val">Creative Developer & UI Engineer</span>
+          </div>
+          <div class="row">
+            <span class="label">SYSTEM:</span>
+            <span class="val">React 18 · TypeScript · Web Audio API · Tailwind CSS</span>
+          </div>
+          <div class="row">
+            <span class="label">DOMAIN:</span>
+            <span class="val">persona-lilac-mu.vercel.app</span>
+          </div>
+        </div>
+
+        <div class="project-story">
+          <p>
+            Most developer portfolios follow identical grid patterns and neutral aesthetics. I wanted to break the mold entirely by building an authentic, 60 FPS console experience inspired by Persona 5 Royal that pushes web interactivity to its absolute limit.
+          </p>
+          <p>
+            I engineered a zero-scroll 1080p viewport interface featuring procedural Web Audio synthesis for zero-latency acoustic feedback, ransom-note comic typography, character background video loops, and responsive game-menu state machines that recreate the iconic ATLUS experience right in the browser.
+          </p>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+          <span class="link-badge" style="background:#22201e; color:#faf9f6; border:none;">SYNTHESIZED SOUNDSCAPES</span>
+          <span class="link-badge" style="background:#22201e; color:#faf9f6; border:none;">ANGULAR POLYGON MASKS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span>SELECTED WORKS // #03</span>
+      <span>PERSONA 5 ROYAL</span>
+      <span>[ 05 / 08 ]</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: PROJECT 04 - STUDENT LIFE -->
+  <section class="slide theme-light">
+    <div class="slide-header">
+      <div style="display:flex; align-items:baseline; gap:18px;">
+        <h2 class="header-chapter">CHAPTER II</h2>
+        <span class="header-tag">THE WORK #04 // PRODUCTIVITY ECOSYSTEM & OFFLINE PWA</span>
+      </div>
+      <div class="header-right">
+        <a href="https://ferrelhd.github.io/Student-Life/" class="link-badge">LIVE DEMO ↗</a>
+        <a href="https://github.com/FerrelHD/Student-Life" class="link-badge">GITHUB ↗</a>
+      </div>
+    </div>
+
+    <div class="project-grid">
+      <!-- Left: Mockup + Metrics -->
+      <div>
+        <div class="mockup-window">
+          <div class="mockup-bar">
+            <span class="traffic-dot dot-red"></span>
+            <span class="traffic-dot dot-yellow"></span>
+            <span class="traffic-dot dot-green"></span>
+            <span class="mockup-url">student-life.app</span>
+          </div>
+          <div class="mockup-content">
+            <img src="file:///E:/College Stuff/Career/portfolio/src/assets/images/student-life.png" alt="Student Life PWA">
+          </div>
+        </div>
+
+        <div class="metric-badges">
+          <div class="metric-badge">
+            <span class="metric-value">Offline-First</span>
+            <span class="metric-label">PWA Service Worker</span>
+          </div>
+          <div class="metric-badge">
+            <span class="metric-value">3-in-1</span>
+            <span class="metric-label">Tasks, Pomodoro & Schedule</span>
+          </div>
+          <div class="metric-badge">
+            <span class="metric-value">Supabase</span>
+            <span class="metric-label">Cloud Synchronization</span>
+          </div>
+          <div class="metric-badge">
+            <span class="metric-value">PWA</span>
+            <span class="metric-label">Installable App</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Story & Details -->
+      <div>
+        <h3 class="project-title">STUDENT LIFE</h3>
+        <div class="project-meta-list">
+          <div class="row">
+            <span class="label">ROLE:</span>
+            <span class="val">Lead Developer & Product Designer</span>
+          </div>
+          <div class="row">
+            <span class="label">SYSTEM:</span>
+            <span class="val">React 19 · TypeScript · Supabase · PWA</span>
+          </div>
+          <div class="row">
+            <span class="label">DOMAIN:</span>
+            <span class="val">student-life.app</span>
+          </div>
+        </div>
+
+        <div class="project-story">
+          <p>
+            Students juggle tasks, schedules, and focus sessions across multiple apps. I wanted to consolidate everything into one focused, offline-first productivity ecosystem tailored specifically for academic workflow.
+          </p>
+          <p>
+            I designed and developed an all-in-one student tool featuring smart task management, Pomodoro focus cycles, and schedule tracking with PWA offline support — so students can stay productive anywhere without network dependence.
+          </p>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+          <span class="link-badge" style="background:#22201e; color:#faf9f6; border:none;">POMODORO FOCUS CYCLES</span>
+          <span class="link-badge" style="background:#22201e; color:#faf9f6; border:none;">OFFLINE SERVICE WORKER</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span>SELECTED WORKS // #04</span>
+      <span>STUDENT LIFE PWA</span>
+      <span>[ 06 / 08 ]</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: CHAPTER III - CAPABILITIES -->
+  <section class="slide theme-bronze">
+    <div class="slide-header">
+      <div style="display:flex; align-items:baseline; gap:18px;">
+        <h2 class="header-chapter">CHAPTER III</h2>
+        <span class="header-tag">WHAT I DO? — CORE CAPABILITIES & TECH ARSENAL</span>
+      </div>
+      <div class="header-right">
+        <span>ENGINEERING DISCIPLINES</span>
+      </div>
+    </div>
+
+    <div class="cap-grid">
+      <!-- Col 1 -->
+      <div class="cap-card">
+        <div>
+          <span class="cap-num">01</span>
+          <h3 class="cap-title">Frontend & Systems</h3>
+          <p class="cap-desc">
+            High-speed web platforms with React 19, Next.js 14/15, Vue 3, TypeScript, and Tailwind v4. Type-safe state management, 60 FPS motion with GSAP, and modular architecture.
+          </p>
+        </div>
+        <div class="pill-stack">
+          <span class="tech-pill">React 19</span>
+          <span class="tech-pill">Next.js 14</span>
+          <span class="tech-pill">Vue 3</span>
+          <span class="tech-pill">TypeScript</span>
+          <span class="tech-pill">GSAP Motion</span>
+          <span class="tech-pill">Tailwind v4</span>
+          <span class="tech-pill">Canvas 2D</span>
+        </div>
+      </div>
+
+      <!-- Col 2 -->
+      <div class="cap-card">
+        <div>
+          <span class="cap-num">02</span>
+          <h3 class="cap-title">Creative Tech & 3D</h3>
+          <p class="cap-desc">
+            Console-grade game UI architectures, procedural Web Audio synthesis, kinetic typography, and physics-driven 3D environments engineered for cinematic immersion.
+          </p>
+        </div>
+        <div class="pill-stack">
+          <span class="tech-pill">Web Audio API</span>
+          <span class="tech-pill">Unity 3D (C#)</span>
+          <span class="tech-pill">Blender 3D</span>
+          <span class="tech-pill">Roblox (Luau)</span>
+          <span class="tech-pill">Interactive Physics</span>
+          <span class="tech-pill">Audio Synthesis</span>
+        </div>
+      </div>
+
+      <!-- Col 3 -->
+      <div class="cap-card">
+        <div>
+          <span class="cap-num">03</span>
+          <h3 class="cap-title">Full-Stack & ML</h3>
+          <p class="cap-desc">
+            End-to-end architectures with Laravel 11, Node.js, Express, and PostgreSQL, coupled with quantitative ML pipelines for predictive intelligence and data analysis.
+          </p>
+        </div>
+        <div class="pill-stack">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">Laravel 11</span>
+          <span class="tech-pill">Node.js</span>
+          <span class="tech-pill">PostgreSQL</span>
+          <span class="tech-pill">Supabase</span>
+          <span class="tech-pill">XGBoost</span>
+          <span class="tech-pill">LightGBM</span>
+          <span class="tech-pill">REST APIs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span>TECHNICAL EXPERTISE</span>
+      <span>CHAPTER III — CAPABILITIES</span>
+      <span>[ 07 / 08 ]</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 8: CLOSING & CONTACT -->
+  <section class="slide theme-closing">
+    <div class="slide-header">
+      <span class="header-tag">CLOSING // 2026 — NEXT CHAPTER</span>
+      <div class="header-right">
+        <span>LET'S BUILD SOMETHING GREAT</span>
+      </div>
+    </div>
+
+    <div class="closing-center">
+      <span style="font-size:14px; text-transform:uppercase; letter-spacing:0.25em; opacity:0.6; font-weight:600;">CONTACT & COLLABORATION</span>
+      <h2 class="closing-title">NEXT<br/>CHAPTER</h2>
+      <p style="font-size: 22px; max-width: 900px; line-height: 1.5; opacity: 0.8; font-weight: 400;">
+        Available for Software Engineering, Frontend/Full-Stack, and Creative Development roles. Open for high-impact projects, collaborations, and engineering discussions.
+      </p>
+
+      <div class="contact-card-grid">
+        <div class="contact-card">
+          <span class="c-label">Direct Email</span>
+          <a href="mailto:ferrelrashadakeyla2014@gmail.com" class="c-value">ferrelrashadakeyla2014@gmail.com</a>
+        </div>
+        <div class="contact-card">
+          <span class="c-label">GitHub</span>
+          <a href="https://github.com/FerrelHD" class="c-value">github.com/FerrelHD</a>
+        </div>
+        <div class="contact-card">
+          <span class="c-label">LinkedIn</span>
+          <a href="https://linkedin.com/in/ferrel-rashad" class="c-value">linkedin.com/in/ferrel-rashad</a>
+        </div>
+        <div class="contact-card">
+          <span class="c-label">Location / Base</span>
+          <span class="c-value">Depok / Jakarta, Indonesia (GMT+7)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span>FERREL RASHAD AKEYLA</span>
+      <span>PORTFOLIO SLIDE DECK (2022 — 2026)</span>
+      <span>[ 08 / 08 ]</span>
+    </div>
+  </section>
+
+</body>
+</html>
