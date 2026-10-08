@@ -55,6 +55,7 @@
         <!-- Slides 2, 3, 4, 5: Chapter II - 4 Project Slides (Light #faf9f6) -->
         <Works
           ref="worksRef"
+          :activeProjectIndex="activeWorkIndex"
           @openArchive="openArchive"
           @openCaseStudy="openCaseStudy"
           @goToProject="(idx: number) => navigateToSlideIndex(2 + idx)"
@@ -242,6 +243,16 @@
     return 'contact';
   });
 
+  const activeWorkIndex = computed<number | null>(() => {
+    if (isArchiveOpen.value || activeCaseStudyId.value) {
+      return null;
+    }
+    if (currentSlideIndex.value >= 2 && currentSlideIndex.value <= 5) {
+      return currentSlideIndex.value - 2;
+    }
+    return null;
+  });
+
   const TOTAL_SLIDES = 8;
 
   const triggerSlideAnimation = (index: number) => {
@@ -359,7 +370,7 @@
         'works',
         'work-tactiq',
         'work-persona-5',
-        'work-student-life',
+        'work-charles-leclerc',
         'capabilities',
         'contact',
       ];

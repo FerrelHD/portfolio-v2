@@ -107,9 +107,21 @@
                 </div>
                 <div class="size-2"></div>
               </div>
-              <!-- Screenshot Preview with Micro-Zoom & Subtle Sheen -->
+              <!-- Media Preview (Video with Poster Fallback or Static Screenshot) -->
               <div class="relative aspect-[16/9] max-h-[16vh] sm:max-h-[19vh] md:max-h-[21vh] lg:max-h-[24vh] xl:max-h-[28vh] w-full overflow-hidden bg-black/5">
+                <video
+                  v-if="project.previewVideo"
+                  :ref="(el) => setVideoRef(el, index)"
+                  :src="project.previewVideo"
+                  :poster="project.previewImg"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.05]"
+                />
                 <img
+                  v-else
                   :src="project.previewImg"
                   :alt="project.title"
                   class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.05]"
@@ -283,20 +295,37 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted } from 'vue';
+  import { onMounted, ref, watch } from 'vue';
   import gsap from 'gsap';
+
+  const props = withDefaults(
+    defineProps<{
+      activeProjectIndex?: number | null;
+    }>(),
+    {
+      activeProjectIndex: null,
+    },
+  );
 
   const emit = defineEmits<{
     (e: 'openArchive'): void;
     (e: 'goToProject', index: number): void;
     (e: 'openCaseStudy', projectId: string): void;
   }>();
+
   import {
     indonesianCrustalObservatoryImg,
     tactiqImg,
     personaImg,
-    studentLifeImg,
+    charlesLeclercImg,
   } from '@/assets/images';
+
+  import {
+    leclercVideo,
+    nusantaraVideo,
+    personaVideo,
+    tactiqVideo,
+  } from '@/assets/videos';
 
   export interface WorkSlideProject {
     id: string;
@@ -308,6 +337,7 @@
     system: string;
     domain: string;
     previewImg: string;
+    previewVideo?: string;
     liveUrl?: string;
     githubUrl?: string;
   }
@@ -325,6 +355,7 @@
       system: 'React 19 · TypeScript · Canvas 2D',
       domain: 'nusantara-observatory.vercel.app',
       previewImg: indonesianCrustalObservatoryImg,
+      previewVideo: nusantaraVideo,
       liveUrl: 'https://nusantara-observatory.vercel.app/',
       githubUrl: 'https://github.com/FerrelHD/Global-Seismic-Tracker',
     },
@@ -340,6 +371,7 @@
       system: 'Next.js 14 · TypeScript · HTML5 Canvas · Socket.io · Tailwind',
       domain: 'tactiq.analytics',
       previewImg: tactiqImg,
+      previewVideo: tactiqVideo,
       githubUrl: 'https://github.com/LuthfiMirza/TactIQ',
     },
     {
@@ -354,30 +386,66 @@
       system: 'React 18 · TypeScript · Web Audio · Tailwind',
       domain: 'persona-lilac-mu.vercel.app',
       previewImg: personaImg,
+      previewVideo: personaVideo,
       liveUrl: 'https://persona-lilac-mu.vercel.app/',
       githubUrl: 'https://github.com/FerrelHD/Persona',
     },
     {
-      id: 'student-life',
+      id: 'charles-leclerc',
       slideNumber: '#04',
-      title: 'Student Life',
+      title: 'Charles Leclerc #16',
       aboutP1:
-        'Students juggle tasks, schedules, and focus sessions across multiple apps. I wanted to consolidate everything into one focused, offline-first productivity ecosystem.',
+        'Motorsport enthusiasts love granular telemetry: throttle traces, braking curves, and sector deltas. I wanted to translate the sensory velocity and telemetry of Formula 1 into an interactive web experience using typography, audio cues, and telemetry charts.',
       aboutP2:
-        'I designed and developed an all-in-one student tool featuring smart task management, Pomodoro focus cycles, and schedule tracking with PWA offline support — so students can stay productive anywhere.',
-      role: 'Lead Developer & Product Designer',
-      system: 'React 19 · TypeScript · Supabase · PWA',
-      domain: 'student-life.app',
-      previewImg: studentLifeImg,
-      liveUrl: 'https://ferrelhd.github.io/Student-Life/',
-      githubUrl: 'https://github.com/FerrelHD/Student-Life',
+        'I engineered an interactive Canvas 2D RPM tachometer dial that revs dynamically based on user scroll velocity, paired with custom redline shaders, video scrub triggers, and sector delta timelines comparing qualifying telemetry across Monaco and Monza.',
+      role: 'Creative Frontend Developer',
+      system: 'React 18 · GSAP · Canvas 2D · Tailwind',
+      domain: 'leclerc-redline.vercel.app',
+      previewImg: charlesLeclercImg,
+      previewVideo: leclercVideo,
+      liveUrl: 'https://leclerc-redline.vercel.app/',
     },
   ];
+
+  const videoRefs = ref<Map<number, HTMLVideoElement>>(new Map());
+
+  const setVideoRef = (el: any, index: number) => {
+    if (el) {
+      videoRefs.value.set(index, el as HTMLVideoElement);
+      if (props.activeProjectIndex === index) {
+        (el as HTMLVideoElement).play().catch(() => {});
+      }
+    } else {
+      videoRefs.value.delete(index);
+    }
+  };
+
+  const updateVideoPlayback = (activeIdx: number | null | undefined) => {
+    videoRefs.value.forEach((videoEl, idx) => {
+      if (idx === activeIdx) {
+        const playPromise = videoEl.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {});
+        }
+      } else {
+        videoEl.pause();
+      }
+    });
+  };
+
+  watch(
+    () => props.activeProjectIndex,
+    (newIdx) => {
+      updateVideoPlayback(newIdx);
+    },
+    { immediate: true },
+  );
 
   const revealedSlideIndices = new Set<number>();
 
   // Function to reveal text animation for a specific slide
   const revealSlideIndex = (index: number) => {
+    updateVideoPlayback(index);
     const slides = document.querySelectorAll('.work-slide');
     if (!slides[index]) return;
 

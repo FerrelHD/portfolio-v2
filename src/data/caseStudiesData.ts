@@ -264,7 +264,7 @@ export const caseStudies: Record<string, ProjectCaseStudy> = {
 
   'student-life': {
     id: 'student-life',
-    number: '#04',
+    number: '#08',
     title: 'Student Life',
     tagline: 'All-in-one offline-first academic productivity ecosystem consolidating schedules, tasks, and focus sessions.',
     category: 'Productivity PWA & Cloud Persistence',
@@ -506,7 +506,7 @@ export const caseStudies: Record<string, ProjectCaseStudy> = {
 
   'charles-leclerc': {
     id: 'charles-leclerc',
-    number: '#08',
+    number: '#04',
     title: 'Charles Leclerc #16',
     tagline: 'High-octane Formula 1 showcase with canvas telemetry visualizers and fluid kinetic transitions.',
     category: 'Creative Motion & F1 Physics',
@@ -734,11 +734,11 @@ export const caseStudyOrder: string[] = [
   'nusantara-observatory',
   'tactiq',
   'persona-5',
-  'student-life',
+  'charles-leclerc',
   'ecobite',
   'spidey-dev',
   'fersya-shop',
-  'charles-leclerc',
+  'student-life',
   'stock-prediction',
   'street-rush',
   'gunung-gede',
