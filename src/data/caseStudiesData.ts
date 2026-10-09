@@ -204,9 +204,9 @@ export const caseStudies: Record<string, ProjectCaseStudy> = {
     role: 'Creative Developer & UI Engineer',
     system: 'React 18 · TypeScript · Web Audio API · Tailwind · CSS 3D',
     context: 'Creative Technologist Showcase',
-    domain: 'persona-lilac-mu.vercel.app',
+    domain: 'persona.ferrelrashadakeyla2014.workers.dev',
     techStack: ['React 18', 'TypeScript', 'Web Audio API', 'CSS 3D Transforms', 'Tailwind CSS'],
-    liveUrl: 'https://persona-lilac-mu.vercel.app/',
+    liveUrl: 'https://persona.ferrelrashadakeyla2014.workers.dev/',
     githubUrl: 'https://github.com/FerrelHD/Persona',
     heroImg: personaImg,
     metrics: [

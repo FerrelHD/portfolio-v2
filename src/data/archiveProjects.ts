@@ -43,7 +43,7 @@ export const archiveProjects: ArchiveProject[] = [
     category: 'Game Console UI & Web Audio Engine',
     categoryFilter: 'creative',
     techStack: ['React 18', 'TypeScript', 'Tailwind', 'Web Audio API'],
-    liveUrl: 'https://persona-lilac-mu.vercel.app/',
+    liveUrl: 'https://persona.ferrelrashadakeyla2014.workers.dev/',
     githubUrl: 'https://github.com/FerrelHD/Persona',
     previewImg: personaImg,
     description: 'Cinematic game-console developer portfolio inspired by Persona 5 Royal, featuring procedural Web Audio synthesis, 1080p character loop videos, and zero-scroll canvas navigation.',

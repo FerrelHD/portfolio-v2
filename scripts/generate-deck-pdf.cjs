@@ -802,7 +802,7 @@ const htmlContent = `<!DOCTYPE html>
         <span class="header-tag">THE WORK #03 // CREATIVE FRONTEND & GAME UI</span>
       </div>
       <div class="header-right">
-        <a href="https://persona-lilac-mu.vercel.app/" class="link-badge">LIVE DEMO ↗</a>
+        <a href="https://persona.ferrelrashadakeyla2014.workers.dev/" class="link-badge">LIVE DEMO ↗</a>
         <a href="https://github.com/FerrelHD/Persona" class="link-badge">GITHUB ↗</a>
       </div>
     </div>
@@ -815,7 +815,7 @@ const htmlContent = `<!DOCTYPE html>
             <span class="traffic-dot dot-red"></span>
             <span class="traffic-dot dot-yellow"></span>
             <span class="traffic-dot dot-green"></span>
-            <span class="mockup-url">persona-lilac-mu.vercel.app</span>
+            <span class="mockup-url">persona.ferrelrashadakeyla2014.workers.dev</span>
           </div>
           <div class="mockup-content">
             <img src="${personaUri}" alt="Persona 5 Royal Web">
@@ -856,7 +856,7 @@ const htmlContent = `<!DOCTYPE html>
           </div>
           <div class="row">
             <span class="label">DOMAIN:</span>
-            <span class="val">persona-lilac-mu.vercel.app</span>
+            <span class="val">persona.ferrelrashadakeyla2014.workers.dev</span>
           </div>
         </div>
 
