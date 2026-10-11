@@ -10,6 +10,7 @@ import streetRushImg from './street-rush.webp';
 import ecoBiteImg from './Eco-Bite.png';
 import personaImg from './Persona.png';
 import tactiqImg from './TactIQ.png';
+import arakiArtImg from './araki art.png';
 
 export {
   ferrelPortrait,
@@ -24,6 +25,7 @@ export {
   ecoBiteImg,
   personaImg,
   tactiqImg,
+  arakiArtImg,
 };
 
 
