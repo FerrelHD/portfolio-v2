@@ -10,6 +10,7 @@ import {
   ecoBiteImg,
   personaImg,
   tactiqImg,
+  arakiArtImg,
 } from '@/assets/images';
 
 export type ArchiveCategoryFilter = 'all' | 'web' | 'creative' | 'ml' | 'games';
@@ -37,13 +38,25 @@ export const archiveCategories: { id: ArchiveCategoryFilter; label: string }[] =
 
 export const archiveProjects: ArchiveProject[] = [
   {
+    id: 'araki-art',
+    year: '2026',
+    title: 'Araki Art Archive',
+    category: 'Haute-Couture Editorial Archive',
+    categoryFilter: 'creative',
+    techStack: ['Vue 3', 'TypeScript', 'Tailwind', 'GSAP 3', 'Lenis'],
+    liveUrl: 'https://araki-art.vercel.app',
+    githubUrl: 'https://github.com/FerrelHD/Araki-Art',
+    previewImg: arakiArtImg,
+    description: 'Interactive editorial archive documenting the intersection of Hirohiko Araki with haute-couture fashion, featuring a Swiss blueprint 12-column grid and kinetic GSAP motion.',
+  },
+  {
     id: 'persona-5',
     year: '2026',
     title: 'Persona 5 Royal Portfolio',
     category: 'Game Console UI & Web Audio Engine',
     categoryFilter: 'creative',
     techStack: ['React 18', 'TypeScript', 'Tailwind', 'Web Audio API'],
-    liveUrl: 'https://persona-lilac-mu.vercel.app/',
+    liveUrl: 'https://persona.ferrelrashadakeyla2014.workers.dev/',
     githubUrl: 'https://github.com/FerrelHD/Persona',
     previewImg: personaImg,
     description: 'Cinematic game-console developer portfolio inspired by Persona 5 Royal, featuring procedural Web Audio synthesis, 1080p character loop videos, and zero-scroll canvas navigation.',

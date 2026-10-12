@@ -384,10 +384,10 @@
         'I engineered a zero-scroll 1080p viewport interface featuring procedural Web Audio synthesis for zero-latency acoustic feedback, ransom-note typography, 1080p character background video loops, and responsive game-menu state machines.',
       role: 'Creative Developer & UI Engineer',
       system: 'React 18 · TypeScript · Web Audio · Tailwind',
-      domain: 'persona-lilac-mu.vercel.app',
+      domain: 'persona.ferrelrashadakeyla2014.workers.dev',
       previewImg: personaImg,
       previewVideo: personaVideo,
-      liveUrl: 'https://persona-lilac-mu.vercel.app/',
+      liveUrl: 'https://persona.ferrelrashadakeyla2014.workers.dev/',
       githubUrl: 'https://github.com/FerrelHD/Persona',
     },
     {
