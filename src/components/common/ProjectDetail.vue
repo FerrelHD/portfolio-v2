@@ -472,14 +472,24 @@
 
   let animationTl: gsap.core.Timeline | gsap.core.Tween | null = null;
 
-  const animateIn = () => {
-    if (!detailOverlay.value) return;
+  const waitForOverlay = async (maxAttempts = 8): Promise<HTMLElement | null> => {
+    for (let i = 0; i < maxAttempts; i++) {
+      if (detailOverlay.value) return detailOverlay.value;
+      await nextTick();
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+    }
+    return detailOverlay.value;
+  };
+
+  const animateIn = async () => {
+    const el = await waitForOverlay();
+    if (!el) return;
 
     if (animationTl) animationTl.kill();
 
     activeSection.value = 'section-overview';
 
-    gsap.set(detailOverlay.value, {
+    gsap.set(el, {
       clipPath: 'inset(100% 0 0 0)',
     });
 
@@ -490,7 +500,7 @@
     });
 
     // 1. Unveil modal overlay
-    tl.to(detailOverlay.value, {
+    tl.to(el, {
       clipPath: 'inset(0% 0 0 0)',
       duration: 0.65,
       ease: 'power3.inOut',
@@ -572,10 +582,15 @@
     () => props.projectId,
     async (newId, oldId) => {
       if (newId) {
-        await nextTick();
         if (!oldId) {
           // Opening from closed state
-          animateIn();
+          await animateIn();
+        } else {
+          // Navigating between projects while already open
+          const el = await waitForOverlay(3);
+          if (el) {
+            gsap.set(el, { clipPath: 'inset(0% 0 0 0)' });
+          }
         }
         if (scrollContainer.value) {
           scrollContainer.value.scrollTop = 0;

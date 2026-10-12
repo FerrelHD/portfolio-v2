@@ -10,6 +10,7 @@ import {
   ecoBiteImg,
   personaImg,
   tactiqImg,
+  arakiArtImg,
 } from '@/assets/images';
 
 export interface ProjectMetric {
@@ -58,6 +59,73 @@ export interface ProjectCaseStudy {
 }
 
 export const caseStudies: Record<string, ProjectCaseStudy> = {
+  'araki-art': {
+    id: 'araki-art',
+    number: '#00',
+    title: 'Araki Art Archive',
+    tagline: 'Haute-couture editorial web archive exploring Hirohiko Araki’s intersection with high-fashion, classical sculpture, and Swiss architectural grid design.',
+    category: 'Haute-Couture Editorial Archive',
+    year: '2026',
+    role: 'Creative Developer & UI Engineer',
+    system: 'Vue 3 · TypeScript · Tailwind CSS · GSAP · Lenis',
+    context: 'Independent Creative Engineering Project',
+    domain: 'araki-art.vercel.app',
+    techStack: ['Vue 3', 'TypeScript', 'Tailwind CSS', 'GSAP 3', 'Lenis'],
+    liveUrl: 'https://araki-art.vercel.app',
+    githubUrl: 'https://github.com/FerrelHD/Araki-Art',
+    heroImg: arakiArtImg,
+    metrics: [
+      { label: 'Grid Architecture', value: '12-Col Swiss' },
+      { label: 'Motion Frame Rate', value: '60 FPS Locked' },
+      { label: 'Theme States', value: 'Dual Palette Engine' },
+      { label: 'Curated Milestones', value: '4 Capsules' },
+    ],
+    problem: {
+      headline: 'Elevating manga narrative artistry into high-fashion architectural digital curation.',
+      description:
+        'Most anime and manga web exhibits resort to casual, cluttered fansite conventions. They fail to reflect that Hirohiko Araki is a world-class artist exhibited at the Musée du Louvre and an official collaborator of historic luxury houses like Gucci and Bulgari. The challenge was crafting an avant-garde digital lookbook inspired by European editorial benchmarks (such as mijobello.com) while preserving the signature dramatic tension and color fluidity of JoJo’s Bizarre Adventure.',
+    },
+    architecture: {
+      headline: 'Swiss 12-column architectural blueprint with kinetic GSAP timelines and zero-jank Lenis scrolling.',
+      description:
+        'Engineered an editorial experience structured upon a persistent 12-column Swiss modernist grid overlay. Micro-interactions and typography are strictly aligned to coordinate boundaries, decoupling layout calculations from the viewport to guarantee 60 FPS motion even during complex height expansions and theme shifts.',
+      highlights: [
+        {
+          title: 'Modular 12-Column Blueprint Grid',
+          detail: 'Hardware-accelerated grid overlay dynamically adapting from a 4-column mobile matrix to a full 12-column architectural framework on desktop.',
+        },
+        {
+          title: 'Dual Palette Chromatic State Machine',
+          detail: 'Instant theme toggling between high-fashion "Runway Paper" (#f4ede2) and the psychological "Menacing Color Shift" (#170b1e violet & acid chartreuse) honoring Araki’s non-canonical color philosophy.',
+        },
+        {
+          title: 'Kinetic Slot-Machine Micro-Interactions',
+          detail: 'GSAP-powered vertical rolling text buttons, infinite live-timezone capital tickers (Paris, Milan, Tokyo), and dynamic silhouette hover displacement.',
+        },
+      ],
+    },
+    features: [
+      {
+        title: 'Curated Runway Capsules Slider',
+        description: 'Interactive showcase documenting historic collaborations with Gucci (2011, 2013), Musée du Louvre (2009), and Bulgari (2017) with interactive silhouettes.',
+        tag: 'Editorial',
+      },
+      {
+        title: 'Fashion Capital Live Clock Marquee',
+        description: 'Real-time multi-timezone clocks tracking international fashion capitals and exhibition landmarks with hover-pause physics.',
+        tag: 'Kinetic Motion',
+      },
+      {
+        title: 'Expanding Anatomy Accordion',
+        description: 'Deep-dive analytical accordion deconstructing The Pose (contrapposto), Chromatic Fluidity, Rock & Roll Heritage, and Couture Tailoring.',
+        tag: 'Interactive',
+      },
+    ],
+    takeaways: [
+      'Strict architectural grid systems provide a timeless foundation that allows aggressive, avant-garde typography and motion to coexist harmoniously.',
+      'Decoupling layout transformations from native scroll events using Lenis and requestAnimationFrame is crucial for zero-jank editorial micro-interactions.',
+    ],
+  },
   'tactiq': {
     id: 'tactiq',
     number: '#02',
@@ -731,6 +799,7 @@ export const caseStudies: Record<string, ProjectCaseStudy> = {
 };
 
 export const caseStudyOrder: string[] = [
+  'araki-art',
   'nusantara-observatory',
   'tactiq',
   'persona-5',

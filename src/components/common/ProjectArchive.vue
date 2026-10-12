@@ -89,6 +89,7 @@
                   :key="project.id"
                   @pointerenter="onRowMouseEnter(project, $event)"
                   @pointerleave="onRowMouseLeave"
+                  @click="emit('openCaseStudy', project.id)"
                   class="group transition-colors duration-200 hover:bg-black/[0.03] cursor-pointer"
                 >
                   <!-- Year -->
@@ -145,6 +146,7 @@
                         :href="project.liveUrl"
                         target="_blank"
                         rel="noreferrer"
+                        @click.stop
                         class="group/link inline-flex items-center gap-1 text-[#22201e]/70 hover:text-black border-b border-transparent hover:border-black transition-colors"
                         :aria-label="`View live demo for ${project.title}`"
                       >
@@ -156,6 +158,7 @@
                         :href="project.githubUrl"
                         target="_blank"
                         rel="noreferrer"
+                        @click.stop
                         class="group/link inline-flex items-center gap-1 text-[#22201e]/70 hover:text-black border-b border-transparent hover:border-black transition-colors"
                         :aria-label="`View source code on GitHub for ${project.title}`"
                       >
@@ -174,7 +177,8 @@
             <article
               v-for="project in filteredProjects"
               :key="project.id"
-              class="p-5 rounded-xl border border-black/10 bg-white/70 shadow-xs flex flex-col gap-3.5"
+              @click="emit('openCaseStudy', project.id)"
+              class="p-5 rounded-xl border border-black/10 bg-white/70 shadow-xs flex flex-col gap-3.5 cursor-pointer hover:bg-white/90 transition-colors"
             >
               <!-- Top Info: Year & Category -->
               <div class="flex items-center justify-between text-xs font-sans text-[#22201e]/60">
@@ -222,6 +226,7 @@
                   :href="project.liveUrl"
                   target="_blank"
                   rel="noreferrer"
+                  @click.stop
                   class="group inline-flex items-center gap-1 text-[#22201e]/80 border-b border-transparent hover:border-black/60 py-0.5 transition-colors"
                 >
                   <span>Live Demo</span>
@@ -232,6 +237,7 @@
                   :href="project.githubUrl"
                   target="_blank"
                   rel="noreferrer"
+                  @click.stop
                   class="group inline-flex items-center gap-1 text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 py-0.5 transition-colors"
                 >
                   <span>GitHub</span>
