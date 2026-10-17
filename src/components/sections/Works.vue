@@ -52,7 +52,7 @@
         </div>
       </div>
 
-      <!-- Main Middle Grid: Swiss 12-Column Editorial Grid -->
+      <!-- Main Middle Grid: Swiss 12-Column Editorial Grid (50:50 Clean Balanced Layout) -->
       <div class="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 md:gap-8 lg:gap-10 items-start my-auto py-2 md:py-3">
         
         <!-- Right Column on Desktop (Title & Meta) -> On Mobile goes FIRST (order-1 md:order-2) -->
@@ -67,85 +67,66 @@
             </h3>
           </div>
 
-          <!-- Role & System Metadata — Swiss Technical Spec Tags -->
-          <div class="flex flex-col gap-1.5 sm:gap-2 mt-3 sm:mt-4 md:mt-6 font-mono text-[10px] sm:text-[11px] md:text-xs uppercase tracking-[0.1em] text-[#22201e]/80 text-left">
+          <!-- Role & System Metadata — Original font-sans typography, clean without cards or // -->
+          <div class="flex flex-col gap-1 sm:gap-1.5 mt-2 sm:mt-4 md:mt-6 lg:mt-7 font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
             <div class="overflow-hidden py-0.5">
-              <div class="slide-project-meta will-change-transform inline-flex items-center gap-2 px-2.5 py-1 rounded-sm bg-black/[0.03] border border-black/10">
-                <span class="font-bold text-[#22201e]">ROLE //</span>
-                <span class="text-[#22201e]/80">{{ project.role }}</span>
+              <div class="slide-project-meta will-change-transform">
+                <span class="font-bold text-[#22201e]">ROLE: </span>
+                <span class="font-medium text-[#22201e]/80">{{ project.role }}</span>
               </div>
             </div>
             <div class="overflow-hidden py-0.5">
-              <div class="slide-project-meta will-change-transform inline-flex items-center gap-2 px-2.5 py-1 rounded-sm bg-black/[0.03] border border-black/10">
-                <span class="font-bold text-[#22201e]">SYSTEM //</span>
-                <span class="text-[#22201e]/80">{{ project.system }}</span>
+              <div class="slide-project-meta will-change-transform">
+                <span class="font-bold text-[#22201e]">SYSTEM: </span>
+                <span class="font-medium text-[#22201e]/80">{{ project.system }}</span>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Left Column on Desktop (Mockup & About) -> On Mobile goes SECOND (order-2 md:order-1) -->
-        <div class="order-2 md:order-1 md:col-span-6 flex flex-col gap-2.5 sm:gap-3 lg:gap-3.5 max-w-[450px] md:max-w-[490px] lg:max-w-[560px] xl:max-w-[640px] 2xl:max-w-[690px]">
+        <div class="order-2 md:order-1 md:col-span-6 flex flex-col gap-2.5 sm:gap-3 lg:gap-3.5 max-w-[420px] md:max-w-[460px] lg:max-w-[520px] xl:max-w-[580px]">
           <!-- Entrance Animation Wrapper for Mockup -->
           <div class="slide-mockup will-change-transform">
-            <!-- Swiss Architectural Viewport (Sleek Widescreen, Precision Hairline Frame) -->
+            <!-- Frameless Widescreen 16:9 Viewport with Floating Glass Header -->
             <div
               role="button"
               tabindex="0"
               @click="emit('openCaseStudy', project.id)"
               @keydown.enter="emit('openCaseStudy', project.id)"
-              class="group/mockup relative block w-full overflow-hidden rounded-md border border-black/15 bg-white shadow-[0_4px_16px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.06)] hover:border-black/35 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)] transition-all duration-500 ease-out hover:-translate-y-1 cursor-pointer"
+              class="group/mockup relative block w-full aspect-[16/9] overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
             >
-              <!-- Architectural Top Bar (Compact & Technical) -->
-              <div class="flex items-center justify-between px-2.5 sm:px-3 py-1 sm:py-1.5 bg-[#f5f4ef] border-b border-black/10 transition-colors duration-300 group-hover/mockup:bg-[#eae8e3]">
-                <!-- Precision Window Dots -->
-                <div class="flex items-center gap-1.5">
-                  <span class="size-1.5 sm:size-2 rounded-full bg-[#ff5f56]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
-                  <span class="size-1.5 sm:size-2 rounded-full bg-[#ffbd2e]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
-                  <span class="size-1.5 sm:size-2 rounded-full bg-[#27c93f]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
-                </div>
-                <!-- Technical URL Pill -->
-                <div class="px-2 py-0.5 rounded bg-white text-[9px] sm:text-[10px] md:text-[11px] font-mono text-[#22201e]/70 border border-black/5 truncate max-w-[170px] sm:max-w-[200px] transition-colors duration-300 group-hover/mockup:text-[#22201e]">
-                  {{ project.domain }}
-                </div>
-                <!-- Technical Coordinate Tag -->
-                <div class="font-mono text-[8px] sm:text-[9px] tracking-widest text-[#22201e]/40 uppercase hidden sm:block">
-                  FIG. 0{{ index + 1 }}
-                </div>
-              </div>
+              <!-- Media Preview (Natural 16:9 Full Aspect Ratio) -->
+              <video
+                v-if="project.previewVideo"
+                :ref="(el) => setVideoRef(el, index)"
+                :src="project.previewVideo"
+                :poster="project.previewImg"
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                class="absolute inset-0 size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.03]"
+              />
+              <img
+                v-else
+                :src="project.previewImg"
+                :alt="project.title"
+                class="absolute inset-0 size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.03]"
+                loading="lazy"
+              />
 
-              <!-- Media Preview (Natural 16:9 Aspect Ratio - Full Uncropped View) -->
-              <div class="relative aspect-[16/9] w-full overflow-hidden bg-black/5">
-                <video
-                  v-if="project.previewVideo"
-                  :ref="(el) => setVideoRef(el, index)"
-                  :src="project.previewVideo"
-                  :poster="project.previewImg"
-                  muted
-                  loop
-                  playsinline
-                  preload="metadata"
-                  class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.03]"
-                />
-                <img
-                  v-else
-                  :src="project.previewImg"
-                  :alt="project.title"
-                  class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.03]"
-                  loading="lazy"
-                />
-                <!-- Subtle Glass Sheen on Hover -->
-                <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20 opacity-0 transition-opacity duration-500 group-hover/mockup:opacity-100"></div>
+              <!-- Subtle Glass Sheen on Hover -->
+              <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20 opacity-0 transition-opacity duration-500 group-hover/mockup:opacity-100 z-10"></div>
 
-                <!-- Editorial Viewfinder Crosshairs on Hover -->
-                <div class="pointer-events-none absolute inset-2 border border-white/20 opacity-0 transition-opacity duration-300 group-hover/mockup:opacity-100"></div>
+              <!-- Editorial Viewfinder Crosshairs on Hover -->
+              <div class="pointer-events-none absolute inset-2.5 border border-white/20 opacity-0 transition-opacity duration-300 group-hover/mockup:opacity-100 z-10"></div>
 
-                <!-- Hover Floating Pill "READ CASE STUDY →" -->
-                <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover/mockup:opacity-100 transition-all duration-300">
-                  <div class="px-3.5 py-1.5 rounded-full bg-[#22201e]/90 text-[#faf9f6] text-[10px] md:text-xs font-mono tracking-wider backdrop-blur-md shadow-xl flex items-center gap-1.5 transform scale-90 group-hover/mockup:scale-100 transition-transform duration-300">
-                    <span>READ CASE STUDY</span>
-                    <span class="text-sm leading-none inline-block transition-transform duration-300 ease-out group-hover/mockup:translate-x-0.5">→</span>
-                  </div>
+              <!-- Hover Floating Center Pill "READ CASE STUDY →" -->
+              <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover/mockup:opacity-100 transition-all duration-300 z-20">
+                <div class="px-3.5 py-1.5 rounded-full bg-[#22201e]/90 text-[#faf9f6] text-[10px] md:text-xs font-mono tracking-wider backdrop-blur-md shadow-xl flex items-center gap-1.5 transform scale-90 group-hover/mockup:scale-100 transition-transform duration-300">
+                  <span>READ CASE STUDY</span>
+                  <span class="text-sm leading-none inline-block transition-transform duration-300 ease-out group-hover/mockup:translate-x-0.5">→</span>
                 </div>
               </div>
             </div>
@@ -155,8 +136,8 @@
           <div class="slide-about-container flex flex-col pt-0.5">
             <!-- Section Heading (tightly wrapped) -->
             <div class="slide-about-item relative inline-block self-start overflow-hidden mb-1 pr-1">
-              <span class="slide-about-text block text-[11px] sm:text-xs md:text-xs font-mono font-bold tracking-widest text-[#22201e]/50 uppercase">
-                OVERVIEW //
+              <span class="slide-about-text block text-xs sm:text-sm md:text-base font-sans font-semibold text-[#22201e]">
+                About
               </span>
               <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
             </div>
