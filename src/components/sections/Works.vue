@@ -82,16 +82,16 @@
         </div>
 
         <!-- Left Column on Desktop (Mockup & About) -> On Mobile goes SECOND (order-2 md:order-1) -->
-        <div class="order-2 md:order-1 md:col-span-6 flex flex-col gap-2 sm:gap-2.5 lg:gap-3 max-w-[420px] md:max-w-[460px] lg:max-w-[520px] xl:max-w-[620px]">
+        <div class="order-2 md:order-1 md:col-span-6 flex flex-col gap-2 sm:gap-2.5 lg:gap-3 max-w-[420px] md:max-w-[440px] lg:max-w-[500px] xl:max-w-[580px] 2xl:max-w-[620px]">
           <!-- Entrance Animation Wrapper for Mockup -->
           <div class="slide-mockup will-change-transform">
-            <!-- macOS Browser Frame Mockup with Responsive Height Clamping -->
+            <!-- macOS Browser Frame Mockup with Uncropped 16:9 Natural Ratio -->
             <div
               role="button"
               tabindex="0"
               @click="emit('openCaseStudy', project.id)"
               @keydown.enter="emit('openCaseStudy', project.id)"
-              class="group/mockup relative block w-full max-h-[19vh] sm:max-h-[22vh] md:max-h-[25vh] lg:max-h-[28vh] xl:max-h-[32vh] overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
+              class="group/mockup relative block w-full overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
             >
               <!-- Browser Top Bar -->
               <div class="flex items-center justify-between px-3 py-1.5 bg-[#f3f2ee] border-b border-black/10 transition-colors duration-300 group-hover/mockup:bg-[#eae8e3]">
@@ -107,8 +107,8 @@
                 </div>
                 <div class="size-2"></div>
               </div>
-              <!-- Media Preview (Video with Poster Fallback or Static Screenshot) -->
-              <div class="relative aspect-[16/9] max-h-[16vh] sm:max-h-[19vh] md:max-h-[21vh] lg:max-h-[24vh] xl:max-h-[28vh] w-full overflow-hidden bg-black/5">
+              <!-- Media Preview (Natural 16:9 Aspect Ratio - Full Uncropped View) -->
+              <div class="relative aspect-[16/9] w-full overflow-hidden bg-black/5">
                 <video
                   v-if="project.previewVideo"
                   :ref="(el) => setVideoRef(el, index)"
@@ -567,3 +567,12 @@
     revealSlideIndex,
   });
 </script>
+
+<style scoped>
+@media (max-height: 720px) and (min-width: 768px) {
+  .work-slide {
+    padding-top: 1.25rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+}
+</style>
