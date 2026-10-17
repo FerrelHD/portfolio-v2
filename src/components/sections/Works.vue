@@ -375,13 +375,13 @@
       githubUrl: 'https://github.com/LuthfiMirza/TactIQ',
     },
     {
-      id: 'persona-5',
+      id: 'persona-3',
       slideNumber: '#03',
-      title: 'Persona 5 Royal',
+      title: 'Persona 3 Reload',
       aboutP1:
-        'Most developer portfolios follow identical grid patterns and neutral aesthetics. I wanted to break the mold entirely by building an authentic, 60 FPS console experience inspired by Persona 5 Royal that pushes web interactivity to its absolute limit.',
+        'Most developer portfolios follow identical grid patterns and neutral aesthetics. I wanted to break the mold entirely by building an authentic, 60 FPS console experience inspired by Persona 3 Reload that pushes web interactivity to its absolute limit.',
       aboutP2:
-        'I engineered a zero-scroll 1080p viewport interface featuring procedural Web Audio synthesis for zero-latency acoustic feedback, ransom-note typography, 1080p character background video loops, and responsive game-menu state machines.',
+        'I engineered a zero-scroll 1080p viewport interface featuring procedural Web Audio synthesis for zero-latency acoustic feedback, stylized typography, 1080p character background video loops, and responsive game-menu state machines.',
       role: 'Creative Developer & UI Engineer',
       system: 'React 18 · TypeScript · Web Audio · Tailwind',
       domain: 'persona.ferrelrashadakeyla2014.workers.dev',

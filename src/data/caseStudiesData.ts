@@ -262,11 +262,11 @@ export const caseStudies: Record<string, ProjectCaseStudy> = {
     ],
   },
 
-  'persona-5': {
-    id: 'persona-5',
+  'persona-3': {
+    id: 'persona-3',
     number: '#03',
-    title: 'Persona 5 Royal Portfolio',
-    tagline: 'Authentic 60 FPS console experience featuring procedural Web Audio synthesis, ransom-note kinetic typography, and zero-scroll canvas navigation.',
+    title: 'Persona 3 Reload Portfolio',
+    tagline: 'Authentic 60 FPS console experience featuring procedural Web Audio synthesis, stylized kinetic typography, and zero-scroll canvas navigation.',
     category: 'Game Console UI & Web Audio Engine',
     year: '2026',
     role: 'Creative Developer & UI Engineer',
@@ -286,7 +286,7 @@ export const caseStudies: Record<string, ProjectCaseStudy> = {
     problem: {
       headline: 'Pushing web interactivity beyond sterile modern UI conventions.',
       description:
-        'Most developer portfolios follow identical grid patterns and neutral aesthetics. I wanted to break the mold entirely by building an authentic, 60 FPS console experience inspired by Persona 5 Royal that pushes web browser audio and animation to its absolute limit.',
+        'Most developer portfolios follow identical grid patterns and neutral aesthetics. I wanted to break the mold entirely by building an authentic, 60 FPS console experience inspired by Persona 3 Reload that pushes web browser audio and animation to its absolute limit.',
     },
     architecture: {
       headline: 'Procedural Web Audio synthesis and zero-scroll state machines.',
@@ -298,8 +298,8 @@ export const caseStudies: Record<string, ProjectCaseStudy> = {
           detail: 'Native Web Audio API oscillators synthesizing UI mechanical sounds, eliminating audio load latency entirely.',
         },
         {
-          title: 'Dynamic Ransom-Note Typography',
-          detail: 'Procedural angle, padding, and font-weight jitter algorithms creating the signature Persona 5 visual rebel style.',
+          title: 'Dynamic Stylized Typography',
+          detail: 'Procedural angle, padding, and font-weight jitter algorithms creating the signature Persona 3 Reload visual style.',
         },
         {
           title: 'CSS 3D Diagonal Perspective',
@@ -319,8 +319,8 @@ export const caseStudies: Record<string, ProjectCaseStudy> = {
         tag: 'Creative Tech',
       },
       {
-        title: 'Calling Card Contact System',
-        description: 'Themed contact form styled as the iconic Phantom Thieves Calling Card.',
+        title: 'Themed Interactive System',
+        description: 'Atmospheric UI system styled with iconic Persona 3 Reload aesthetics and sound design.',
         tag: 'Interactive UI',
       },
     ],
@@ -798,11 +798,14 @@ export const caseStudies: Record<string, ProjectCaseStudy> = {
   },
 };
 
+// Backward-compatible alias for existing links or bookmarks
+caseStudies['persona-5'] = caseStudies['persona-3'];
+
 export const caseStudyOrder: string[] = [
   'araki-art',
   'nusantara-observatory',
   'tactiq',
-  'persona-5',
+  'persona-3',
   'charles-leclerc',
   'ecobite',
   'spidey-dev',
