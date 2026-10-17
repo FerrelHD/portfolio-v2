@@ -7,14 +7,17 @@
       :id="index === 0 ? 'works' : `work-${project.id}`"
       class="work-slide shrink-0 w-full md:w-screen min-h-[100svh] md:h-dvh flex flex-col justify-between select-none
              bg-[#faf9f6] text-[#22201e] relative overflow-hidden
-             pt-20 pb-6 px-6 md:pt-6 md:pb-4 lg:pt-8 lg:pb-5 md:pl-24 md:pr-12 font-sans"
+             pt-20 pb-5 px-6 md:pt-6 md:pb-4 lg:pt-7 lg:pb-5 md:pl-24 md:pr-12 font-sans"
     >
-      <!-- Top Row: CHAPTER II on Left, Live Link on Right -->
-      <div class="flex items-center justify-between">
-        <div class="overflow-hidden">
+      <!-- Top Row: CHAPTER II on Left, Live Link on Right + Swiss Hairline -->
+      <div class="flex items-center justify-between pb-2.5 sm:pb-3 border-b border-black/10">
+        <div class="flex items-baseline gap-3 overflow-hidden">
           <h2 class="slide-chapter-title font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#22201e] uppercase leading-none will-change-transform">
             CHAPTER II
           </h2>
+          <span class="hidden md:inline-block font-mono text-[10px] lg:text-[11px] tracking-[0.2em] text-[#22201e]/40 uppercase">
+            / SELECTED WORKS [ 0{{ index + 1 }} OF 04 ]
+          </span>
         </div>
 
         <div class="flex items-center gap-3 sm:gap-5">
@@ -49,11 +52,11 @@
         </div>
       </div>
 
-      <!-- Main Middle Grid: Mobile: Title first -> Mockup -> About. Desktop: Mockup+About on Left, Title+Meta on Right -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5 sm:gap-5 md:gap-6 lg:gap-10 items-start my-auto py-0">
+      <!-- Main Middle Grid: Swiss 12-Column Editorial Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 md:gap-8 lg:gap-10 items-start my-auto py-2 md:py-3">
         
         <!-- Right Column on Desktop (Title & Meta) -> On Mobile goes FIRST (order-1 md:order-2) -->
-        <div class="order-1 md:order-2 md:col-span-6 flex flex-col pt-0 md:pl-2 lg:pl-4">
+        <div class="order-1 md:order-2 md:col-span-6 flex flex-col pt-0 md:pl-6 lg:pl-8 md:border-l md:border-black/10">
           <!-- Project Title (Masked Reveal) — Responsive, bold, uppercase, never clips -->
           <div class="overflow-hidden">
             <h3
@@ -64,49 +67,53 @@
             </h3>
           </div>
 
-          <!-- Role & System Metadata — Left-aligned directly beneath title -->
-          <div class="flex flex-col gap-1 sm:gap-1.5 mt-2 sm:mt-4 md:mt-6 lg:mt-7 font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
+          <!-- Role & System Metadata — Swiss Technical Spec Tags -->
+          <div class="flex flex-col gap-1.5 sm:gap-2 mt-3 sm:mt-4 md:mt-6 font-mono text-[10px] sm:text-[11px] md:text-xs uppercase tracking-[0.1em] text-[#22201e]/80 text-left">
             <div class="overflow-hidden py-0.5">
-              <div class="slide-project-meta will-change-transform">
-                <span class="font-bold text-[#22201e]">ROLE: </span>
-                <span class="font-medium text-[#22201e]/80">{{ project.role }}</span>
+              <div class="slide-project-meta will-change-transform inline-flex items-center gap-2 px-2.5 py-1 rounded-sm bg-black/[0.03] border border-black/10">
+                <span class="font-bold text-[#22201e]">ROLE //</span>
+                <span class="text-[#22201e]/80">{{ project.role }}</span>
               </div>
             </div>
             <div class="overflow-hidden py-0.5">
-              <div class="slide-project-meta will-change-transform">
-                <span class="font-bold text-[#22201e]">SYSTEM: </span>
-                <span class="font-medium text-[#22201e]/80">{{ project.system }}</span>
+              <div class="slide-project-meta will-change-transform inline-flex items-center gap-2 px-2.5 py-1 rounded-sm bg-black/[0.03] border border-black/10">
+                <span class="font-bold text-[#22201e]">SYSTEM //</span>
+                <span class="text-[#22201e]/80">{{ project.system }}</span>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Left Column on Desktop (Mockup & About) -> On Mobile goes SECOND (order-2 md:order-1) -->
-        <div class="order-2 md:order-1 md:col-span-6 flex flex-col gap-2 sm:gap-2.5 lg:gap-3 max-w-[420px] md:max-w-[440px] lg:max-w-[500px] xl:max-w-[580px] 2xl:max-w-[620px]">
+        <div class="order-2 md:order-1 md:col-span-6 flex flex-col gap-2.5 sm:gap-3 lg:gap-3.5 max-w-[450px] md:max-w-[490px] lg:max-w-[560px] xl:max-w-[640px] 2xl:max-w-[690px]">
           <!-- Entrance Animation Wrapper for Mockup -->
           <div class="slide-mockup will-change-transform">
-            <!-- macOS Browser Frame Mockup with Uncropped 16:9 Natural Ratio -->
+            <!-- Swiss Architectural Viewport (Sleek Widescreen, Precision Hairline Frame) -->
             <div
               role="button"
               tabindex="0"
               @click="emit('openCaseStudy', project.id)"
               @keydown.enter="emit('openCaseStudy', project.id)"
-              class="group/mockup relative block w-full overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
+              class="group/mockup relative block w-full overflow-hidden rounded-md border border-black/15 bg-white shadow-[0_4px_16px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.06)] hover:border-black/35 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)] transition-all duration-500 ease-out hover:-translate-y-1 cursor-pointer"
             >
-              <!-- Browser Top Bar -->
-              <div class="flex items-center justify-between px-3 py-1.5 bg-[#f3f2ee] border-b border-black/10 transition-colors duration-300 group-hover/mockup:bg-[#eae8e3]">
-                <!-- Window Dots -->
+              <!-- Architectural Top Bar (Compact & Technical) -->
+              <div class="flex items-center justify-between px-2.5 sm:px-3 py-1 sm:py-1.5 bg-[#f5f4ef] border-b border-black/10 transition-colors duration-300 group-hover/mockup:bg-[#eae8e3]">
+                <!-- Precision Window Dots -->
                 <div class="flex items-center gap-1.5">
-                  <span class="size-2 rounded-full bg-[#ff5f56]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
-                  <span class="size-2 rounded-full bg-[#ffbd2e]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
-                  <span class="size-2 rounded-full bg-[#27c93f]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
+                  <span class="size-1.5 sm:size-2 rounded-full bg-[#ff5f56]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
+                  <span class="size-1.5 sm:size-2 rounded-full bg-[#ffbd2e]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
+                  <span class="size-1.5 sm:size-2 rounded-full bg-[#27c93f]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
                 </div>
-                <!-- URL Pill -->
-                <div class="px-2.5 py-0.5 rounded-md bg-white text-[10px] sm:text-[11px] font-mono text-[#22201e]/60 border border-black/5 truncate max-w-[180px] transition-colors duration-300 group-hover/mockup:text-[#22201e]">
+                <!-- Technical URL Pill -->
+                <div class="px-2 py-0.5 rounded bg-white text-[9px] sm:text-[10px] md:text-[11px] font-mono text-[#22201e]/70 border border-black/5 truncate max-w-[170px] sm:max-w-[200px] transition-colors duration-300 group-hover/mockup:text-[#22201e]">
                   {{ project.domain }}
                 </div>
-                <div class="size-2"></div>
+                <!-- Technical Coordinate Tag -->
+                <div class="font-mono text-[8px] sm:text-[9px] tracking-widest text-[#22201e]/40 uppercase hidden sm:block">
+                  FIG. 0{{ index + 1 }}
+                </div>
               </div>
+
               <!-- Media Preview (Natural 16:9 Aspect Ratio - Full Uncropped View) -->
               <div class="relative aspect-[16/9] w-full overflow-hidden bg-black/5">
                 <video
@@ -118,17 +125,20 @@
                   loop
                   playsinline
                   preload="metadata"
-                  class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.05]"
+                  class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.03]"
                 />
                 <img
                   v-else
                   :src="project.previewImg"
                   :alt="project.title"
-                  class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.05]"
+                  class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.03]"
                   loading="lazy"
                 />
                 <!-- Subtle Glass Sheen on Hover -->
-                <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/25 opacity-0 transition-opacity duration-500 group-hover/mockup:opacity-100"></div>
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20 opacity-0 transition-opacity duration-500 group-hover/mockup:opacity-100"></div>
+
+                <!-- Editorial Viewfinder Crosshairs on Hover -->
+                <div class="pointer-events-none absolute inset-2 border border-white/20 opacity-0 transition-opacity duration-300 group-hover/mockup:opacity-100"></div>
 
                 <!-- Hover Floating Pill "READ CASE STUDY →" -->
                 <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover/mockup:opacity-100 transition-all duration-300">
@@ -142,11 +152,11 @@
           </div>
 
           <!-- About Project Section with Text Box Reveal -->
-          <div class="slide-about-container flex flex-col">
+          <div class="slide-about-container flex flex-col pt-0.5">
             <!-- Section Heading (tightly wrapped) -->
             <div class="slide-about-item relative inline-block self-start overflow-hidden mb-1 pr-1">
-              <span class="slide-about-text block text-xs sm:text-sm md:text-base font-sans font-semibold text-[#22201e]">
-                About
+              <span class="slide-about-text block text-[11px] sm:text-xs md:text-xs font-mono font-bold tracking-widest text-[#22201e]/50 uppercase">
+                OVERVIEW //
               </span>
               <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
             </div>
@@ -170,8 +180,8 @@
         </div>
       </div>
 
-      <!-- Bottom Row: Project Step Indicators & Explore Archive on Left, THE WORK #01 on Right -->
-      <div class="flex items-end justify-between pt-1">
+      <!-- Bottom Row: Project Step Indicators & Explore Archive on Left, THE WORK #01 on Right + Swiss Hairline -->
+      <div class="flex items-end justify-between pt-2.5 sm:pt-3 border-t border-black/10">
         <!-- Left Side: Interactive Project Pagination & Archive Link -->
         <div class="flex items-center gap-3 sm:gap-6">
           <!-- Step Pagination Dots / Lines with Rolling Number & Spring Pill -->
