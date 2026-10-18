@@ -85,57 +85,41 @@
         <div class="order-2 md:order-1 md:col-span-6 flex flex-col gap-2 sm:gap-2.5 lg:gap-3 max-w-[420px] md:max-w-[460px] lg:max-w-[520px] xl:max-w-[620px]">
           <!-- Entrance Animation Wrapper for Mockup -->
           <div class="slide-mockup will-change-transform">
-            <!-- macOS Browser Frame Mockup with Responsive Height Clamping -->
+            <!-- Pure Frameless Project Viewport with Responsive Height Clamping -->
             <div
               role="button"
               tabindex="0"
               @click="emit('openCaseStudy', project.id)"
               @keydown.enter="emit('openCaseStudy', project.id)"
-              class="group/mockup relative block w-full max-h-[19vh] sm:max-h-[22vh] md:max-h-[25vh] lg:max-h-[28vh] xl:max-h-[32vh] overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
+              class="group/mockup relative block w-full aspect-[16/9] max-h-[19vh] sm:max-h-[22vh] md:max-h-[25vh] lg:max-h-[28vh] xl:max-h-[32vh] overflow-hidden rounded-xl border border-black/15 bg-black/5 shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
             >
-              <!-- Browser Top Bar -->
-              <div class="flex items-center justify-between px-3 py-1.5 bg-[#f3f2ee] border-b border-black/10 transition-colors duration-300 group-hover/mockup:bg-[#eae8e3]">
-                <!-- Window Dots -->
-                <div class="flex items-center gap-1.5">
-                  <span class="size-2 rounded-full bg-[#ff5f56]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
-                  <span class="size-2 rounded-full bg-[#ffbd2e]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
-                  <span class="size-2 rounded-full bg-[#27c93f]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
-                </div>
-                <!-- URL Pill -->
-                <div class="px-2.5 py-0.5 rounded-md bg-white text-[10px] sm:text-[11px] font-mono text-[#22201e]/60 border border-black/5 truncate max-w-[180px] transition-colors duration-300 group-hover/mockup:text-[#22201e]">
-                  {{ project.domain }}
-                </div>
-                <div class="size-2"></div>
-              </div>
               <!-- Media Preview (Video with Poster Fallback or Static Screenshot) -->
-              <div class="relative aspect-[16/9] max-h-[16vh] sm:max-h-[19vh] md:max-h-[21vh] lg:max-h-[24vh] xl:max-h-[28vh] w-full overflow-hidden bg-black/5">
-                <video
-                  v-if="project.previewVideo"
-                  :ref="(el) => setVideoRef(el, index)"
-                  :src="project.previewVideo"
-                  :poster="project.previewImg"
-                  muted
-                  loop
-                  playsinline
-                  preload="metadata"
-                  class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.05]"
-                />
-                <img
-                  v-else
-                  :src="project.previewImg"
-                  :alt="project.title"
-                  class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.05]"
-                  loading="lazy"
-                />
-                <!-- Subtle Glass Sheen on Hover -->
-                <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/25 opacity-0 transition-opacity duration-500 group-hover/mockup:opacity-100"></div>
+              <video
+                v-if="project.previewVideo"
+                :ref="(el) => setVideoRef(el, index)"
+                :src="project.previewVideo"
+                :poster="project.previewImg"
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.05]"
+              />
+              <img
+                v-else
+                :src="project.previewImg"
+                :alt="project.title"
+                class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.05]"
+                loading="lazy"
+              />
+              <!-- Subtle Glass Sheen on Hover -->
+              <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/25 opacity-0 transition-opacity duration-500 group-hover/mockup:opacity-100"></div>
 
-                <!-- Hover Floating Pill "READ CASE STUDY →" -->
-                <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover/mockup:opacity-100 transition-all duration-300">
-                  <div class="px-3.5 py-1.5 rounded-full bg-[#22201e]/90 text-[#faf9f6] text-[10px] md:text-xs font-mono tracking-wider backdrop-blur-md shadow-xl flex items-center gap-1.5 transform scale-90 group-hover/mockup:scale-100 transition-transform duration-300">
-                    <span>READ CASE STUDY</span>
-                    <span class="text-sm leading-none inline-block transition-transform duration-300 ease-out group-hover/mockup:translate-x-0.5">→</span>
-                  </div>
+              <!-- Hover Floating Pill "READ CASE STUDY →" -->
+              <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover/mockup:opacity-100 transition-all duration-300">
+                <div class="px-3.5 py-1.5 rounded-full bg-[#22201e]/90 text-[#faf9f6] text-[10px] md:text-xs font-mono tracking-wider backdrop-blur-md shadow-xl flex items-center gap-1.5 transform scale-90 group-hover/mockup:scale-100 transition-transform duration-300">
+                  <span>READ CASE STUDY</span>
+                  <span class="text-sm leading-none inline-block transition-transform duration-300 ease-out group-hover/mockup:translate-x-0.5">→</span>
                 </div>
               </div>
             </div>
