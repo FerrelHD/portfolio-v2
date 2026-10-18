@@ -7,16 +7,16 @@
       :id="index === 0 ? 'works' : `work-${project.id}`"
       class="work-slide shrink-0 w-full md:w-screen min-h-[100svh] md:h-dvh flex flex-col justify-between select-none
              bg-[#faf9f6] text-[#22201e] relative overflow-hidden
-             pt-20 pb-5 px-6 md:pt-6 md:pb-4 lg:pt-7 lg:pb-5 md:pl-24 md:pr-12 font-sans"
+             pt-20 pb-6 px-6 md:pt-6 md:pb-4 lg:pt-8 lg:pb-5 md:pl-24 md:pr-12 font-sans"
     >
-      <!-- Top Row: CHAPTER II on Left, Live Link on Right + Swiss Hairline -->
-      <div class="flex items-center justify-between pb-2.5 sm:pb-3 border-b border-black/10">
-        <div class="flex items-baseline gap-3 overflow-hidden">
+      <!-- Top Row: CHAPTER II on Left, Live Link on Right -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-baseline gap-3 sm:gap-4 overflow-hidden">
           <h2 class="slide-chapter-title font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#22201e] uppercase leading-none will-change-transform">
             CHAPTER II
           </h2>
-          <span class="hidden md:inline-block font-mono text-[10px] lg:text-[11px] tracking-[0.2em] text-[#22201e]/40 uppercase">
-            / SELECTED WORKS [ 0{{ index + 1 }} OF 04 ]
+          <span class="slide-chapter-tag font-mono text-[10px] sm:text-xs tracking-widest text-[#22201e]/50 uppercase hidden sm:inline-block will-change-transform">
+            / SELECTED WORKS [ 0{{ index + 1 }} OF 0{{ workProjects.length }} ]
           </span>
         </div>
 
@@ -52,11 +52,11 @@
         </div>
       </div>
 
-      <!-- Main Middle Grid: Swiss 12-Column Editorial Grid (50:50 Clean Balanced Layout) -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 md:gap-8 lg:gap-10 items-start my-auto py-2 md:py-3">
+      <!-- Main Middle Grid: Natural Open Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5 sm:gap-5 md:gap-6 lg:gap-10 items-start my-auto py-0">
         
         <!-- Right Column on Desktop (Title & Meta) -> On Mobile goes FIRST (order-1 md:order-2) -->
-        <div class="order-1 md:order-2 md:col-span-6 flex flex-col pt-0 md:pl-6 lg:pl-8 md:border-l md:border-black/10">
+        <div class="order-1 md:order-2 md:col-span-6 flex flex-col pt-0 md:pl-2 lg:pl-4">
           <!-- Project Title (Masked Reveal) — Responsive, bold, uppercase, never clips -->
           <div class="overflow-hidden">
             <h3
@@ -85,7 +85,7 @@
         </div>
 
         <!-- Left Column on Desktop (Mockup & About) -> On Mobile goes SECOND (order-2 md:order-1) -->
-        <div class="order-2 md:order-1 md:col-span-6 flex flex-col gap-2.5 sm:gap-3 lg:gap-3.5 max-w-[420px] md:max-w-[460px] lg:max-w-[520px] xl:max-w-[580px]">
+        <div class="order-2 md:order-1 md:col-span-6 flex flex-col gap-2 sm:gap-2.5 lg:gap-3 max-w-[420px] md:max-w-[460px] lg:max-w-[520px] xl:max-w-[620px]">
           <!-- Entrance Animation Wrapper for Mockup -->
           <div class="slide-mockup will-change-transform">
             <!-- Frameless Widescreen 16:9 Viewport with Floating Glass Header -->
@@ -161,8 +161,8 @@
         </div>
       </div>
 
-      <!-- Bottom Row: Project Step Indicators & Explore Archive on Left, THE WORK #01 on Right + Swiss Hairline -->
-      <div class="flex items-end justify-between pt-2.5 sm:pt-3 border-t border-black/10">
+      <!-- Bottom Row: Project Step Indicators & Explore Archive on Left, THE WORK #01 on Right -->
+      <div class="flex items-end justify-between pt-1">
         <!-- Left Side: Interactive Project Pagination & Archive Link -->
         <div class="flex items-center gap-3 sm:gap-6">
           <!-- Step Pagination Dots / Lines with Rolling Number & Spring Pill -->
