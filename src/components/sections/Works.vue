@@ -11,13 +11,10 @@
     >
       <!-- Top Row: CHAPTER II on Left, Live Link on Right -->
       <div class="flex items-center justify-between">
-        <div class="flex items-baseline gap-3 sm:gap-4 overflow-hidden">
+        <div class="overflow-hidden">
           <h2 class="slide-chapter-title font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#22201e] uppercase leading-none will-change-transform">
             CHAPTER II
           </h2>
-          <span class="slide-chapter-tag font-mono text-[10px] sm:text-xs tracking-widest text-[#22201e]/50 uppercase hidden sm:inline-block will-change-transform">
-            / SELECTED WORKS [ 0{{ index + 1 }} OF 0{{ workProjects.length }} ]
-          </span>
         </div>
 
         <div class="flex items-center gap-3 sm:gap-5">
@@ -52,7 +49,7 @@
         </div>
       </div>
 
-      <!-- Main Middle Grid: Natural Open Layout -->
+      <!-- Main Middle Grid: Mobile: Title first -> Mockup -> About. Desktop: Mockup+About on Left, Title+Meta on Right -->
       <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5 sm:gap-5 md:gap-6 lg:gap-10 items-start my-auto py-0">
         
         <!-- Right Column on Desktop (Title & Meta) -> On Mobile goes FIRST (order-1 md:order-2) -->
@@ -67,7 +64,7 @@
             </h3>
           </div>
 
-          <!-- Role & System Metadata — Original font-sans typography, clean without cards or // -->
+          <!-- Role & System Metadata — Left-aligned directly beneath title -->
           <div class="flex flex-col gap-1 sm:gap-1.5 mt-2 sm:mt-4 md:mt-6 lg:mt-7 font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
             <div class="overflow-hidden py-0.5">
               <div class="slide-project-meta will-change-transform">
@@ -88,52 +85,64 @@
         <div class="order-2 md:order-1 md:col-span-6 flex flex-col gap-2 sm:gap-2.5 lg:gap-3 max-w-[420px] md:max-w-[460px] lg:max-w-[520px] xl:max-w-[620px]">
           <!-- Entrance Animation Wrapper for Mockup -->
           <div class="slide-mockup will-change-transform">
-            <!-- Frameless Widescreen 16:9 Viewport with Floating Glass Header -->
+            <!-- macOS Browser Frame Mockup with Responsive Height Clamping -->
             <div
               role="button"
               tabindex="0"
               @click="emit('openCaseStudy', project.id)"
               @keydown.enter="emit('openCaseStudy', project.id)"
-              class="group/mockup relative block w-full aspect-[16/9] overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
+              class="group/mockup relative block w-full max-h-[19vh] sm:max-h-[22vh] md:max-h-[25vh] lg:max-h-[28vh] xl:max-h-[32vh] overflow-hidden rounded-xl border border-black/15 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
             >
-              <!-- Media Preview (Natural 16:9 Full Aspect Ratio) -->
-              <video
-                v-if="project.previewVideo"
-                :ref="(el) => setVideoRef(el, index)"
-                :src="project.previewVideo"
-                :poster="project.previewImg"
-                muted
-                loop
-                playsinline
-                preload="metadata"
-                class="absolute inset-0 size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.03]"
-              />
-              <img
-                v-else
-                :src="project.previewImg"
-                :alt="project.title"
-                class="absolute inset-0 size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.03]"
-                loading="lazy"
-              />
+              <!-- Browser Top Bar -->
+              <div class="flex items-center justify-between px-3 py-1.5 bg-[#f3f2ee] border-b border-black/10 transition-colors duration-300 group-hover/mockup:bg-[#eae8e3]">
+                <!-- Window Dots -->
+                <div class="flex items-center gap-1.5">
+                  <span class="size-2 rounded-full bg-[#ff5f56]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
+                  <span class="size-2 rounded-full bg-[#ffbd2e]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
+                  <span class="size-2 rounded-full bg-[#27c93f]/80 transition-transform duration-300 group-hover/mockup:scale-110"></span>
+                </div>
+                <!-- URL Pill -->
+                <div class="px-2.5 py-0.5 rounded-md bg-white text-[10px] sm:text-[11px] font-mono text-[#22201e]/60 border border-black/5 truncate max-w-[180px] transition-colors duration-300 group-hover/mockup:text-[#22201e]">
+                  {{ project.domain }}
+                </div>
+                <div class="size-2"></div>
+              </div>
+              <!-- Media Preview (Video with Poster Fallback or Static Screenshot) -->
+              <div class="relative aspect-[16/9] max-h-[16vh] sm:max-h-[19vh] md:max-h-[21vh] lg:max-h-[24vh] xl:max-h-[28vh] w-full overflow-hidden bg-black/5">
+                <video
+                  v-if="project.previewVideo"
+                  :ref="(el) => setVideoRef(el, index)"
+                  :src="project.previewVideo"
+                  :poster="project.previewImg"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.05]"
+                />
+                <img
+                  v-else
+                  :src="project.previewImg"
+                  :alt="project.title"
+                  class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.05]"
+                  loading="lazy"
+                />
+                <!-- Subtle Glass Sheen on Hover -->
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/25 opacity-0 transition-opacity duration-500 group-hover/mockup:opacity-100"></div>
 
-              <!-- Subtle Glass Sheen on Hover -->
-              <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20 opacity-0 transition-opacity duration-500 group-hover/mockup:opacity-100 z-10"></div>
-
-              <!-- Editorial Viewfinder Crosshairs on Hover -->
-              <div class="pointer-events-none absolute inset-2.5 border border-white/20 opacity-0 transition-opacity duration-300 group-hover/mockup:opacity-100 z-10"></div>
-
-              <!-- Hover Floating Center Pill "READ CASE STUDY →" -->
-              <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover/mockup:opacity-100 transition-all duration-300 z-20">
-                <div class="px-3.5 py-1.5 rounded-full bg-[#22201e]/90 text-[#faf9f6] text-[10px] md:text-xs font-mono tracking-wider backdrop-blur-md shadow-xl flex items-center gap-1.5 transform scale-90 group-hover/mockup:scale-100 transition-transform duration-300">
-                  <span>READ CASE STUDY</span>
-                  <span class="text-sm leading-none inline-block transition-transform duration-300 ease-out group-hover/mockup:translate-x-0.5">→</span>
+                <!-- Hover Floating Pill "READ CASE STUDY →" -->
+                <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover/mockup:opacity-100 transition-all duration-300">
+                  <div class="px-3.5 py-1.5 rounded-full bg-[#22201e]/90 text-[#faf9f6] text-[10px] md:text-xs font-mono tracking-wider backdrop-blur-md shadow-xl flex items-center gap-1.5 transform scale-90 group-hover/mockup:scale-100 transition-transform duration-300">
+                    <span>READ CASE STUDY</span>
+                    <span class="text-sm leading-none inline-block transition-transform duration-300 ease-out group-hover/mockup:translate-x-0.5">→</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- About Project Section with Text Box Reveal -->
-          <div class="slide-about-container flex flex-col pt-0.5">
+          <div class="slide-about-container flex flex-col">
             <!-- Section Heading (tightly wrapped) -->
             <div class="slide-about-item relative inline-block self-start overflow-hidden mb-1 pr-1">
               <span class="slide-about-text block text-xs sm:text-sm md:text-base font-sans font-semibold text-[#22201e]">
@@ -339,9 +348,9 @@
       slideNumber: '#01',
       title: 'Nusantara Observatory',
       aboutP1:
-        'Hazard information is often scattered across different sources, making it difficult to see what is happening across Indonesia in one place. I wanted to turn fragmented hazard data into a single visual experience that makes complex events easier to explore.',
+        'Hazard data across Indonesia is often scattered across isolated portals. I built a unified visual experience to make complex seismic events and historical replays immediately clear to explore.',
       aboutP2:
-        'I built an interactive geospatial observatory integrating multiple live data sources into a real-time 2D map with event replay and proximity analysis. This project pushed me to think beyond interfaces — combining data, performance, visualization, and usability into one system.',
+        'I engineered a high-performance 2D canvas observatory featuring live tremor feeds, historical event replays, and proximity analytics, unifying raw spatial data and fluid usability into one system.',
       role: 'Frontend & Geospatial Engineer',
       system: 'React 19 · TypeScript · Canvas 2D',
       domain: 'nusantara-observatory.vercel.app',
@@ -355,9 +364,9 @@
       slideNumber: '#02',
       title: 'TactIQ',
       aboutP1:
-        'Modern football operations increasingly depend on granular performance data, yet tools unifying predictive ML modeling, multivariate player analytics, and live video tactical tracking remain gatekept from mainstream analysts. I wanted to design an integrated telemetry intelligence hub that bridges high-performance data systems with intuitive pitch visualization.',
+        'Modern football relies on granular data, yet tools unifying tactical modeling and video tracking remain fragmented. I set out to build an accessible intelligence hub for tactical analysts.',
       aboutP2:
-        'As Front-End Lead, I engineered the Next.js 14 telemetry platform — architecting dynamic 7-axis Chart.js radar comparisons, an AI-powered player similarity engine, and an interactive HTML5 Canvas 2D overlay synchronized with computer vision tracking feeds via WebSockets at 60 FPS.',
+        'As Front-End Lead, I engineered the Next.js 14 platform featuring 7-axis radar metrics, an AI player scout engine, and a 60 FPS HTML5 Canvas overlay synced to real-time computer vision tracking feeds.',
       role: 'Front-End Lead & UI Engineer',
       system: 'Next.js 14 · TypeScript · HTML5 Canvas · Socket.io · Tailwind',
       domain: 'tactiq.analytics',
@@ -370,9 +379,9 @@
       slideNumber: '#03',
       title: 'Persona 3 Reload',
       aboutP1:
-        'Most developer portfolios follow identical grid patterns and neutral aesthetics. I wanted to break the mold entirely by building an authentic, 60 FPS console experience inspired by Persona 3 Reload that pushes web interactivity to its absolute limit.',
+        'Most developer portfolios rely on predictable grids and neutral styling. I wanted to break convention by building an authentic, 60 FPS console interface inspired by the aesthetic of Persona 3 Reload.',
       aboutP2:
-        'I engineered a zero-scroll 1080p viewport interface featuring procedural Web Audio synthesis for zero-latency acoustic feedback, stylized typography, 1080p character background video loops, and responsive game-menu state machines.',
+        'I engineered a zero-scroll 1080p viewport interface with procedural Web Audio synthesis for zero-latency feedback, kinetic typography, character video loops, and responsive game-menu state machines.',
       role: 'Creative Developer & UI Engineer',
       system: 'React 18 · TypeScript · Web Audio · Tailwind',
       domain: 'persona.ferrelrashadakeyla2014.workers.dev',
@@ -386,9 +395,9 @@
       slideNumber: '#04',
       title: 'Charles Leclerc #16',
       aboutP1:
-        'Motorsport enthusiasts love granular telemetry: throttle traces, braking curves, and sector deltas. I wanted to translate the sensory velocity and telemetry of Formula 1 into an interactive web experience using typography, audio cues, and telemetry charts.',
+        'Motorsport fans love granular telemetry: throttle curves and sector deltas. I wanted to translate the sensory velocity of Formula 1 into an interactive web experience powered by kinetic motion and sound.',
       aboutP2:
-        'I engineered an interactive Canvas 2D RPM tachometer dial that revs dynamically based on user scroll velocity, paired with custom redline shaders, video scrub triggers, and sector delta timelines comparing qualifying telemetry across Monaco and Monza.',
+        'I engineered an interactive Canvas 2D tachometer revving dynamically with scroll speed, custom redline shaders, video scrub triggers, and sector delta timelines comparing telemetry across Monaco and Monza.',
       role: 'Creative Frontend Developer',
       system: 'React 18 · GSAP · Canvas 2D · Tailwind',
       domain: 'leclerc-redline.vercel.app',
@@ -558,12 +567,3 @@
     revealSlideIndex,
   });
 </script>
-
-<style scoped>
-@media (max-height: 720px) and (min-width: 768px) {
-  .work-slide {
-    padding-top: 1.25rem !important;
-    padding-bottom: 0.75rem !important;
-  }
-}
-</style>
