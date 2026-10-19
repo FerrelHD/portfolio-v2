@@ -32,10 +32,10 @@
             ref="closeBtn"
             type="button"
             @click="handleClose"
-            class="group flex items-center justify-center size-9 md:size-10 rounded-full border border-black/10 hover:border-black/30 hover:bg-black/[0.04] transition-all duration-200 cursor-pointer outline-none"
+            class="group flex items-center justify-center p-1 text-[#22201e]/60 hover:text-[#22201e] transition-colors cursor-pointer outline-none select-none"
             aria-label="Close colophon modal"
           >
-            <span class="text-base transition-transform duration-300 group-hover:rotate-90 inline-block">✕</span>
+            <span class="text-xl transition-transform duration-300 group-hover:rotate-90 inline-block leading-none">✕</span>
           </button>
         </div>
       </header>
