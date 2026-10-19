@@ -48,11 +48,11 @@
           
           <!-- Editorial Top Hero Header -->
           <div class="flex flex-col gap-4 pb-8 md:pb-12 border-b border-black/10">
-            <div class="case-study-hero-meta flex items-center gap-3">
-              <span class="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-widest bg-black/[0.06] text-[#22201e]/80">
+            <div class="case-study-hero-meta flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 items-start">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-mono uppercase tracking-widest bg-black/[0.06] text-[#22201e]/80 whitespace-nowrap shrink-0">
                 CASE STUDY · {{ project.number }}
               </span>
-              <span class="font-sans text-xs uppercase tracking-widest text-[#22201e]/50 font-medium">
+              <span class="font-sans text-[11px] sm:text-xs uppercase tracking-widest text-[#22201e]/50 font-medium leading-relaxed">
                 {{ project.category }}
               </span>
             </div>

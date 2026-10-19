@@ -198,12 +198,12 @@
             </button>
           </div>
 
-          <!-- Archive Link on Last Slide -->
+          <!-- Archive Link on Last Slide (Desktop & Tablet only) -->
           <button
             v-if="index === workProjects.length - 1"
             type="button"
             @click="emit('openArchive')"
-            class="group inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer outline-none select-none pb-0.5 ml-2"
+            class="group hidden sm:inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer outline-none select-none pb-0.5 ml-2"
           >
             <span>Explore All Works (10+)</span>
             <span class="text-sm md:text-base transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
