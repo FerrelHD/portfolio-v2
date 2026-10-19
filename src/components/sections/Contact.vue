@@ -108,8 +108,17 @@
         </div>
       </div>
 
-      <!-- Copyright Note (Bottom-Right) -->
-      <div class="text-xs sm:text-sm text-[#f3eee8]/50 font-sans sm:text-right">
+      <!-- Copyright Note & Colophon Trigger (Bottom-Right) -->
+      <div class="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-[#f3eee8]/50 font-sans sm:justify-end">
+        <button
+          type="button"
+          @click="emit('openColophon')"
+          class="group inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#f3eee8]/65 hover:text-white transition-colors cursor-pointer outline-none"
+        >
+          <span class="border-b border-white/20 group-hover:border-white transition-colors pb-0.5">Colophon & Specs</span>
+          <span class="font-serif italic text-xs inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+        </button>
+        <span class="text-white/20 hidden sm:inline">·</span>
         <span>© 2026 Ferrel Rashad Akeyla</span>
       </div>
     </div>
@@ -122,6 +131,7 @@
 
   const emit = defineEmits<{
     (e: 'scrollToStart'): void;
+    (e: 'openColophon'): void;
   }>();
 
   const nextEl = ref<HTMLElement | null>(null);

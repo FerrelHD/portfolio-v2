@@ -181,16 +181,29 @@
       </div>
     </nav>
 
-    <!-- Bottom Row: Left Archive Link, Right Social Links -->
+    <!-- Bottom Row: Left Archive Link & Colophon, Right Social Links -->
     <div class="overflow-hidden pt-4 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-      <button
-        type="button"
-        @click="openArchiveModal"
-        class="group inline-flex items-center gap-2 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer outline-none"
-      >
-        <span class="border-b border-white/20 group-hover:border-white transition-colors">All Works Archive (8+)</span>
-        <span class="font-serif italic text-sm inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-      </button>
+      <div class="flex flex-wrap items-center gap-3 sm:gap-5">
+        <button
+          type="button"
+          @click="openArchiveModal"
+          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer outline-none"
+        >
+          <span class="border-b border-white/20 group-hover:border-white transition-colors">All Works Archive (10+)</span>
+          <span class="font-serif italic text-sm inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+        </button>
+
+        <span class="text-white/20 text-xs hidden sm:inline">/</span>
+
+        <button
+          type="button"
+          @click="openColophonModal"
+          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer outline-none"
+        >
+          <span class="border-b border-white/20 group-hover:border-white transition-colors">Colophon & Specs</span>
+          <span class="font-serif italic text-sm inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+        </button>
+      </div>
 
       <div
         ref="socialLinks"
@@ -245,11 +258,18 @@
   const emit = defineEmits<{
     (e: 'navigate', sectionId: string): void;
     (e: 'openArchive'): void;
+    (e: 'openColophon'): void;
   }>();
 
   const openArchiveModal = () => {
     closeMenu(() => {
       emit('openArchive');
+    });
+  };
+
+  const openColophonModal = () => {
+    closeMenu(() => {
+      emit('openColophon');
     });
   };
 

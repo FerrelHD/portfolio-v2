@@ -31,6 +31,7 @@
     :activeSection="currentSectionId"
     @navigate="handleNavigate"
     @openArchive="openArchive"
+    @openColophon="openColophon"
   />
 
   <!-- Main Viewport Container (Desktop Horizontal Pinned Track, Mobile Vertical Stack) -->
@@ -65,7 +66,11 @@
         <Capabilities ref="capabilitiesRef" />
 
         <!-- Slide 7: Closing - Thank You & Contact (Dark #22201e) -->
-        <Contact ref="contactRef" @scrollToStart="() => handleNavigate('hero')" />
+        <Contact
+          ref="contactRef"
+          @scrollToStart="() => handleNavigate('hero')"
+          @openColophon="openColophon"
+        />
       </div>
     </div>
   </main>
@@ -83,6 +88,12 @@
     @close="closeCaseStudy"
     @navigate="openCaseStudy"
   />
+
+  <!-- Fullscreen Colophon & Site Architecture Specification Modal -->
+  <ColophonModal
+    :isOpen="isColophonOpen"
+    @close="closeColophon"
+  />
 </template>
 
 <script setup lang="ts">
@@ -95,7 +106,7 @@
   } from '@/components/sections';
   import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
   import { SamsungError } from '@/components/design';
-  import { LeftRail, ProjectArchive, ProjectDetail } from './components/common';
+  import { LeftRail, ProjectArchive, ProjectDetail, ColophonModal } from './components/common';
   import { useWindowSize } from '@vueuse/core';
   import gsap from 'gsap';
   import { ScrollTrigger } from 'gsap/all';
@@ -119,6 +130,7 @@
   const isSidebarSolid = ref(false);
   const isArchiveOpen = ref(false);
   const activeCaseStudyId = ref<string | null>(null);
+  const isColophonOpen = ref(false);
 
   const openArchive = () => {
     isArchiveOpen.value = true;
@@ -127,8 +139,30 @@
 
   const closeArchive = () => {
     isArchiveOpen.value = false;
-    if (!activeCaseStudyId.value) {
+    if (!activeCaseStudyId.value && !isColophonOpen.value) {
       lenis.start();
+    }
+  };
+
+  const openColophon = () => {
+    isColophonOpen.value = true;
+    lenis.stop();
+    if (window.location.hash !== '#colophon') {
+      window.location.hash = 'colophon';
+    }
+  };
+
+  const closeColophon = () => {
+    isColophonOpen.value = false;
+    if (!isArchiveOpen.value && !activeCaseStudyId.value) {
+      lenis.start();
+    }
+    if (window.location.hash === '#colophon') {
+      history.pushState(
+        '',
+        document.title,
+        window.location.pathname + window.location.search
+      );
     }
   };
 
@@ -142,7 +176,7 @@
 
   const closeCaseStudy = () => {
     activeCaseStudyId.value = null;
-    if (!isArchiveOpen.value) {
+    if (!isArchiveOpen.value && !isColophonOpen.value) {
       lenis.start();
     }
     if (window.location.hash.startsWith('#project/')) {
@@ -156,14 +190,22 @@
 
   const syncCaseStudyFromHash = () => {
     const hash = window.location.hash;
-    if (hash.startsWith('#project/')) {
+    if (hash === '#colophon') {
+      isColophonOpen.value = true;
+      lenis.stop();
+    } else if (hash.startsWith('#project/')) {
       const id = hash.replace('#project/', '');
       if (id && id !== activeCaseStudyId.value) {
         activeCaseStudyId.value = id;
         lenis.stop();
       }
-    } else if (activeCaseStudyId.value) {
-      activeCaseStudyId.value = null;
+    } else {
+      if (isColophonOpen.value) {
+        isColophonOpen.value = false;
+      }
+      if (activeCaseStudyId.value) {
+        activeCaseStudyId.value = null;
+      }
       if (!isArchiveOpen.value) {
         lenis.start();
       }
@@ -402,7 +444,7 @@
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (isArchiveOpen.value || activeCaseStudyId.value) return;
+    if (isArchiveOpen.value || activeCaseStudyId.value || isColophonOpen.value) return;
     if (['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as HTMLElement)?.tagName)) return;
 
     if (['ArrowRight', 'ArrowDown', 'PageDown'].includes(e.key) || (e.key === ' ' && !e.shiftKey)) {
