@@ -103,13 +103,19 @@
                 loop
                 playsinline
                 preload="metadata"
-                class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.05]"
+                :class="[
+                  'size-full object-cover transition-transform duration-700 ease-out',
+                  project.mediaClass || 'object-top group-hover/mockup:scale-[1.05]',
+                ]"
               />
               <img
                 v-else
                 :src="project.previewImg"
                 :alt="project.title"
-                class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-[1.05]"
+                :class="[
+                  'size-full object-cover transition-transform duration-700 ease-out',
+                  project.mediaClass || 'object-top group-hover/mockup:scale-[1.05]',
+                ]"
                 loading="lazy"
               />
               <!-- Subtle Glass Sheen on Hover -->
@@ -299,7 +305,7 @@
 
   import {
     indonesianCrustalObservatoryImg,
-    tactiqImg,
+    vhsImg,
     personaImg,
     charlesLeclercImg,
   } from '@/assets/images';
@@ -308,7 +314,7 @@
     leclercVideo,
     nusantaraVideo,
     personaVideo,
-    tactiqVideo,
+    vhsVideo,
   } from '@/assets/videos';
 
   export interface WorkSlideProject {
@@ -322,6 +328,7 @@
     domain: string;
     previewImg: string;
     previewVideo?: string;
+    mediaClass?: string;
     liveUrl?: string;
     githubUrl?: string;
   }
@@ -344,19 +351,21 @@
       githubUrl: 'https://github.com/FerrelHD/Global-Seismic-Tracker',
     },
     {
-      id: 'tactiq',
+      id: 'vhs',
       slideNumber: '#02',
-      title: 'TactIQ',
+      title: 'Cyberpunk Edgerunners',
       aboutP1:
-        'Modern football relies on granular data, yet tools unifying tactical modeling and video tracking remain fragmented. I set out to build an accessible intelligence hub for tactical analysts.',
+        'Analog broadcast aesthetics often get lost in flat, modern web design. I set out to build an authentic tactile archival experience evoking vintage CRT studio monitors and physical VHS tape decks for Cyberpunk: Edgerunners.',
       aboutP2:
-        'As Front-End Lead, I engineered the Next.js 14 platform featuring 7-axis radar metrics, an AI player scout engine, and a 60 FPS HTML5 Canvas overlay synced to real-time computer vision tracking feeds.',
-      role: 'Front-End Lead & UI Engineer',
-      system: 'Next.js 14 · TypeScript · HTML5 Canvas · Socket.io · Tailwind',
-      domain: 'tactiq.analytics',
-      previewImg: tactiqImg,
-      previewVideo: tactiqVideo,
-      githubUrl: 'https://github.com/LuthfiMirza/TactIQ',
+        'I engineered a cylindrical 3D tape carousel in Three.js and React Three Fiber, optical WebGL2 post-processing CRT barrel distortion shaders, procedural Web Audio tape hums and clicks, and a horizontal inertia narrative gallery via Lenis.',
+      role: 'Creative Technologist & 3D WebGL Developer',
+      system: 'Next.js 15 · Three.js · R3F · WebGL2 · Web Audio API',
+      domain: 'vhs-gold.vercel.app',
+      previewImg: vhsImg,
+      previewVideo: vhsVideo,
+      mediaClass: 'object-center scale-[1.12] -translate-y-[6%] group-hover/mockup:scale-[1.18]',
+      liveUrl: 'https://vhs-gold.vercel.app',
+      githubUrl: 'https://github.com/FerrelHD/VHS',
     },
     {
       id: 'persona-3',

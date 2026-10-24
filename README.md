@@ -64,8 +64,9 @@ Built with a focus on fluid 60 FPS motion, seamless horizontal parallax scrollin
 
 | Project | Category | Tech Stack | Status / Links |
 | :--- | :--- | :--- | :--- |
+| **[Cyberpunk Edgerunners](https://vhs-gold.vercel.app)** | Vintage CRT Studio & 3D VHS Archive | Next.js 15, Three.js, R3F, WebGL2 | [Live Demo](https://vhs-gold.vercel.app) • [Source](https://github.com/FerrelHD/VHS) |
 | **[Nusantara Observatory](https://nusantara-observatory.vercel.app/)** | Geospatial Hazard & Event Replay | React 19, TypeScript, Canvas 2D | [Live Demo](https://nusantara-observatory.vercel.app/) • [Source](https://github.com/FerrelHD/Global-Seismic-Tracker) |
-| **[Spidey Dev Portfolio](https://github.com/FerrelHD/Portofolio)** | Creative Frontend & Web Audio | React 19, GSAP, Web Audio API | [Source Code](https://github.com/FerrelHD/Portofolio) |
+| **[TactIQ](https://github.com/LuthfiMirza/TactIQ)** | Football Analytics Platform | Next.js 14, TypeScript, Canvas | [Source Code](https://github.com/LuthfiMirza/TactIQ) |
 | **[Fersya Shop](https://github.com/FerrelHD/Fersya-Shop)** | Organic E-Commerce Storefront | Laravel 11, Filament Admin, MySQL | [Source Code](https://github.com/FerrelHD/Fersya-Shop) |
 | **[Student Life](https://ferrelhd.github.io/Student-Life/)** | All-in-One Productivity PWA | React 19, TypeScript, Supabase, PWA | [Live Demo](https://ferrelhd.github.io/Student-Life/) • [Source](https://github.com/FerrelHD/Student-Life) |
 | **[Charles Leclerc #16](https://leclerc-redline.vercel.app/)** | Creative Motion & Formula 1 Physics | React 18, GSAP, Canvas 2D | [Live Demo](https://leclerc-redline.vercel.app/) |
