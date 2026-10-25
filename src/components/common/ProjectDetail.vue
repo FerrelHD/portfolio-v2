@@ -17,7 +17,7 @@
         <button
           type="button"
           @click="handleClose"
-          class="group flex items-center gap-2 px-3 py-1.5 -ml-2 rounded-full text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/75 hover:text-[#22201e] hover:bg-black/[0.05] transition-all cursor-pointer outline-none"
+          class="group flex items-center gap-2 px-3 py-1.5 -ml-2 rounded-full text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/75 hover:text-[#22201e] hover:bg-black/[0.05] transition-all cursor-pointer outline-none min-h-[44px]"
         >
           <span class="inline-block transition-transform duration-200 group-hover:-translate-x-1">←</span>
           <span>Back to Works</span>
@@ -29,7 +29,7 @@
             ref="closeBtn"
             type="button"
             @click="handleClose"
-            class="group flex items-center justify-center size-8 sm:size-9 rounded-full text-[#22201e]/60 hover:text-[#22201e] hover:bg-black/[0.06] transition-all cursor-pointer outline-none"
+            class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/60 hover:text-[#22201e] hover:bg-black/[0.06] transition-all cursor-pointer outline-none"
             aria-label="Close case study dialog"
           >
             <span class="text-base sm:text-lg transition-transform duration-300 group-hover:rotate-90 inline-block">✕</span>

@@ -125,7 +125,7 @@
     ref="menuPanel"
     class="fixed inset-y-0 right-0 left-0 md:left-16 z-[95] flex flex-col justify-between
            bg-[#24211e] text-[#faf9f6] select-none
-           p-6 sm:p-10 md:pt-8 md:pb-10 md:pl-20 md:pr-16 overflow-y-auto will-change-[clip-path]"
+           px-6 pt-20 pb-6 sm:p-10 md:pt-8 md:pb-10 md:pl-20 md:pr-16 overflow-y-auto will-change-[clip-path]"
     style="clip-path: inset(0 100% 0 0);"
   >
     <!-- Top Right: Pure Serif "CLOSE" Button (Identical to Khanh Nguyen) -->
@@ -134,7 +134,7 @@
         ref="closeBtn"
         type="button"
         @click="closeMenu()"
-        class="font-serif text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-[#faf9f6] opacity-75 hover:opacity-100 transition-opacity cursor-pointer outline-none will-change-transform"
+        class="font-serif text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-[#faf9f6] opacity-75 hover:opacity-100 transition-opacity cursor-pointer outline-none will-change-transform min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
         aria-label="Close navigation menu"
       >
         CLOSE
@@ -166,7 +166,7 @@
             <!-- Giant Editorial Serif Title + Subtle Dynamic Dash Indicator -->
             <div class="flex items-center gap-3 sm:gap-5 lg:gap-6">
               <span
-                class="font-serif text-4xl sm:text-6xl md:text-[54px] lg:text-[68px] xl:text-[76px] 2xl:text-[5.5vw] uppercase tracking-[-0.03em] leading-[0.9] text-inherit transition-colors duration-300"
+                class="font-serif text-3xl sm:text-6xl md:text-[54px] lg:text-[68px] xl:text-[76px] 2xl:text-[5.5vw] uppercase tracking-[-0.03em] leading-[0.9] text-inherit transition-colors duration-300"
               >
                 {{ item.label }}
               </span>
@@ -187,7 +187,7 @@
         <button
           type="button"
           @click="openArchiveModal"
-          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer outline-none"
+          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer outline-none min-h-[44px]"
         >
           <span class="border-b border-white/20 group-hover:border-white transition-colors">All Works Archive (10+)</span>
           <span class="font-serif italic text-sm inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -198,7 +198,7 @@
         <button
           type="button"
           @click="openColophonModal"
-          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer outline-none"
+          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer outline-none min-h-[44px]"
         >
           <span class="border-b border-white/20 group-hover:border-white transition-colors">Colophon & Specs</span>
           <span class="font-serif italic text-sm inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -213,7 +213,7 @@
           href="https://github.com/FerrelHD"
           target="_blank"
           rel="noreferrer"
-          class="hover:text-white transition-colors"
+          class="hover:text-white transition-colors min-h-[44px] inline-flex items-center"
         >
           GitHub
         </a>
@@ -221,13 +221,13 @@
           href="https://www.linkedin.com/in/ferrel-rashad/"
           target="_blank"
           rel="noreferrer"
-          class="hover:text-white transition-colors"
+          class="hover:text-white transition-colors min-h-[44px] inline-flex items-center"
         >
           LinkedIn
         </a>
         <a
           href="mailto:ferrelrashadakeyla2014@gmail.com"
-          class="hover:text-white transition-colors"
+          class="hover:text-white transition-colors min-h-[44px] inline-flex items-center"
         >
           Email
         </a>

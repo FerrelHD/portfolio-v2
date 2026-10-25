@@ -25,7 +25,7 @@
         >
           <div
             ref="introContent"
-            class="flex items-center h-[1em] text-[17vw] sm:text-[14vw] md:text-[clamp(3.75rem,min(9.5vw,16vh),10rem)] lg:text-[clamp(4.25rem,min(9.8vw,17vh),12rem)] xl:text-[clamp(5.2rem,min(10.5vw,21vh),15rem)] text-[#f3eee8] font-normal will-change-transform leading-none tracking-[-0.045em] pr-4 sm:pr-6"
+            class="flex items-center h-[1em] text-[clamp(2.75rem,16vw,10rem)] md:text-[clamp(3.75rem,min(9.5vw,16vh),10rem)] lg:text-[clamp(4.25rem,min(9.8vw,17vh),12rem)] xl:text-[clamp(5.2rem,min(10.5vw,21vh),15rem)] text-[#f3eee8] font-normal will-change-transform leading-none tracking-[-0.045em] pr-4 sm:pr-6"
           >
             <span class="flex h-[1em] items-center leading-none">20</span>
             <!-- Rolling 2-digit strip -->
@@ -51,7 +51,7 @@
           <span class="block overflow-hidden pr-4 sm:pr-6 pt-1 pb-1">
             <span
               ref="firstNameEl"
-              class="block will-change-transform whitespace-nowrap text-[17vw] sm:text-[14vw] md:text-[clamp(3.75rem,min(9.5vw,16vh),10rem)] lg:text-[clamp(4.25rem,min(9.8vw,17vh),12rem)] xl:text-[clamp(5.2rem,min(10.5vw,21vh),15rem)] tracking-[-0.045em] pr-2"
+              class="block will-change-transform whitespace-nowrap text-[clamp(2.75rem,16vw,10rem)] md:text-[clamp(3.75rem,min(9.5vw,16vh),10rem)] lg:text-[clamp(4.25rem,min(9.8vw,17vh),12rem)] xl:text-[clamp(5.2rem,min(10.5vw,21vh),15rem)] tracking-[-0.045em] pr-2"
             >
               FERREL
             </span>
@@ -59,7 +59,7 @@
           <span class="block overflow-hidden pr-6 sm:pr-8 mt-1 sm:mt-1.5 md:mt-2 pt-1 pb-1">
             <span
               ref="lastNameEl"
-              class="block will-change-transform whitespace-nowrap text-[18.5vw] sm:text-[15.2vw] md:text-[clamp(4.25rem,min(10.5vw,17.5vh),11.5rem)] lg:text-[clamp(4.75rem,min(10.8vw,18.5vh),13.5rem)] xl:text-[clamp(5.8rem,min(11.2vw,22.5vh),16.5rem)] tracking-[-0.045em] origin-left pr-4"
+              class="block will-change-transform whitespace-nowrap text-[clamp(3rem,17.5vw,11.5rem)] md:text-[clamp(4.25rem,min(10.5vw,17.5vh),11.5rem)] lg:text-[clamp(4.75rem,min(10.8vw,18.5vh),13.5rem)] xl:text-[clamp(5.8rem,min(11.2vw,22.5vh),16.5rem)] tracking-[-0.045em] origin-left pr-4"
             >
               <span>R</span><span class="inline-block pl-[0.06em]">A</span><span>SHAD</span>
             </span>
@@ -84,15 +84,19 @@
     <div class="relative z-[2] grid grid-cols-2 md:grid-cols-3 items-end gap-4 font-sans text-[#f3eee8]/80 max-w-[1700px] w-full">
       <!-- Bottom Left: Location & Live Local Clock -->
       <div class="overflow-hidden">
-        <div ref="footerLeftEl" class="flex flex-col text-sm sm:text-base md:text-lg leading-[140%] will-change-transform">
+        <div ref="footerLeftEl" class="flex flex-col text-xs sm:text-base md:text-lg leading-[140%] will-change-transform">
           <span class="text-[#f3eee8]">Depok, Indonesia</span>
           <span class="text-[#f3eee8]/60 tabular-nums">
             (GMT+7) {{ currentTime }}
           </span>
+          <span class="md:hidden text-emerald-400/90 text-[11px] mt-0.5 flex items-center gap-1.5 font-medium">
+            <span class="size-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Available for work
+          </span>
         </div>
       </div>
 
-      <!-- Bottom Center: Availability Status -->
+      <!-- Bottom Center: Availability Status (Tablet & Desktop) -->
       <div class="hidden md:flex flex-col items-center text-sm sm:text-base md:text-lg text-center leading-[140%] overflow-hidden">
         <span ref="footerCenterEl" class="text-[#f3eee8]/80 will-change-transform">
           Open for collaborations
@@ -105,11 +109,11 @@
           <!-- Intro Quote: tightly masked container, entrance from below, exit to below -->
           <div
             ref="quoteWrapperEl"
-            class="absolute right-0 bottom-0 overflow-hidden pointer-events-none select-none max-w-[280px] sm:max-w-none w-max z-10"
+            class="absolute right-0 bottom-0 overflow-hidden pointer-events-none select-none max-w-[200px] sm:max-w-none w-max z-10"
           >
             <div
               ref="quoteEl"
-              class="font-sans text-xs sm:text-sm md:text-base text-[#f3eee8]/75 text-right will-change-transform leading-snug tracking-normal whitespace-nowrap"
+              class="font-sans text-[11px] sm:text-sm md:text-base text-[#f3eee8]/75 text-right will-change-transform leading-snug tracking-normal whitespace-nowrap"
             >
               <span>Where logic meets imagination.</span>
             </div>

@@ -163,27 +163,27 @@
       <!-- Bottom Row: Project Step Indicators & Explore Archive on Left, THE WORK #01 on Right -->
       <div class="flex items-end justify-between pt-1">
         <!-- Left Side: Interactive Project Pagination & Archive Link -->
-        <div class="flex items-center gap-3 sm:gap-6">
+        <div class="flex items-center gap-2 sm:gap-6">
           <!-- Step Pagination Dots / Lines with Rolling Number & Spring Pill -->
-          <div class="flex items-center gap-1.5 sm:gap-2.5 font-mono text-[10px] sm:text-[11px] tracking-wider text-[#22201e]/60">
+          <div class="flex items-center gap-1 sm:gap-2.5 font-mono text-[10px] sm:text-[11px] tracking-wider text-[#22201e]/60">
             <span class="font-sans uppercase text-[9px] sm:text-[10px] tracking-[0.2em] text-[#22201e]/40 font-semibold mr-0.5 sm:mr-1">PROJECT</span>
             <button
               v-for="(p, pIdx) in workProjects"
               :key="p.id"
               type="button"
               @click="emit('goToProject', pIdx)"
-              class="group/step relative flex items-center gap-1 sm:gap-1.5 transition-colors cursor-pointer outline-none select-none py-1"
+              class="group/step relative flex items-center gap-1 sm:gap-1.5 transition-colors cursor-pointer outline-none select-none min-h-[44px] px-1 sm:px-0 py-1"
               :class="pIdx === index ? 'text-[#22201e] font-bold' : 'text-[#22201e]/40 hover:text-[#22201e]'"
               :aria-label="`Go to project ${p.title}`"
             >
               <!-- Active Spring Pill vs Inactive Magnetic Dash -->
               <span
                 v-if="pIdx === index"
-                class="step-pill-active inline-block h-1 w-5 sm:w-7 bg-[#22201e] rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.15)] will-change-transform origin-left"
+                class="step-pill-active inline-block h-1 w-4 sm:w-7 bg-[#22201e] rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.15)] will-change-transform origin-left"
               ></span>
               <span
                 v-else
-                class="inline-block h-1 w-2 sm:w-2.5 bg-black/20 rounded-full transition-all duration-300 ease-out group-hover/step:w-3.5 sm:group-hover/step:w-4 group-hover/step:bg-black/60"
+                class="inline-block h-1 w-1.5 sm:w-2.5 bg-black/20 rounded-full transition-all duration-300 ease-out group-hover/step:w-3.5 sm:group-hover/step:w-4 group-hover/step:bg-black/60"
               ></span>
 
               <!-- Masked Rolling Counter for Number -->
@@ -217,20 +217,20 @@
         </div>
 
         <!-- Right Side: THE WORK #01 typography -->
-        <div class="flex items-end gap-1 leading-none select-none ml-auto">
-          <!-- THE stacked vertically -->
-          <div class="flex flex-col uppercase font-sans font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#22201e]/25 leading-[0.85] tracking-tight">
+        <div class="flex items-end gap-1 leading-none select-none ml-auto shrink-0">
+          <!-- THE stacked vertically (desktop/tablet) -->
+          <div class="hidden sm:flex flex-col uppercase font-sans font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#22201e]/25 leading-[0.85] tracking-tight">
             <span>THE</span>
           </div>
-          <!-- WORK massive -->
-          <div class="overflow-hidden leading-none">
+          <!-- WORK massive (desktop/tablet) -->
+          <div class="hidden sm:block overflow-hidden leading-none">
             <span class="slide-number font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/25 leading-[0.85] tracking-tighter will-change-transform inline-block">
               WORK
             </span>
           </div>
-          <!-- Slide number -->
-          <div class="overflow-hidden leading-none ml-1.5">
-            <span class="slide-number-idx font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/30 leading-[0.85] will-change-transform inline-block">
+          <!-- Slide number (shown on all breakpoints) -->
+          <div class="overflow-hidden leading-none sm:ml-1.5">
+            <span class="slide-number-idx font-serif text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/30 leading-[0.85] will-change-transform inline-block">
               {{ project.slideNumber }}
             </span>
           </div>
@@ -242,7 +242,7 @@
         <button
           type="button"
           @click="emit('openArchive')"
-          class="group inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer outline-none select-none pb-0.5"
+          class="group inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer outline-none select-none py-1.5 min-h-[44px]"
         >
           <span>Explore All Works (10+)</span>
           <span class="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -254,17 +254,17 @@
         <button
           type="button"
           @click="emit('openCaseStudy', project.id)"
-          class="font-medium text-[#22201e] underline underline-offset-2 transition-all inline-flex items-center gap-1 cursor-pointer outline-none"
+          class="font-medium text-[#22201e] underline underline-offset-2 transition-all inline-flex items-center gap-1 cursor-pointer outline-none min-h-[44px]"
         >
           <span>Case Study</span>
           <span class="inline-block transition-transform duration-300 ease-out">→</span>
         </button>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-4">
           <a
             v-if="project.liveUrl"
             :href="project.liveUrl"
             target="_blank"
-            class="group font-medium text-[#22201e]/80 hover:text-[#22201e] transition-all inline-flex items-center gap-1"
+            class="group font-medium text-[#22201e]/80 hover:text-[#22201e] transition-all inline-flex items-center gap-1 min-h-[44px]"
           >
             <span>Live</span>
             <span class="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -273,7 +273,7 @@
             v-if="project.githubUrl"
             :href="project.githubUrl"
             target="_blank"
-            class="group font-medium text-[#22201e]/80 hover:text-[#22201e] transition-all inline-flex items-center gap-1"
+            class="group font-medium text-[#22201e]/80 hover:text-[#22201e] transition-all inline-flex items-center gap-1 min-h-[44px]"
           >
             <span>GitHub</span>
             <span class="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>

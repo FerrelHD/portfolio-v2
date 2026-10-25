@@ -34,7 +34,7 @@
           </span>
         </div>
 
-        <div class="font-sans text-xl sm:text-2xl lg:text-[26px] xl:text-[28px] font-normal leading-[1.3] text-[#faf9f6] max-w-sm flex flex-col">
+        <div class="font-sans text-lg sm:text-2xl lg:text-[26px] xl:text-[28px] font-normal leading-[1.3] text-[#faf9f6] max-w-sm flex flex-col">
           <div class="overflow-hidden">
             <span ref="statementLine1" class="statement-line block whitespace-nowrap will-change-transform">Designing digital</span>
           </div>

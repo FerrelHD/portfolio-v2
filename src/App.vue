@@ -367,6 +367,46 @@
   };
 
   let scrollTicking = false;
+  const updateMobileSlideState = () => {
+    if (window.innerWidth >= 768) return;
+    const slideIds = [
+      'hero',
+      'about',
+      'works',
+      'work-vhs',
+      'work-persona-3',
+      'work-charles-leclerc',
+      'capabilities',
+      'contact',
+    ];
+
+    const viewportMiddle = window.innerHeight * 0.5;
+    let mostVisibleSlide = 0;
+    let minDistance = Infinity;
+
+    slideIds.forEach((id, idx) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+
+      // Trigger reveal when section enters visible area
+      if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+        triggerSlideAnimation(idx);
+      }
+
+      // Determine active slide index for rail and navigation highlight
+      const centerDistance = Math.abs(rect.top + rect.height / 2 - viewportMiddle);
+      if (centerDistance < minDistance) {
+        minDistance = centerDistance;
+        mostVisibleSlide = idx;
+      }
+    });
+
+    if (mostVisibleSlide !== currentSlideIndex.value) {
+      currentSlideIndex.value = mostVisibleSlide;
+    }
+  };
+
   const onWindowScroll = () => {
     if (window.innerWidth < 768) {
       if (!scrollTicking) {
@@ -377,7 +417,7 @@
           if (progress > 0.01) {
             isSidebarSolid.value = true;
           }
-          updateSlideIndex(progress);
+          updateMobileSlideState();
           checkRailTheme();
           scrollTicking = false;
         });
@@ -507,6 +547,8 @@
       ScrollTrigger.refresh();
       if (horizontalScrollTrigger) {
         updateSlideIndex(horizontalScrollTrigger.progress);
+      } else {
+        updateMobileSlideState();
       }
       checkRailTheme();
     }, 150);

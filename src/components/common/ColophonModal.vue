@@ -32,7 +32,7 @@
             ref="closeBtn"
             type="button"
             @click="handleClose"
-            class="group flex items-center justify-center p-1 text-[#22201e]/60 hover:text-[#22201e] transition-colors cursor-pointer outline-none select-none"
+            class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/60 hover:text-[#22201e] hover:bg-black/[0.05] transition-colors cursor-pointer outline-none select-none"
             aria-label="Close colophon modal"
           >
             <span class="text-xl transition-transform duration-300 group-hover:rotate-90 inline-block leading-none">✕</span>

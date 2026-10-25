@@ -22,7 +22,16 @@
         <span class="block font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.2em] text-[#22201e]/60 mb-2 font-medium">
           QUICK INTRO
         </span>
-        <p class="font-sans text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[26px] leading-[135%] text-[#22201e]/90 font-normal text-left">
+        <!-- Mobile Natural Fluid Flow -->
+        <p class="font-sans text-[15px] sm:text-lg leading-[145%] text-[#22201e]/90 font-normal text-left block md:hidden">
+          <span class="block overflow-hidden">
+            <span class="intro-line-mobile block will-change-transform">
+              Hi, I'm Ferrel — a software engineer and creative technologist focused on crafting fluid web interfaces, real-time data visualisations, and interactive digital experiences.
+            </span>
+          </span>
+        </p>
+        <!-- Desktop Multi-Line Mask Stagger -->
+        <p class="font-sans text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[26px] leading-[135%] text-[#22201e]/90 font-normal text-left hidden md:block">
           <span class="block overflow-hidden">
             <span class="intro-line block will-change-transform">
               Hi, I'm Ferrel — a software engineer and creative
@@ -69,7 +78,7 @@
       <div class="md:col-start-8 md:col-span-5 lg:col-start-8 lg:col-span-5 flex justify-start md:justify-end">
         <div
           ref="photoEl"
-          class="group/photo relative w-48 sm:w-60 md:w-72 lg:w-80 xl:w-[420px] max-h-[48vh] lg:max-h-[52vh] aspect-[3/4] bg-[#22201e]/5 overflow-hidden shadow-md hover:shadow-2xl border border-black/5 hover:border-black/15 transition-all duration-700 ease-out will-change-transform rounded-sm cursor-pointer"
+          class="group/photo relative w-40 sm:w-60 md:w-72 lg:w-80 xl:w-[420px] max-h-[38vh] sm:max-h-[48vh] lg:max-h-[52vh] aspect-[3/4] bg-[#22201e]/5 overflow-hidden shadow-md hover:shadow-2xl border border-black/5 hover:border-black/15 transition-all duration-700 ease-out will-change-transform rounded-sm cursor-pointer"
         >
           <img
             ref="photoImgEl"
@@ -119,7 +128,7 @@
     }
 
     // 1. Quick Intro Split-Line Stagger Reveal
-    const introLines = document.querySelectorAll('#about .intro-line');
+    const introLines = document.querySelectorAll('#about .intro-line, #about .intro-line-mobile');
     if (introLines.length) {
       tl.to(
         introLines,
@@ -180,7 +189,7 @@
     if (photoEl.value) gsap.set(photoEl.value, { y: 35, opacity: 0 });
     if (photoImgEl.value) gsap.set(photoImgEl.value, { scale: 1.25, yPercent: -8 });
 
-    const introLines = document.querySelectorAll('#about .intro-line');
+    const introLines = document.querySelectorAll('#about .intro-line, #about .intro-line-mobile');
     const quoteLines = document.querySelectorAll('#about .quote-line');
     if (introLines.length) gsap.set(introLines, { yPercent: 105 });
     if (quoteLines.length) gsap.set(quoteLines, { yPercent: 105 });

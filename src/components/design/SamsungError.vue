@@ -1,10 +1,10 @@
 <template>
   <div
     id="samsung-error-modal"
-    class="flex-center fixed inset-0 z-50 h-svh w-svw bg-black/75 opacity-0"
+    class="flex-center fixed inset-0 z-50 h-svh w-svw bg-black/75 opacity-0 transition-opacity duration-300"
   >
     <div
-      class="flex-center z-50 mx-auto size-full h-1/2 w-11/12 flex-col rounded-lg bg-white p-5 shadow-sm md:w-1/2"
+      class="flex-center z-50 mx-auto size-full max-h-[90svh] w-11/12 flex-col rounded-lg bg-white p-5 shadow-sm md:w-1/2 overflow-y-auto"
     >
       <div class="flex flex-col items-center text-center">
         <div class="inline-block rounded-full bg-yellow-50 p-4">
@@ -27,7 +27,7 @@
           fix it please follow the steps below:
         </p>
         <br />
-        <div class="flex-center">
+        <div class="flex-center flex-wrap gap-2 text-sm text-gray-700">
           <!-- Settings -->
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -109,11 +109,13 @@
         <p class="mt-3 text-xl font-bold">Then reload the page.</p>
       </div>
 
-      <div class="mt-3 flex w-full items-center" @click="handleClick">
+      <div class="mt-4 flex w-full items-center">
         <button
-          class="flex-1 rounded-md bg-gray-100 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200"
+          type="button"
+          @click="handleClick"
+          class="flex-1 rounded-md bg-gray-900 px-4 py-3 text-sm font-semibold text-white hover:bg-black transition-colors cursor-pointer min-h-[44px]"
         >
-          OK
+          I Understand, Continue
         </button>
       </div>
     </div>
@@ -126,11 +128,23 @@
   import { onMounted } from 'vue';
 
   const handleClick = () => {
-    gsap.set('#samsung-error-modal', { display: 'none' });
-    lenis.start();
+    gsap.to('#samsung-error-modal', {
+      opacity: 0,
+      duration: 0.25,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        gsap.set('#samsung-error-modal', { display: 'none' });
+        lenis.start();
+      },
+    });
   };
 
   onMounted(() => {
     lenis.stop();
+    gsap.to('#samsung-error-modal', {
+      opacity: 1,
+      duration: 0.35,
+      ease: 'power2.out',
+    });
   });
 </script>
