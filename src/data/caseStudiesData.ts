@@ -11,6 +11,7 @@ import {
   personaImg,
   tactiqImg,
   arakiArtImg,
+  notchFlowImg,
 } from '@/assets/images';
 
 export interface ProjectMetric {
@@ -59,6 +60,112 @@ export interface ProjectCaseStudy {
 }
 
 export const caseStudies: Record<string, ProjectCaseStudy> = {
+  notchflow: {
+    id: 'notchflow',
+    number: '#12',
+    title: 'NotchFlow',
+    tagline:
+      'Native macOS bezel companion & hardware-integrated status hub engineered with Swift, AppKit, and SwiftUI — zero Electron, zero external dependencies, sub-30MB memory footprint.',
+    category: 'Native macOS Bezel Companion',
+    year: '2026',
+    role: 'Systems & Native Apple Platform Engineer',
+    system: 'Swift 5.10 · AppKit · SwiftUI · Darwin Kernel APIs · IOKit',
+    context: 'Independent Systems & Native macOS Architecture Project',
+    domain: 'github.com/FerrelHD/Dynamic-Chemicvl',
+    techStack: ['Swift 5.10', 'AppKit', 'SwiftUI', 'Darwin Kernel', 'IOKit', 'CoreGraphics'],
+    liveUrl: 'https://github.com/FerrelHD/Dynamic-Chemicvl/releases',
+    githubUrl: 'https://github.com/FerrelHD/Dynamic-Chemicvl',
+    heroImg: notchFlowImg,
+    metrics: [
+      { label: 'Idle CPU Overhead', value: '0.0% Polling' },
+      { label: 'Memory Footprint', value: '< 30 MB RAM' },
+      { label: 'External Dependencies', value: 'Zero (Pure Native)' },
+      { label: 'Display Refresh Rate', value: '120 Hz ProMotion' },
+    ],
+    problem: {
+      headline:
+        'The tragedy of bloated web-wrapper desktop utilities in modern personal computing.',
+      description:
+        'Modern desktop status utilities frequently ship as 300MB+ Chromium and Electron bundles, casually consuming 500MB+ of RAM and accelerating battery depletion just to display basic system stats or media scrubbers. Simultaneously, the physical display notch introduced in modern MacBooks sits completely idle during everyday workflows—treated by software as an aesthetic compromise rather than prime, zero-overhead interactive real estate. The challenge was building an ultra-responsive, battery-respecting native companion that turns the display bezel into an active productivity and delight hub.',
+    },
+    architecture: {
+      headline:
+        'Direct Darwin C-bindings, non-activating NSPanel window tiering, and declarative SwiftUI state trees.',
+      description:
+        'Engineered completely from scratch in Swift, AppKit, and SwiftUI without external frameworks or helper daemons. The interface resides inside a borderless NSPanel positioned precisely against the screen bezel with .nonactivatingPanel behaviors and floating window levels (.mainMenu + 1), allowing seamless hover expansions and global hotkey invocation (Option + Space) without stealing keyboard focus or disrupting the user active workspace. Telemetry is collected directly through low-level Darwin C Mach kernel calls (mach_host_self, host_statistics64) and IOKit, completely eliminating costly subprocess forks.',
+      highlights: [
+        {
+          title: 'Zero-Overhead Kernel Telemetry Engine',
+          detail:
+            'Mach kernel host statistics and IOKit queries execute on dedicated background dispatch queues with negligible CPU overhead, updating CPU core load, RAM allocation, battery cycles, and live network I/O without waking disk or GPU.',
+        },
+        {
+          title: 'Non-Activating Bezel Panel Architecture',
+          detail:
+            'Configured NSPanel with borderless masks and non-activating window flags so users can interact with timers, clipboard staging, or media without dropping focus from their IDE, code terminal, or design canvases.',
+        },
+        {
+          title: 'Living Companion Vector Engine',
+          detail:
+            'An interactive virtual mascot (Notchy) rendered with vector mathematics, calculating dynamic gaze angle vectors against cursor coordinates in real time, accompanied by procedural blinking and battery-conserving idle sleep cycles.',
+        },
+        {
+          title: 'Distributed Media & Synced Lyrics',
+          detail:
+            'Integrates directly with Spotify, Apple Music, and Chromium audio sessions via DistributedNotificationCenter to deliver instantaneous track scrubbing, album artwork ambient glow, and real-time synchronized lyrics.',
+        },
+      ],
+    },
+    features: [
+      {
+        title: 'Darwin Mach Kernel Telemetry',
+        description:
+          'Real-time CPU core utilization, memory pressure breakdown, storage capacity, and live network throughput queried directly through Darwin kernel C APIs.',
+        tag: 'Systems Engine',
+      },
+      {
+        title: 'Media Hub & Synchronized Lyrics',
+        description:
+          'Zero-latency playback scrubber, dynamic background artwork ambient glow, and time-synchronized lyric rendering for Apple Music and Spotify.',
+        tag: 'Audio & Media',
+      },
+      {
+        title: 'Living Bezel Companion (Notchy)',
+        description:
+          'Interactive virtual mascot resting inside the notch with real-time cursor gaze tracking, procedural blink patterns, and energy-conserving sleep states.',
+        tag: 'Micro-Interaction',
+      },
+      {
+        title: 'Zero-Shift 42-Cell Monthly Agenda',
+        description:
+          'Precision monthly calendar with a fixed 42-cell matrix that eliminates layout shifting across months, paired with day-filtered quick event entry.',
+        tag: 'Productivity',
+      },
+      {
+        title: 'Bluetooth Peripheral Battery HUD',
+        description:
+          'Live battery percentage and charging status monitor for AirPods, Magic Keyboard, Magic Mouse, Trackpads, and paired iOS devices.',
+        tag: 'Hardware I/O',
+      },
+      {
+        title: 'Staging Shelf & Local Clipboard Memory',
+        description:
+          'Temporary drag-and-drop staging zone for quick file/image transfers, coupled with a private on-device clipboard history manager.',
+        tag: 'Workflow',
+      },
+      {
+        title: 'Compact Notch Heads-Up Notifiers',
+        description:
+          'Unobtrusive HUD pill notifications anchored to the bezel for system volume, battery charging state, Wi-Fi toggles, and Caps Lock alerts.',
+        tag: 'macOS Integration',
+      },
+    ],
+    takeaways: [
+      'Native platform APIs (AppKit, SwiftUI, Darwin) provide astronomical performance, battery efficiency, and responsiveness advantages over hybrid cross-platform wrappers.',
+      'Designing software that embraces physical hardware characteristics—such as the MacBook notch—creates a uniquely satisfying and tactile computing experience.',
+      'Direct C-level Mach kernel integration proves that comprehensive hardware telemetry does not require background bloat or periodic process spawning.',
+    ],
+  },
   'araki-art': {
     id: 'araki-art',
     number: '#00',
