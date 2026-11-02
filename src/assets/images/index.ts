@@ -11,6 +11,7 @@ import personaImg from './Persona.png';
 import tactiqImg from './TactIQ.png';
 import arakiArtImg from './araki art.png';
 import vhsImg from './VHS.png';
+import notchFlowImg from './notchflow.png';
 
 export {
   ferrelPortrait,
@@ -26,4 +27,5 @@ export {
   tactiqImg,
   arakiArtImg,
   vhsImg,
+  notchFlowImg,
 };
