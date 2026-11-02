@@ -11,6 +11,7 @@ import {
   personaImg,
   tactiqImg,
   arakiArtImg,
+  notchFlowImg,
 } from '@/assets/images';
 
 export type ArchiveCategoryFilter = 'all' | 'web' | 'creative' | 'ml' | 'games';
@@ -37,6 +38,18 @@ export const archiveCategories: { id: ArchiveCategoryFilter; label: string }[] =
 ];
 
 export const archiveProjects: ArchiveProject[] = [
+  {
+    id: 'notchflow',
+    year: '2026',
+    title: 'NotchFlow',
+    category: 'Native macOS Bezel Companion',
+    categoryFilter: 'web',
+    techStack: ['Swift 5.10', 'AppKit', 'SwiftUI', 'Darwin Kernel', 'IOKit'],
+    liveUrl: 'https://github.com/FerrelHD/Dynamic-Chemicvl/releases',
+    githubUrl: 'https://github.com/FerrelHD/Dynamic-Chemicvl',
+    previewImg: notchFlowImg,
+    description: 'A native, zero-dependency macOS status bar and notch companion built with Swift and AppKit. Features Darwin kernel hardware telemetry, live synced lyrics, and an interactive virtual mascot.',
+  },
   {
     id: 'araki-art',
     year: '2026',
