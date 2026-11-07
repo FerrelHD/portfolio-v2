@@ -150,7 +150,6 @@
 
 <script setup lang="ts">
   import { onMounted, onUnmounted, ref } from 'vue';
-  import moment from 'moment-timezone';
   import gsap from 'gsap';
 
   const props = withDefaults(
@@ -188,7 +187,12 @@
   const scrollCueEl = ref<HTMLElement | null>(null);
 
   const updateClock = () => {
-    currentTime.value = moment.tz('Asia/Jakarta').format('HH:mm');
+    currentTime.value = new Intl.DateTimeFormat('id-ID', {
+      timeZone: 'Asia/Jakarta',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).format(new Date());
   };
 
   const scrollToNext = () => {
