@@ -104,9 +104,19 @@
     Capabilities,
     Contact,
   } from '@/components/sections';
-  import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+  import { computed, defineAsyncComponent, onMounted, onUnmounted, ref, watch } from 'vue';
   import { SamsungError } from '@/components/design';
-  import { LeftRail, ProjectArchive, ProjectDetail, ColophonModal } from './components/common';
+  import LeftRail from './components/common/LeftRail.vue';
+
+  const ProjectArchive = defineAsyncComponent(
+    () => import('./components/common/ProjectArchive.vue')
+  );
+  const ProjectDetail = defineAsyncComponent(
+    () => import('./components/common/ProjectDetail.vue')
+  );
+  const ColophonModal = defineAsyncComponent(
+    () => import('./components/common/ColophonModal.vue')
+  );
   import { useWindowSize } from '@vueuse/core';
   import gsap from 'gsap';
   import { ScrollTrigger } from 'gsap/all';

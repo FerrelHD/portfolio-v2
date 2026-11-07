@@ -9,8 +9,14 @@ export default defineConfig({
   base: '/',
   build: {
     sourcemap: true,
-    // terserOptions:
-    chunkSizeWarningLimit: 1600,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          gsap: ['gsap'],
+          vendor: ['vue', '@vueuse/core', 'lenis'],
+        },
+      },
+    },
   },
   plugins: [
     tailwindcss(),
