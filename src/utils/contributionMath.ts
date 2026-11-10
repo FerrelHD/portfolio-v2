@@ -20,6 +20,15 @@ export const easeInOutCubic = (x: number): number => {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 };
 export const easeOutCubic = (x: number): number => 1 - Math.pow(1 - clamp01(x), 3);
+
+/** Subtle elastic spring settling: rises dynamically with an organic micro-bounce. */
+export const easeOutElasticSubtle = (x: number): number => {
+  const t = clamp01(x);
+  if (t === 0) return 0;
+  if (t === 1) return 1;
+  return 1 - Math.pow(2, -8 * t) * Math.cos(t * Math.PI * 2.5);
+};
+
 export const smoothstep = (a: number, b: number, x: number): number => {
   const t = clamp01((x - a) / (b - a));
   return t * t * (3 - 2 * t);
@@ -171,10 +180,10 @@ export const barHeight = (count: number, max: number, scale = 1): number =>
 
 export const WAVE = 0.42;
 
-/** 0 → 1 rising wave during 2D → 3D morph. */
+/** 0 → 1 rising wave during 2D → 3D morph with tactile spring settling. */
 export const riseAt = (t: number, week: number, weeks: number, day: number): number => {
   const d = (weeks > 1 ? week / (weeks - 1) : 0) * 0.36 + (day / 6) * 0.06;
-  return easeOutCubic((t - d) / (1 - WAVE));
+  return easeOutElasticSubtle((t - d) / (1 - WAVE));
 };
 
 export const YAW_3D = Math.PI / 4;
