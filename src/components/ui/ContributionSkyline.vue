@@ -468,7 +468,7 @@
   const FG_FALLBACK: RGB = [243, 238, 232];
   const BG_FALLBACK: RGB = [30, 28, 26];
 
-  let engine: { kick: () => void; load: () => void; retheme: () => void; tipWidth: (w: number) => void } | null = null;
+  let engine: { kick: () => void; load: () => void; retheme: () => void; tipWidth: (w: number) => void; playSweep: () => void } | null = null;
 
   onMounted(() => {
     const root = rootRef.value;
@@ -482,6 +482,15 @@
     const reduceMq = window.matchMedia('(prefers-reduced-motion: reduce)');
     const darkMq = window.matchMedia('(prefers-color-scheme: dark)');
     let reduced = reduceMq.matches;
+
+    let sweepProgress = 0;
+    let isSweeping = true;
+
+    const playSweep = () => {
+      sweepProgress = 0;
+      isSweeping = true;
+      kick();
+    };
 
     let t = currentView.value === '3d' ? 1 : 0;
     let target = currentView.value === '3d' ? 1 : 0;
@@ -720,10 +729,23 @@
         }
         const hv = hover[i];
         if (hv > 0.002) {
-          const m = 0.16 * hv;
+          const m = 0.22 * hv;
           r += (fg[0] - r) * m;
           g += (fg[1] - g) * m;
           bl += (fg[2] - bl) * m;
+        }
+        if (sweepProgress < 1.25) {
+          const cellProgress = wk[i] / Math.max(1, weeks - 1);
+          const sweepDiff = sweepProgress - cellProgress;
+          if (sweepDiff >= -0.05 && sweepDiff <= 0.15) {
+            const sweepGlow = Math.sin(Math.PI * Math.max(0, Math.min(1, (sweepDiff + 0.05) / 0.2)));
+            if (sweepGlow > 0.01) {
+              const boost = sweepGlow * 0.42;
+              r = Math.min(255, r + (fg[0] - r) * boost);
+              g = Math.min(255, g + (fg[1] - g) * boost);
+              bl = Math.min(255, bl + (fg[2] - bl) * boost);
+            }
+          }
         }
         if (f & 1) {
           ctx.beginPath();
@@ -748,8 +770,19 @@
         }
         if (hv > 0.02) {
           ctx.strokeStyle = 'rgba(' + fg[0] + ',' + fg[1] + ',' + fg[2] + ',' + (0.85 * hv).toFixed(3) + ')';
-          ctx.lineWidth = 1.5;
+          ctx.lineWidth = hv > 0.5 ? 1.5 : 1;
           ctx.stroke();
+        } else if (sweepProgress < 1.25) {
+          const cellProgress = wk[i] / Math.max(1, weeks - 1);
+          const sweepDiff = sweepProgress - cellProgress;
+          if (sweepDiff >= -0.04 && sweepDiff <= 0.14) {
+            const glow = Math.sin(Math.PI * Math.max(0, Math.min(1, (sweepDiff + 0.04) / 0.18)));
+            if (glow > 0.05) {
+              ctx.strokeStyle = 'rgba(' + fg[0] + ',' + fg[1] + ',' + fg[2] + ',' + (0.55 * glow).toFixed(3) + ')';
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          }
         }
       }
 
@@ -804,6 +837,15 @@
       last = now;
       let moving = false;
 
+      if (isSweeping) {
+        sweepProgress += dt / 0.95;
+        moving = true;
+        if (sweepProgress >= 1.25) {
+          isSweeping = false;
+          sweepProgress = 1.25;
+        }
+      }
+
       if (t !== target) {
         const step = reduced ? 1 : (dt * 1000) / Math.max(1, props.duration);
         t = target > t ? Math.min(target, t + step) : Math.max(target, t - step);
@@ -832,7 +874,17 @@
       const kd = reduced ? 1 : 1 - Math.exp(-dt * 10);
       const leg = legendLevel.value;
       for (let i = 0; i < n; i++) {
-        const hg = i === activeIdx ? 1 : 0;
+        let hg = 0;
+        if (i === activeIdx) {
+          hg = 1;
+        } else if (activeIdx >= 0) {
+          const dw = Math.abs(wk[i] - wk[activeIdx]);
+          const dd = Math.abs(dy[i] - dy[activeIdx]);
+          const dist = Math.hypot(dw, dd);
+          if (dist <= 2.2) {
+            hg = (1 - dist / 2.2) * 0.42;
+          }
+        }
         const dg = leg >= 0 && lv[i] !== leg ? 1 : 0;
         const h = hover[i];
         const d = dim[i];
@@ -1077,6 +1129,7 @@
         tipW = w;
         draw();
       },
+      playSweep,
     };
 
     animateCounter();
@@ -1122,7 +1175,12 @@
     },
   );
 
+  const playSweep = () => {
+    engine?.playSweep();
+  };
+
   defineExpose({
     animateCounter,
+    playSweep,
   });
 </script>
