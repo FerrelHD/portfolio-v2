@@ -276,10 +276,11 @@
         <div class="relative aspect-video w-full overflow-hidden bg-[#e8e6df]">
           <img
             v-if="hoveredProject"
+            :key="hoveredProject.id"
             :src="hoveredProject.previewImg"
             :alt="hoveredProject.title"
             class="size-full object-cover object-top transition-transform duration-500 ease-out scale-105"
-            loading="lazy"
+            decoding="async"
           />
         </div>
 
