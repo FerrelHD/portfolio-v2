@@ -3,7 +3,7 @@
     id="activity"
     class="activity-slide shrink-0 w-full md:w-screen min-h-[100svh] md:h-dvh flex flex-col justify-between select-none
            bg-[#23201e] text-[#faf9f6] relative overflow-hidden
-           pt-16 pb-6 px-6 md:pt-8 md:pb-6 lg:pt-10 lg:pb-8 md:pl-28 md:pr-14 font-sans"
+           pt-16 pb-4 px-6 md:pt-6 md:pb-4 lg:pt-8 lg:pb-5 md:pl-24 md:pr-12 font-sans"
   >
     <!-- Top Editorial Header Bar -->
     <div class="flex items-center justify-between shrink-0">
@@ -12,7 +12,7 @@
           CHAPTER IV
         </h2>
         <span class="font-sans text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#faf9f6]/50 font-medium">
-          ENGINEERING PULSE // 3D SKYLINE
+          ENGINEERING PULSE // GITHUB ACTIVITY
         </span>
       </div>
 
@@ -29,20 +29,21 @@
     </div>
 
     <!-- Center Interactive Content -->
-    <div class="my-auto py-3 md:py-4 w-full max-w-[1100px] mx-auto flex flex-col gap-4">
-      <div class="flex flex-col gap-1 text-left">
-        <h3 class="font-serif text-2xl sm:text-3xl md:text-4xl text-[#faf9f6] tracking-tight">
+    <div class="my-auto py-2 md:py-3 w-full max-w-[1040px] mx-auto flex flex-col gap-2.5 sm:gap-3">
+      <div class="flex flex-col gap-0.5 text-left">
+        <h3 class="font-serif text-xl sm:text-2xl md:text-3xl text-[#faf9f6] tracking-tight">
           One Year of Code as an Isometric City.
         </h3>
-        <p class="font-sans text-xs sm:text-sm text-[#faf9f6]/65 max-w-2xl leading-relaxed">
-          Daily git commits and creative motion experiments rendered onto an interactive canvas.
-          Switch between the 2D planar heatmap and the 3D kinetic skyline wave.
+        <p class="font-sans text-xs sm:text-sm text-[#faf9f6]/65 max-w-xl leading-relaxed">
+          Daily git commits rendered onto an interactive canvas.
+          Switch between 2D planar heatmap and 3D kinetic skyline wave.
         </p>
       </div>
 
-      <!-- Skyline Canvas Component -->
+      <!-- Skyline Canvas Component with Live GitHub Data -->
       <div class="w-full">
         <ContributionSkyline
+          :data="contributions"
           defaultView="3d"
           palette="github"
           :orbit="true"
@@ -63,5 +64,17 @@
 </template>
 
 <script setup lang="ts">
+  import { onMounted, ref } from 'vue';
   import ContributionSkyline from '@/components/ui/ContributionSkyline.vue';
+  import {
+    fetchGitHubContributions,
+    ferrelFallbackContributions,
+  } from '@/services/githubContributions';
+  import type { ContributionDay } from '@/utils/contributionMath';
+
+  const contributions = ref<ContributionDay[]>(ferrelFallbackContributions);
+
+  onMounted(async () => {
+    contributions.value = await fetchGitHubContributions('FerrelHD');
+  });
 </script>
