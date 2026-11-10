@@ -734,16 +734,28 @@
           g += (fg[1] - g) * m;
           bl += (fg[2] - bl) * m;
         }
-        if (sweepProgress < 1.25) {
+        if (!reduced && sweepProgress < 1.25) {
           const cellProgress = wk[i] / Math.max(1, weeks - 1);
-          const sweepDiff = sweepProgress - cellProgress;
-          if (sweepDiff >= -0.05 && sweepDiff <= 0.15) {
-            const sweepGlow = Math.sin(Math.PI * Math.max(0, Math.min(1, (sweepDiff + 0.05) / 0.2)));
-            if (sweepGlow > 0.01) {
-              const boost = sweepGlow * 0.42;
-              r = Math.min(255, r + (fg[0] - r) * boost);
-              g = Math.min(255, g + (fg[1] - g) * boost);
-              bl = Math.min(255, bl + (fg[2] - bl) * boost);
+          const cellJitter = (((i * 31) % 17) / 17) * 0.04;
+          const localDiff = sweepProgress - cellProgress - cellJitter;
+          if (localDiff < 0) {
+            r = ex;
+            g = ey;
+            bl = ez;
+          } else if (localDiff < 0.14) {
+            const fp = localDiff / 0.14;
+            const cellHash = ((i * 101) % 13) / 13;
+            const osc = Math.sin(fp * 22 + cellHash * 6.28);
+            if (osc > 0.1) {
+              const flash = (1 - fp) * (osc > 0.6 ? 0.72 : 0.42);
+              r = Math.min(255, r + (fg[0] - r) * flash);
+              g = Math.min(255, g + (fg[1] - g) * flash);
+              bl = Math.min(255, bl + (fg[2] - bl) * flash);
+            } else {
+              const dip = (1 - fp) * 0.65;
+              r += (ex - r) * dip;
+              g += (ey - g) * dip;
+              bl += (ez - bl) * dip;
             }
           }
         }
@@ -772,13 +784,16 @@
           ctx.strokeStyle = 'rgba(' + fg[0] + ',' + fg[1] + ',' + fg[2] + ',' + (0.85 * hv).toFixed(3) + ')';
           ctx.lineWidth = hv > 0.5 ? 1.5 : 1;
           ctx.stroke();
-        } else if (sweepProgress < 1.25) {
+        } else if (!reduced && sweepProgress < 1.25) {
           const cellProgress = wk[i] / Math.max(1, weeks - 1);
-          const sweepDiff = sweepProgress - cellProgress;
-          if (sweepDiff >= -0.04 && sweepDiff <= 0.14) {
-            const glow = Math.sin(Math.PI * Math.max(0, Math.min(1, (sweepDiff + 0.04) / 0.18)));
-            if (glow > 0.05) {
-              ctx.strokeStyle = 'rgba(' + fg[0] + ',' + fg[1] + ',' + fg[2] + ',' + (0.55 * glow).toFixed(3) + ')';
+          const cellJitter = (((i * 31) % 17) / 17) * 0.04;
+          const localDiff = sweepProgress - cellProgress - cellJitter;
+          if (localDiff >= 0 && localDiff < 0.12) {
+            const fp = localDiff / 0.12;
+            const osc = Math.sin(fp * 22 + (((i * 101) % 13) / 13) * 6.28);
+            if (osc > 0.3) {
+              const alpha = (1 - fp) * 0.75;
+              ctx.strokeStyle = 'rgba(' + fg[0] + ',' + fg[1] + ',' + fg[2] + ',' + alpha.toFixed(3) + ')';
               ctx.lineWidth = 1;
               ctx.stroke();
             }
