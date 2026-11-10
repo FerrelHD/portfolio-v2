@@ -67,7 +67,7 @@
       <div class="w-full">
         <ContributionSkyline
           :data="contributions"
-          defaultView="3d"
+          defaultView="2d"
           palette="github"
           :orbit="true"
           :showStats="true"
@@ -80,7 +80,7 @@
 
     <!-- Bottom Contextual Status Bar -->
     <div class="flex items-center justify-between text-[11px] font-sans uppercase tracking-[0.15em] text-[#faf9f6]/40 shrink-0 pt-2 border-t border-white/5">
-      <span>Drag to orbit · Click cell for details</span>
+      <span>Toggle 3D for skyline wave · Click cell for details</span>
       <span class="tabular-nums">Status: Active Development</span>
     </div>
 
@@ -98,7 +98,7 @@
         <div class="flex items-center justify-between pb-4 border-b border-white/10 shrink-0">
           <div class="flex items-baseline gap-3">
             <h2 class="font-serif text-2xl sm:text-3xl uppercase tracking-tight text-[#faf9f6]">
-              3D SKYLINE // FULLSCREEN
+              SKYLINE // FULLSCREEN
             </h2>
             <span class="font-sans text-xs uppercase tracking-widest text-[#faf9f6]/50">
               @FerrelHD
@@ -119,7 +119,7 @@
         <div class="my-auto py-4 w-full max-w-[1300px] mx-auto flex-1 flex flex-col justify-center">
           <ContributionSkyline
             :data="contributions"
-            defaultView="3d"
+            defaultView="2d"
             palette="github"
             :orbit="true"
             :heightScale="1.3"

@@ -355,7 +355,7 @@
       className?: string;
     }>(),
     {
-      defaultView: '3d',
+      defaultView: '2d',
       palette: 'github',
       unit: 'contribution',
       heightScale: 1,
