@@ -141,45 +141,102 @@
       </button>
     </div>
 
-    <!-- Center: Giant Editorial Navigation Links with Masked Reveals -->
-    <nav class="my-auto py-4 sm:py-6 md:py-6 lg:py-8 flex flex-col gap-2.5 sm:gap-3.5 md:gap-4 lg:gap-5 xl:gap-6">
-      <div
-        v-for="item in navItems"
-        :key="item.id"
-        class="overflow-hidden cursor-pointer select-none"
-        @click="navigateTo(item.id)"
-      >
-        <!-- GSAP Mask Container (purely handles yPercent entrance and exit) -->
+    <!-- Center: Split Editorial Layout (Left: Menu Links, Right: Dynamic Context Panel) -->
+    <div class="my-auto py-4 sm:py-6 md:py-6 lg:py-8 grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <!-- Left Column: Giant Editorial Navigation Links with Masked Reveals -->
+      <nav class="md:col-span-7 flex flex-col gap-2.5 sm:gap-3.5 md:gap-4 lg:gap-5 xl:gap-6">
         <div
-          ref="navItemLines"
-          class="will-change-transform"
+          v-for="item in navItems"
+          :key="item.id"
+          class="overflow-hidden cursor-pointer select-none"
+          @click="navigateTo(item.id)"
+          @mouseenter="hoveredItem = item.id"
+          @mouseleave="hoveredItem = null"
         >
-          <!-- Interactive Hover Layer (separated from GSAP transform) -->
+          <!-- GSAP Mask Container (purely handles yPercent entrance and exit) -->
           <div
-            class="group/nav flex items-baseline gap-3 sm:gap-5 md:gap-6 lg:gap-8 transition-all duration-300 ease-out hover:translate-x-2 sm:hover:translate-x-4"
-            :class="activeSection === item.id ? 'opacity-100' : 'opacity-30 hover:opacity-100'"
+            ref="navItemLines"
+            class="will-change-transform"
           >
-            <!-- Small Serif Slide Number -->
-            <span class="font-serif text-base sm:text-xl md:text-2xl lg:text-[26px] text-inherit transition-colors duration-300">
-              {{ item.num }}
-            </span>
-            <!-- Giant Editorial Serif Title + Subtle Dynamic Dash Indicator -->
-            <div class="flex items-center gap-3 sm:gap-5 lg:gap-6">
-              <span
-                class="font-serif text-3xl sm:text-6xl md:text-[54px] lg:text-[68px] xl:text-[76px] 2xl:text-[5.5vw] uppercase tracking-[-0.03em] leading-[0.9] text-inherit transition-colors duration-300"
-              >
-                {{ item.label }}
+            <!-- Interactive Hover Layer (separated from GSAP transform) -->
+            <div
+              class="group/nav flex items-baseline gap-3 sm:gap-5 md:gap-6 lg:gap-8 transition-all duration-300 ease-out hover:translate-x-2 sm:hover:translate-x-4"
+              :class="activeSection === item.id || hoveredItem === item.id ? 'opacity-100' : 'opacity-30 hover:opacity-100'"
+            >
+              <!-- Small Serif Slide Number -->
+              <span class="font-serif text-base sm:text-xl md:text-2xl lg:text-[26px] text-inherit transition-colors duration-300">
+                {{ item.num }}
               </span>
-              <!-- Subtle editorial accent line: active has resting indicator, hover expands smoothly -->
-              <span
-                class="hidden sm:inline-block h-[2px] bg-white/70 transition-all duration-300 ease-out"
-                :class="activeSection === item.id ? 'w-6 lg:w-8 bg-white/50 group-hover/nav:w-12 lg:group-hover/nav:w-16' : 'w-0 group-hover/nav:w-10 lg:group-hover/nav:w-14'"
-              ></span>
+              <!-- Giant Editorial Serif Title + Chapter Sub-badge + Dynamic Dash Indicator -->
+              <div class="flex items-center gap-3 sm:gap-5 lg:gap-6">
+                <span
+                  class="font-serif text-3xl sm:text-6xl md:text-[50px] lg:text-[62px] xl:text-[72px] 2xl:text-[5vw] uppercase tracking-[-0.03em] leading-[0.9] text-inherit transition-colors duration-300"
+                >
+                  {{ item.label }}
+                </span>
+                <!-- Chapter Sub-badge -->
+                <span class="hidden sm:inline-block font-sans text-[10px] uppercase tracking-[0.2em] text-[#faf9f6]/40 transition-colors group-hover/nav:text-[#faf9f6]/75">
+                  {{ item.chapter }}
+                </span>
+                <!-- Subtle editorial accent line: active has resting indicator, hover expands smoothly -->
+                <span
+                  class="hidden sm:inline-block h-[2px] bg-white/70 transition-all duration-300 ease-out"
+                  :class="activeSection === item.id ? 'w-6 lg:w-8 bg-white/50 group-hover/nav:w-10 lg:group-hover/nav:w-12' : 'w-0 group-hover/nav:w-8 lg:group-hover/nav:w-10'"
+                ></span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      <!-- Right Column: Editorial Context & Live Status Panel (Desktop Only) -->
+      <aside
+        ref="contextPanel"
+        class="hidden md:flex md:col-span-5 flex-col justify-between self-stretch py-2 pl-6 lg:pl-10 border-l border-white/10 will-change-transform"
+      >
+        <!-- Top Metadata: Live Jakarta Time & Availability Badge -->
+        <div class="flex flex-col gap-3 pb-6 border-b border-white/10">
+          <div class="flex items-center justify-between">
+            <span class="font-sans text-[11px] uppercase tracking-[0.2em] text-[#faf9f6]/50">
+              LOCATION // TIME
+            </span>
+            <span class="font-sans text-xs uppercase tracking-wider text-[#faf9f6]/80 tabular-nums">
+              JAKARTA, ID · {{ currentTime }} WIB
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="font-sans text-[11px] uppercase tracking-[0.2em] text-[#faf9f6]/50">
+              AVAILABILITY
+            </span>
+            <span class="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-wider text-[#faf9f6]/90">
+              <span class="size-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              OPEN FOR WORK
+            </span>
+          </div>
+        </div>
+
+        <!-- Middle Dynamic Context Card -->
+        <div class="my-auto py-6 flex flex-col gap-3 transition-opacity duration-300">
+          <div class="overflow-hidden">
+            <span class="font-sans text-xs uppercase tracking-[0.22em] text-[#faf9f6]/50 block">
+              {{ activeContext.chapter }}
+            </span>
+          </div>
+          <h4 class="font-sans font-bold text-xl lg:text-2xl text-[#faf9f6] tracking-tight leading-snug">
+            {{ activeContext.title }}
+          </h4>
+          <p class="font-sans text-xs lg:text-sm text-[#faf9f6]/70 leading-relaxed max-w-sm">
+            {{ activeContext.desc }}
+          </p>
+        </div>
+
+        <!-- Bottom Micro Hint -->
+        <div class="pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-sans uppercase tracking-[0.2em] text-[#faf9f6]/35">
+          <span>{{ activeContext.meta }}</span>
+          <span>FOLIO 2026</span>
+        </div>
+      </aside>
+    </div>
 
     <!-- Bottom Row: Left Archive Link & Colophon, Right Social Links -->
     <div class="overflow-hidden pt-4 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -237,10 +294,10 @@
 </template>
 
 <script setup lang="ts">
-  import { nextTick, ref } from 'vue';
+  import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
   import gsap from 'gsap';
 
-  withDefaults(
+  const props = withDefaults(
     defineProps<{
       progress?: number;
       isDark?: boolean;
@@ -280,14 +337,108 @@
   const closeBtn = ref<HTMLElement | null>(null);
   const navItemLines = ref<HTMLElement[]>([]);
   const socialLinks = ref<HTMLElement | null>(null);
+  const contextPanel = ref<HTMLElement | null>(null);
+
+  const hoveredItem = ref<string | null>(null);
+  const currentTime = ref('');
+
+  const updateClock = () => {
+    try {
+      currentTime.value = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Jakarta',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+      }).format(new Date());
+    } catch {
+      currentTime.value = new Date().toTimeString().slice(0, 8);
+    }
+  };
+
+  let clockTimer: ReturnType<typeof setInterval> | null = null;
+
+  onMounted(() => {
+    updateClock();
+    clockTimer = setInterval(updateClock, 1000);
+  });
+
+  onUnmounted(() => {
+    if (clockTimer) clearInterval(clockTimer);
+  });
+
+  interface NavItemContext {
+    num: string;
+    label: string;
+    chapter: string;
+    title: string;
+    desc: string;
+    meta: string;
+  }
+
+  const navContexts: Record<string, NavItemContext> = {
+    hero: {
+      num: '01.',
+      label: 'HOME',
+      chapter: 'INDEX // FOLIO 2026',
+      title: 'Frontend Engineer & Creative Developer',
+      desc: 'Crafting fluid, motion-driven digital experiences with meticulous typography, modern frameworks, and editorial aesthetics.',
+      meta: 'JAKARTA, ID · AVAILABLE FOR WORK',
+    },
+    about: {
+      num: '02.',
+      label: 'ABOUT',
+      chapter: 'CHAPTER I // ORIGIN & MINDSET',
+      title: 'Multidisciplinary Engineering & Craft',
+      desc: 'The intersection of software architecture and visual design. Principles shaped by deliberate practice and creative experiments.',
+      meta: 'BACKGROUND & PHILOSOPHY',
+    },
+    works: {
+      num: '03.',
+      label: 'WORKS',
+      chapter: 'CHAPTER II // SELECTED INDEX',
+      title: 'Featured Case Studies & Builds',
+      desc: 'Production applications and design systems including NotchFlow, Charles Leclerc interactive folio, Eco-Bite, and more.',
+      meta: '4 FEATURED · 10+ IN ARCHIVE',
+    },
+    capabilities: {
+      num: '04.',
+      label: 'SERVICES',
+      chapter: 'CHAPTER III // SERVICES & TOOLSET',
+      title: 'Creative Tech & Fullstack Engineering',
+      desc: 'From high-performance frontend interfaces with GSAP motion to full-stack cloud workflows and accessible design systems.',
+      meta: 'STACK & SPECIALIZATIONS',
+    },
+    activity: {
+      num: '05.',
+      label: 'ACTIVITY',
+      chapter: 'CHAPTER IV // 3D GITHUB PULSE',
+      title: 'One Year of Code as an Isometric City',
+      desc: 'Real-time contribution heat map rendered as an interactive 3D skyline wave, reflecting daily commits and open-source rhythm.',
+      meta: '@FERRELHD · LIVE API SYNC',
+    },
+    contact: {
+      num: '06.',
+      label: 'CONTACT',
+      chapter: 'CHAPTER V // COLLABORATION',
+      title: 'Start a Project or Say Hello',
+      desc: 'Available for freelance design engineering, high-impact contract roles, or technical collaborations worldwide.',
+      meta: 'EMAIL · LINKEDIN · GITHUB',
+    },
+  };
+
+  const activeContext = computed<NavItemContext>(() => {
+    const targetId = hoveredItem.value || props.activeSection || 'hero';
+    return navContexts[targetId] || navContexts.hero;
+  });
 
   const navItems = [
-    { num: '01.', label: 'HOME', id: 'hero' },
-    { num: '02.', label: 'ABOUT', id: 'about' },
-    { num: '03.', label: 'WORKS', id: 'works' },
-    { num: '04.', label: 'SERVICES', id: 'capabilities' },
-    { num: '05.', label: 'ACTIVITY', id: 'activity' },
-    { num: '06.', label: 'CONTACT', id: 'contact' },
+    { num: '01.', label: 'HOME', id: 'hero', chapter: 'INDEX' },
+    { num: '02.', label: 'ABOUT', id: 'about', chapter: 'CH. I' },
+    { num: '03.', label: 'WORKS', id: 'works', chapter: 'CH. II' },
+    { num: '04.', label: 'SERVICES', id: 'capabilities', chapter: 'CH. III' },
+    { num: '05.', label: 'ACTIVITY', id: 'activity', chapter: 'CH. IV' },
+    { num: '06.', label: 'CONTACT', id: 'contact', chapter: 'CH. V' },
   ];
 
   let activeMenuTl: gsap.core.Timeline | null = null;
@@ -323,6 +474,9 @@
       }
       if (socialLinks.value) {
         gsap.set(socialLinks.value, { yPercent: 105, opacity: 0 });
+      }
+      if (contextPanel.value) {
+        gsap.set(contextPanel.value, { opacity: 0, x: 25 });
       }
 
       activeMenuTl = gsap.timeline({
@@ -380,6 +534,20 @@
           0.32,
         );
       }
+
+      // 5. Reveal Context Panel (Desktop)
+      if (contextPanel.value) {
+        activeMenuTl.to(
+          contextPanel.value,
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            ease: 'power4.out',
+          },
+          0.26,
+        );
+      }
     });
   };
 
@@ -425,6 +593,10 @@
 
     if (socialLinks.value) {
       activeMenuTl.to(socialLinks.value, { yPercent: 105, opacity: 0, duration: 0.2, ease: 'power2.in' }, 0);
+    }
+
+    if (contextPanel.value) {
+      activeMenuTl.to(contextPanel.value, { opacity: 0, x: 20, duration: 0.2, ease: 'power2.in' }, 0);
     }
 
     // 2. Curtain rolls back to left (inset(0 100% 0 0))
