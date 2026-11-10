@@ -40,7 +40,7 @@
     <!-- Center Interactive Content -->
     <div class="my-auto py-2 md:py-3 w-full max-w-[1040px] mx-auto flex flex-col gap-2.5 sm:gap-3">
       <div class="flex flex-col gap-0.5 text-left">
-        <h3 class="font-serif text-xl sm:text-2xl md:text-3xl text-[#faf9f6] tracking-tight">
+        <h3 class="font-sans font-bold text-xl sm:text-2xl md:text-3xl text-[#faf9f6] tracking-tight">
           One Year of Code as an Isometric City.
         </h3>
         <p class="font-sans text-xs sm:text-sm text-[#faf9f6]/65 max-w-xl leading-relaxed">
