@@ -7,13 +7,10 @@
   >
     <!-- Top Editorial Header Bar -->
     <div class="flex items-center justify-between shrink-0">
-      <div class="flex items-baseline gap-3 sm:gap-4">
-        <h2 class="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal tracking-tight text-[#faf9f6] uppercase leading-none">
+      <div class="overflow-hidden">
+        <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#faf9f6] uppercase leading-none will-change-transform">
           CHAPTER IV
         </h2>
-        <span class="font-sans text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#faf9f6]/50 font-medium">
-          ENGINEERING PULSE // GITHUB ACTIVITY
-        </span>
       </div>
 
       <div class="flex items-center gap-4">
