@@ -356,7 +356,7 @@
       className?: string;
     }>(),
     {
-      defaultView: '2d',
+      defaultView: '3d',
       palette: 'github',
       unit: 'contribution',
       heightScale: 1,
@@ -468,7 +468,7 @@
   const FG_FALLBACK: RGB = [243, 238, 232];
   const BG_FALLBACK: RGB = [30, 28, 26];
 
-  let engine: { kick: () => void; load: () => void; retheme: () => void; tipWidth: (w: number) => void; playFlicker: () => void; playSweep: () => void } | null = null;
+  let engine: { kick: () => void; load: () => void; retheme: () => void; tipWidth: (w: number) => void; playEntrance: () => void; playFlicker: () => void; playSweep: () => void } | null = null;
 
   onMounted(() => {
     const root = rootRef.value;
@@ -485,13 +485,18 @@
 
     let flickerProgress = 0;
     let isFlickering = true;
+    let riseProgress = 0;
+    let isRising = true;
 
-    const playFlicker = () => {
+    const playEntrance = () => {
       flickerProgress = 0;
       isFlickering = true;
+      riseProgress = 0;
+      isRising = true;
       kick();
     };
-    const playSweep = playFlicker;
+    const playFlicker = playEntrance;
+    const playSweep = playEntrance;
 
     let t = currentView.value === '3d' ? 1 : 0;
     let target = currentView.value === '3d' ? 1 : 0;
@@ -664,7 +669,8 @@
         stage.style.height = Hc.toFixed(1) + 'px';
         lastH = Hc;
       }
-      for (let i = 0; i < n; i++) zs[i] = riseAt(t, wk[i], weeks, dy[i]) * hgt[i];
+      const rVal = currentView.value === '3d' ? (reduced ? 1 : riseProgress) : 1;
+      for (let i = 0; i < n; i++) zs[i] = riseAt(t * rVal, wk[i], weeks, dy[i]) * hgt[i];
       const b = extent(cam, e, false);
       const pad = lerp(2, 20, e);
       const left = pad + gutter * (1 - e);
@@ -744,48 +750,49 @@
 
         let flashStroke = 0;
         if (!reduced && flickerProgress < 1.0) {
-          const start = flickerOffsets[i] ?? 0;
-          const duration = 0.32;
-          const elapsed = flickerProgress - start;
+          if (lv[i] > 0) {
+            const start = flickerOffsets[i] ?? 0;
+            const duration = 0.32;
+            const elapsed = flickerProgress - start;
 
-          if (elapsed < 0) {
-            r = ex;
-            g = ey;
-            bl = ez;
-          } else if (elapsed < duration) {
-            const fp = elapsed / duration;
-            const build = fp * fp * (3 - 2 * fp);
-            const tr = r;
-            const tg = g;
-            const tb = bl;
-            let curR = ex + (tr - ex) * build;
-            let curG = ey + (tg - ey) * build;
-            let curB = ez + (tb - ez) * build;
+            if (elapsed < 0) {
+              r = ex;
+              g = ey;
+              bl = ez;
+            } else if (elapsed < duration) {
+              const fp = elapsed / duration;
+              const build = fp * fp * (3 - 2 * fp);
+              const tr = r;
+              const tg = g;
+              const tb = bl;
+              let curR = ex + (tr - ex) * build;
+              let curG = ey + (tg - ey) * build;
+              let curB = ez + (tb - ez) * build;
 
-            const pulse = Math.sin(fp * Math.PI * 5);
-            const isGreen = lv[i] > 0;
-            const topG_R = col[12];
-            const topG_G = col[13];
-            const topG_B = col[14];
+              const pulse = Math.sin(fp * Math.PI * 5);
+              const topG_R = col[12];
+              const topG_G = col[13];
+              const topG_B = col[14];
 
-            if (pulse > 0) {
-              const swell = Math.sin(pulse * Math.PI * 0.5) * (1 - fp * 0.7) * (isGreen ? 0.6 : 0.22);
-              curR += (topG_R - curR) * swell;
-              curG += (topG_G - curG) * swell;
-              curB += (topG_B - curB) * swell;
-              if (pulse > 0.25) {
-                flashStroke = (1 - fp) * (isGreen ? 0.75 : 0.28) * pulse;
+              if (pulse > 0) {
+                const swell = Math.sin(pulse * Math.PI * 0.5) * (1 - fp * 0.7) * 0.65;
+                curR += (topG_R - curR) * swell;
+                curG += (topG_G - curG) * swell;
+                curB += (topG_B - curB) * swell;
+                if (pulse > 0.25) {
+                  flashStroke = (1 - fp) * 0.75 * pulse;
+                }
+              } else {
+                const dip = Math.abs(pulse) * (1 - fp) * 0.45;
+                curR += (ex - curR) * dip;
+                curG += (ey - curG) * dip;
+                curB += (ez - curB) * dip;
               }
-            } else {
-              const dip = Math.abs(pulse) * (1 - fp) * (isGreen ? 0.45 : 0.2);
-              curR += (ex - curR) * dip;
-              curG += (ey - curG) * dip;
-              curB += (ez - curB) * dip;
-            }
 
-            r = curR;
-            g = curG;
-            bl = curB;
+              r = curR;
+              g = curG;
+              bl = curB;
+            }
           }
         }
         if (f & 1) {
@@ -877,6 +884,15 @@
         if (flickerProgress >= 1.0) {
           isFlickering = false;
           flickerProgress = 1.0;
+        }
+      }
+
+      if (isRising) {
+        riseProgress += dt / 1.15;
+        moving = true;
+        if (riseProgress >= 1.0) {
+          isRising = false;
+          riseProgress = 1.0;
         }
       }
 
@@ -1163,6 +1179,7 @@
         tipW = w;
         draw();
       },
+      playEntrance,
       playFlicker,
       playSweep,
     };
@@ -1210,13 +1227,15 @@
     },
   );
 
-  const playFlicker = () => {
-    engine?.playFlicker();
+  const playEntrance = () => {
+    engine?.playEntrance();
   };
-  const playSweep = playFlicker;
+  const playFlicker = playEntrance;
+  const playSweep = playEntrance;
 
   defineExpose({
     animateCounter,
+    playEntrance,
     playFlicker,
     playSweep,
   });

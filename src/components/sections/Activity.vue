@@ -65,15 +65,14 @@
             ref="titleRef"
             class="font-sans font-bold text-xl sm:text-2xl md:text-3xl text-[#faf9f6] tracking-tight will-change-transform"
           >
-            One Year of Code as an Isometric City.
+            Open Source Activity & Code Frequency.
           </h3>
         </div>
         <p
           ref="descRef"
           class="font-sans text-xs sm:text-sm text-[#faf9f6]/65 max-w-xl leading-relaxed will-change-transform"
         >
-          Daily git commits rendered onto an interactive canvas.
-          Switch between 2D planar heatmap and 3D kinetic skyline wave.
+          An isometric projection of daily git activity. 3D kinetic elevation with live GitHub telemetry.
         </p>
       </div>
 
@@ -85,7 +84,7 @@
         <ContributionSkyline
           ref="skylineCompRef"
           :data="contributions"
-          defaultView="2d"
+          defaultView="3d"
           palette="github"
           :orbit="true"
           :showStats="true"
@@ -218,7 +217,7 @@
       tl.to(skylineCardRef.value, { y: 0, opacity: 1, scale: 1, duration: 1.0 }, 0.22);
     }
     skylineCompRef.value?.animateCounter();
-    skylineCompRef.value?.playFlicker?.();
+    skylineCompRef.value?.playEntrance?.() ?? skylineCompRef.value?.playFlicker?.();
     if (statusBarRef.value) {
       tl.to(statusBarRef.value, { y: 0, opacity: 1, duration: 0.8 }, 0.35);
     }
