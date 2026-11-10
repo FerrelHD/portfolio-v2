@@ -98,7 +98,7 @@
         <div class="flex items-center justify-between pb-4 border-b border-white/10 shrink-0">
           <div class="flex items-baseline gap-3">
             <h2 class="font-serif text-2xl sm:text-3xl uppercase tracking-tight text-[#faf9f6]">
-              SKYLINE // FULLSCREEN
+              SKYLINE FULLSCREEN
             </h2>
             <span class="font-sans text-xs uppercase tracking-widest text-[#faf9f6]/50">
               @FerrelHD

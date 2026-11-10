@@ -198,15 +198,15 @@
         <div class="flex flex-col gap-3 pb-6 border-b border-white/10">
           <div class="flex items-center justify-between">
             <span class="font-sans text-[11px] uppercase tracking-[0.2em] text-[#faf9f6]/50">
-              LOCATION // TIME
+              LOCAL TIME
             </span>
             <span class="font-sans text-xs uppercase tracking-wider text-[#faf9f6]/80 tabular-nums">
-              JAKARTA, ID · {{ currentTime }} WIB
+              JAKARTA · {{ currentTime }} WIB
             </span>
           </div>
           <div class="flex items-center justify-between">
             <span class="font-sans text-[11px] uppercase tracking-[0.2em] text-[#faf9f6]/50">
-              AVAILABILITY
+              STATUS
             </span>
             <span class="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-wider text-[#faf9f6]/90">
               <span class="size-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -380,49 +380,49 @@
     hero: {
       num: '01.',
       label: 'HOME',
-      chapter: 'INDEX // FOLIO 2026',
-      title: 'Frontend Engineer & Creative Developer',
-      desc: 'Crafting fluid, motion-driven digital experiences with meticulous typography, modern frameworks, and editorial aesthetics.',
-      meta: 'JAKARTA, ID · AVAILABLE FOR WORK',
+      chapter: 'INDEX',
+      title: 'Frontend Developer & Creative Engineer',
+      desc: 'Building responsive web interfaces, interactive components, and clean design systems with Vue, TypeScript, and GSAP.',
+      meta: 'JAKARTA, ID · 2026',
     },
     about: {
       num: '02.',
       label: 'ABOUT',
-      chapter: 'CHAPTER I // ORIGIN & MINDSET',
-      title: 'Multidisciplinary Engineering & Craft',
-      desc: 'The intersection of software architecture and visual design. Principles shaped by deliberate practice and creative experiments.',
-      meta: 'BACKGROUND & PHILOSOPHY',
+      chapter: 'CHAPTER I',
+      title: 'Background and Principles',
+      desc: 'Developer based in Jakarta. Focused on interface quality, fast load times, and maintainable frontend architecture.',
+      meta: 'PROFILE · FERREL RASHAD',
     },
     works: {
       num: '03.',
       label: 'WORKS',
-      chapter: 'CHAPTER II // SELECTED INDEX',
-      title: 'Featured Case Studies & Builds',
-      desc: 'Production applications and design systems including NotchFlow, Charles Leclerc interactive folio, Eco-Bite, and more.',
-      meta: '4 FEATURED · 10+ IN ARCHIVE',
+      chapter: 'CHAPTER II',
+      title: 'Selected Projects',
+      desc: 'Production applications and design systems including NotchFlow, Charles Leclerc interactive portfolio, and Eco-Bite.',
+      meta: '4 FEATURED · ARCHIVE',
     },
     capabilities: {
       num: '04.',
       label: 'SERVICES',
-      chapter: 'CHAPTER III // SERVICES & TOOLSET',
-      title: 'Creative Tech & Fullstack Engineering',
-      desc: 'From high-performance frontend interfaces with GSAP motion to full-stack cloud workflows and accessible design systems.',
-      meta: 'STACK & SPECIALIZATIONS',
+      chapter: 'CHAPTER III',
+      title: 'Capabilities and Stack',
+      desc: 'Component architecture, animation and micro-interactions, full-stack prototyping, and responsive layouts.',
+      meta: 'VUE · TYPESCRIPT · TAILWIND',
     },
     activity: {
       num: '05.',
       label: 'ACTIVITY',
-      chapter: 'CHAPTER IV // 3D GITHUB PULSE',
-      title: 'One Year of Code as an Isometric City',
-      desc: 'Real-time contribution heat map rendered as an interactive 3D skyline wave, reflecting daily commits and open-source rhythm.',
-      meta: '@FERRELHD · LIVE API SYNC',
+      chapter: 'CHAPTER IV',
+      title: 'GitHub Contributions',
+      desc: 'Daily git commits rendered on an interactive canvas in 2D grid and 3D isometric skyline view.',
+      meta: 'GITHUB @FERRELHD',
     },
     contact: {
       num: '06.',
       label: 'CONTACT',
-      chapter: 'CHAPTER V // COLLABORATION',
-      title: 'Start a Project or Say Hello',
-      desc: 'Available for freelance design engineering, high-impact contract roles, or technical collaborations worldwide.',
+      chapter: 'CHAPTER V',
+      title: 'Contact and Inquiries',
+      desc: 'Open for freelance projects, engineering roles, and technical collaborations.',
       meta: 'EMAIL · LINKEDIN · GITHUB',
     },
   };
