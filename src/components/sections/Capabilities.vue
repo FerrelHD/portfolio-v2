@@ -82,13 +82,11 @@
 
         <!-- Top Row: Number on Left, Category Index & Arrow on Right -->
         <div class="relative z-10 flex items-start justify-between">
-          <div class="overflow-hidden">
-            <span
-              class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal leading-none text-[#faf9f6] inline-block transition-transform duration-500 ease-out group-hover:translate-x-1"
-            >
-              {{ item.num }}
-            </span>
-          </div>
+          <span
+            class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal leading-none text-[#faf9f6] inline-block transition-transform duration-500 ease-out group-hover:translate-x-1"
+          >
+            {{ item.num }}
+          </span>
 
           <div class="flex items-center gap-2 pt-1 font-mono text-[10px] sm:text-[11px] text-[#faf9f6]/40 uppercase tracking-widest transition-colors duration-300 group-hover:text-[#faf9f6]/80">
             <span>{{ item.category }}</span>
