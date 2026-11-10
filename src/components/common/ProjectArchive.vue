@@ -460,10 +460,23 @@
     }
   };
 
+  let hasPreloaded = false;
+  const preloadArchiveImages = () => {
+    if (hasPreloaded) return;
+    hasPreloaded = true;
+    archiveProjects.forEach((p) => {
+      if (p.previewImg) {
+        const img = new Image();
+        img.src = p.previewImg;
+      }
+    });
+  };
+
   watch(
     () => props.isOpen,
     (val) => {
       if (val) {
+        preloadArchiveImages();
         document.body.style.overflow = 'hidden';
         openArchiveAnimation();
         nextTick(() => {
