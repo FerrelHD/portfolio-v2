@@ -66,7 +66,7 @@
         <Capabilities ref="capabilitiesRef" />
 
         <!-- Slide 7: Chapter IV - Engineering Activity & 3D Skyline (Dark #23201e) -->
-        <Activity />
+        <Activity ref="activityRef" />
 
         <!-- Slide 8: Closing - Thank You & Contact (Dark #3A3632) -->
         <Contact
@@ -136,6 +136,7 @@
   const aboutMeRef = ref<any>(null);
   const worksRef = ref<any>(null);
   const capabilitiesRef = ref<any>(null);
+  const activityRef = ref<any>(null);
   const contactRef = ref<any>(null);
 
   const scrollProgress = ref(0);
@@ -329,6 +330,8 @@
       worksRef.value?.revealSlideIndex(index - 2);
     } else if (index === 6) {
       capabilitiesRef.value?.revealSlide();
+    } else if (index === 7) {
+      activityRef.value?.revealSlide();
     } else if (index === 8) {
       contactRef.value?.revealSlide();
     }
