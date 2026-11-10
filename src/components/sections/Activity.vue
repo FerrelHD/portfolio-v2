@@ -8,12 +8,18 @@
     <!-- Top Editorial Header Bar -->
     <div class="flex items-center justify-between shrink-0">
       <div class="overflow-hidden">
-        <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#faf9f6] uppercase leading-none will-change-transform">
+        <h2
+          ref="chapterTitleRef"
+          class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#faf9f6] uppercase leading-none will-change-transform"
+        >
           CHAPTER IV
         </h2>
       </div>
 
-      <div class="flex items-center gap-4">
+      <div
+        ref="headerActionsRef"
+        class="flex items-center gap-4 will-change-transform"
+      >
         <button
           type="button"
           @click="openFullscreen"
@@ -54,17 +60,28 @@
     <!-- Center Interactive Content -->
     <div class="my-auto py-2 md:py-3 w-full max-w-[1040px] mx-auto flex flex-col gap-2.5 sm:gap-3">
       <div class="flex flex-col gap-0.5 text-left">
-        <h3 class="font-sans font-bold text-xl sm:text-2xl md:text-3xl text-[#faf9f6] tracking-tight">
-          One Year of Code as an Isometric City.
-        </h3>
-        <p class="font-sans text-xs sm:text-sm text-[#faf9f6]/65 max-w-xl leading-relaxed">
+        <div class="overflow-hidden">
+          <h3
+            ref="titleRef"
+            class="font-sans font-bold text-xl sm:text-2xl md:text-3xl text-[#faf9f6] tracking-tight will-change-transform"
+          >
+            One Year of Code as an Isometric City.
+          </h3>
+        </div>
+        <p
+          ref="descRef"
+          class="font-sans text-xs sm:text-sm text-[#faf9f6]/65 max-w-xl leading-relaxed will-change-transform"
+        >
           Daily git commits rendered onto an interactive canvas.
           Switch between 2D planar heatmap and 3D kinetic skyline wave.
         </p>
       </div>
 
       <!-- Skyline Canvas Component with Live GitHub Data -->
-      <div class="w-full">
+      <div
+        ref="skylineCardRef"
+        class="w-full will-change-transform"
+      >
         <ContributionSkyline
           :data="contributions"
           defaultView="2d"
@@ -79,7 +96,10 @@
     </div>
 
     <!-- Bottom Contextual Status Bar -->
-    <div class="flex items-center justify-between text-[11px] font-sans uppercase tracking-[0.15em] text-[#faf9f6]/40 shrink-0 pt-2 border-t border-white/5">
+    <div
+      ref="statusBarRef"
+      class="flex items-center justify-between text-[11px] font-sans uppercase tracking-[0.15em] text-[#faf9f6]/40 shrink-0 pt-2 border-t border-white/5 will-change-transform"
+    >
       <span>Toggle 3D for skyline wave · Click cell for details</span>
       <span class="tabular-nums">Status: Active Development</span>
     </div>
@@ -142,6 +162,7 @@
 
 <script setup lang="ts">
   import { onMounted, onUnmounted, ref } from 'vue';
+  import gsap from 'gsap';
   import ContributionSkyline from '@/components/ui/ContributionSkyline.vue';
   import {
     fetchGitHubContributions,
@@ -149,6 +170,13 @@
   } from '@/services/githubContributions';
   import type { ContributionDay } from '@/utils/contributionMath';
   import { lenis } from '@/lenis';
+
+  const chapterTitleRef = ref<HTMLElement | null>(null);
+  const headerActionsRef = ref<HTMLElement | null>(null);
+  const titleRef = ref<HTMLElement | null>(null);
+  const descRef = ref<HTMLElement | null>(null);
+  const skylineCardRef = ref<HTMLElement | null>(null);
+  const statusBarRef = ref<HTMLElement | null>(null);
 
   const contributions = ref<ContributionDay[]>(ferrelFallbackContributions);
   const isFullscreenOpen = ref(false);
@@ -169,7 +197,41 @@
     }
   };
 
+  const revealSlide = () => {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    if (chapterTitleRef.value) {
+      tl.to(chapterTitleRef.value, { yPercent: 0, duration: 1.1 }, 0);
+    }
+    if (headerActionsRef.value) {
+      tl.to(headerActionsRef.value, { y: 0, opacity: 1, duration: 0.9 }, 0.1);
+    }
+    if (titleRef.value) {
+      tl.to(titleRef.value, { yPercent: 0, duration: 1.05 }, 0.12);
+    }
+    if (descRef.value) {
+      tl.to(descRef.value, { y: 0, opacity: 1, duration: 0.95 }, 0.2);
+    }
+    if (skylineCardRef.value) {
+      tl.to(skylineCardRef.value, { y: 0, opacity: 1, scale: 1, duration: 1.0 }, 0.22);
+    }
+    if (statusBarRef.value) {
+      tl.to(statusBarRef.value, { y: 0, opacity: 1, duration: 0.8 }, 0.35);
+    }
+  };
+
+  defineExpose({
+    revealSlide,
+  });
+
   onMounted(async () => {
+    if (chapterTitleRef.value) gsap.set(chapterTitleRef.value, { yPercent: 105 });
+    if (headerActionsRef.value) gsap.set(headerActionsRef.value, { y: 15, opacity: 0 });
+    if (titleRef.value) gsap.set(titleRef.value, { yPercent: 105 });
+    if (descRef.value) gsap.set(descRef.value, { y: 15, opacity: 0 });
+    if (skylineCardRef.value) gsap.set(skylineCardRef.value, { y: 25, opacity: 0, scale: 0.98 });
+    if (statusBarRef.value) gsap.set(statusBarRef.value, { y: 10, opacity: 0 });
+
     window.addEventListener('keydown', handleKeydown);
     contributions.value = await fetchGitHubContributions('FerrelHD');
   });
