@@ -83,6 +83,7 @@
         class="w-full will-change-transform"
       >
         <ContributionSkyline
+          ref="skylineCompRef"
           :data="contributions"
           defaultView="2d"
           palette="github"
@@ -176,6 +177,7 @@
   const titleRef = ref<HTMLElement | null>(null);
   const descRef = ref<HTMLElement | null>(null);
   const skylineCardRef = ref<HTMLElement | null>(null);
+  const skylineCompRef = ref<any>(null);
   const statusBarRef = ref<HTMLElement | null>(null);
 
   const contributions = ref<ContributionDay[]>(ferrelFallbackContributions);
@@ -215,6 +217,7 @@
     if (skylineCardRef.value) {
       tl.to(skylineCardRef.value, { y: 0, opacity: 1, scale: 1, duration: 1.0 }, 0.22);
     }
+    skylineCompRef.value?.animateCounter();
     if (statusBarRef.value) {
       tl.to(statusBarRef.value, { y: 0, opacity: 1, duration: 0.8 }, 0.35);
     }

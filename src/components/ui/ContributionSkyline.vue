@@ -14,7 +14,7 @@
       <h3 class="m-0 text-[15px] font-normal leading-snug">
         <template v-if="title">{{ title }}</template>
         <template v-else>
-          <span class="font-semibold tabular-nums">{{ nf.format(model.stats.total) }}</span>
+          <span class="font-semibold tabular-nums">{{ nf.format(Math.round(model.stats.total * counterProgress)) }}</span>
           {{ noun(model.stats.total) }} in the last year
         </template>
       </h3>
@@ -301,6 +301,7 @@
 
 <script setup lang="ts">
   import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
+  import gsap from 'gsap';
   import {
     barHeight,
     buildGrid,
@@ -431,12 +432,32 @@
   const bigSize = computed(() => Math.round(Math.max(24, Math.min(44, width.value * 0.045))));
   const showRow = computed(() => props.showStats && !(currentView.value === '3d' && corners.value));
 
-  const statBlocks = computed(() => [
-    { label: '1 year total', value: nf.value.format(model.value.stats.total), unit: noun(model.value.stats.total), sub: range(model.value.stats.first, model.value.stats.last, true) },
-    { label: 'Busiest day', value: nf.value.format(model.value.stats.busiest.count), unit: noun(model.value.stats.busiest.count), sub: model.value.stats.busiest.date ? df.value.format(dayMs(model.value.stats.busiest.date)) : '—' },
-    { label: 'Longest streak', value: nf.value.format(model.value.stats.longest.days), unit: model.value.stats.longest.days === 1 ? 'day' : 'days', sub: range(model.value.stats.longest.start, model.value.stats.longest.end) },
-    { label: 'Current streak', value: nf.value.format(model.value.stats.current.days), unit: model.value.stats.current.days === 1 ? 'day' : 'days', sub: range(model.value.stats.current.start, model.value.stats.current.end) },
-  ]);
+  const counterProgress = ref(0);
+
+  const animateCounter = () => {
+    gsap.killTweensOf(counterProgress);
+    counterProgress.value = 0;
+    gsap.to(counterProgress, {
+      value: 1,
+      duration: 1.4,
+      ease: 'power2.out',
+    });
+  };
+
+  const statBlocks = computed(() => {
+    const p = counterProgress.value;
+    const total = Math.round(model.value.stats.total * p);
+    const busiest = Math.round(model.value.stats.busiest.count * p);
+    const longest = Math.round(model.value.stats.longest.days * p);
+    const current = Math.round(model.value.stats.current.days * p);
+
+    return [
+      { label: '1 year total', value: nf.value.format(total), unit: noun(model.value.stats.total), sub: range(model.value.stats.first, model.value.stats.last, true) },
+      { label: 'Busiest day', value: nf.value.format(busiest), unit: noun(model.value.stats.busiest.count), sub: model.value.stats.busiest.date ? df.value.format(dayMs(model.value.stats.busiest.date)) : '—' },
+      { label: 'Longest streak', value: nf.value.format(longest), unit: model.value.stats.longest.days === 1 ? 'day' : 'days', sub: range(model.value.stats.longest.start, model.value.stats.longest.end) },
+      { label: 'Current streak', value: nf.value.format(current), unit: model.value.stats.current.days === 1 ? 'day' : 'days', sub: range(model.value.stats.current.start, model.value.stats.current.end) },
+    ];
+  });
 
   const ease = 'cubic-bezier(0.65, 0, 0.35, 1)';
   const levelNames = computed(() => ['No ' + plural.value, 'Light', 'Moderate', 'Heavy', 'Heaviest']);
@@ -1058,6 +1079,8 @@
       },
     };
 
+    animateCounter();
+
     onUnmounted(() => {
       if (raf) cancelAnimationFrame(raf);
       io?.disconnect();
@@ -1088,6 +1111,7 @@
     () => [model.value, props.heightScale],
     () => {
       engine?.load();
+      animateCounter();
     },
   );
 
@@ -1097,4 +1121,8 @@
       engine?.retheme();
     },
   );
+
+  defineExpose({
+    animateCounter,
+  });
 </script>
