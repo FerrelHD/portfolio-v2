@@ -427,8 +427,8 @@
     return f.format(dayMs(a)) + ' — ' + f.format(dayMs(b));
   };
 
-  const corners = computed(() => props.showStats && width.value >= 560);
-  const bigSize = computed(() => Math.round(Math.max(30, Math.min(56, width.value * 0.058))));
+  const corners = computed(() => props.showStats && width.value >= 600);
+  const bigSize = computed(() => Math.round(Math.max(24, Math.min(44, width.value * 0.045))));
   const showRow = computed(() => props.showStats && !(currentView.value === '3d' && corners.value));
 
   const statBlocks = computed(() => [
@@ -604,7 +604,10 @@
       H2 = 20 + 4 + ((b2.maxy - b2.miny) / (b2.maxx - b2.minx)) * (W - gutter - 4);
       const b3 = extent(camera(1), 1, true);
       const natural = ((b3.maxy - b3.miny) / (b3.maxx - b3.minx)) * (W - 40) + 40;
-      H3 = Math.max(Math.min(natural, W * 0.72, 620), Math.min(natural, 240));
+      // Viewport-aware 3D height clamping: keeps 3D skyline within screen bounds without overflow
+      const maxH3 = typeof window !== 'undefined' ? Math.min(window.innerHeight * 0.36, 360) : 340;
+      const minH3 = typeof window !== 'undefined' ? Math.min(220, window.innerHeight * 0.26) : 220;
+      H3 = Math.max(Math.min(natural, W * 0.52, maxH3), minH3);
       Hmax = Math.ceil(Math.max(H2, H3));
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(Hmax * dpr);
