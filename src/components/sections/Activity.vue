@@ -21,7 +21,21 @@
           title="Expand 3D Skyline Fullscreen"
         >
           <span>Fullscreen</span>
-          <span class="text-xs inline-block transition-transform duration-300 ease-out group-hover:scale-125">⛶</span>
+          <svg
+            class="size-3 sm:size-3.5 transition-transform duration-300 ease-out group-hover:scale-110"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M2 6V2h4" />
+            <path d="M14 6V2h-4" />
+            <path d="M2 10v4h4" />
+            <path d="M14 10v4h-4" />
+          </svg>
         </button>
 
         <a
