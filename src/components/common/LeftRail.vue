@@ -10,7 +10,7 @@
             ? 'bg-[#24211e] text-[#f3eee8] border-white/10'
             : (!isSolid && activeSection === 'hero'
                 ? 'bg-transparent text-[#f3eee8] border-white/10'
-                : (activeSection === 'capabilities'
+                : (activeSection === 'capabilities' || activeSection === 'activity'
                     ? 'bg-[#282523] text-[#f3eee8] border-white/10'
                     : 'bg-[#3A3632] text-[#f3eee8] border-white/10')))
         : (isOpen
@@ -286,7 +286,8 @@
     { num: '02.', label: 'ABOUT', id: 'about' },
     { num: '03.', label: 'WORKS', id: 'works' },
     { num: '04.', label: 'SERVICES', id: 'capabilities' },
-    { num: '05.', label: 'CONTACT', id: 'contact' },
+    { num: '05.', label: 'ACTIVITY', id: 'activity' },
+    { num: '06.', label: 'CONTACT', id: 'contact' },
   ];
 
   let activeMenuTl: gsap.core.Timeline | null = null;

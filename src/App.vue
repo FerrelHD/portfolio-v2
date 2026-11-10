@@ -65,7 +65,10 @@
         <!-- Slide 6: Chapter III - Capabilities & Workflow (Light #faf9f6) -->
         <Capabilities ref="capabilitiesRef" />
 
-        <!-- Slide 7: Closing - Thank You & Contact (Dark #22201e) -->
+        <!-- Slide 7: Chapter IV - Engineering Activity & 3D Skyline (Dark #23201e) -->
+        <Activity />
+
+        <!-- Slide 8: Closing - Thank You & Contact (Dark #3A3632) -->
         <Contact
           ref="contactRef"
           @scrollToStart="() => handleNavigate('hero')"
@@ -102,6 +105,7 @@
     Works,
     aboutMe,
     Capabilities,
+    Activity,
     Contact,
   } from '@/components/sections';
   import { computed, defineAsyncComponent, onMounted, onUnmounted, ref, watch } from 'vue';
@@ -244,6 +248,7 @@
     if (isDesktop) {
       const heroEl = document.getElementById('hero');
       const capEl = document.getElementById('capabilities');
+      const actEl = document.getElementById('activity');
       const contactEl = document.getElementById('contact');
       if (!heroEl || !contactEl) return;
 
@@ -251,12 +256,16 @@
       const heroRight = heroEl.getBoundingClientRect().right;
       const capLeft = capEl ? capEl.getBoundingClientRect().left : 9999;
       const capRight = capEl ? capEl.getBoundingClientRect().right : -9999;
+      const actLeft = actEl ? actEl.getBoundingClientRect().left : 9999;
+      const actRight = actEl ? actEl.getBoundingClientRect().right : -9999;
       const contactLeft = contactEl.getBoundingClientRect().left;
 
-      // Dark if Hero covers rail, or Chapter III (Capabilities) covers rail, or Contact has reached rail
+      // Dark if Hero covers rail, or Chapter III (Capabilities), or Chapter IV (Activity), or Contact has reached rail
       if (heroRight > railWidth + 5) {
         isDarkRail.value = true;
       } else if (capLeft <= railWidth && capRight > 5) {
+        isDarkRail.value = true;
+      } else if (actLeft <= railWidth && actRight > 5) {
         isDarkRail.value = true;
       } else if (contactLeft <= railWidth + 5) {
         isDarkRail.value = true;
@@ -267,17 +276,22 @@
       const railHeight = 56;
       const heroEl = document.getElementById('hero');
       const capEl = document.getElementById('capabilities');
+      const actEl = document.getElementById('activity');
       const contactEl = document.getElementById('contact');
       if (!heroEl || !contactEl) return;
 
       const heroBottom = heroEl.getBoundingClientRect().bottom;
       const capTop = capEl ? capEl.getBoundingClientRect().top : 9999;
       const capBottom = capEl ? capEl.getBoundingClientRect().bottom : -9999;
+      const actTop = actEl ? actEl.getBoundingClientRect().top : 9999;
+      const actBottom = actEl ? actEl.getBoundingClientRect().bottom : -9999;
       const contactTop = contactEl.getBoundingClientRect().top;
 
       if (heroBottom > railHeight + 5) {
         isDarkRail.value = true;
       } else if (capTop <= railHeight && capBottom > 5) {
+        isDarkRail.value = true;
+      } else if (actTop <= railHeight && actBottom > 5) {
         isDarkRail.value = true;
       } else if (contactTop <= railHeight + 5) {
         isDarkRail.value = true;
@@ -292,6 +306,7 @@
     if (currentSlideIndex.value === 1) return 'about';
     if (currentSlideIndex.value >= 2 && currentSlideIndex.value <= 5) return 'works';
     if (currentSlideIndex.value === 6) return 'capabilities';
+    if (currentSlideIndex.value === 7) return 'activity';
     return 'contact';
   });
 
@@ -305,7 +320,7 @@
     return null;
   });
 
-  const TOTAL_SLIDES = 8;
+  const TOTAL_SLIDES = 9;
 
   const triggerSlideAnimation = (index: number) => {
     if (index === 1) {
@@ -314,7 +329,7 @@
       worksRef.value?.revealSlideIndex(index - 2);
     } else if (index === 6) {
       capabilitiesRef.value?.revealSlide();
-    } else if (index === 7) {
+    } else if (index === 8) {
       contactRef.value?.revealSlide();
     }
   };
@@ -464,6 +479,7 @@
         'work-persona-3',
         'work-charles-leclerc',
         'capabilities',
+        'activity',
         'contact',
       ];
       const targetId = slideIds[clampedSlide] ?? 'hero';
@@ -486,7 +502,8 @@
       about: 1,
       works: 2,
       capabilities: 6,
-      contact: 7,
+      activity: 7,
+      contact: 8,
     };
 
     const targetSlide = slideTargets[sectionId] ?? 0;
