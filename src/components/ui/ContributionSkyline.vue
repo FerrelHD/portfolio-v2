@@ -468,7 +468,7 @@
   const FG_FALLBACK: RGB = [243, 238, 232];
   const BG_FALLBACK: RGB = [30, 28, 26];
 
-  let engine: { kick: () => void; load: () => void; retheme: () => void; tipWidth: (w: number) => void; playSweep: () => void } | null = null;
+  let engine: { kick: () => void; load: () => void; retheme: () => void; tipWidth: (w: number) => void; playFlicker: () => void; playSweep: () => void } | null = null;
 
   onMounted(() => {
     const root = rootRef.value;
@@ -483,14 +483,15 @@
     const darkMq = window.matchMedia('(prefers-color-scheme: dark)');
     let reduced = reduceMq.matches;
 
-    let sweepProgress = 0;
-    let isSweeping = true;
+    let flickerProgress = 0;
+    let isFlickering = true;
 
-    const playSweep = () => {
-      sweepProgress = 0;
-      isSweeping = true;
+    const playFlicker = () => {
+      flickerProgress = 0;
+      isFlickering = true;
       kick();
     };
+    const playSweep = playFlicker;
 
     let t = currentView.value === '3d' ? 1 : 0;
     let target = currentView.value === '3d' ? 1 : 0;
@@ -527,6 +528,7 @@
     let dim = new Float32Array(0);
     let polys = new Float32Array(0);
     let faces = new Uint8Array(0);
+    let flickerOffsets = new Float32Array(0);
     let order: number[] = [];
     let months: { week: number; label: string }[] = [];
     let weekdayRows: { day: number; label: string }[] = [];
@@ -552,6 +554,7 @@
         dim = new Float32Array(n);
         polys = new Float32Array(n * 24);
         faces = new Uint8Array(n);
+        flickerOffsets = new Float32Array(n);
         order = Array.from({ length: n }, (_, i) => i);
       }
       for (let i = 0; i < n; i++) {
@@ -560,6 +563,10 @@
         dy[i] = c.day;
         lv[i] = c.level;
         hgt[i] = barHeight(c.count, m.max, props.heightScale);
+        let z = (i + 1337) ^ 0x6c62272e;
+        z = Math.imul(z ^ (z >>> 15), z | 1);
+        z ^= z + Math.imul(z ^ (z >>> 7), z | 61);
+        flickerOffsets[i] = (((z ^ (z >>> 14)) >>> 0) / 4294967296) * 0.60;
       }
       months = m.months;
       const wf = new Intl.DateTimeFormat(props.locale, { weekday: 'short', timeZone: 'UTC' });
@@ -734,25 +741,31 @@
           g += (fg[1] - g) * m;
           bl += (fg[2] - bl) * m;
         }
-        if (!reduced && sweepProgress < 1.25) {
-          const cellProgress = wk[i] / Math.max(1, weeks - 1);
-          const cellJitter = (((i * 31) % 17) / 17) * 0.04;
-          const localDiff = sweepProgress - cellProgress - cellJitter;
-          if (localDiff < 0) {
+
+        let flashStroke = 0;
+        if (!reduced && flickerProgress < 1.0) {
+          const start = flickerOffsets[i] ?? 0;
+          const duration = 0.22;
+          const elapsed = flickerProgress - start;
+
+          if (elapsed < 0) {
             r = ex;
             g = ey;
             bl = ez;
-          } else if (localDiff < 0.14) {
-            const fp = localDiff / 0.14;
-            const cellHash = ((i * 101) % 13) / 13;
-            const osc = Math.sin(fp * 22 + cellHash * 6.28);
-            if (osc > 0.1) {
-              const flash = (1 - fp) * (osc > 0.6 ? 0.72 : 0.42);
+          } else if (elapsed < duration) {
+            const fp = elapsed / duration;
+            const osc = Math.sin(fp * Math.PI * 6);
+            const isGreen = lv[i] > 0;
+            if (osc > 0) {
+              const flash = (1 - fp) * (isGreen ? 0.72 : 0.35);
               r = Math.min(255, r + (fg[0] - r) * flash);
               g = Math.min(255, g + (fg[1] - g) * flash);
               bl = Math.min(255, bl + (fg[2] - bl) * flash);
+              if (osc > 0.25) {
+                flashStroke = (1 - fp) * (isGreen ? 0.75 : 0.38);
+              }
             } else {
-              const dip = (1 - fp) * 0.65;
+              const dip = (1 - fp) * (isGreen ? 0.65 : 0.3);
               r += (ex - r) * dip;
               g += (ey - g) * dip;
               bl += (ez - bl) * dip;
@@ -784,20 +797,10 @@
           ctx.strokeStyle = 'rgba(' + fg[0] + ',' + fg[1] + ',' + fg[2] + ',' + (0.85 * hv).toFixed(3) + ')';
           ctx.lineWidth = hv > 0.5 ? 1.5 : 1;
           ctx.stroke();
-        } else if (!reduced && sweepProgress < 1.25) {
-          const cellProgress = wk[i] / Math.max(1, weeks - 1);
-          const cellJitter = (((i * 31) % 17) / 17) * 0.04;
-          const localDiff = sweepProgress - cellProgress - cellJitter;
-          if (localDiff >= 0 && localDiff < 0.12) {
-            const fp = localDiff / 0.12;
-            const osc = Math.sin(fp * 22 + (((i * 101) % 13) / 13) * 6.28);
-            if (osc > 0.3) {
-              const alpha = (1 - fp) * 0.75;
-              ctx.strokeStyle = 'rgba(' + fg[0] + ',' + fg[1] + ',' + fg[2] + ',' + alpha.toFixed(3) + ')';
-              ctx.lineWidth = 1;
-              ctx.stroke();
-            }
-          }
+        } else if (flashStroke > 0.05) {
+          ctx.strokeStyle = 'rgba(' + fg[0] + ',' + fg[1] + ',' + fg[2] + ',' + flashStroke.toFixed(3) + ')';
+          ctx.lineWidth = 1;
+          ctx.stroke();
         }
       }
 
@@ -852,12 +855,12 @@
       last = now;
       let moving = false;
 
-      if (isSweeping) {
-        sweepProgress += dt / 0.95;
+      if (isFlickering) {
+        flickerProgress += dt / 0.95;
         moving = true;
-        if (sweepProgress >= 1.25) {
-          isSweeping = false;
-          sweepProgress = 1.25;
+        if (flickerProgress >= 1.0) {
+          isFlickering = false;
+          flickerProgress = 1.0;
         }
       }
 
@@ -1144,6 +1147,7 @@
         tipW = w;
         draw();
       },
+      playFlicker,
       playSweep,
     };
 
@@ -1190,12 +1194,14 @@
     },
   );
 
-  const playSweep = () => {
-    engine?.playSweep();
+  const playFlicker = () => {
+    engine?.playFlicker();
   };
+  const playSweep = playFlicker;
 
   defineExpose({
     animateCounter,
+    playFlicker,
     playSweep,
   });
 </script>

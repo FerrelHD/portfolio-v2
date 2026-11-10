@@ -218,7 +218,7 @@
       tl.to(skylineCardRef.value, { y: 0, opacity: 1, scale: 1, duration: 1.0 }, 0.22);
     }
     skylineCompRef.value?.animateCounter();
-    skylineCompRef.value?.playSweep();
+    skylineCompRef.value?.playFlicker?.();
     if (statusBarRef.value) {
       tl.to(statusBarRef.value, { y: 0, opacity: 1, duration: 0.8 }, 0.35);
     }
