@@ -566,7 +566,7 @@
         let z = (i + 1337) ^ 0x6c62272e;
         z = Math.imul(z ^ (z >>> 15), z | 1);
         z ^= z + Math.imul(z ^ (z >>> 7), z | 61);
-        flickerOffsets[i] = (((z ^ (z >>> 14)) >>> 0) / 4294967296) * 0.60;
+        flickerOffsets[i] = (((z ^ (z >>> 14)) >>> 0) / 4294967296) * 0.58;
       }
       months = m.months;
       const wf = new Intl.DateTimeFormat(props.locale, { weekday: 'short', timeZone: 'UTC' });
@@ -745,7 +745,7 @@
         let flashStroke = 0;
         if (!reduced && flickerProgress < 1.0) {
           const start = flickerOffsets[i] ?? 0;
-          const duration = 0.22;
+          const duration = 0.32;
           const elapsed = flickerProgress - start;
 
           if (elapsed < 0) {
@@ -754,22 +754,38 @@
             bl = ez;
           } else if (elapsed < duration) {
             const fp = elapsed / duration;
-            const osc = Math.sin(fp * Math.PI * 6);
+            const build = fp * fp * (3 - 2 * fp);
+            const tr = r;
+            const tg = g;
+            const tb = bl;
+            let curR = ex + (tr - ex) * build;
+            let curG = ey + (tg - ey) * build;
+            let curB = ez + (tb - ez) * build;
+
+            const pulse = Math.sin(fp * Math.PI * 5);
             const isGreen = lv[i] > 0;
-            if (osc > 0) {
-              const flash = (1 - fp) * (isGreen ? 0.72 : 0.35);
-              r = Math.min(255, r + (fg[0] - r) * flash);
-              g = Math.min(255, g + (fg[1] - g) * flash);
-              bl = Math.min(255, bl + (fg[2] - bl) * flash);
-              if (osc > 0.25) {
-                flashStroke = (1 - fp) * (isGreen ? 0.75 : 0.38);
+            const topG_R = col[12];
+            const topG_G = col[13];
+            const topG_B = col[14];
+
+            if (pulse > 0) {
+              const swell = Math.sin(pulse * Math.PI * 0.5) * (1 - fp * 0.7) * (isGreen ? 0.6 : 0.22);
+              curR += (topG_R - curR) * swell;
+              curG += (topG_G - curG) * swell;
+              curB += (topG_B - curB) * swell;
+              if (pulse > 0.25) {
+                flashStroke = (1 - fp) * (isGreen ? 0.75 : 0.28) * pulse;
               }
             } else {
-              const dip = (1 - fp) * (isGreen ? 0.65 : 0.3);
-              r += (ex - r) * dip;
-              g += (ey - g) * dip;
-              bl += (ez - bl) * dip;
+              const dip = Math.abs(pulse) * (1 - fp) * (isGreen ? 0.45 : 0.2);
+              curR += (ex - curR) * dip;
+              curG += (ey - curG) * dip;
+              curB += (ez - curB) * dip;
             }
+
+            r = curR;
+            g = curG;
+            bl = curB;
           }
         }
         if (f & 1) {
@@ -797,8 +813,8 @@
           ctx.strokeStyle = 'rgba(' + fg[0] + ',' + fg[1] + ',' + fg[2] + ',' + (0.85 * hv).toFixed(3) + ')';
           ctx.lineWidth = hv > 0.5 ? 1.5 : 1;
           ctx.stroke();
-        } else if (flashStroke > 0.05) {
-          ctx.strokeStyle = 'rgba(' + fg[0] + ',' + fg[1] + ',' + fg[2] + ',' + flashStroke.toFixed(3) + ')';
+        } else if (flashStroke > 0.04) {
+          ctx.strokeStyle = 'rgba(' + Math.round(col[12]) + ',' + Math.round(col[13]) + ',' + Math.round(col[14]) + ',' + flashStroke.toFixed(3) + ')';
           ctx.lineWidth = 1;
           ctx.stroke();
         }
