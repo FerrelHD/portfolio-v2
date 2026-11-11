@@ -395,6 +395,7 @@
   };
 
   let scrollTicking = false;
+  const revealedMobileSlides = new Set<number>();
   const updateMobileSlideState = () => {
     if (window.innerWidth >= 768) return;
     const slideIds = [
@@ -405,6 +406,7 @@
       'work-persona-3',
       'work-charles-leclerc',
       'capabilities',
+      'activity',
       'contact',
     ];
 
@@ -417,8 +419,9 @@
       if (!el) return;
       const rect = el.getBoundingClientRect();
 
-      // Trigger reveal when section enters visible area
-      if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+      // Trigger reveal once when section enters visible area on mobile
+      if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0 && !revealedMobileSlides.has(idx)) {
+        revealedMobileSlides.add(idx);
         triggerSlideAnimation(idx);
       }
 
@@ -459,6 +462,9 @@
     const clampedSlide = Math.min(TOTAL_SLIDES - 1, Math.max(0, targetSlide));
     currentSlideIndex.value = clampedSlide;
     setRailThemeForSlide(clampedSlide);
+    if (window.innerWidth < 768) {
+      revealedMobileSlides.add(clampedSlide);
+    }
     triggerSlideAnimation(clampedSlide);
 
     if (window.innerWidth >= 768 && horizontalScrollTrigger) {
