@@ -257,23 +257,23 @@
         }"
       >
         <div class="min-h-0 overflow-hidden">
-          <div class="grid grid-cols-2 gap-x-3 sm:gap-x-4 gap-y-3 sm:gap-y-4 px-3 pt-3.5 pb-1 sm:px-4 sm:pt-4 md:grid-cols-4">
+          <div class="grid grid-cols-2 gap-x-4 gap-y-3.5 sm:gap-y-4 px-3 pt-3.5 pb-1 sm:px-4 sm:pt-4 md:grid-cols-4">
             <div
               v-for="b in statBlocks"
               :key="b.label"
               class="min-w-0"
             >
               <div class="text-[11px] sm:text-[13px] leading-tight" :style="{ color: mutedColor }">{{ b.label }}</div>
-              <div class="mt-1 flex items-baseline gap-1.5 flex-wrap">
+              <div class="mt-1 flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-1.5">
                 <span
-                  class="text-[22px] sm:text-[26px] md:text-[28px] font-semibold tabular-nums transition-colors duration-500 leading-none tracking-[-0.02em]"
+                  class="text-2xl sm:text-[26px] md:text-[28px] font-semibold tabular-nums transition-colors duration-500 leading-none tracking-[-0.02em]"
                   :style="{ color: theme.accent }"
                 >
                   {{ b.value }}
                 </span>
-                <span class="text-xs sm:text-[14px]">{{ b.unit }}</span>
+                <span class="text-[11px] sm:text-[14px] leading-tight opacity-85 sm:opacity-100">{{ b.unit }}</span>
               </div>
-              <div class="mt-0.5 text-[11px] sm:text-[12px] leading-snug break-words" :style="{ color: mutedColor }">{{ b.sub }}</div>
+              <div class="mt-1 sm:mt-0.5 text-[11px] sm:text-[12px] leading-snug break-words" :style="{ color: mutedColor }">{{ b.sub }}</div>
             </div>
           </div>
         </div>
@@ -281,10 +281,10 @@
 
       <!-- Footer / Legend Row -->
       <div
-        class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-3 pt-3 pb-3 text-[11px] sm:text-[12px] sm:px-4"
+        class="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 px-3 pt-3 pb-3 text-[11px] sm:text-[12px] sm:px-4"
         :style="{ color: mutedColor }"
       >
-        <span class="relative grid flex-1 min-w-[180px]">
+        <span class="relative grid shrink-0 sm:flex-1 whitespace-nowrap">
           <template v-if="footer !== undefined">{{ footer }}</template>
           <template v-else>
             <span
@@ -490,11 +490,27 @@
   const dfy = computed(() => new Intl.DateTimeFormat(props.locale, { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }));
   const dfl = computed(() => new Intl.DateTimeFormat(props.locale, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }));
 
+  const dfm = computed(() => new Intl.DateTimeFormat(props.locale, { month: 'short', timeZone: 'UTC' }));
+
+  const compactMonthYear = (v: string) => {
+    const ms = dayMs(v);
+    const d = new Date(ms);
+    return `${dfm.value.format(ms)} '${String(d.getUTCFullYear()).slice(-2)}`;
+  };
+
+  const isCompactHints = computed(() =>
+    width.value ? width.value < 600 : (typeof window !== 'undefined' ? window.innerWidth < 640 : false),
+  );
+
   const noun = (n: number) => (n === 1 ? props.unit : plural.value);
   const range = (a: string | null, b: string | null, withYear = false) => {
     if (!a || !b) return '—';
     const f = withYear ? dfy.value : df.value;
     return f.format(dayMs(a)) + ' — ' + f.format(dayMs(b));
+  };
+  const compactRange = (a: string | null, b: string | null) => {
+    if (!a || !b) return '—';
+    return `${compactMonthYear(a)} — ${compactMonthYear(b)}`;
   };
 
   const corners = computed(
@@ -526,7 +542,14 @@
     const current = Math.round(model.value.stats.current.days * p);
 
     return [
-      { label: '1 year total', value: nf.value.format(total), unit: noun(model.value.stats.total), sub: range(model.value.stats.first, model.value.stats.last, true) },
+      {
+        label: '1 year total',
+        value: nf.value.format(total),
+        unit: noun(model.value.stats.total),
+        sub: isCompactHints.value
+          ? compactRange(model.value.stats.first, model.value.stats.last)
+          : range(model.value.stats.first, model.value.stats.last, true),
+      },
       { label: 'Busiest day', value: nf.value.format(busiest), unit: noun(model.value.stats.busiest.count), sub: model.value.stats.busiest.date ? df.value.format(dayMs(model.value.stats.busiest.date)) : '—' },
       { label: 'Longest streak', value: nf.value.format(longest), unit: model.value.stats.longest.days === 1 ? 'day' : 'days', sub: range(model.value.stats.longest.start, model.value.stats.longest.end) },
       { label: 'Current streak', value: nf.value.format(current), unit: model.value.stats.current.days === 1 ? 'day' : 'days', sub: range(model.value.stats.current.start, model.value.stats.current.end) },
@@ -535,10 +558,9 @@
 
   const ease = 'cubic-bezier(0.65, 0, 0.35, 1)';
   const levelNames = computed(() => ['No ' + plural.value, 'Light', 'Moderate', 'Heavy', 'Heaviest']);
-  const isCompactHints = computed(() => width.value > 0 && width.value < 600);
   const hints = computed(() =>
     isCompactHints.value
-      ? ['Tap a cell for details', 'Swipe to orbit · Tap a cell for details']
+      ? ['Tap cell for details', 'Swipe 3D · Tap cell']
       : ['Hover a day for details · arrow keys to explore', 'Drag to orbit · double-click to reset'],
   );
   const currentHint = computed(() => hints.value[currentView.value === '3d' && props.orbit ? 1 : 0]);
