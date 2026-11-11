@@ -10,8 +10,8 @@
     }"
   >
     <!-- Header -->
-    <header class="mb-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-      <h3 class="m-0 text-[15px] font-normal leading-snug">
+    <header class="mb-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-2.5">
+      <h3 class="m-0 text-sm sm:text-[15px] font-normal leading-snug">
         <template v-if="title">{{ title }}</template>
         <template v-else>
           <span class="font-semibold tabular-nums">{{ nf.format(Math.round(model.stats.total * counterProgress)) }}</span>
@@ -19,13 +19,48 @@
         </template>
       </h3>
 
-      <div
-        v-if="showToggle"
-        role="group"
-        aria-label="Chart view"
-        class="relative inline-flex rounded-md border p-0.5"
-        :style="{ borderColor: 'var(--color-border, rgba(255, 255, 255, 0.12))' }"
-      >
+      <!-- Controls Group: Timeframe (6M / 1Y) + Chart View (2D / 3D) -->
+      <div v-if="showToggle" class="flex items-center gap-2 shrink-0">
+        <!-- 6M / 1Y Adaptive Range Toggle -->
+        <div
+          role="group"
+          aria-label="Timeframe range"
+          class="relative inline-flex rounded-md border p-0.5 text-[10px] sm:text-[11px] font-mono uppercase tracking-wider"
+          :style="{ borderColor: 'var(--color-border, rgba(255, 255, 255, 0.12))' }"
+        >
+          <span
+            aria-hidden="true"
+            class="absolute top-0.5 bottom-0.5 left-0.5 w-8 rounded transition-transform duration-500 motion-reduce:transition-none"
+            :style="{
+              background: 'var(--color-foreground, #ffffff)',
+              transform: effectiveRange === '1y' ? 'translateX(100%)' : 'translateX(0)',
+              transitionTimingFunction: ease,
+            }"
+          />
+          <button
+            v-for="r in (['6m', '1y'] as const)"
+            :key="r"
+            type="button"
+            :aria-pressed="effectiveRange === r"
+            :aria-label="r === '6m' ? 'Show last 6 months' : 'Show full 12 months'"
+            :title="r === '6m' ? 'Last 6 months view' : 'Full year (12 months) view'"
+            @click="setRange(r)"
+            class="relative z-10 grid h-7 w-8 cursor-pointer place-items-center rounded border-0 bg-transparent p-0 font-semibold transition-colors duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none outline-none"
+            :style="{
+              color: effectiveRange === r ? 'var(--color-background, #1e1c1a)' : mutedColor,
+            }"
+          >
+            {{ r.toUpperCase() }}
+          </button>
+        </div>
+
+        <!-- 2D / 3D View Toggle -->
+        <div
+          role="group"
+          aria-label="Chart view"
+          class="relative inline-flex rounded-md border p-0.5"
+          :style="{ borderColor: 'var(--color-border, rgba(255, 255, 255, 0.12))' }"
+        >
         <span
           aria-hidden="true"
           class="absolute top-0.5 bottom-0.5 left-0.5 w-8 rounded transition-transform duration-500 motion-reduce:transition-none"
@@ -87,6 +122,7 @@
             />
           </svg>
         </button>
+        </div>
       </div>
     </header>
 
@@ -110,11 +146,11 @@
             :style="{ maxWidth: 'none', touchAction: currentView === '3d' && orbit ? 'pan-y' : 'auto' }"
           />
 
-          <!-- 3D Mode Corner Stats (Desktop) -->
+          <!-- 3D Mode Corner Stats (Desktop / Spacious Tablets) -->
           <template v-if="showStats && corners">
             <div
               :aria-hidden="currentView !== '3d'"
-              class="pointer-events-none absolute top-1 right-1 flex flex-col items-end gap-5 transition-[opacity,transform] motion-reduce:transition-none"
+              class="pointer-events-none absolute top-1 right-1 flex flex-col items-end gap-3 lg:gap-4 transition-[opacity,transform] motion-reduce:transition-none"
               :style="{
                 opacity: currentView === '3d' ? 1 : 0,
                 transform: currentView === '3d' ? 'translateY(0)' : 'translateY(-10px)',
@@ -128,7 +164,7 @@
                 :key="b.label"
                 class="grid grid-cols-[auto_auto] items-end gap-x-2 justify-end"
               >
-                <div class="text-right text-[13px] leading-tight" :style="{ color: mutedColor }">{{ b.label }}</div>
+                <div class="text-right text-xs lg:text-[13px] leading-tight" :style="{ color: mutedColor }">{{ b.label }}</div>
                 <div />
                 <div
                   class="text-right font-semibold tabular-nums transition-colors duration-500"
@@ -137,15 +173,15 @@
                   {{ b.value }}
                 </div>
                 <div class="pb-[0.15em] leading-tight">
-                  <div class="text-[15px]">{{ b.unit }}</div>
-                  <div class="whitespace-nowrap text-[13px]" :style="{ color: mutedColor }">{{ b.sub }}</div>
+                  <div class="text-[13px] lg:text-[15px]">{{ b.unit }}</div>
+                  <div class="whitespace-nowrap text-xs lg:text-[13px]" :style="{ color: mutedColor }">{{ b.sub }}</div>
                 </div>
               </div>
             </div>
 
             <div
               :aria-hidden="currentView !== '3d'"
-              class="pointer-events-none absolute bottom-1 left-1 flex flex-col items-start gap-5 transition-[opacity,transform] motion-reduce:transition-none"
+              class="pointer-events-none absolute bottom-1 left-1 flex flex-col items-start gap-3 lg:gap-4 transition-[opacity,transform] motion-reduce:transition-none"
               :style="{
                 opacity: currentView === '3d' ? 1 : 0,
                 transform: currentView === '3d' ? 'translateY(0)' : 'translateY(10px)',
@@ -159,7 +195,7 @@
                 :key="b.label"
                 class="grid grid-cols-[auto_auto] items-end gap-x-2 justify-start"
               >
-                <div class="col-span-2 text-[13px] leading-tight" :style="{ color: mutedColor }">{{ b.label }}</div>
+                <div class="col-span-2 text-xs lg:text-[13px] leading-tight" :style="{ color: mutedColor }">{{ b.label }}</div>
                 <div
                   class="text-right font-semibold tabular-nums transition-colors duration-500"
                   :style="{ color: theme.accent, fontSize: `${bigSize}px`, lineHeight: 0.95, letterSpacing: '-0.02em' }"
@@ -167,8 +203,8 @@
                   {{ b.value }}
                 </div>
                 <div class="pb-[0.15em] leading-tight">
-                  <div class="text-[15px]">{{ b.unit }}</div>
-                  <div class="whitespace-nowrap text-[13px]" :style="{ color: mutedColor }">{{ b.sub }}</div>
+                  <div class="text-[13px] lg:text-[15px]">{{ b.unit }}</div>
+                  <div class="whitespace-nowrap text-xs lg:text-[13px]" :style="{ color: mutedColor }">{{ b.sub }}</div>
                 </div>
               </div>
             </div>
@@ -180,7 +216,7 @@
           ref="tipRef"
           role="tooltip"
           :aria-hidden="active < 0"
-          class="pointer-events-none absolute top-3 left-3 z-20 whitespace-nowrap rounded-md px-2.5 py-1.5 text-[12px] leading-none shadow-lg transition-opacity duration-150 sm:top-4 sm:left-4 motion-reduce:transition-none"
+          class="pointer-events-none absolute top-3 left-3 z-20 whitespace-nowrap rounded-md px-2.5 py-1.5 text-[11px] sm:text-[12px] leading-none shadow-lg transition-opacity duration-150 sm:top-4 sm:left-4 motion-reduce:transition-none"
           :style="{
             opacity: active >= 0 ? 1 : 0,
             background: 'var(--color-foreground, #ffffff)',
@@ -208,7 +244,7 @@
         </div>
       </div>
 
-      <!-- Bottom Stats Row (2D mode or Mobile) -->
+      <!-- Bottom Stats Row (2D mode, Mobile, or Compact Tablet/Laptop) -->
       <div
         v-if="showStats"
         :aria-hidden="!showRow"
@@ -221,23 +257,23 @@
         }"
       >
         <div class="min-h-0 overflow-hidden">
-          <div class="grid grid-cols-2 gap-x-4 gap-y-4 px-3 pt-4 pb-1 sm:px-4 md:grid-cols-4">
+          <div class="grid grid-cols-2 gap-x-3 sm:gap-x-4 gap-y-3 sm:gap-y-4 px-3 pt-3.5 pb-1 sm:px-4 sm:pt-4 md:grid-cols-4">
             <div
               v-for="b in statBlocks"
               :key="b.label"
               class="min-w-0"
             >
-              <div class="text-[13px] leading-tight" :style="{ color: mutedColor }">{{ b.label }}</div>
-              <div class="mt-1 flex items-baseline gap-1.5">
+              <div class="text-[11px] sm:text-[13px] leading-tight" :style="{ color: mutedColor }">{{ b.label }}</div>
+              <div class="mt-1 flex items-baseline gap-1.5 flex-wrap">
                 <span
-                  class="font-semibold tabular-nums transition-colors duration-500"
-                  :style="{ color: theme.accent, fontSize: '28px', lineHeight: 1, letterSpacing: '-0.02em' }"
+                  class="text-[22px] sm:text-[26px] md:text-[28px] font-semibold tabular-nums transition-colors duration-500 leading-none tracking-[-0.02em]"
+                  :style="{ color: theme.accent }"
                 >
                   {{ b.value }}
                 </span>
-                <span class="text-[14px]">{{ b.unit }}</span>
+                <span class="text-xs sm:text-[14px]">{{ b.unit }}</span>
               </div>
-              <div class="mt-0.5 truncate text-[12px]" :style="{ color: mutedColor }">{{ b.sub }}</div>
+              <div class="mt-0.5 text-[11px] sm:text-[12px] leading-snug break-words" :style="{ color: mutedColor }">{{ b.sub }}</div>
             </div>
           </div>
         </div>
@@ -245,15 +281,15 @@
 
       <!-- Footer / Legend Row -->
       <div
-        class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-3 pt-3 pb-3 text-[12px] sm:px-4"
+        class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-3 pt-3 pb-3 text-[11px] sm:text-[12px] sm:px-4"
         :style="{ color: mutedColor }"
       >
-        <span class="relative grid flex-1">
+        <span class="relative grid flex-1 min-w-[180px]">
           <template v-if="footer !== undefined">{{ footer }}</template>
           <template v-else>
             <span
-              v-for="h in hints"
-              :key="h"
+              v-for="(h, idx) in hints"
+              :key="idx"
               :aria-hidden="h !== currentHint"
               class="[grid-area:1/1] transition-opacity duration-500 motion-reduce:transition-none"
               :style="{ opacity: h === currentHint ? 1 : 0 }"
@@ -265,7 +301,7 @@
 
         <div
           v-if="showLegend"
-          class="flex items-center gap-1.5"
+          class="flex items-center gap-1.5 shrink-0"
           @mouseleave="legendLevel = -1"
         >
           <span class="mr-0.5">Less</span>
@@ -350,6 +386,7 @@
       showStats?: boolean;
       showLegend?: boolean;
       showToggle?: boolean;
+      fullscreen?: boolean;
       footer?: string;
       locale?: string;
       seed?: number;
@@ -366,6 +403,7 @@
       showStats: true,
       showLegend: true,
       showToggle: true,
+      fullscreen: false,
       locale: 'en-US',
       seed: 7,
       className: '',
@@ -385,9 +423,22 @@
     emit('update:view', v);
   };
 
+  const width = ref(0);
+  const viewportHeight = ref(typeof window !== 'undefined' ? window.innerHeight : 900);
+  const manualRange = ref<'6m' | '1y' | null>(null);
+  const effectiveRange = computed<'6m' | '1y'>(() => {
+    if (manualRange.value) return manualRange.value;
+    const refW = width.value || (typeof window !== 'undefined' ? window.innerWidth - 64 : 1024);
+    return refW < 500 ? '6m' : '1y';
+  });
+
+  const setRange = (r: '6m' | '1y') => {
+    manualRange.value = r;
+  };
+
   const endKey = computed(() => (props.endDate == null ? null : dayMs(props.endDate)));
 
-  const model = computed(() => {
+  const fullModel = computed(() => {
     const dates = (props.data ?? []).map((d) => dayMs(d.date)).filter(Number.isFinite);
     const end = endKey.value ?? (dates.length ? Math.max(...dates) : dayMs(new Date()));
     const days = props.data ?? generateContributions(end, props.seed);
@@ -397,6 +448,25 @@
       stats: computeStats(grid.cells),
       months: monthLabels(grid.cells, grid.weeks, props.locale),
     };
+  });
+
+  const model = computed(() => {
+    const full = fullModel.value;
+    if (effectiveRange.value === '6m' && full.weeks > 26) {
+      const startWeek = full.weeks - 26;
+      const cells = full.cells
+        .filter((c) => c.week >= startWeek)
+        .map((c) => ({ ...c, week: c.week - startWeek }));
+      const weeks = full.weeks - startWeek;
+      return {
+        cells,
+        weeks,
+        max: full.max,
+        stats: full.stats,
+        months: monthLabels(cells, weeks, props.locale),
+      };
+    }
+    return full;
   });
 
   const rootRef = ref<HTMLElement | null>(null);
@@ -410,7 +480,6 @@
     accent: PALETTES.github.dark[3],
   });
 
-  const width = ref(0);
   const active = ref(-1);
   const legendLevel = ref(-1);
   const announce = ref('');
@@ -428,8 +497,13 @@
     return f.format(dayMs(a)) + ' — ' + f.format(dayMs(b));
   };
 
-  const corners = computed(() => props.showStats && width.value >= 600);
-  const bigSize = computed(() => Math.round(Math.max(24, Math.min(44, width.value * 0.045))));
+  const corners = computed(
+    () => props.showStats && width.value >= 760 && (viewportHeight.value >= 640 || props.fullscreen),
+  );
+  const bigSize = computed(() => {
+    const scale = viewportHeight.value < 780 && !props.fullscreen ? 0.036 : 0.043;
+    return Math.round(Math.max(24, Math.min(42, width.value * scale)));
+  });
   const showRow = computed(() => props.showStats && !(currentView.value === '3d' && corners.value));
 
   const counterProgress = ref(0);
@@ -461,8 +535,13 @@
 
   const ease = 'cubic-bezier(0.65, 0, 0.35, 1)';
   const levelNames = computed(() => ['No ' + plural.value, 'Light', 'Moderate', 'Heavy', 'Heaviest']);
-  const hints = ['Hover a day for details · arrow keys to explore', 'Drag to orbit · double-click to reset'];
-  const currentHint = computed(() => hints[currentView.value === '3d' && props.orbit ? 1 : 0]);
+  const isCompactHints = computed(() => width.value > 0 && width.value < 600);
+  const hints = computed(() =>
+    isCompactHints.value
+      ? ['Tap a cell for details', 'Swipe to orbit · Tap a cell for details']
+      : ['Hover a day for details · arrow keys to explore', 'Drag to orbit · double-click to reset'],
+  );
+  const currentHint = computed(() => hints.value[currentView.value === '3d' && props.orbit ? 1 : 0]);
   const mutedColor = 'rgba(255, 255, 255, 0.45)';
 
   const FG_FALLBACK: RGB = [243, 238, 232];
@@ -542,6 +621,7 @@
     let pinned = -1;
     let activeIdx = -1;
     let tipW = 0;
+    let tipH = 30;
     let raf = 0;
     let last = 0;
 
@@ -640,16 +720,24 @@
       const w = Math.round(stage.clientWidth);
       if (!w || !n) return;
       W = w;
-      gutter = W < 520 ? 0 : labelW;
+      const vh = typeof window !== 'undefined' ? window.innerHeight : 900;
+      viewportHeight.value = vh;
+      const isShortGrid = effectiveRange.value === '6m';
+      gutter = W < 340 || (!isShortGrid && W < 520) ? 0 : labelW;
       dpr = Math.min(2, window.devicePixelRatio || 1);
       const b2 = extent(camera(0), 0, true);
       H2 = 20 + 4 + ((b2.maxy - b2.miny) / (b2.maxx - b2.minx)) * (W - gutter - 4);
       const b3 = extent(camera(1), 1, true);
       const natural = ((b3.maxy - b3.miny) / (b3.maxx - b3.minx)) * (W - 40) + 40;
-      // Viewport-aware 3D height clamping: keeps 3D skyline within screen bounds without overflow
-      const maxH3 = typeof window !== 'undefined' ? Math.min(window.innerHeight * 0.36, 360) : 340;
-      const minH3 = typeof window !== 'undefined' ? Math.min(220, window.innerHeight * 0.26) : 220;
-      H3 = Math.max(Math.min(natural, W * 0.52, maxH3), minH3);
+      // Adaptive 3D height clamping across mobile, laptop, desktop, and fullscreen views
+      const maxRatio = props.fullscreen ? (W < 640 ? 0.44 : 0.56) : (W < 640 ? 0.34 : 0.36);
+      const maxCap = props.fullscreen ? 560 : (W < 640 ? 290 : 360);
+      const maxH3 = Math.min(vh * maxRatio, maxCap);
+      const minH3 = props.fullscreen
+        ? Math.min(280, vh * 0.32)
+        : (W < 640 ? Math.min(185, vh * 0.24) : Math.min(220, vh * 0.26));
+      const widthScaleCap = isShortGrid ? W * 0.88 : (props.fullscreen ? W * 0.65 : W * 0.52);
+      H3 = Math.max(Math.min(natural, widthScaleCap, maxH3), minH3);
       Hmax = Math.ceil(Math.max(H2, H3));
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(Hmax * dpr);
@@ -867,7 +955,8 @@
         const ty = Math.min(py(wk[i] + off, dy[i] + off, z), py(wk[i] + off + w, dy[i] + off, z), py(wk[i] + off, dy[i] + off + w, z));
         const half = tipW / 2;
         const cx = Math.min(W - half - 2, Math.max(half + 2, tx));
-        tip.style.transform = 'translate(' + (cx - half).toFixed(1) + 'px,' + (ty - 8).toFixed(1) + 'px) translateY(-100%)';
+        const safeTy = Math.max(tipH + 6, ty - 8);
+        tip.style.transform = 'translate(' + (cx - half).toFixed(1) + 'px,' + safeTy.toFixed(1) + 'px) translateY(-100%)';
         tip.style.setProperty('--arrow', (tx - cx + half).toFixed(1) + 'px');
       }
     };
@@ -966,6 +1055,7 @@
       nextTick(() => {
         if (tip && active.value >= 0) {
           tipW = tip.offsetWidth;
+          tipH = tip.offsetHeight;
           draw();
         }
       });
@@ -983,6 +1073,22 @@
       return -1;
     };
 
+    const hitNearest = (x: number, y: number, maxDist = 16): number => {
+      let best = -1;
+      let bestD = maxDist;
+      for (let i = 0; i < n; i++) {
+        const o = i * 24;
+        const cx = (polys[o] + polys[o + 4]) * 0.5;
+        const cy = (polys[o + 1] + polys[o + 5]) * 0.5;
+        const d = Math.hypot(x - cx, y - cy);
+        if (d < bestD) {
+          bestD = d;
+          best = i;
+        }
+      }
+      return best;
+    };
+
     const local = (ev: PointerEvent | MouseEvent) => {
       const r = canvas.getBoundingClientRect();
       return [ev.clientX - r.left, ev.clientY - r.top] as const;
@@ -993,8 +1099,9 @@
     const onDown = (ev: PointerEvent) => {
       if (ev.button !== 0) return;
       const can = props.orbit && target === 1;
-      drag = { id: ev.pointerId, x: ev.clientX, y: ev.clientY, yaw: yawGoal, elev: elevGoal, moved: false, orbit: can, mouse: ev.pointerType === 'mouse' };
-      if (can) {
+      const isMouse = ev.pointerType === 'mouse';
+      drag = { id: ev.pointerId, x: ev.clientX, y: ev.clientY, yaw: yawGoal, elev: elevGoal, moved: false, orbit: can, mouse: isMouse };
+      if (can && isMouse) {
         try {
           canvas.setPointerCapture(ev.pointerId);
         } catch {
@@ -1007,7 +1114,15 @@
       if (drag && drag.orbit && ev.pointerId === drag.id) {
         const dx = ev.clientX - drag.x;
         const dyy = ev.clientY - drag.y;
-        if (drag.moved || Math.hypot(dx, dyy) > 4) {
+        const threshold = drag.mouse ? 4 : 6;
+        if (drag.moved || Math.hypot(dx, dyy) > threshold) {
+          if (!drag.moved && !drag.mouse) {
+            try {
+              canvas.setPointerCapture(ev.pointerId);
+            } catch {
+              /* ignore */
+            }
+          }
           drag.moved = true;
           yawGoal = Math.min(YAW_RANGE[1] - YAW_3D, Math.max(YAW_RANGE[0] - YAW_3D, drag.yaw + dx * 0.006));
           if (drag.mouse) elevGoal = Math.min(ELEV_RANGE[1] - ELEV_3D, Math.max(ELEV_RANGE[0] - ELEV_3D, drag.elev + dyy * 0.004));
@@ -1036,7 +1151,10 @@
       canvas.style.cursor = props.orbit && target === 1 ? 'grab' : 'default';
       if (wasMoved) return;
       const [x, y] = local(ev);
-      const i = hit(x, y);
+      let i = hit(x, y);
+      if (i < 0 && ev.pointerType !== 'mouse') {
+        i = hitNearest(x, y, 16);
+      }
       pinned = i === pinned ? -1 : i;
       if (ev.pointerType !== 'mouse') hovered = -1;
       refreshActive();
@@ -1145,6 +1263,13 @@
     });
     ro.observe(stage);
 
+    const onWindowResize = () => {
+      if (Math.round(stage.clientWidth) !== W || Math.abs(window.innerHeight - viewportHeight.value) > 120) {
+        relayout();
+      }
+    };
+    window.addEventListener('resize', onWindowResize, { passive: true });
+
     const mo = new MutationObserver(retheme);
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'style', 'data-theme'] });
 
@@ -1170,6 +1295,10 @@
         kick();
       },
       load: () => {
+        hovered = -1;
+        pinned = -1;
+        activeIdx = -1;
+        active.value = -1;
         load();
         retheme();
         relayout();
@@ -1191,6 +1320,7 @@
       io?.disconnect();
       ro.disconnect();
       mo.disconnect();
+      window.removeEventListener('resize', onWindowResize);
       reduceMq.removeEventListener('change', onReduce);
       darkMq.removeEventListener('change', retheme);
       canvas.removeEventListener('pointerdown', onDown);
@@ -1213,9 +1343,15 @@
   );
 
   watch(
-    () => [model.value, props.heightScale],
+    () => [model.value, props.heightScale, props.fullscreen],
     () => {
       engine?.load();
+    },
+  );
+
+  watch(
+    () => fullModel.value.stats.total,
+    () => {
       animateCounter();
     },
   );
