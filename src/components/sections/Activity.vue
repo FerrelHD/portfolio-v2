@@ -3,10 +3,10 @@
     id="activity"
     class="activity-slide shrink-0 w-full md:w-screen min-h-[100svh] md:h-dvh flex flex-col justify-between select-none
            bg-[#23201e] text-[#faf9f6] relative overflow-hidden
-           pt-16 pb-4 px-6 md:pt-6 md:pb-4 lg:pt-8 lg:pb-5 md:pl-24 md:pr-12 font-sans"
+           pt-20 pb-6 px-5 sm:px-6 md:pt-6 md:pb-5 lg:pt-8 lg:pb-6 md:pl-24 md:pr-12 font-sans"
   >
     <!-- Top Editorial Header Bar -->
-    <div class="flex items-center justify-between shrink-0">
+    <div class="flex flex-wrap items-center justify-between gap-2.5 sm:gap-4 shrink-0">
       <div class="overflow-hidden">
         <h2
           ref="chapterTitleRef"
@@ -18,12 +18,12 @@
 
       <div
         ref="headerActionsRef"
-        class="flex items-center gap-4 will-change-transform"
+        class="flex items-center gap-3 sm:gap-4 will-change-transform"
       >
         <button
           type="button"
           @click="openFullscreen"
-          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/70 hover:text-white border-b border-transparent hover:border-white/60 transition-colors cursor-pointer outline-none select-none"
+          class="group inline-flex items-center gap-1.5 min-h-[44px] md:min-h-0 text-[11px] sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/70 hover:text-white border-b border-transparent hover:border-white/60 transition-colors cursor-pointer outline-none select-none"
           title="Expand 3D Skyline Fullscreen"
         >
           <span>Fullscreen</span>
@@ -48,7 +48,7 @@
           href="https://github.com/FerrelHD"
           target="_blank"
           rel="noreferrer"
-          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/70 hover:text-white border-b border-transparent hover:border-white/60 transition-colors"
+          class="group inline-flex items-center gap-1.5 min-h-[44px] md:min-h-0 text-[11px] sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/70 hover:text-white border-b border-transparent hover:border-white/60 transition-colors"
           aria-label="View Ferrel's GitHub profile"
         >
           <span>@FerrelHD</span>
@@ -58,12 +58,12 @@
     </div>
 
     <!-- Center Interactive Content -->
-    <div class="my-auto py-2 md:py-3 w-full max-w-[1040px] mx-auto flex flex-col gap-2.5 sm:gap-3">
-      <div class="flex flex-col gap-0.5 text-left">
+    <div class="my-auto py-4 sm:py-5 md:py-2 lg:py-3 w-full max-w-[1040px] mx-auto flex flex-col gap-2.5 sm:gap-3">
+      <div class="flex flex-col gap-0.5 sm:gap-1 text-left">
         <div class="overflow-hidden">
           <h3
             ref="titleRef"
-            class="font-sans font-bold text-xl sm:text-2xl md:text-3xl text-[#faf9f6] tracking-tight will-change-transform"
+            class="font-sans font-bold text-lg sm:text-2xl md:text-3xl text-[#faf9f6] tracking-tight leading-snug will-change-transform"
           >
             Open Source Activity & Code Frequency.
           </h3>
@@ -98,9 +98,10 @@
     <!-- Bottom Contextual Status Bar -->
     <div
       ref="statusBarRef"
-      class="flex items-center justify-between text-[11px] font-sans uppercase tracking-[0.15em] text-[#faf9f6]/40 shrink-0 pt-2 border-t border-white/5 will-change-transform"
+      class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4 text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.12em] sm:tracking-[0.15em] text-[#faf9f6]/40 shrink-0 pt-3 sm:pt-2 border-t border-white/5 will-change-transform"
     >
-      <span>Toggle 3D for skyline wave · Click cell for details</span>
+      <span class="hidden sm:inline">Toggle 3D for skyline wave · Click cell for details</span>
+      <span class="sm:hidden">Swipe 3D to orbit · Tap cell for details</span>
       <span class="tabular-nums">Status: Active Development</span>
     </div>
 
@@ -109,18 +110,18 @@
       <div
         v-if="isFullscreenOpen"
         data-lenis-prevent
-        class="fixed inset-0 z-[125] flex flex-col justify-between bg-[#191715]/95 backdrop-blur-md p-6 sm:p-10 md:p-12 text-[#faf9f6] select-none"
+        class="fixed inset-0 z-[125] flex flex-col justify-between bg-[#191715]/95 backdrop-blur-md p-4 sm:p-8 md:p-12 text-[#faf9f6] select-none overflow-y-auto overscroll-contain"
         role="dialog"
         aria-modal="true"
         aria-label="GitHub 3D Skyline Fullscreen View"
       >
         <!-- Modal Header -->
-        <div class="flex items-center justify-between pb-4 border-b border-white/10 shrink-0">
-          <div class="flex items-baseline gap-3">
-            <h2 class="font-serif text-2xl sm:text-3xl uppercase tracking-tight text-[#faf9f6]">
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-3 sm:pb-4 border-b border-white/10 shrink-0">
+          <div class="flex items-baseline gap-2.5 sm:gap-3">
+            <h2 class="font-serif text-xl sm:text-3xl uppercase tracking-tight text-[#faf9f6]">
               SKYLINE FULLSCREEN
             </h2>
-            <span class="font-sans text-xs uppercase tracking-widest text-[#faf9f6]/50">
+            <span class="font-sans text-[11px] sm:text-xs uppercase tracking-widest text-[#faf9f6]/50">
               @FerrelHD
             </span>
           </div>
@@ -128,9 +129,10 @@
           <button
             type="button"
             @click="closeFullscreen"
-            class="group inline-flex items-center gap-2 text-sm font-sans uppercase tracking-wider text-[#faf9f6]/70 hover:text-white transition-colors cursor-pointer outline-none"
+            class="group inline-flex items-center gap-2 min-h-[44px] md:min-h-0 text-xs sm:text-sm font-sans uppercase tracking-wider text-[#faf9f6]/70 hover:text-white transition-colors cursor-pointer outline-none"
           >
-            <span>Close [ESC]</span>
+            <span class="hidden sm:inline">Close [ESC]</span>
+            <span class="sm:hidden">Close</span>
             <span class="text-base inline-block transition-transform duration-300 group-hover:rotate-90">✕</span>
           </button>
         </div>
@@ -139,9 +141,10 @@
         <div class="my-auto py-4 w-full max-w-[1300px] mx-auto flex-1 flex flex-col justify-center">
           <ContributionSkyline
             :data="contributions"
-            defaultView="2d"
+            defaultView="3d"
             palette="github"
             :orbit="true"
+            :fullscreen="true"
             :heightScale="1.3"
             :showStats="true"
             :showLegend="true"
@@ -151,9 +154,10 @@
         </div>
 
         <!-- Modal Footer -->
-        <div class="flex items-center justify-between text-xs font-sans uppercase tracking-widest text-[#faf9f6]/40 pt-3 border-t border-white/10 shrink-0">
-          <span>Click & Drag to rotate 360° · Double-click to reset orbit</span>
-          <span>Press ESC to return</span>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-[10px] sm:text-xs font-sans uppercase tracking-wider sm:tracking-widest text-[#faf9f6]/40 pt-3 border-t border-white/10 shrink-0">
+          <span class="hidden sm:inline">Click & Drag to rotate 360° · Double-click to reset orbit</span>
+          <span class="sm:hidden">Swipe 3D to orbit · Tap cell for details</span>
+          <span class="hidden sm:inline">Press ESC to return</span>
         </div>
       </div>
     </Teleport>
@@ -184,11 +188,13 @@
 
   const openFullscreen = () => {
     isFullscreenOpen.value = true;
+    document.body.style.overflow = 'hidden';
     lenis.stop();
   };
 
   const closeFullscreen = () => {
     isFullscreenOpen.value = false;
+    document.body.style.overflow = '';
     lenis.start();
   };
 
@@ -242,6 +248,7 @@
   onUnmounted(() => {
     window.removeEventListener('keydown', handleKeydown);
     if (isFullscreenOpen.value) {
+      document.body.style.overflow = '';
       lenis.start();
     }
   });
