@@ -358,13 +358,26 @@
 
   let clockTimer: ReturnType<typeof setInterval> | null = null;
 
-  onMounted(() => {
+  const startClock = () => {
     updateClock();
-    clockTimer = setInterval(updateClock, 1000);
+    if (!clockTimer) {
+      clockTimer = setInterval(updateClock, 1000);
+    }
+  };
+
+  const stopClock = () => {
+    if (clockTimer) {
+      clearInterval(clockTimer);
+      clockTimer = null;
+    }
+  };
+
+  onMounted(() => {
+    // Clock is only ticked when navigation menu is actually open
   });
 
   onUnmounted(() => {
-    if (clockTimer) clearInterval(clockTimer);
+    stopClock();
   });
 
   interface NavItemContext {
@@ -460,6 +473,7 @@
     isOpen.value = true;
     isAnimating.value = true;
     document.body.style.overflow = 'hidden';
+    startClock();
 
     nextTick(() => {
       if (!menuPanel.value) return;
@@ -561,6 +575,7 @@
       activeMenuTl = null;
     }
     isAnimating.value = true;
+    stopClock();
 
     activeMenuTl = gsap.timeline({
       onComplete: () => {
