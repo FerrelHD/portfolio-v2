@@ -232,6 +232,7 @@
   };
 
   let horizontalScrollTrigger: ScrollTrigger | null = null;
+  let cachedScrollAmount = 0;
   const isSamsungBrowser = /samsung/i.test(navigator.userAgent);
 
   const setRailThemeForSlide = (slideIndex: number) => {
@@ -245,12 +246,12 @@
   };
 
   const checkRailTheme = () => {
-    const isDesktop = window.innerWidth >= 768;
-    if (isDesktop) {
-      if (!horizontalTrack.value) return;
-      const scrollAmount = horizontalTrack.value.scrollWidth - window.innerWidth;
+    const vw = width.value || window.innerWidth;
+    if (vw >= 768) {
+      const scrollAmount = cachedScrollAmount || (horizontalTrack.value ? horizontalTrack.value.scrollWidth - vw : 0);
+      if (!scrollAmount) return;
       const trackX = scrollProgress.value * scrollAmount;
-      const slideUnderRail = Math.floor((trackX + 64) / window.innerWidth);
+      const slideUnderRail = Math.floor((trackX + 64) / vw);
       isDarkRail.value = slideUnderRail === 0 || slideUnderRail >= 6;
     } else {
       isDarkRail.value = currentSlideIndex.value === 0 || currentSlideIndex.value >= 6;
@@ -323,7 +324,10 @@
     const track = horizontalTrack.value;
     const pin = horizontalPin.value;
 
-    const getScrollAmount = () => track.scrollWidth - window.innerWidth;
+    const getScrollAmount = () => {
+      cachedScrollAmount = track.scrollWidth - window.innerWidth;
+      return cachedScrollAmount;
+    };
 
     const tween = gsap.to(track, {
       x: () => -getScrollAmount(),
