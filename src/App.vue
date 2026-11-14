@@ -247,58 +247,13 @@
   const checkRailTheme = () => {
     const isDesktop = window.innerWidth >= 768;
     if (isDesktop) {
-      const heroEl = document.getElementById('hero');
-      const capEl = document.getElementById('capabilities');
-      const actEl = document.getElementById('activity');
-      const contactEl = document.getElementById('contact');
-      if (!heroEl || !contactEl) return;
-
-      const railWidth = 64;
-      const heroRight = heroEl.getBoundingClientRect().right;
-      const capLeft = capEl ? capEl.getBoundingClientRect().left : 9999;
-      const capRight = capEl ? capEl.getBoundingClientRect().right : -9999;
-      const actLeft = actEl ? actEl.getBoundingClientRect().left : 9999;
-      const actRight = actEl ? actEl.getBoundingClientRect().right : -9999;
-      const contactLeft = contactEl.getBoundingClientRect().left;
-
-      // Dark if Hero covers rail, or Chapter III (Capabilities), or Chapter IV (Activity), or Contact has reached rail
-      if (heroRight > railWidth + 5) {
-        isDarkRail.value = true;
-      } else if (capLeft <= railWidth && capRight > 5) {
-        isDarkRail.value = true;
-      } else if (actLeft <= railWidth && actRight > 5) {
-        isDarkRail.value = true;
-      } else if (contactLeft <= railWidth + 5) {
-        isDarkRail.value = true;
-      } else {
-        isDarkRail.value = false;
-      }
+      if (!horizontalTrack.value) return;
+      const scrollAmount = horizontalTrack.value.scrollWidth - window.innerWidth;
+      const trackX = scrollProgress.value * scrollAmount;
+      const slideUnderRail = Math.floor((trackX + 64) / window.innerWidth);
+      isDarkRail.value = slideUnderRail === 0 || slideUnderRail >= 6;
     } else {
-      const railHeight = 56;
-      const heroEl = document.getElementById('hero');
-      const capEl = document.getElementById('capabilities');
-      const actEl = document.getElementById('activity');
-      const contactEl = document.getElementById('contact');
-      if (!heroEl || !contactEl) return;
-
-      const heroBottom = heroEl.getBoundingClientRect().bottom;
-      const capTop = capEl ? capEl.getBoundingClientRect().top : 9999;
-      const capBottom = capEl ? capEl.getBoundingClientRect().bottom : -9999;
-      const actTop = actEl ? actEl.getBoundingClientRect().top : 9999;
-      const actBottom = actEl ? actEl.getBoundingClientRect().bottom : -9999;
-      const contactTop = contactEl.getBoundingClientRect().top;
-
-      if (heroBottom > railHeight + 5) {
-        isDarkRail.value = true;
-      } else if (capTop <= railHeight && capBottom > 5) {
-        isDarkRail.value = true;
-      } else if (actTop <= railHeight && actBottom > 5) {
-        isDarkRail.value = true;
-      } else if (contactTop <= railHeight + 5) {
-        isDarkRail.value = true;
-      } else {
-        isDarkRail.value = false;
-      }
+      isDarkRail.value = currentSlideIndex.value === 0 || currentSlideIndex.value >= 6;
     }
   };
 
