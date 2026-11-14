@@ -351,7 +351,6 @@
     mixRGB,
     monthLabels,
     pointInQuad,
-    project,
     quadPath,
     resolvePalette,
     rgbString,
@@ -635,7 +634,14 @@
     let polys = new Float32Array(0);
     let faces = new Uint8Array(0);
     let flickerOffsets = new Float32Array(0);
+    let depthKeys = new Float32Array(0);
     let order: number[] = [];
+    let lastSn = -999;
+    let lastCs = -999;
+    let isColAnimating = false;
+    const baseFill = new Array<string>(5);
+    const baseSide1 = new Array<string>(5);
+    const baseSide2 = new Array<string>(5);
     let months: { week: number; label: string }[] = [];
     let weekdayRows: { day: number; label: string }[] = [];
 
@@ -662,7 +668,10 @@
         polys = new Float32Array(n * 24);
         faces = new Uint8Array(n);
         flickerOffsets = new Float32Array(n);
+        depthKeys = new Float32Array(n);
         order = Array.from({ length: n }, (_, i) => i);
+        lastSn = -999;
+        lastCs = -999;
       }
       for (let i = 0; i < n; i++) {
         const c = m.cells[i];
@@ -704,6 +713,12 @@
       ctx.font = font;
       labelW = Math.ceil(Math.max(20, ...weekdayRows.map((r) => ctx.measureText(r.label).width))) + 8;
       const sw = all.map((c) => rgbString(c[0], c[1], c[2]));
+      for (let k = 0; k < 5; k++) {
+        const cr = all[k][0], cg = all[k][1], cb = all[k][2];
+        baseFill[k] = rgbString(cr, cg, cb);
+        baseSide1[k] = rgbString(cr * 0.84, cg * 0.84, cb * 0.84);
+        baseSide2[k] = rgbString(cr * 0.68, cg * 0.68, cb * 0.68);
+      }
       theme.value = { dark: isDark, swatches: sw, accent: sw[4] };
       kick();
     };
@@ -715,26 +730,33 @@
       let maxx = -Infinity;
       let miny = Infinity;
       let maxy = -Infinity;
+      const { cs, sn, se, ce } = cam;
       const add = (x: number, y: number, z: number) => {
-        const p = project(cam, x, y, z);
-        if (p[0] < minx) minx = p[0];
-        if (p[0] > maxx) maxx = p[0];
-        if (p[1] < miny) miny = p[1];
-        if (p[1] > maxy) maxy = p[1];
+        const px = x * cs - y * sn;
+        const py = (x * sn + y * cs) * se - z * ce;
+        if (px < minx) minx = px;
+        if (px > maxx) maxx = px;
+        if (py < miny) miny = py;
+        if (py > maxy) maxy = py;
       };
-      for (let i = 0; i < n; i++) {
-        const x0 = wk[i] + off;
-        const y0 = dy[i] + off;
-        const z = full ? hgt[i] * e : zs[i];
-        add(x0, y0, z);
-        add(x0 + w, y0, z);
-        add(x0, y0 + w, z);
-        add(x0 + w, y0 + w, 0);
-        add(x0, y0 + w, 0);
-        add(x0 + w, y0, 0);
-      }
+
+      // Ground corners cover the floor for all 371 cells without 1,100 redundant iterations
+      add(0, 0, 0);
+      add(weeks, 0, 0);
       add(0, 7 + 1.5 * e, 0);
       add(weeks, 7 + 1.5 * e, 0);
+
+      // Only elevated cells (z > 0.05) expand the upper envelope
+      for (let i = 0; i < n; i++) {
+        const z = full ? hgt[i] * e : zs[i];
+        if (z > 0.05) {
+          const x0 = wk[i] + off;
+          const y0 = dy[i] + off;
+          add(x0, y0, z);
+          add(x0 + w, y0, z);
+          add(x0, y0 + w, z);
+        }
+      }
       return { minx, maxx, miny, maxy };
     };
 
@@ -799,7 +821,12 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, Hmax);
 
-      order.sort((a, c) => (wk[a] + 0.5) * sn + (dy[a] + 0.5) * cs - ((wk[c] + 0.5) * sn + (dy[c] + 0.5) * cs));
+      if (Math.abs(sn - lastSn) > 1e-4 || Math.abs(cs - lastCs) > 1e-4) {
+        lastSn = sn;
+        lastCs = cs;
+        for (let i = 0; i < n; i++) depthKeys[i] = (wk[i] + 0.5) * sn + (dy[i] + 0.5) * cs;
+        order.sort((a, c) => depthKeys[a] - depthKeys[c]);
+      }
 
       const w = lerp(0.78, 0.9, e);
       const off = (1 - w) / 2;
@@ -840,27 +867,33 @@
         if (tall > 0.35 && w * sn * s > 0.35) f |= 2;
         faces[i] = f;
 
-        const L = lv[i] * 3;
-        let r = col[L];
-        let g = col[L + 1];
-        let bl = col[L + 2];
+        const level = lv[i];
         const d = dim[i];
-        if (d > 0.002) {
-          r += (ex - r) * 0.72 * d;
-          g += (ey - g) * 0.72 * d;
-          bl += (ez - bl) * 0.72 * d;
-        }
         const hv = hover[i];
-        if (hv > 0.002) {
-          const m = 0.22 * hv;
-          r += (fg[0] - r) * m;
-          g += (fg[1] - g) * m;
-          bl += (fg[2] - bl) * m;
-        }
-
+        const isDynamic = isColAnimating || d > 0.002 || hv > 0.002 || (!reduced && flickerProgress < 1.0 && level > 0);
+        let r = 0;
+        let g = 0;
+        let bl = 0;
         let flashStroke = 0;
-        if (!reduced && flickerProgress < 1.0) {
-          if (lv[i] > 0) {
+
+        if (isDynamic) {
+          const L = level * 3;
+          r = col[L];
+          g = col[L + 1];
+          bl = col[L + 2];
+          if (d > 0.002) {
+            r += (ex - r) * 0.72 * d;
+            g += (ey - g) * 0.72 * d;
+            bl += (ez - bl) * 0.72 * d;
+          }
+          if (hv > 0.002) {
+            const m = 0.22 * hv;
+            r += (fg[0] - r) * m;
+            g += (fg[1] - g) * m;
+            bl += (fg[2] - bl) * m;
+          }
+
+          if (!reduced && flickerProgress < 1.0 && level > 0) {
             const start = flickerOffsets[i] ?? 0;
             const duration = 0.32;
             const elapsed = flickerProgress - start;
@@ -905,21 +938,22 @@
             }
           }
         }
+
         if (f & 1) {
           ctx.beginPath();
           quadPath(ctx, polys, o + 8, 0);
-          ctx.fillStyle = rgbString(r * 0.84, g * 0.84, bl * 0.84);
+          ctx.fillStyle = isDynamic ? rgbString(r * 0.84, g * 0.84, bl * 0.84) : (baseSide1[level] || rgbString(r * 0.84, g * 0.84, bl * 0.84));
           ctx.fill();
         }
         if (f & 2) {
           ctx.beginPath();
           quadPath(ctx, polys, o + 16, 0);
-          ctx.fillStyle = rgbString(r * 0.68, g * 0.68, bl * 0.68);
+          ctx.fillStyle = isDynamic ? rgbString(r * 0.68, g * 0.68, bl * 0.68) : (baseSide2[level] || rgbString(r * 0.68, g * 0.68, bl * 0.68));
           ctx.fill();
         }
         ctx.beginPath();
         quadPath(ctx, polys, o, radius);
-        ctx.fillStyle = rgbString(r, g, bl);
+        ctx.fillStyle = isDynamic ? rgbString(r, g, bl) : (baseFill[level] || rgbString(r, g, bl));
         ctx.fill();
         if (outline > 0.004) {
           ctx.strokeStyle = 'rgba(' + fg[0] + ',' + fg[1] + ',' + fg[2] + ',' + outline.toFixed(3) + ')';
@@ -1023,13 +1057,16 @@
       }
 
       const kc = reduced ? 1 : 1 - Math.exp(-dt * 7);
+      let colMoving = false;
       for (let k = 0; k < 15; k++) {
         const d = colGoal[k] - col[k];
         if (Math.abs(d) > 0.4) {
           col[k] += d * kc;
           moving = true;
+          colMoving = true;
         } else col[k] = colGoal[k];
       }
+      isColAnimating = colMoving;
 
       const kh = reduced ? 1 : 1 - Math.exp(-dt * 16);
       const kd = reduced ? 1 : 1 - Math.exp(-dt * 10);
@@ -1041,9 +1078,12 @@
         } else if (activeIdx >= 0) {
           const dw = Math.abs(wk[i] - wk[activeIdx]);
           const dd = Math.abs(dy[i] - dy[activeIdx]);
-          const dist = Math.hypot(dw, dd);
-          if (dist <= 2.2) {
-            hg = (1 - dist / 2.2) * 0.42;
+          if (dw <= 2.2 && dd <= 2.2) {
+            const distSq = dw * dw + dd * dd;
+            if (distSq <= 4.84) {
+              const dist = Math.sqrt(distSq);
+              hg = (1 - dist / 2.2) * 0.42;
+            }
           }
         }
         const dg = leg >= 0 && lv[i] !== leg ? 1 : 0;
