@@ -670,9 +670,9 @@
         flickerOffsets = new Float32Array(n);
         depthKeys = new Float32Array(n);
         order = Array.from({ length: n }, (_, i) => i);
-        lastSn = -999;
-        lastCs = -999;
       }
+      lastSn = -999;
+      lastCs = -999;
       for (let i = 0; i < n; i++) {
         const c = m.cells[i];
         wk[i] = c.week;
@@ -709,6 +709,9 @@
       if (!colReady || reduced) {
         col.set(colGoal);
         colReady = true;
+        isColAnimating = false;
+      } else {
+        isColAnimating = true;
       }
       ctx.font = font;
       labelW = Math.ceil(Math.max(20, ...weekdayRows.map((r) => ctx.measureText(r.label).width))) + 8;
