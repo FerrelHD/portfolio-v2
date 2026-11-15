@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://ferrel-rashad-portfolio.vercel.app/</loc>
+    <image:image>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/og-image.png</image:loc>
+      <image:title>Ferrel Rashad Akeyla — Software Engineer &amp; Creative Developer Portfolio</image:title>
+      <image:caption>Open Graph showcase banner of Ferrel Rashad Akeyla portfolio</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/ferrel-portrait.jpg</image:loc>
+      <image:title>Ferrel Rashad Akeyla — Portrait Photo</image:title>
+      <image:caption>Full-Stack Developer &amp; Creative Engineer Portrait Photo</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/notchflow.png</image:loc>
+      <image:title>Notchflow — Dynamic Island UX &amp; Workflow Framework</image:title>
+      <image:caption>Notchflow multi-modal interactive workflow system designed by Ferrel Rashad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/TactIQ.png</image:loc>
+      <image:title>TactIQ — Football Tactical Intelligence Engine</image:title>
+      <image:caption>TactIQ AI spatial tracking and tactical intelligence web platform by Ferrel Rashad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/VHS.png</image:loc>
+      <image:title>VHS Cyberpunk — 3D Three.js Audio Visualizer</image:title>
+      <image:caption>Interactive 3D WebGL audio reactive experience built with Three.js</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/Persona.png</image:loc>
+      <image:title>Persona 3 Reload — 3D Web Experience</image:title>
+      <image:caption>Cinematic interactive web experience inspired by Persona 3 Reload</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/Charles-Leclerc.png</image:loc>
+      <image:title>Scuderia Ferrari Charles Leclerc — Interactive 3D Showcase</image:title>
+      <image:caption>High-fidelity Formula 1 interactive 3D digital vehicle experience</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/Eco-Bite.png</image:loc>
+      <image:title>Eco-Bite — Sustainable Surplus Food Distribution Platform</image:title>
+      <image:caption>Zero-waste food distribution and sustainability mobile web application</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/student-life.png</image:loc>
+      <image:title>Student Life — Academic &amp; Campus Productivity Management</image:title>
+      <image:caption>Comprehensive digital student lifecycle and task management dashboard</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/stock-prediction.png</image:loc>
+      <image:title>Stock Prediction — Financial Forecasting &amp; ML Platform</image:title>
+      <image:caption>Machine learning quantitative market analytics and trend forecasting dashboard</image:caption>
+    </image:image>
+  </url>
+</urlset>

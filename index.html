@@ -36,6 +36,9 @@
     />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Ferrel Rashad Akeyla" />
+    <link rel="canonical" href="https://ferrel-rashad-portfolio.vercel.app/" />
+    <!-- Google Search Console Verification: replace content with token from GSC -->
+    <!-- <meta name="google-site-verification" content="YOUR_GSC_VERIFICATION_TOKEN" /> -->
 
     <!-- Open Graph Meta Tags  -->
     <meta
@@ -97,34 +100,61 @@
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
 
-    <!-- Enhanced Structured Data for Ferrel Rashad Akeyla -->
+    <!-- Enhanced Structured Data for Ferrel Rashad Akeyla (Person & WebSite Graph) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Ferrel Rashad Akeyla",
-        "givenName": "Ferrel",
-        "familyName": "Akeyla",
-        "alternateName": [
-          "Ferrel Rashad",
-          "FerrelHD",
-          "Ferrel Rashad A.",
-          "Ferrel Akeyla"
-        ],
-        "jobTitle": "Full-Stack Developer & Creative Engineer",
-        "description": "Multidisciplinary Full-Stack Developer, 3D Modeler, Game Developer & Digital Creator based in Indonesia.",
-        "image": "https://ferrel-rashad-portfolio.vercel.app/og-image.png",
-        "url": "https://ferrel-rashad-portfolio.vercel.app/",
-        "sameAs": [
-          "https://github.com/FerrelHD",
-          "https://www.linkedin.com/in/ferrel-rashad-8a165514b/"
-        ],
-        "knowsLanguage": ["en", "id"],
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Freelance & Independent Projects"
-        },
-        "skills": "Full-Stack Web Development, React 19, TypeScript, Laravel 11, Python Machine Learning, Unity 3D, Blender"
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://ferrel-rashad-portfolio.vercel.app/#person",
+            "name": "Ferrel Rashad Akeyla",
+            "givenName": "Ferrel",
+            "familyName": "Akeyla",
+            "alternateName": [
+              "Ferrel Rashad",
+              "FerrelHD",
+              "Ferrel Rashad A.",
+              "Ferrel Akeyla"
+            ],
+            "jobTitle": "Full-Stack Developer & Creative Engineer",
+            "description": "Multidisciplinary Full-Stack Developer, 3D Modeler, Game Developer & Digital Creator based in Indonesia.",
+            "image": {
+              "@type": "ImageObject",
+              "url": "https://ferrel-rashad-portfolio.vercel.app/og-image.png",
+              "caption": "Ferrel Rashad Akeyla Portfolio"
+            },
+            "url": "https://ferrel-rashad-portfolio.vercel.app/",
+            "sameAs": [
+              "https://github.com/FerrelHD",
+              "https://www.linkedin.com/in/ferrel-rashad-8a165514b/"
+            ],
+            "knowsLanguage": ["en", "id"],
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Freelance & Independent Projects"
+            },
+            "skills": "Full-Stack Web Development, Vue 3, React 19, TypeScript, Laravel 11, Python Machine Learning, Three.js, GSAP, Blender"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://ferrel-rashad-portfolio.vercel.app/#website",
+            "url": "https://ferrel-rashad-portfolio.vercel.app/",
+            "name": "Ferrel Rashad Akeyla — Portfolio",
+            "description": "Software Engineer & Creative Developer crafting high-performance web architectures, interactive experiences, and cinematic digital products.",
+            "publisher": {
+              "@id": "https://ferrel-rashad-portfolio.vercel.app/#person"
+            },
+            "inLanguage": "en-US",
+            "primaryImageOfPage": {
+              "@type": "ImageObject",
+              "url": "https://ferrel-rashad-portfolio.vercel.app/og-image.png",
+              "width": 1200,
+              "height": 630,
+              "caption": "Ferrel Rashad Akeyla — Software Engineer & Creative Developer Portfolio 2026"
+            }
+          }
+        ]
       }
     </script>
     <!-- Cloudflare Web Analytics -->

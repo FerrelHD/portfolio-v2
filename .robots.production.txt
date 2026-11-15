@@ -3,5 +3,6 @@ Disallow: /private/
 Allow: /
 
 # Sitemap must be a valid, absolute XML file URL
-Sitemap: https://ferrelhd.github.io/portfolio/sitemap.xml
+Sitemap: https://ferrel-rashad-portfolio.vercel.app/sitemap.xml
+Sitemap: https://ferrel-rashad-portfolio.vercel.app/sitemap-images.xml
 

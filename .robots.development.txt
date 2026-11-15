@@ -3,4 +3,5 @@ Disallow: /private/
 Allow: /
 
 # Specify the location of your sitemap if you have one
-Sitemap: https://ferrelhd.github.io/portfolio/sitemap.xml
+Sitemap: https://ferrel-rashad-portfolio.vercel.app/sitemap.xml
+Sitemap: https://ferrel-rashad-portfolio.vercel.app/sitemap-images.xml
