@@ -111,12 +111,13 @@
               <img
                 v-else
                 :src="project.previewImg"
-                :alt="project.title"
+                :alt="`${project.title} — ${project.role || project.system || 'Creative Engineering Project'} by Ferrel Rashad`"
                 :class="[
                   'size-full object-cover transition-transform duration-700 ease-out',
                   project.mediaClass || 'object-top group-hover/mockup:scale-[1.05]',
                 ]"
                 loading="lazy"
+                decoding="async"
               />
               <!-- Subtle Glass Sheen on Hover -->
               <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/25 opacity-0 transition-opacity duration-500 group-hover/mockup:opacity-100"></div>

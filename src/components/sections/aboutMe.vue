@@ -83,9 +83,12 @@
           <img
             ref="photoImgEl"
             :src="ferrelPortrait"
-            alt="Ferrel Rashad"
+            alt="Ferrel Rashad Akeyla — Full-Stack Developer & Creative Engineer Portrait"
             class="size-full object-cover object-top grayscale contrast-[115%] brightness-95 transition-all duration-700 ease-out group-hover/photo:grayscale-0 group-hover/photo:contrast-[105%] group-hover/photo:scale-105 will-change-transform"
             loading="lazy"
+            decoding="async"
+            width="420"
+            height="560"
           />
           <!-- Subtle editorial corner crosshairs / viewfinder accent on hover -->
           <div class="pointer-events-none absolute inset-2.5 border border-white/25 opacity-0 transition-opacity duration-500 group-hover/photo:opacity-100"></div>

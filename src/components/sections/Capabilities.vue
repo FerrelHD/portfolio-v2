@@ -74,9 +74,10 @@
           <!-- Background Image -->
           <img
             :src="item.image"
-            :alt="item.name"
+            :alt="`${item.name} — ${item.category} capability by Ferrel Rashad`"
             class="service-bg-media size-full object-cover object-center scale-105 will-change-transform"
             loading="lazy"
+            decoding="async"
           />
         </div>
 

@@ -278,9 +278,10 @@
             v-if="hoveredProject"
             :key="hoveredProject.id"
             :src="hoveredProject.previewImg"
-            :alt="hoveredProject.title"
+            :alt="`${hoveredProject.title} — ${hoveredProject.category || 'Portfolio Archive Project'} (${hoveredProject.year})`"
             class="size-full object-cover object-top transition-transform duration-500 ease-out scale-105"
             decoding="async"
+            loading="lazy"
           />
         </div>
 

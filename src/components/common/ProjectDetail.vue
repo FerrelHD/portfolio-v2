@@ -199,8 +199,10 @@
                   <div class="relative aspect-[16/9] w-full bg-black/5 overflow-hidden">
                     <img
                       :src="project.heroImg"
-                      :alt="project.title"
+                      :alt="`${project.title} — ${project.tagline || project.category || 'Portfolio Case Study'} by Ferrel Rashad`"
                       class="size-full object-cover object-top"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 </div>
