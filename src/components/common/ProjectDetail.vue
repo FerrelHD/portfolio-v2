@@ -383,6 +383,7 @@
 <script setup lang="ts">
   import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
   import gsap from 'gsap';
+  import { captureFocusOrigin, restoreFocusOrigin, trapDialogTab } from '@/utils/modalFocus';
   import {
     caseStudies,
     caseStudyOrder,
@@ -402,6 +403,7 @@
   const scrollContainer = ref<HTMLElement | null>(null);
   const closeBtn = ref<HTMLButtonElement | null>(null);
   const activeSection = ref<string>('section-overview');
+  let previousFocus: HTMLElement | null = null;
 
   const project = computed<ProjectCaseStudy | null>(() => {
     if (!props.projectId) return null;
@@ -568,6 +570,11 @@
   const handleKeyDown = (e: KeyboardEvent) => {
     if (!props.projectId) return;
 
+    if (e.key === 'Tab') {
+      trapDialogTab(detailOverlay.value, e);
+      return;
+    }
+
     if (e.key === 'Escape') {
       e.preventDefault();
       handleClose();
@@ -586,6 +593,7 @@
       if (newId) {
         if (!oldId) {
           // Opening from closed state
+          previousFocus = captureFocusOrigin();
           await animateIn();
         } else {
           // Navigating between projects while already open
@@ -597,6 +605,9 @@
         if (scrollContainer.value) {
           scrollContainer.value.scrollTop = 0;
         }
+      } else if (oldId) {
+        restoreFocusOrigin(previousFocus);
+        previousFocus = null;
       }
     },
     { immediate: true }
