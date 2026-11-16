@@ -72,8 +72,25 @@
             </div>
           </div>
 
+          <!-- Empty State -->
+          <div
+            v-if="filteredProjects.length === 0"
+            role="status"
+            class="py-16 px-6 text-center rounded-xl border border-black/10 bg-black/[0.02] flex flex-col items-center gap-3"
+          >
+            <p class="font-serif text-2xl text-[#22201e]">No projects in this category yet.</p>
+            <p class="font-sans text-sm text-[#22201e]/70">Select another filter or reset to view the full archive.</p>
+            <button
+              type="button"
+              @click="activeCategory = 'all'"
+              class="mt-1 px-4 py-2.5 min-h-[44px] rounded-full bg-[#22201e] text-[#faf9f6] text-xs font-sans font-medium uppercase tracking-wider hover:bg-black transition-colors cursor-pointer"
+            >
+              Show all works
+            </button>
+          </div>
+
           <!-- Desktop Table (>= 768px) -->
-          <div class="hidden md:block w-full">
+          <div v-else class="hidden md:block w-full">
             <table class="w-full text-left border-collapse">
               <thead>
                 <tr class="border-b border-black/15 text-[11px] font-sans uppercase tracking-[0.2em] text-[#22201e]/65">
@@ -174,7 +191,7 @@
           </div>
 
           <!-- Mobile Cards (< 768px) -->
-          <div class="flex flex-col gap-4 md:hidden">
+          <div v-if="filteredProjects.length > 0" class="flex flex-col gap-4 md:hidden">
             <article
               v-for="project in filteredProjects"
               :key="project.id"
