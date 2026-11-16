@@ -109,7 +109,9 @@
     <Teleport to="body">
       <div
         v-if="isFullscreenOpen"
+        ref="fullscreenModalRef"
         data-lenis-prevent
+        tabindex="-1"
         class="fixed inset-0 z-[125] flex flex-col justify-between bg-[#191715]/95 backdrop-blur-md p-4 sm:p-8 md:p-12 text-[#faf9f6] select-none overflow-y-auto overscroll-contain"
         role="dialog"
         aria-modal="true"
@@ -127,6 +129,7 @@
           </div>
 
           <button
+            ref="closeFullscreenBtn"
             type="button"
             @click="closeFullscreen"
             class="group inline-flex items-center gap-2 min-h-[44px] md:min-h-0 text-xs sm:text-sm font-sans uppercase tracking-wider text-[#faf9f6]/70 hover:text-white transition-colors cursor-pointer"
@@ -165,7 +168,7 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, onUnmounted, ref } from 'vue';
+  import { nextTick, onMounted, onUnmounted, ref } from 'vue';
   import gsap from 'gsap';
   import ContributionSkyline from '@/components/ui/ContributionSkyline.vue';
   import {
@@ -173,6 +176,7 @@
     ferrelFallbackContributions,
   } from '@/services/githubContributions';
   import type { ContributionDay } from '@/utils/contributionMath';
+  import { captureFocusOrigin, restoreFocusOrigin, trapDialogTab } from '@/utils/modalFocus';
   import { lenis } from '@/lenis';
 
   const chapterTitleRef = ref<HTMLElement | null>(null);
@@ -185,23 +189,38 @@
 
   const contributions = ref<ContributionDay[]>(ferrelFallbackContributions);
   const isFullscreenOpen = ref(false);
+  const fullscreenModalRef = ref<HTMLElement | null>(null);
+  const closeFullscreenBtn = ref<HTMLButtonElement | null>(null);
+  let previousFocus: HTMLElement | null = null;
 
   const openFullscreen = () => {
+    previousFocus = captureFocusOrigin();
     isFullscreenOpen.value = true;
     document.body.style.overflow = 'hidden';
     lenis.stop();
+    nextTick(() => {
+      closeFullscreenBtn.value?.focus({ preventScroll: true });
+    });
   };
 
   const closeFullscreen = () => {
     isFullscreenOpen.value = false;
     document.body.style.overflow = '';
     lenis.start();
+    nextTick(() => {
+      restoreFocusOrigin(previousFocus);
+      previousFocus = null;
+    });
   };
 
   const handleKeydown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape' && isFullscreenOpen.value) {
+    if (!isFullscreenOpen.value) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
       closeFullscreen();
+      return;
     }
+    trapDialogTab(fullscreenModalRef.value, e);
   };
 
   const revealSlide = () => {
