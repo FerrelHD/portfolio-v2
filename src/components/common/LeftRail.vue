@@ -152,7 +152,11 @@
     <!-- Center: Split Editorial Layout (Left: Menu Links, Right: Dynamic Context Panel) -->
     <div class="flex-1 min-h-0 my-auto py-2 sm:py-3 md:py-3 lg:py-5 grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-12 items-center">
       <!-- Left Column: Giant Editorial Navigation Links with Masked Reveals -->
-      <nav aria-label="Primary chapters" class="md:col-span-7 flex flex-col gap-2 sm:gap-2.5 md:gap-2.5 lg:gap-3 xl:gap-4">
+      <nav
+        aria-label="Primary chapters"
+        @mouseleave="hoveredItem = null"
+        class="md:col-span-7 flex flex-col gap-2 sm:gap-2.5 md:gap-2.5 lg:gap-3 xl:gap-4"
+      >
         <div
           v-for="item in navItems"
           :key="item.id"
@@ -163,39 +167,53 @@
             ref="navItemLines"
             class="will-change-transform"
           >
-            <!-- Interactive Semantic Button Layer (separated from GSAP transform) -->
+            <!-- Interactive Semantic Button Layer (stationary hitbox, zero pointer jitter) -->
             <button
               type="button"
               @click="navigateTo(item.id)"
               @mouseenter="hoveredItem = item.id"
-              @mouseleave="hoveredItem = null"
               @focus="hoveredItem = item.id"
               @blur="hoveredItem = null"
               :aria-current="activeSection === item.id ? 'location' : undefined"
-              class="group/nav w-full text-left bg-transparent border-0 p-0 cursor-pointer flex items-baseline gap-3 sm:gap-5 md:gap-5 lg:gap-7 transition-all duration-300 ease-out hover:translate-x-2 sm:hover:translate-x-4"
-              :class="activeSection === item.id || hoveredItem === item.id ? 'text-[#faf9f6]' : 'text-[#faf9f6]/60 hover:text-[#faf9f6] focus-visible:text-[#faf9f6]'"
+              class="group/nav w-full text-left bg-transparent border-0 p-0 cursor-pointer block outline-none focus-visible:ring-1 focus-visible:ring-white/40 transition-colors duration-300 ease-out"
+              :class="[
+                hoveredItem
+                  ? (hoveredItem === item.id ? 'text-[#faf9f6]' : 'text-[#faf9f6]/35')
+                  : (activeSection === item.id ? 'text-[#faf9f6]' : 'text-[#faf9f6]/60')
+              ]"
             >
-              <!-- Small Serif Slide Number -->
-              <span class="font-serif text-sm sm:text-lg md:text-xl lg:text-2xl text-inherit transition-colors duration-300">
-                {{ item.num }}
-              </span>
-              <!-- Giant Editorial Serif Title + Chapter Sub-badge + Dynamic Dash Indicator -->
-              <span class="flex items-center gap-3 sm:gap-4 lg:gap-5">
-                <span
-                  class="font-serif text-3xl sm:text-5xl md:text-[clamp(2rem,3.8vh,3.2rem)] lg:text-[clamp(2.3rem,4.4vh,3.8rem)] xl:text-[clamp(2.7rem,5vh,4.5rem)] uppercase tracking-[-0.03em] leading-[0.92] text-inherit transition-colors duration-300"
-                >
-                  {{ item.label }}
+              <!-- Moving Visual Container (isolated from hitbox, GPU smooth translate) -->
+              <span
+                class="inline-flex items-baseline gap-3 sm:gap-5 md:gap-5 lg:gap-7 transition-transform duration-300 ease-out group-hover/nav:translate-x-2 sm:group-hover/nav:translate-x-4 will-change-transform"
+              >
+                <!-- Small Serif Slide Number -->
+                <span class="font-serif text-sm sm:text-lg md:text-xl lg:text-2xl text-inherit transition-colors duration-300">
+                  {{ item.num }}
                 </span>
-                <!-- Chapter Sub-badge -->
-                <span class="hidden sm:inline-block font-sans text-[10px] uppercase tracking-[0.2em] text-[#faf9f6]/60 transition-colors group-hover/nav:text-[#faf9f6]/85">
-                  {{ item.chapter }}
+                <!-- Giant Editorial Serif Title + Chapter Sub-badge + Dynamic Dash Indicator -->
+                <span class="flex items-center gap-3 sm:gap-4 lg:gap-5">
+                  <span
+                    class="font-serif text-3xl sm:text-5xl md:text-[clamp(2rem,3.8vh,3.2rem)] lg:text-[clamp(2.3rem,4.4vh,3.8rem)] xl:text-[clamp(2.7rem,5vh,4.5rem)] uppercase tracking-[-0.03em] leading-[0.92] text-inherit transition-colors duration-300"
+                  >
+                    {{ item.label }}
+                  </span>
+                  <!-- Chapter Sub-badge -->
+                  <span class="hidden sm:inline-block font-sans text-[10px] uppercase tracking-[0.2em] text-[#faf9f6]/60 transition-colors group-hover/nav:text-[#faf9f6]/85">
+                    {{ item.chapter }}
+                  </span>
+                  <!-- GPU-Accelerated Editorial Accent Line (ScaleX, Zero Layout Reflow) -->
+                  <span
+                    aria-hidden="true"
+                    class="hidden sm:inline-block h-[2px] w-8 lg:w-10 bg-white/70 origin-left transition-all duration-300 ease-out will-change-transform"
+                    :class="[
+                      hoveredItem === item.id
+                        ? 'scale-x-100 opacity-100'
+                        : (activeSection === item.id && !hoveredItem
+                            ? 'scale-x-75 opacity-50'
+                            : 'scale-x-0 opacity-0')
+                    ]"
+                  ></span>
                 </span>
-                <!-- Subtle editorial accent line: active has resting indicator, hover expands smoothly -->
-                <span
-                  aria-hidden="true"
-                  class="hidden sm:inline-block h-[2px] bg-white/70 transition-all duration-300 ease-out"
-                  :class="activeSection === item.id ? 'w-6 lg:w-8 bg-white/50 group-hover/nav:w-10 lg:group-hover/nav:w-12' : 'w-0 group-hover/nav:w-8 lg:group-hover/nav:w-10'"
-                ></span>
               </span>
             </button>
           </div>
@@ -609,6 +627,7 @@
   };
 
   const closeMenu = (callback?: () => void) => {
+    hoveredItem.value = null;
     if (!isOpen.value) {
       callback?.();
       return;
