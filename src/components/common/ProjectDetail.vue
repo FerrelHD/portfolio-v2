@@ -384,6 +384,7 @@
   import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
   import gsap from 'gsap';
   import { captureFocusOrigin, restoreFocusOrigin, trapDialogTab } from '@/utils/modalFocus';
+  import { prefersReducedMotion } from '@/utils/motion';
   import {
     caseStudies,
     caseStudyOrder,
@@ -493,6 +494,12 @@
 
     activeSection.value = 'section-overview';
 
+    if (prefersReducedMotion()) {
+      gsap.set(el, { clipPath: 'inset(0% 0 0 0)' });
+      closeBtn.value?.focus({ preventScroll: true });
+      return;
+    }
+
     gsap.set(el, {
       clipPath: 'inset(100% 0 0 0)',
     });
@@ -550,7 +557,7 @@
   };
 
   const handleClose = () => {
-    if (!detailOverlay.value) {
+    if (!detailOverlay.value || prefersReducedMotion()) {
       emit('close');
       return;
     }

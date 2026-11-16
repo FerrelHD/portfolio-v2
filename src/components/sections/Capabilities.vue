@@ -120,6 +120,7 @@
 <script setup lang="ts">
   import { ref, onMounted } from 'vue';
   import gsap from 'gsap';
+  import { prefersReducedMotion } from '@/utils/motion';
   import {
     indonesianCrustalObservatoryImg,
     personaImg,
@@ -206,6 +207,7 @@
   };
 
   const revealSlide = () => {
+    if (prefersReducedMotion()) return;
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     if (chapterTitle.value) {
@@ -230,17 +232,19 @@
   };
 
   onMounted(() => {
-    if (chapterTitle.value) gsap.set(chapterTitle.value, { yPercent: 105 });
-    if (whatIDoRef.value) gsap.set(whatIDoRef.value, { yPercent: 105 });
-    const lines = [statementLine1.value, statementLine2.value, statementLine3.value, statementLine4.value].filter(Boolean);
-    if (lines.length) gsap.set(lines, { yPercent: 105 });
-
     columnRefs.value.forEach((col) => {
       const revealLayer = col.querySelector('.service-bg-reveal');
       const mediaImg = col.querySelector('.service-bg-media');
       if (revealLayer) gsap.set(revealLayer, { clipPath: 'inset(100% 0% 0% 0%)' });
       if (mediaImg) gsap.set(mediaImg, { yPercent: 4 });
     });
+
+    if (prefersReducedMotion()) return;
+
+    if (chapterTitle.value) gsap.set(chapterTitle.value, { yPercent: 105 });
+    if (whatIDoRef.value) gsap.set(whatIDoRef.value, { yPercent: 105 });
+    const lines = [statementLine1.value, statementLine2.value, statementLine3.value, statementLine4.value].filter(Boolean);
+    if (lines.length) gsap.set(lines, { yPercent: 105 });
   });
 
   defineExpose({

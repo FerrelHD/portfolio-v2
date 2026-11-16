@@ -153,6 +153,7 @@
 <script setup lang="ts">
   import { onMounted, onUnmounted, ref } from 'vue';
   import gsap from 'gsap';
+  import { prefersReducedMotion } from '@/utils/motion';
 
   const props = withDefaults(
     defineProps<{
@@ -206,6 +207,24 @@
   const playIntro = () => {
     if (introStarted) return;
     introStarted = true;
+
+    if (prefersReducedMotion()) {
+      showIntro.value = false;
+      if (quoteWrapperEl.value) quoteWrapperEl.value.style.display = 'none';
+      if (baseCurtain.value) gsap.set(baseCurtain.value, { height: '100%' });
+      if (heroTitle.value) gsap.set(heroTitle.value, { autoAlpha: 1 });
+      if (bioEl.value) gsap.set(bioEl.value, { autoAlpha: 1, yPercent: 0 });
+      gsap.set([firstNameEl.value, lastNameEl.value].filter(Boolean), { yPercent: 0 });
+      gsap.set([footerLeftEl.value, footerCenterEl.value, scrollCueEl.value].filter(Boolean), {
+        yPercent: 0,
+        autoAlpha: 1,
+      });
+      if (scrollCueEl.value?.parentElement) {
+        scrollCueEl.value.parentElement.style.overflow = 'visible';
+      }
+      emit('introComplete');
+      return;
+    }
 
     // 5-Stage Intro Animation Timeline:
     // 1. Stage 1: Mask reveal dari bawah untuk 2022 dan quote kanan bawah

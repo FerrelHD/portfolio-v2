@@ -296,6 +296,7 @@
 <script setup lang="ts">
   import { onMounted, ref, watch } from 'vue';
   import gsap from 'gsap';
+  import { prefersReducedMotion } from '@/utils/motion';
 
   const props = withDefaults(
     defineProps<{
@@ -448,6 +449,7 @@
   // Function to reveal text animation for a specific slide
   const revealSlideIndex = (index: number) => {
     updateVideoPlayback(index);
+    if (prefersReducedMotion()) return;
     const slides = document.querySelectorAll('.work-slide');
     if (!slides[index]) return;
 
@@ -540,13 +542,16 @@
   onMounted(() => {
     // Set initial hidden state via GSAP (not CSS classes) so reveal animation works
     document.querySelectorAll('.work-slide').forEach((slide) => {
+      const aboutBoxes = slide.querySelectorAll('.slide-about-box');
+      if (aboutBoxes.length) gsap.set(aboutBoxes, { scaleX: 0, transformOrigin: 'left center' });
+      if (prefersReducedMotion()) return;
+
       const chapter = slide.querySelector('.slide-chapter-title');
       const title = slide.querySelector('.slide-project-title');
       const metaLines = slide.querySelectorAll('.slide-project-meta');
       const num = slide.querySelector('.slide-number');
       const numIdx = slide.querySelector('.slide-number-idx');
       const mockup = slide.querySelector('.slide-mockup');
-      const aboutBoxes = slide.querySelectorAll('.slide-about-box');
       const aboutTexts = slide.querySelectorAll('.slide-about-text');
 
       if (chapter) gsap.set(chapter, { yPercent: 105 });
@@ -555,7 +560,6 @@
       if (num) gsap.set(num, { yPercent: 105 });
       if (numIdx) gsap.set(numIdx, { yPercent: 105 });
       if (mockup) gsap.set(mockup, { y: 35, scale: 0.96, opacity: 0 });
-      if (aboutBoxes.length) gsap.set(aboutBoxes, { scaleX: 0, transformOrigin: 'left center' });
       if (aboutTexts.length) gsap.set(aboutTexts, { opacity: 0 });
 
       const activePill = slide.querySelector('.step-pill-active');

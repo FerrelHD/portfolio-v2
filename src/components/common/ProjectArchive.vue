@@ -321,6 +321,7 @@
   import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
   import gsap from 'gsap';
   import { captureFocusOrigin, restoreFocusOrigin, trapDialogTab } from '@/utils/modalFocus';
+  import { prefersReducedMotion } from '@/utils/motion';
   import {
     archiveCategories,
     archiveProjects,
@@ -410,6 +411,11 @@
 
       if (activeAnimation) activeAnimation.kill();
 
+      if (prefersReducedMotion()) {
+        gsap.set(archiveOverlay.value, { clipPath: 'inset(0% 0 0 0)' });
+        return;
+      }
+
       gsap.set(archiveOverlay.value, { clipPath: 'inset(100% 0 0 0)' });
 
       activeAnimation = gsap.timeline({
@@ -426,7 +432,7 @@
   };
 
   const closeArchiveAnimation = (callback?: () => void) => {
-    if (!archiveOverlay.value) {
+    if (!archiveOverlay.value || prefersReducedMotion()) {
       callback?.();
       return;
     }

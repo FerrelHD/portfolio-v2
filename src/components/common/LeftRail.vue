@@ -310,6 +310,7 @@
   import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
   import gsap from 'gsap';
   import { captureFocusOrigin, restoreFocusOrigin, trapDialogTab } from '@/utils/modalFocus';
+  import { prefersReducedMotion } from '@/utils/motion';
 
   const props = withDefaults(
     defineProps<{
@@ -508,6 +509,16 @@
       closeBtn.value?.focus({ preventScroll: true });
       if (!menuPanel.value) return;
 
+      if (prefersReducedMotion()) {
+        gsap.set(menuPanel.value, { clipPath: 'inset(0 0% 0 0)' });
+        if (navItemLines.value?.length) gsap.set(navItemLines.value, { yPercent: 0, opacity: 1 });
+        if (closeBtn.value) gsap.set(closeBtn.value, { yPercent: 0, opacity: 0.75 });
+        if (socialLinks.value) gsap.set(socialLinks.value, { yPercent: 0, opacity: 1 });
+        if (contextPanel.value) gsap.set(contextPanel.value, { opacity: 1, x: 0 });
+        isAnimating.value = false;
+        return;
+      }
+
       // Reset initial states
       gsap.set(menuPanel.value, { clipPath: 'inset(0 100% 0 0)' });
       if (navItemLines.value && navItemLines.value.length) {
@@ -606,6 +617,19 @@
     }
     isAnimating.value = true;
     stopClock();
+
+    if (prefersReducedMotion()) {
+      isOpen.value = false;
+      isAnimating.value = false;
+      document.body.style.overflow = '';
+      if (callback) {
+        callback();
+      } else {
+        restoreFocusOrigin(previousFocus ?? menuBtn.value);
+      }
+      previousFocus = null;
+      return;
+    }
 
     activeMenuTl = gsap.timeline({
       onComplete: () => {

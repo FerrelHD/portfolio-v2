@@ -191,6 +191,7 @@
   } from '@/services/githubContributions';
   import type { ContributionDay } from '@/utils/contributionMath';
   import { captureFocusOrigin, restoreFocusOrigin, trapDialogTab } from '@/utils/modalFocus';
+  import { prefersReducedMotion } from '@/utils/motion';
   import { lenis } from '@/lenis';
 
   const chapterTitleRef = ref<HTMLElement | null>(null);
@@ -246,6 +247,11 @@
   };
 
   const revealSlide = () => {
+    if (prefersReducedMotion()) {
+      skylineCompRef.value?.animateCounter();
+      skylineCompRef.value?.playEntrance?.() ?? skylineCompRef.value?.playFlicker?.();
+      return;
+    }
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     if (chapterTitleRef.value) {
@@ -275,12 +281,14 @@
   });
 
   onMounted(async () => {
-    if (chapterTitleRef.value) gsap.set(chapterTitleRef.value, { yPercent: 105 });
-    if (headerActionsRef.value) gsap.set(headerActionsRef.value, { y: 15, opacity: 0 });
-    if (titleRef.value) gsap.set(titleRef.value, { yPercent: 105 });
-    if (descRef.value) gsap.set(descRef.value, { y: 15, opacity: 0 });
-    if (skylineCardRef.value) gsap.set(skylineCardRef.value, { y: 25, opacity: 0, scale: 0.98 });
-    if (statusBarRef.value) gsap.set(statusBarRef.value, { y: 10, opacity: 0 });
+    if (!prefersReducedMotion()) {
+      if (chapterTitleRef.value) gsap.set(chapterTitleRef.value, { yPercent: 105 });
+      if (headerActionsRef.value) gsap.set(headerActionsRef.value, { y: 15, opacity: 0 });
+      if (titleRef.value) gsap.set(titleRef.value, { yPercent: 105 });
+      if (descRef.value) gsap.set(descRef.value, { y: 15, opacity: 0 });
+      if (skylineCardRef.value) gsap.set(skylineCardRef.value, { y: 25, opacity: 0, scale: 0.98 });
+      if (statusBarRef.value) gsap.set(statusBarRef.value, { y: 10, opacity: 0 });
+    }
 
     window.addEventListener('keydown', handleKeydown);
     await loadContributions();

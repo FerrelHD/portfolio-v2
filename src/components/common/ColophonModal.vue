@@ -287,6 +287,7 @@
   import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
   import gsap from 'gsap';
   import { captureFocusOrigin, restoreFocusOrigin, trapDialogTab } from '@/utils/modalFocus';
+  import { prefersReducedMotion } from '@/utils/motion';
 
   const props = withDefaults(
     defineProps<{
@@ -311,6 +312,14 @@
       if (!colophonOverlay.value) return;
       if (activeAnimation) activeAnimation.kill();
 
+      if (prefersReducedMotion()) {
+        gsap.set(colophonOverlay.value, {
+          clipPath: 'inset(0% 0 0 0)',
+          display: 'flex',
+        });
+        return;
+      }
+
       gsap.set(colophonOverlay.value, {
         clipPath: 'inset(100% 0 0 0)',
         display: 'flex',
@@ -326,7 +335,7 @@
   };
 
   const closeColophonAnimation = (callback?: () => void) => {
-    if (!colophonOverlay.value) {
+    if (!colophonOverlay.value || prefersReducedMotion()) {
       callback?.();
       return;
     }

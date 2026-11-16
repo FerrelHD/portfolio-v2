@@ -116,6 +116,7 @@
   import { onMounted, ref } from 'vue';
   import gsap from 'gsap';
   import { ferrelPortrait } from '@/assets/images';
+  import { prefersReducedMotion } from '@/utils/motion';
 
   const chapterTitle = ref<HTMLElement | null>(null);
   const photoEl = ref<HTMLElement | null>(null);
@@ -124,6 +125,7 @@
 
   // Method to trigger masked reveal animation when slide enters view
   const revealSlide = () => {
+    if (prefersReducedMotion()) return;
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     if (chapterTitle.value) {
@@ -186,6 +188,7 @@
   });
 
   onMounted(() => {
+    if (prefersReducedMotion()) return;
     // Set initial hidden state
     if (chapterTitle.value) gsap.set(chapterTitle.value, { yPercent: 105 });
     if (bottomNoteEl.value) gsap.set(bottomNoteEl.value, { yPercent: 105 });

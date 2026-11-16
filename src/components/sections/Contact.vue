@@ -130,6 +130,7 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import gsap from 'gsap';
+  import { prefersReducedMotion } from '@/utils/motion';
 
   const emit = defineEmits<{
     (e: 'scrollToStart'): void;
@@ -162,6 +163,7 @@
   };
 
   const revealSlide = () => {
+    if (prefersReducedMotion()) return;
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
     if (nextEl.value) tl.to(nextEl.value, { yPercent: 0, duration: 1.2 }, 0);
     if (chapterEl.value) tl.to(chapterEl.value, { yPercent: 0, duration: 1.2 }, 0.1);
@@ -172,6 +174,7 @@
   });
 
   onMounted(() => {
+    if (prefersReducedMotion()) return;
     if (nextEl.value) gsap.set(nextEl.value, { yPercent: 105 });
     if (chapterEl.value) gsap.set(chapterEl.value, { yPercent: 105 });
   });
