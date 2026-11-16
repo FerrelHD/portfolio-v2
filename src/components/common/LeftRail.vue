@@ -135,7 +135,7 @@
     style="clip-path: inset(0 100% 0 0);"
   >
     <!-- Top Right: Pure Serif "CLOSE" Button (Identical to Khanh Nguyen) -->
-    <div class="flex justify-end w-full overflow-hidden p-1">
+    <div class="shrink-0 flex justify-end w-full overflow-hidden p-1">
       <button
         ref="closeBtn"
         type="button"
@@ -148,7 +148,7 @@
     </div>
 
     <!-- Center: Split Editorial Layout (Left: Menu Links, Right: Dynamic Context Panel) -->
-    <div class="my-auto py-4 sm:py-6 md:py-6 lg:py-8 grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+    <div class="shrink-0 my-auto py-4 sm:py-6 md:py-6 lg:py-8 grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
       <!-- Left Column: Giant Editorial Navigation Links with Masked Reveals -->
       <nav aria-label="Primary chapters" class="md:col-span-7 flex flex-col gap-2.5 sm:gap-3.5 md:gap-4 lg:gap-5 xl:gap-6">
         <div
@@ -250,7 +250,7 @@
     </div>
 
     <!-- Bottom Row: Left Archive Link & Colophon, Right Social Links -->
-    <div class="overflow-hidden pt-4 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <div class="shrink-0 pt-4 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-4">
       <div class="flex flex-wrap items-center gap-3 sm:gap-5">
         <button
           type="button"
@@ -273,32 +273,34 @@
         </button>
       </div>
 
-      <div
-        ref="socialLinks"
-        class="flex items-center justify-end gap-6 sm:gap-8 text-xs sm:text-sm font-sans font-medium text-[#faf9f6]/70 will-change-transform"
-      >
-        <a
-          href="https://github.com/FerrelHD"
-          target="_blank"
-          rel="noreferrer"
-          class="hover:text-white transition-colors min-h-[44px] inline-flex items-center"
+      <div class="overflow-hidden p-1 -m-1">
+        <div
+          ref="socialLinks"
+          class="flex flex-wrap items-center justify-start md:justify-end gap-6 sm:gap-8 text-xs sm:text-sm font-sans font-medium text-[#faf9f6]/70 will-change-transform"
         >
-          GitHub
-        </a>
-        <a
-          href="https://www.linkedin.com/in/ferrel-rashad/"
-          target="_blank"
-          rel="noreferrer"
-          class="hover:text-white transition-colors min-h-[44px] inline-flex items-center"
-        >
-          LinkedIn
-        </a>
-        <a
-          href="mailto:ferrelrashadakeyla2014@gmail.com"
-          class="hover:text-white transition-colors min-h-[44px] inline-flex items-center"
-        >
-          Email
-        </a>
+          <a
+            href="https://github.com/FerrelHD"
+            target="_blank"
+            rel="noreferrer"
+            class="hover:text-white transition-colors min-h-[44px] inline-flex items-center"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/ferrel-rashad/"
+            target="_blank"
+            rel="noreferrer"
+            class="hover:text-white transition-colors min-h-[44px] inline-flex items-center"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="mailto:ferrelrashadakeyla2014@gmail.com"
+            class="hover:text-white transition-colors min-h-[44px] inline-flex items-center"
+          >
+            Email
+          </a>
+        </div>
       </div>
     </div>
   </div>
