@@ -22,6 +22,7 @@
 
     <!-- Top / Left: Hamburger Menu Button in Fixed Box with Divider -->
     <button
+      ref="menuBtn"
       type="button"
       @click="toggleMenu"
       class="group relative flex size-10 md:size-auto md:h-16 md:w-full items-center justify-center transition-all duration-300 cursor-pointer md:border-b select-none"
@@ -30,6 +31,7 @@
           ? 'text-[#f3eee8] hover:text-white md:border-white/10 hover:bg-white/[0.04]'
           : 'text-[#22201e] hover:text-black md:border-black/10 hover:bg-black/[0.03]'
       ]"
+      :aria-expanded="isOpen"
       :aria-label="isOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'"
     >
       <!-- Clean 3-Line Hamburger Icon with Editorial Stagger Hover Effect -->
@@ -123,6 +125,10 @@
   <div
     v-if="isOpen"
     ref="menuPanel"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Site navigation"
+    tabindex="-1"
     class="fixed inset-y-0 right-0 left-0 md:left-16 z-[95] flex flex-col justify-between
            bg-[#24211e] text-[#faf9f6] select-none
            px-6 pt-20 pb-6 sm:p-10 md:pt-8 md:pb-10 md:pl-20 md:pr-16 overflow-y-auto will-change-[clip-path]"
@@ -144,31 +150,35 @@
     <!-- Center: Split Editorial Layout (Left: Menu Links, Right: Dynamic Context Panel) -->
     <div class="my-auto py-4 sm:py-6 md:py-6 lg:py-8 grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
       <!-- Left Column: Giant Editorial Navigation Links with Masked Reveals -->
-      <nav class="md:col-span-7 flex flex-col gap-2.5 sm:gap-3.5 md:gap-4 lg:gap-5 xl:gap-6">
+      <nav aria-label="Primary chapters" class="md:col-span-7 flex flex-col gap-2.5 sm:gap-3.5 md:gap-4 lg:gap-5 xl:gap-6">
         <div
           v-for="item in navItems"
           :key="item.id"
-          class="overflow-hidden cursor-pointer select-none"
-          @click="navigateTo(item.id)"
-          @mouseenter="hoveredItem = item.id"
-          @mouseleave="hoveredItem = null"
+          class="overflow-hidden select-none p-1 -m-1"
         >
           <!-- GSAP Mask Container (purely handles yPercent entrance and exit) -->
           <div
             ref="navItemLines"
             class="will-change-transform"
           >
-            <!-- Interactive Hover Layer (separated from GSAP transform) -->
-            <div
-              class="group/nav flex items-baseline gap-3 sm:gap-5 md:gap-6 lg:gap-8 transition-all duration-300 ease-out hover:translate-x-2 sm:hover:translate-x-4"
-              :class="activeSection === item.id || hoveredItem === item.id ? 'opacity-100' : 'opacity-30 hover:opacity-100'"
+            <!-- Interactive Semantic Button Layer (separated from GSAP transform) -->
+            <button
+              type="button"
+              @click="navigateTo(item.id)"
+              @mouseenter="hoveredItem = item.id"
+              @mouseleave="hoveredItem = null"
+              @focus="hoveredItem = item.id"
+              @blur="hoveredItem = null"
+              :aria-current="activeSection === item.id ? 'location' : undefined"
+              class="group/nav w-full text-left bg-transparent border-0 p-0 cursor-pointer flex items-baseline gap-3 sm:gap-5 md:gap-6 lg:gap-8 transition-all duration-300 ease-out hover:translate-x-2 sm:hover:translate-x-4"
+              :class="activeSection === item.id || hoveredItem === item.id ? 'opacity-100' : 'opacity-30 hover:opacity-100 focus-visible:opacity-100'"
             >
               <!-- Small Serif Slide Number -->
               <span class="font-serif text-base sm:text-xl md:text-2xl lg:text-[26px] text-inherit transition-colors duration-300">
                 {{ item.num }}
               </span>
               <!-- Giant Editorial Serif Title + Chapter Sub-badge + Dynamic Dash Indicator -->
-              <div class="flex items-center gap-3 sm:gap-5 lg:gap-6">
+              <span class="flex items-center gap-3 sm:gap-5 lg:gap-6">
                 <span
                   class="font-serif text-3xl sm:text-6xl md:text-[50px] lg:text-[62px] xl:text-[72px] 2xl:text-[5vw] uppercase tracking-[-0.03em] leading-[0.9] text-inherit transition-colors duration-300"
                 >
@@ -180,11 +190,12 @@
                 </span>
                 <!-- Subtle editorial accent line: active has resting indicator, hover expands smoothly -->
                 <span
+                  aria-hidden="true"
                   class="hidden sm:inline-block h-[2px] bg-white/70 transition-all duration-300 ease-out"
                   :class="activeSection === item.id ? 'w-6 lg:w-8 bg-white/50 group-hover/nav:w-10 lg:group-hover/nav:w-12' : 'w-0 group-hover/nav:w-8 lg:group-hover/nav:w-10'"
                 ></span>
-              </div>
-            </div>
+              </span>
+            </button>
           </div>
         </div>
       </nav>
@@ -296,6 +307,7 @@
 <script setup lang="ts">
   import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
   import gsap from 'gsap';
+  import { captureFocusOrigin, restoreFocusOrigin, trapDialogTab } from '@/utils/modalFocus';
 
   const props = withDefaults(
     defineProps<{
@@ -333,11 +345,13 @@
   const isOpen = ref(false);
   const isAnimating = ref(false);
 
+  const menuBtn = ref<HTMLButtonElement | null>(null);
   const menuPanel = ref<HTMLElement | null>(null);
   const closeBtn = ref<HTMLElement | null>(null);
   const navItemLines = ref<HTMLElement[]>([]);
   const socialLinks = ref<HTMLElement | null>(null);
   const contextPanel = ref<HTMLElement | null>(null);
+  let previousFocus: HTMLElement | null = null;
 
   const hoveredItem = ref<string | null>(null);
   const currentTime = ref('');
@@ -372,11 +386,23 @@
     }
   };
 
+  const handleMenuKeyDown = (e: KeyboardEvent) => {
+    if (!isOpen.value) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeMenu();
+      return;
+    }
+    trapDialogTab(menuPanel.value, e);
+  };
+
   onMounted(() => {
     // Clock is only ticked when navigation menu is actually open
+    window.addEventListener('keydown', handleMenuKeyDown);
   });
 
   onUnmounted(() => {
+    window.removeEventListener('keydown', handleMenuKeyDown);
     stopClock();
   });
 
@@ -470,12 +496,14 @@
       activeMenuTl.kill();
       activeMenuTl = null;
     }
+    previousFocus = captureFocusOrigin();
     isOpen.value = true;
     isAnimating.value = true;
     document.body.style.overflow = 'hidden';
     startClock();
 
     nextTick(() => {
+      closeBtn.value?.focus({ preventScroll: true });
       if (!menuPanel.value) return;
 
       // Reset initial states
@@ -583,7 +611,12 @@
         isAnimating.value = false;
         document.body.style.overflow = '';
         activeMenuTl = null;
-        callback?.();
+        if (callback) {
+          callback();
+        } else {
+          restoreFocusOrigin(previousFocus ?? menuBtn.value);
+        }
+        previousFocus = null;
       },
     });
 
