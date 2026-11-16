@@ -19,7 +19,7 @@
 
       <!-- Quick Intro Block (Top Right) -->
       <div class="max-w-[360px] md:max-w-[560px] lg:max-w-[660px] text-left md:pt-1">
-        <span class="block font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.2em] text-[#22201e]/60 mb-2 font-medium">
+        <span class="block font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.2em] text-[#22201e]/65 mb-2 font-medium">
           QUICK INTRO
         </span>
         <!-- Mobile Natural Fluid Flow -->

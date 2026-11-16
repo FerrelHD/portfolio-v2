@@ -173,15 +173,15 @@
         <!-- Left Side: Interactive Project Pagination & Archive Link -->
         <div class="flex items-center gap-2 sm:gap-6">
           <!-- Step Pagination Dots / Lines with Rolling Number & Spring Pill -->
-          <div class="flex items-center gap-1 sm:gap-2.5 font-mono text-[10px] sm:text-[11px] tracking-wider text-[#22201e]/60">
-            <span class="font-sans uppercase text-[9px] sm:text-[10px] tracking-[0.2em] text-[#22201e]/40 font-semibold mr-0.5 sm:mr-1">PROJECT</span>
+          <div class="flex items-center gap-1 sm:gap-2.5 font-mono text-[10px] sm:text-[11px] tracking-wider text-[#22201e]/65">
+            <span class="font-sans uppercase text-[9px] sm:text-[10px] tracking-[0.2em] text-[#22201e]/65 font-semibold mr-0.5 sm:mr-1">PROJECT</span>
             <button
               v-for="(p, pIdx) in workProjects"
               :key="p.id"
               type="button"
               @click="emit('goToProject', pIdx)"
               class="group/step relative flex items-center gap-1 sm:gap-1.5 transition-colors cursor-pointer select-none min-h-[44px] px-1 sm:px-0 py-1"
-              :class="pIdx === index ? 'text-[#22201e] font-bold' : 'text-[#22201e]/40 hover:text-[#22201e]'"
+              :class="pIdx === index ? 'text-[#22201e] font-bold' : 'text-[#22201e]/65 hover:text-[#22201e]'"
               :aria-current="pIdx === index ? 'step' : undefined"
               :aria-label="`Go to project ${p.title}`"
             >
@@ -192,7 +192,7 @@
               ></span>
               <span
                 v-else
-                class="inline-block h-1 w-1.5 sm:w-2.5 bg-black/20 rounded-full transition-all duration-300 ease-out group-hover/step:w-3.5 sm:group-hover/step:w-4 group-hover/step:bg-black/60"
+                class="inline-block h-1 w-1.5 sm:w-2.5 bg-black/45 rounded-full transition-all duration-300 ease-out group-hover/step:w-3.5 sm:group-hover/step:w-4 group-hover/step:bg-black/70"
               ></span>
 
               <!-- Masked Rolling Counter for Number -->
@@ -228,18 +228,18 @@
         <!-- Right Side: THE WORK #01 typography -->
         <div class="flex items-end gap-1 leading-none select-none ml-auto shrink-0">
           <!-- THE stacked vertically (desktop/tablet) -->
-          <div class="hidden sm:flex flex-col uppercase font-sans font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#22201e]/25 leading-[0.85] tracking-tight">
+          <div aria-hidden="true" class="hidden sm:flex flex-col uppercase font-sans font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#22201e]/25 leading-[0.85] tracking-tight">
             <span>THE</span>
           </div>
           <!-- WORK massive (desktop/tablet) -->
-          <div class="hidden sm:block overflow-hidden leading-none">
+          <div aria-hidden="true" class="hidden sm:block overflow-hidden leading-none">
             <span class="slide-number font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/25 leading-[0.85] tracking-tighter will-change-transform inline-block">
               WORK
             </span>
           </div>
           <!-- Slide number (shown on all breakpoints) -->
           <div class="overflow-hidden leading-none sm:ml-1.5">
-            <span class="slide-number-idx font-serif text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/30 leading-[0.85] will-change-transform inline-block">
+            <span class="slide-number-idx font-serif text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/55 leading-[0.85] will-change-transform inline-block">
               {{ project.slideNumber }}
             </span>
           </div>
