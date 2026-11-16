@@ -9,9 +9,10 @@
       <div class="flex flex-col items-center text-center">
         <div class="inline-block rounded-full bg-yellow-50 p-4">
           <svg
-            class="h-12 w-12 fill-current text-yellow-500"
+            class="h-12 w-12 fill-current text-amber-700"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path d="M0 0h24v24H0V0z" fill="none" />
             <path
