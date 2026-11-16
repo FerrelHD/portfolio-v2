@@ -55,12 +55,17 @@
         <!-- Right Column on Desktop (Title & Meta) -> On Mobile goes FIRST (order-1 md:order-2) -->
         <div class="order-1 md:order-2 md:col-span-6 flex flex-col pt-0 md:pl-2 lg:pl-4">
           <!-- Project Title (Masked Reveal) — Responsive, bold, uppercase, never clips -->
-          <div class="overflow-hidden">
+          <div class="overflow-hidden p-1 -m-1">
             <h3
-              @click="emit('openCaseStudy', project.id)"
-              class="slide-project-title font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal cursor-pointer hover:opacity-85 transition-opacity"
+              class="slide-project-title font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal"
             >
-              {{ project.title }}
+              <button
+                type="button"
+                @click="emit('openCaseStudy', project.id)"
+                class="w-full text-left uppercase tracking-tight font-black bg-transparent border-0 p-0 cursor-pointer hover:opacity-85 transition-opacity"
+              >
+                {{ project.title }}
+              </button>
             </h3>
           </div>
 
@@ -89,8 +94,10 @@
             <div
               role="button"
               tabindex="0"
+              :aria-label="`Open case study for ${project.title}`"
               @click="emit('openCaseStudy', project.id)"
-              @keydown.enter="emit('openCaseStudy', project.id)"
+              @keydown.enter.prevent="emit('openCaseStudy', project.id)"
+              @keydown.space.prevent="emit('openCaseStudy', project.id)"
               class="group/mockup relative block w-full aspect-[16/9] max-h-[19vh] sm:max-h-[22vh] md:max-h-[25vh] lg:max-h-[28vh] xl:max-h-[32vh] overflow-hidden rounded-xl border border-black/15 bg-black/5 shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_22px_45px_rgba(0,0,0,0.13)] cursor-pointer"
             >
               <!-- Media Preview (Video with Poster Fallback or Static Screenshot) -->
@@ -175,6 +182,7 @@
               @click="emit('goToProject', pIdx)"
               class="group/step relative flex items-center gap-1 sm:gap-1.5 transition-colors cursor-pointer select-none min-h-[44px] px-1 sm:px-0 py-1"
               :class="pIdx === index ? 'text-[#22201e] font-bold' : 'text-[#22201e]/40 hover:text-[#22201e]'"
+              :aria-current="pIdx === index ? 'step' : undefined"
               :aria-label="`Go to project ${p.title}`"
             >
               <!-- Active Spring Pill vs Inactive Magnetic Dash -->
