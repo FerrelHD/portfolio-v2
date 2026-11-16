@@ -98,7 +98,7 @@
     <!-- Bottom Contextual Status Bar -->
     <div
       ref="statusBarRef"
-      class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4 text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.12em] sm:tracking-[0.15em] text-[#faf9f6]/40 shrink-0 pt-3 sm:pt-2 border-t border-white/5 will-change-transform"
+      class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4 text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.12em] sm:tracking-[0.15em] text-[#faf9f6]/55 shrink-0 pt-3 sm:pt-2 border-t border-white/5 will-change-transform"
     >
       <span class="hidden sm:inline">Toggle 3D for skyline wave · Click cell for details</span>
       <span class="sm:hidden">Swipe 3D to orbit · Tap cell for details</span>
@@ -157,7 +157,7 @@
         </div>
 
         <!-- Modal Footer -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-[10px] sm:text-xs font-sans uppercase tracking-wider sm:tracking-widest text-[#faf9f6]/40 pt-3 border-t border-white/10 shrink-0">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-[10px] sm:text-xs font-sans uppercase tracking-wider sm:tracking-widest text-[#faf9f6]/55 pt-3 border-t border-white/10 shrink-0">
           <span class="hidden sm:inline">Click & Drag to rotate 360° · Double-click to reset orbit</span>
           <span class="sm:hidden">Swipe 3D to orbit · Tap cell for details</span>
           <span class="hidden sm:inline">Press ESC to return</span>
