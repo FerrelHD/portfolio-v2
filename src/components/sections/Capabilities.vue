@@ -23,7 +23,7 @@
 
       <!-- Bottom: WHAT I DO? & Mission Statement (Ide 3: Editorial Typography Morph on Hover) -->
       <div
-        class="flex flex-col gap-3 md:gap-4 mt-6 md:mt-auto cursor-pointer group/statement select-none"
+        class="flex flex-col gap-3 md:gap-4 mt-6 md:mt-auto group/statement select-none"
       >
         <div class="overflow-hidden">
           <span
@@ -62,7 +62,7 @@
         class="relative flex-1 flex flex-col justify-between
                px-6 py-6 sm:px-7 sm:py-7 md:px-5 md:py-8 lg:px-7 lg:py-10 xl:px-9 xl:py-12
                border-b md:border-b-0 md:border-l border-white/10 last:border-b-0
-               overflow-hidden cursor-pointer group select-none"
+               overflow-hidden group select-none"
       >
         <!-- Background Reveal Media Layer (Wipe reveal from bottom to top) -->
         <div

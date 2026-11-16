@@ -78,7 +78,7 @@
       <div class="md:col-start-8 md:col-span-5 lg:col-start-8 lg:col-span-5 flex justify-start md:justify-end">
         <div
           ref="photoEl"
-          class="group/photo relative w-40 sm:w-60 md:w-72 lg:w-80 xl:w-[420px] max-h-[38vh] sm:max-h-[48vh] lg:max-h-[52vh] aspect-[3/4] bg-[#22201e]/5 overflow-hidden shadow-md hover:shadow-2xl border border-black/5 hover:border-black/15 transition-all duration-700 ease-out will-change-transform rounded-sm cursor-pointer"
+          class="group/photo relative w-40 sm:w-60 md:w-72 lg:w-80 xl:w-[420px] max-h-[38vh] sm:max-h-[48vh] lg:max-h-[52vh] aspect-[3/4] bg-[#22201e]/5 overflow-hidden shadow-md hover:shadow-2xl border border-black/5 hover:border-black/15 transition-all duration-700 ease-out will-change-transform rounded-sm"
         >
           <img
             ref="photoImgEl"
