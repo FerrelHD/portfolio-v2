@@ -29,7 +29,7 @@
             ref="closeBtn"
             type="button"
             @click="handleClose"
-            class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/60 hover:text-[#22201e] hover:bg-black/[0.06] transition-all cursor-pointer"
+            class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/70 hover:text-[#22201e] hover:bg-black/[0.06] transition-all cursor-pointer"
             aria-label="Close case study dialog"
           >
             <span class="text-base sm:text-lg transition-transform duration-300 group-hover:rotate-90 inline-block">✕</span>
@@ -52,7 +52,7 @@
               <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-mono uppercase tracking-widest bg-black/[0.06] text-[#22201e]/80 whitespace-nowrap shrink-0">
                 CASE STUDY · {{ project.number }}
               </span>
-              <span class="font-sans text-[11px] sm:text-xs uppercase tracking-widest text-[#22201e]/50 font-medium leading-relaxed">
+              <span class="font-sans text-[11px] sm:text-xs uppercase tracking-widest text-[#22201e]/65 font-medium leading-relaxed">
                 {{ project.category }}
               </span>
             </div>
@@ -77,25 +77,25 @@
               <!-- Metadata Matrix (Clean Minimalist Spec with Hairline Dividers) -->
               <div class="flex flex-col divide-y divide-black/10 border-b border-black/10 text-xs sm:text-[13px]">
                 <div class="case-study-meta-item pb-3.5 flex flex-col gap-1">
-                  <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/40 font-semibold">ROLE</span>
+                  <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/65 font-semibold">ROLE</span>
                   <span class="font-sans font-medium text-[#22201e]">{{ project.role }}</span>
                 </div>
 
                 <div class="case-study-meta-item py-3.5 flex flex-col gap-1">
-                  <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/40 font-semibold">SYSTEM / ARCHITECTURE</span>
+                  <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/65 font-semibold">SYSTEM / ARCHITECTURE</span>
                   <span class="font-sans font-medium text-[#22201e]">{{ project.system }}</span>
                 </div>
 
                 <div class="case-study-meta-item py-3.5 flex flex-col gap-1">
-                  <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/40 font-semibold">CONTEXT & YEAR</span>
+                  <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/65 font-semibold">CONTEXT & YEAR</span>
                   <div class="flex items-center justify-between">
                     <span class="font-sans font-medium text-[#22201e]">{{ project.context }}</span>
-                    <span class="font-mono text-[#22201e]/60">{{ project.year }}</span>
+                    <span class="font-mono text-[#22201e]/65">{{ project.year }}</span>
                   </div>
                 </div>
 
                 <div class="case-study-meta-item py-3.5 flex flex-col gap-2">
-                  <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/40 font-semibold">TECH STACK</span>
+                  <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/65 font-semibold">TECH STACK</span>
                   <div class="flex flex-wrap gap-1.5">
                     <span
                       v-for="tech in project.techStack"
@@ -135,42 +135,42 @@
 
               <!-- Table of Contents (Desktop Jump Links) -->
               <div class="hidden lg:flex flex-col gap-3 pt-2">
-                <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/50 font-semibold">TABLE OF CONTENTS</span>
+                <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/65 font-semibold">TABLE OF CONTENTS</span>
                 <nav class="flex flex-col gap-1 font-sans text-xs border-l border-black/10">
                   <a
                     href="#section-overview"
                     @click.prevent="scrollToSection('section-overview')"
                     class="transition-all duration-200 py-1 flex items-center gap-2 -ml-[1px] pl-3 border-l-2"
-                    :class="activeSection === 'section-overview' ? 'border-[#22201e] text-[#22201e] font-semibold' : 'border-transparent text-[#22201e]/50 hover:text-[#22201e]'"
+                    :class="activeSection === 'section-overview' ? 'border-[#22201e] text-[#22201e] font-semibold' : 'border-transparent text-[#22201e]/65 hover:text-[#22201e]'"
                   >
-                    <span class="font-mono text-xs opacity-60">01.</span>
+                    <span class="font-mono text-xs">01.</span>
                     <span>Problem & Context</span>
                   </a>
                   <a
                     href="#section-architecture"
                     @click.prevent="scrollToSection('section-architecture')"
                     class="transition-all duration-200 py-1 flex items-center gap-2 -ml-[1px] pl-3 border-l-2"
-                    :class="activeSection === 'section-architecture' ? 'border-[#22201e] text-[#22201e] font-semibold' : 'border-transparent text-[#22201e]/50 hover:text-[#22201e]'"
+                    :class="activeSection === 'section-architecture' ? 'border-[#22201e] text-[#22201e] font-semibold' : 'border-transparent text-[#22201e]/65 hover:text-[#22201e]'"
                   >
-                    <span class="font-mono text-xs opacity-60">02.</span>
+                    <span class="font-mono text-xs">02.</span>
                     <span>System Architecture</span>
                   </a>
                   <a
                     href="#section-features"
                     @click.prevent="scrollToSection('section-features')"
                     class="transition-all duration-200 py-1 flex items-center gap-2 -ml-[1px] pl-3 border-l-2"
-                    :class="activeSection === 'section-features' ? 'border-[#22201e] text-[#22201e] font-semibold' : 'border-transparent text-[#22201e]/50 hover:text-[#22201e]'"
+                    :class="activeSection === 'section-features' ? 'border-[#22201e] text-[#22201e] font-semibold' : 'border-transparent text-[#22201e]/65 hover:text-[#22201e]'"
                   >
-                    <span class="font-mono text-xs opacity-60">03.</span>
+                    <span class="font-mono text-xs">03.</span>
                     <span>Key Features</span>
                   </a>
                   <a
                     href="#section-takeaways"
                     @click.prevent="scrollToSection('section-takeaways')"
                     class="transition-all duration-200 py-1 flex items-center gap-2 -ml-[1px] pl-3 border-l-2"
-                    :class="activeSection === 'section-takeaways' ? 'border-[#22201e] text-[#22201e] font-semibold' : 'border-transparent text-[#22201e]/50 hover:text-[#22201e]'"
+                    :class="activeSection === 'section-takeaways' ? 'border-[#22201e] text-[#22201e] font-semibold' : 'border-transparent text-[#22201e]/65 hover:text-[#22201e]'"
                   >
-                    <span class="font-mono text-xs opacity-60">04.</span>
+                    <span class="font-mono text-xs">04.</span>
                     <span>Learnings & Outcomes</span>
                   </a>
                 </nav>
@@ -221,7 +221,7 @@
                   <span class="font-sans font-black text-lg sm:text-xl lg:text-2xl text-[#22201e]">
                     {{ metric.value }}
                   </span>
-                  <span class="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-[#22201e]/55">
+                  <span class="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-[#22201e]/65">
                     {{ metric.label }}
                   </span>
                 </div>
@@ -230,7 +230,7 @@
               <!-- Section 1: The Context & Problem Statement -->
               <section id="section-overview" class="flex flex-col gap-4 scroll-mt-20">
                 <div class="flex items-baseline gap-2.5">
-                  <span class="font-mono text-base sm:text-lg text-[#22201e]/50 font-bold tracking-tight">01.</span>
+                  <span class="font-mono text-base sm:text-lg text-[#22201e]/65 font-bold tracking-tight">01.</span>
                   <h2 class="font-sans font-bold text-xl sm:text-2xl text-[#22201e] uppercase tracking-tight">
                     The Problem & Context
                   </h2>
@@ -246,7 +246,7 @@
               <!-- Section 2: Architecture & Engineering Highlights -->
               <section id="section-architecture" class="flex flex-col gap-6 scroll-mt-20">
                 <div class="flex items-baseline gap-2.5">
-                  <span class="font-mono text-base sm:text-lg text-[#22201e]/50 font-bold tracking-tight">02.</span>
+                  <span class="font-mono text-base sm:text-lg text-[#22201e]/65 font-bold tracking-tight">02.</span>
                   <h2 class="font-sans font-bold text-xl sm:text-2xl text-[#22201e] uppercase tracking-tight">
                     System Architecture & Engineering
                   </h2>
@@ -278,7 +278,7 @@
               <!-- Section 3: Key Features & UI Engineering -->
               <section id="section-features" class="flex flex-col gap-6 scroll-mt-20">
                 <div class="flex items-baseline gap-2.5">
-                  <span class="font-mono text-base sm:text-lg text-[#22201e]/50 font-bold tracking-tight">03.</span>
+                  <span class="font-mono text-base sm:text-lg text-[#22201e]/65 font-bold tracking-tight">03.</span>
                   <h2 class="font-sans font-bold text-xl sm:text-2xl text-[#22201e] uppercase tracking-tight">
                     Key Features & Interaction Design
                   </h2>
@@ -299,7 +299,7 @@
                         </h4>
                         <span
                           v-if="feat.tag"
-                          class="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-[#22201e]/45 font-medium"
+                          class="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-[#22201e]/65 font-medium"
                         >
                           {{ feat.tag }}
                         </span>
@@ -319,7 +319,7 @@
               <!-- Section 4: Key Learnings & Outcomes -->
               <section id="section-takeaways" class="flex flex-col gap-4 scroll-mt-20">
                 <div class="flex items-baseline gap-2.5">
-                  <span class="font-mono text-base sm:text-lg text-[#22201e]/50 font-bold tracking-tight">04.</span>
+                  <span class="font-mono text-base sm:text-lg text-[#22201e]/65 font-bold tracking-tight">04.</span>
                   <h2 class="font-sans font-bold text-xl sm:text-2xl text-[#22201e] uppercase tracking-tight">
                     Key Takeaways & Learnings
                   </h2>
@@ -347,7 +347,7 @@
                   @click="goToProject(prevProject.id)"
                   class="group flex flex-col items-start gap-1 p-4 rounded-xl border border-black/10 hover:border-black/30 hover:bg-black/[0.02] transition-all text-left cursor-pointer flex-1"
                 >
-                  <span class="font-mono text-[10px] uppercase tracking-wider text-[#22201e]/45">
+                  <span class="font-mono text-[10px] uppercase tracking-wider text-[#22201e]/65">
                     ← Previous Case Study
                   </span>
                   <span class="font-sans font-bold text-sm sm:text-base text-[#22201e] group-hover:underline underline-offset-2">
