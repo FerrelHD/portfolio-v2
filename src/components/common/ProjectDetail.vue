@@ -17,7 +17,7 @@
         <button
           type="button"
           @click="handleClose"
-          class="group flex items-center gap-2 px-3 py-1.5 -ml-2 rounded-full text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/75 hover:text-[#22201e] hover:bg-black/[0.05] transition-all cursor-pointer outline-none min-h-[44px]"
+          class="group flex items-center gap-2 px-3 py-1.5 -ml-2 rounded-full text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/75 hover:text-[#22201e] hover:bg-black/[0.05] transition-all cursor-pointer min-h-[44px]"
         >
           <span class="inline-block transition-transform duration-200 group-hover:-translate-x-1">←</span>
           <span>Back to Works</span>
@@ -29,7 +29,7 @@
             ref="closeBtn"
             type="button"
             @click="handleClose"
-            class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/60 hover:text-[#22201e] hover:bg-black/[0.06] transition-all cursor-pointer outline-none"
+            class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/60 hover:text-[#22201e] hover:bg-black/[0.06] transition-all cursor-pointer"
             aria-label="Close case study dialog"
           >
             <span class="text-base sm:text-lg transition-transform duration-300 group-hover:rotate-90 inline-block">✕</span>
@@ -345,7 +345,7 @@
                   v-if="prevProject"
                   type="button"
                   @click="goToProject(prevProject.id)"
-                  class="group flex flex-col items-start gap-1 p-4 rounded-xl border border-black/10 hover:border-black/30 hover:bg-black/[0.02] transition-all text-left cursor-pointer outline-none flex-1"
+                  class="group flex flex-col items-start gap-1 p-4 rounded-xl border border-black/10 hover:border-black/30 hover:bg-black/[0.02] transition-all text-left cursor-pointer flex-1"
                 >
                   <span class="font-mono text-[10px] uppercase tracking-wider text-[#22201e]/45">
                     ← Previous Case Study
@@ -361,7 +361,7 @@
                   v-if="nextProject"
                   type="button"
                   @click="goToProject(nextProject.id)"
-                  class="group flex flex-col items-end gap-1 p-4 rounded-xl border border-black/10 hover:border-black/30 bg-[#22201e] text-[#faf9f6] hover:bg-black transition-all text-right cursor-pointer outline-none flex-1"
+                  class="group flex flex-col items-end gap-1 p-4 rounded-xl border border-black/10 hover:border-black/30 bg-[#22201e] text-[#faf9f6] hover:bg-black transition-all text-right cursor-pointer flex-1"
                 >
                   <span class="font-mono text-[10px] uppercase tracking-wider text-[#faf9f6]/60">
                     Next Case Study →

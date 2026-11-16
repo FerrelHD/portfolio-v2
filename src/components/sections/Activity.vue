@@ -23,7 +23,7 @@
         <button
           type="button"
           @click="openFullscreen"
-          class="group inline-flex items-center gap-1.5 min-h-[44px] md:min-h-0 text-[11px] sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/70 hover:text-white border-b border-transparent hover:border-white/60 transition-colors cursor-pointer outline-none select-none"
+          class="group inline-flex items-center gap-1.5 min-h-[44px] md:min-h-0 text-[11px] sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/70 hover:text-white border-b border-transparent hover:border-white/60 transition-colors cursor-pointer select-none"
           title="Expand 3D Skyline Fullscreen"
         >
           <span>Fullscreen</span>
@@ -129,7 +129,7 @@
           <button
             type="button"
             @click="closeFullscreen"
-            class="group inline-flex items-center gap-2 min-h-[44px] md:min-h-0 text-xs sm:text-sm font-sans uppercase tracking-wider text-[#faf9f6]/70 hover:text-white transition-colors cursor-pointer outline-none"
+            class="group inline-flex items-center gap-2 min-h-[44px] md:min-h-0 text-xs sm:text-sm font-sans uppercase tracking-wider text-[#faf9f6]/70 hover:text-white transition-colors cursor-pointer"
           >
             <span class="hidden sm:inline">Close [ESC]</span>
             <span class="sm:hidden">Close</span>

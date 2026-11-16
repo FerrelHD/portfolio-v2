@@ -244,6 +244,17 @@ layer(base);
     letter-spacing: 0;
   }
 
+  /* High-contrast dual-ring keyboard focus indicator across light and dark surfaces */
+  :where(a, button, summary, input, select, textarea, [tabindex], [role='button']):focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  :where(a, button, summary, input, select, textarea, [tabindex], [role='button']):focus-visible {
+    outline: 2px solid #22201e;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px #faf9f6;
+  }
+
   /* Masked text reveal utility */
   .mask-reveal-wrap {
     display: inline-block;

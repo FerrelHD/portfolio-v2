@@ -28,7 +28,7 @@
           ref="closeBtn"
           type="button"
           @click="handleClose"
-          class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/60 hover:text-[#22201e] hover:bg-black/[0.06] transition-all duration-200 cursor-pointer outline-none"
+          class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/60 hover:text-[#22201e] hover:bg-black/[0.06] transition-all duration-200 cursor-pointer"
           aria-label="Close archive dialog"
         >
           <span class="text-lg transition-transform duration-300 group-hover:rotate-90 inline-block">✕</span>
@@ -56,7 +56,7 @@
                 :key="cat.id"
                 type="button"
                 @click="activeCategory = cat.id"
-                class="px-3.5 py-1.5 rounded-full text-xs sm:text-[13px] font-sans font-medium uppercase tracking-wider transition-all duration-300 cursor-pointer outline-none select-none"
+                class="px-3.5 py-1.5 rounded-full text-xs sm:text-[13px] font-sans font-medium uppercase tracking-wider transition-all duration-300 cursor-pointer select-none"
                 :class="[
                   activeCategory === cat.id
                     ? 'bg-[#22201e] text-[#faf9f6] shadow-sm'
@@ -102,7 +102,7 @@
                     <button
                       type="button"
                       @click="emit('openCaseStudy', project.id)"
-                      class="font-serif text-lg lg:text-xl xl:text-2xl tracking-tight text-[#22201e] group-hover:underline underline-offset-4 decoration-1 decoration-black/30 transition-colors inline-flex items-baseline gap-2 text-left cursor-pointer outline-none"
+                      class="font-serif text-lg lg:text-xl xl:text-2xl tracking-tight text-[#22201e] group-hover:underline underline-offset-4 decoration-1 decoration-black/30 transition-colors inline-flex items-baseline gap-2 text-left cursor-pointer"
                     >
                       <span>{{ project.title }}</span>
                       <span class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-xs font-sans text-black/50 inline-block group-hover:translate-x-0.5">→</span>
@@ -135,7 +135,7 @@
                       <button
                         type="button"
                         @click="emit('openCaseStudy', project.id)"
-                        class="group/link inline-flex items-center gap-1 text-[#22201e] font-semibold hover:underline underline-offset-2 transition-colors cursor-pointer outline-none"
+                        class="group/link inline-flex items-center gap-1 text-[#22201e] font-semibold hover:underline underline-offset-2 transition-colors cursor-pointer"
                         :aria-label="`View case study for ${project.title}`"
                       >
                         <span>Case Study</span>
@@ -191,7 +191,7 @@
                 <button
                   type="button"
                   @click="emit('openCaseStudy', project.id)"
-                  class="font-serif text-2xl tracking-tight text-[#22201e] text-left hover:underline cursor-pointer outline-none block"
+                  class="font-serif text-2xl tracking-tight text-[#22201e] text-left hover:underline cursor-pointer block"
                 >
                   {{ project.title }}
                 </button>
@@ -216,7 +216,7 @@
                 <button
                   type="button"
                   @click="emit('openCaseStudy', project.id)"
-                  class="font-semibold text-[#22201e] underline underline-offset-2 py-0.5 cursor-pointer outline-none inline-flex items-center gap-1"
+                  class="font-semibold text-[#22201e] underline underline-offset-2 py-0.5 cursor-pointer inline-flex items-center gap-1"
                 >
                   <span>Case Study</span>
                   <span>→</span>

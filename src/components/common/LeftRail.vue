@@ -24,7 +24,7 @@
     <button
       type="button"
       @click="toggleMenu"
-      class="group relative flex size-10 md:size-auto md:h-16 md:w-full items-center justify-center transition-all duration-300 cursor-pointer outline-none md:border-b select-none"
+      class="group relative flex size-10 md:size-auto md:h-16 md:w-full items-center justify-center transition-all duration-300 cursor-pointer md:border-b select-none"
       :class="[
         isDark || isOpen
           ? 'text-[#f3eee8] hover:text-white md:border-white/10 hover:bg-white/[0.04]'
@@ -68,7 +68,7 @@
     <button
       type="button"
       @click="navigateTo('hero')"
-      class="flex items-center gap-2 md:hidden cursor-pointer outline-none select-none transition-opacity hover:opacity-80"
+      class="flex items-center gap-2 md:hidden cursor-pointer select-none transition-opacity hover:opacity-80"
       aria-label="Go to home"
     >
       <span class="font-serif text-lg tracking-wider font-normal">
@@ -91,7 +91,7 @@
         <button
           type="button"
           @click="navigateTo('hero')"
-          class="vt-rl vt-reading-up font-sans text-[10px] uppercase tracking-[0.22em] font-medium transition-colors duration-500 whitespace-nowrap cursor-pointer select-none pointer-events-auto outline-none"
+          class="vt-rl vt-reading-up font-sans text-[10px] uppercase tracking-[0.22em] font-medium transition-colors duration-500 whitespace-nowrap cursor-pointer select-none pointer-events-auto"
           :class="isDark && !isOpen ? 'text-[#f3eee8]/80 hover:text-[#f3eee8]' : (isOpen ? 'text-[#f3eee8]/80 hover:text-[#f3eee8]' : 'text-[#22201e]/80 hover:text-[#22201e]')"
           aria-label="Back to home"
         >
@@ -129,12 +129,12 @@
     style="clip-path: inset(0 100% 0 0);"
   >
     <!-- Top Right: Pure Serif "CLOSE" Button (Identical to Khanh Nguyen) -->
-    <div class="flex justify-end w-full overflow-hidden">
+    <div class="flex justify-end w-full overflow-hidden p-1">
       <button
         ref="closeBtn"
         type="button"
         @click="closeMenu()"
-        class="font-serif text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-[#faf9f6] opacity-75 hover:opacity-100 transition-opacity cursor-pointer outline-none will-change-transform min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
+        class="font-serif text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-[#faf9f6] opacity-75 hover:opacity-100 transition-opacity cursor-pointer will-change-transform min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
         aria-label="Close navigation menu"
       >
         CLOSE
@@ -244,7 +244,7 @@
         <button
           type="button"
           @click="openArchiveModal"
-          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer outline-none min-h-[44px]"
+          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer min-h-[44px]"
         >
           <span class="border-b border-white/20 group-hover:border-white transition-colors">All Works Archive (10+)</span>
           <span class="font-serif italic text-sm inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -255,7 +255,7 @@
         <button
           type="button"
           @click="openColophonModal"
-          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer outline-none min-h-[44px]"
+          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer min-h-[44px]"
         >
           <span class="border-b border-white/20 group-hover:border-white transition-colors">Colophon & Specs</span>
           <span class="font-serif italic text-sm inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>

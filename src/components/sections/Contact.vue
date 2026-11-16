@@ -113,7 +113,7 @@
         <button
           type="button"
           @click="emit('openColophon')"
-          class="group inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#f3eee8]/65 hover:text-white transition-colors cursor-pointer outline-none"
+          class="group inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#f3eee8]/65 hover:text-white transition-colors cursor-pointer"
         >
           <span class="border-b border-white/20 group-hover:border-white transition-colors pb-0.5">Colophon & Specs</span>
           <span class="font-serif italic text-xs inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>

@@ -21,7 +21,7 @@
           <button
             type="button"
             @click="emit('openCaseStudy', project.id)"
-            class="group inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer outline-none"
+            class="group inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer"
           >
             <span>Case Study</span>
             <span class="text-sm md:text-base inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -173,7 +173,7 @@
               :key="p.id"
               type="button"
               @click="emit('goToProject', pIdx)"
-              class="group/step relative flex items-center gap-1 sm:gap-1.5 transition-colors cursor-pointer outline-none select-none min-h-[44px] px-1 sm:px-0 py-1"
+              class="group/step relative flex items-center gap-1 sm:gap-1.5 transition-colors cursor-pointer select-none min-h-[44px] px-1 sm:px-0 py-1"
               :class="pIdx === index ? 'text-[#22201e] font-bold' : 'text-[#22201e]/40 hover:text-[#22201e]'"
               :aria-label="`Go to project ${p.title}`"
             >
@@ -210,7 +210,7 @@
             v-if="index === workProjects.length - 1"
             type="button"
             @click="emit('openArchive')"
-            class="group hidden sm:inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer outline-none select-none pb-0.5 ml-2"
+            class="group hidden sm:inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer select-none pb-0.5 ml-2"
           >
             <span>Explore All Works (10+)</span>
             <span class="text-sm md:text-base transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -243,7 +243,7 @@
         <button
           type="button"
           @click="emit('openArchive')"
-          class="group inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer outline-none select-none py-1.5 min-h-[44px]"
+          class="group inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer select-none py-1.5 min-h-[44px]"
         >
           <span>Explore All Works (10+)</span>
           <span class="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -255,7 +255,7 @@
         <button
           type="button"
           @click="emit('openCaseStudy', project.id)"
-          class="font-medium text-[#22201e] underline underline-offset-2 transition-all inline-flex items-center gap-1 cursor-pointer outline-none min-h-[44px]"
+          class="font-medium text-[#22201e] underline underline-offset-2 transition-all inline-flex items-center gap-1 cursor-pointer min-h-[44px]"
         >
           <span>Case Study</span>
           <span class="inline-block transition-transform duration-300 ease-out">→</span>
