@@ -120,19 +120,21 @@
           </div>
 
           <!-- Hero Scroll Cue: tightly masked container with animated arrow -->
-          <div class="overflow-hidden select-none pr-4">
-            <div
+          <div class="overflow-hidden select-none pr-4 p-1">
+            <button
               ref="scrollCueEl"
-              class="group flex items-center gap-2.5 cursor-pointer will-change-transform pr-1"
+              type="button"
+              aria-label="Scroll to About section"
+              class="group flex items-center gap-2.5 cursor-pointer will-change-transform pr-1 bg-transparent border-0 p-0 min-h-[44px]"
               @click="scrollToNext"
             >
               <span class="font-serif italic tracking-[0.02em] text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-normal text-[#faf9f6]/90 transition-all duration-300 group-hover:text-white group-hover:tracking-[0.05em] leading-none">
                 Scroll
               </span>
-              <span class="inline-block font-sans text-xl sm:text-2xl md:text-3xl text-[#faf9f6]/60 transition-all duration-300 group-hover:translate-x-1.5 group-hover:text-white leading-none">
+              <span aria-hidden="true" class="inline-block font-sans text-xl sm:text-2xl md:text-3xl text-[#faf9f6]/60 transition-all duration-300 group-hover:translate-x-1.5 group-hover:text-white leading-none">
                 →
               </span>
-            </div>
+            </button>
           </div>
         </div>
       </div>
