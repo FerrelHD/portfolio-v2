@@ -286,6 +286,7 @@
 <script setup lang="ts">
   import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
   import gsap from 'gsap';
+  import { captureFocusOrigin, restoreFocusOrigin, trapDialogTab } from '@/utils/modalFocus';
 
   const props = withDefaults(
     defineProps<{
@@ -303,6 +304,7 @@
   const colophonOverlay = ref<HTMLElement | null>(null);
   const closeBtn = ref<HTMLButtonElement | null>(null);
   let activeAnimation: gsap.core.Timeline | null = null;
+  let previousFocus: HTMLElement | null = null;
 
   const openColophonAnimation = () => {
     nextTick(() => {
@@ -354,41 +356,30 @@
     if (!props.isOpen) return;
 
     if (e.key === 'Escape') {
+      e.preventDefault();
       handleClose();
       return;
     }
 
-    // Accessible Tab focus trapping
-    if (e.key === 'Tab' && colophonOverlay.value) {
-      const focusableEls = colophonOverlay.value.querySelectorAll<HTMLElement>(
-        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-      );
-      if (!focusableEls.length) return;
-
-      const firstEl = focusableEls[0];
-      const lastEl = focusableEls[focusableEls.length - 1];
-
-      if (e.shiftKey && document.activeElement === firstEl) {
-        e.preventDefault();
-        lastEl.focus();
-      } else if (!e.shiftKey && document.activeElement === lastEl) {
-        e.preventDefault();
-        firstEl.focus();
-      }
-    }
+    trapDialogTab(colophonOverlay.value, e);
   };
 
   watch(
     () => props.isOpen,
-    (val) => {
+    (val, oldVal) => {
       if (val) {
+        previousFocus = captureFocusOrigin();
         document.body.style.overflow = 'hidden';
         openColophonAnimation();
         nextTick(() => {
-          closeBtn.value?.focus();
+          closeBtn.value?.focus({ preventScroll: true });
         });
       } else {
         document.body.style.overflow = '';
+        if (oldVal) {
+          restoreFocusOrigin(previousFocus);
+          previousFocus = null;
+        }
       }
     }
   );

@@ -303,6 +303,7 @@
 <script setup lang="ts">
   import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
   import gsap from 'gsap';
+  import { captureFocusOrigin, restoreFocusOrigin, trapDialogTab } from '@/utils/modalFocus';
   import {
     archiveCategories,
     archiveProjects,
@@ -330,6 +331,7 @@
   let setPreviewX: ((val: number) => void) | null = null;
   let setPreviewY: ((val: number) => void) | null = null;
   let activeAnimation: gsap.core.Timeline | null = null;
+  let previousFocus: HTMLElement | null = null;
 
   const filteredProjects = computed(() => {
     if (activeCategory.value === 'all') {
@@ -438,28 +440,12 @@
     if (!props.isOpen) return;
 
     if (e.key === 'Escape') {
+      e.preventDefault();
       handleClose();
       return;
     }
 
-    // Focus trapping within modal
-    if (e.key === 'Tab' && archiveOverlay.value) {
-      const focusableEls = archiveOverlay.value.querySelectorAll<HTMLElement>(
-        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-      );
-      if (!focusableEls.length) return;
-
-      const firstEl = focusableEls[0];
-      const lastEl = focusableEls[focusableEls.length - 1];
-
-      if (e.shiftKey && document.activeElement === firstEl) {
-        e.preventDefault();
-        lastEl.focus();
-      } else if (!e.shiftKey && document.activeElement === lastEl) {
-        e.preventDefault();
-        firstEl.focus();
-      }
-    }
+    trapDialogTab(archiveOverlay.value, e);
   };
 
   let hasPreloaded = false;
@@ -476,13 +462,14 @@
 
   watch(
     () => props.isOpen,
-    (val) => {
+    (val, oldVal) => {
       if (val) {
+        previousFocus = captureFocusOrigin();
         preloadArchiveImages();
         document.body.style.overflow = 'hidden';
         openArchiveAnimation();
         nextTick(() => {
-          closeBtn.value?.focus();
+          closeBtn.value?.focus({ preventScroll: true });
           if (floatingPreview.value) {
             setPreviewX = gsap.quickTo(floatingPreview.value, 'x', {
               duration: 0.35,
@@ -498,6 +485,10 @@
         document.body.style.overflow = '';
         isPreviewVisible.value = false;
         hoveredProject.value = null;
+        if (oldVal) {
+          restoreFocusOrigin(previousFocus);
+          previousFocus = null;
+        }
       }
     },
   );
