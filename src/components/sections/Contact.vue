@@ -7,7 +7,7 @@
   >
     <!-- Top Area: Clean Open Editorial Space -->
     <div class="flex items-center justify-between">
-      <span class="font-sans text-xs sm:text-sm uppercase tracking-[0.25em] text-[#f3eee8]/40 font-medium">
+      <span class="font-sans text-xs sm:text-sm uppercase tracking-[0.25em] text-[#f3eee8]/65 font-medium">
         CLOSING // 2026
       </span>
       <button
@@ -45,7 +45,7 @@
       
       <!-- Contact Information (Bottom-Left) -->
       <div class="flex flex-col gap-2.5">
-        <span class="font-sans text-xs sm:text-sm uppercase tracking-[0.2em] text-[#f3eee8]/50 font-medium">
+        <span class="font-sans text-xs sm:text-sm uppercase tracking-[0.2em] text-[#f3eee8]/65 font-medium">
           Contact To
         </span>
         <div class="flex flex-col gap-1.5">
@@ -109,7 +109,7 @@
       </div>
 
       <!-- Copyright Note & Colophon Trigger (Bottom-Right) -->
-      <div class="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-[#f3eee8]/50 font-sans sm:justify-end">
+      <div class="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-[#f3eee8]/65 font-sans sm:justify-end">
         <button
           type="button"
           @click="emit('openColophon')"
