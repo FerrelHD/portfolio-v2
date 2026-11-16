@@ -18,21 +18,21 @@
           <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-[#22201e] leading-none">
             COLOPHON
           </h2>
-          <span class="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-[#22201e]/60 font-medium">
+          <span class="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-[#22201e]/65 font-medium">
             SPECIFICATION // 2026
           </span>
         </div>
 
         <!-- Right: Close Button & Keyboard Esc Hint -->
         <div class="flex items-center gap-3">
-          <span class="hidden md:inline-block font-mono text-[11px] text-[#22201e]/40 uppercase tracking-widest">
+          <span class="hidden md:inline-block font-mono text-[11px] text-[#22201e]/65 uppercase tracking-widest">
             ESC TO CLOSE
           </span>
           <button
             ref="closeBtn"
             type="button"
             @click="handleClose"
-            class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/60 hover:text-[#22201e] hover:bg-black/[0.05] transition-colors cursor-pointer select-none"
+            class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/70 hover:text-[#22201e] hover:bg-black/[0.05] transition-colors cursor-pointer select-none"
             aria-label="Close colophon modal"
           >
             <span class="text-xl transition-transform duration-300 group-hover:rotate-90 inline-block leading-none">✕</span>
@@ -49,7 +49,7 @@
           
           <!-- Editorial Statement Header (Max 2 lines on laptop & desktop) -->
           <div class="flex flex-col gap-3 pb-6 md:pb-8 border-b border-black/10">
-            <span class="font-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#22201e]/55 font-semibold">
+            <span class="font-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#22201e]/65 font-semibold">
               ARCHITECTURE & CRAFT
             </span>
             <h1 class="font-sans font-black text-xl sm:text-2xl md:text-3xl lg:text-[34px] xl:text-[38px] text-[#22201e] uppercase tracking-tight leading-[1.08] max-w-5xl">
@@ -66,7 +66,7 @@
             <!-- Pillar 1: Typography & Type Design -->
             <div class="flex flex-col gap-5">
               <div class="flex items-baseline gap-2 pb-2.5 border-b border-black/10">
-                <span class="font-mono text-xs text-[#22201e]/40 font-bold">01.</span>
+                <span class="font-mono text-xs text-[#22201e]/65 font-bold">01.</span>
                 <h3 class="font-sans font-bold text-xs sm:text-sm uppercase tracking-widest text-[#22201e]">
                   TYPOGRAPHY & FOUNDRY
                 </h3>
@@ -76,12 +76,12 @@
               <div class="flex flex-col gap-2 p-3 sm:p-3.5 rounded-lg bg-black/[0.02] border border-black/5">
                 <div class="flex items-baseline justify-between gap-1 flex-wrap">
                   <span class="font-sans font-semibold text-xs text-[#22201e]">PP Editorial Old</span>
-                  <span class="font-mono text-[9px] sm:text-[10px] text-[#22201e]/50 uppercase">Pangram Pangram</span>
+                  <span class="font-mono text-[9px] sm:text-[10px] text-[#22201e]/65 uppercase">Pangram Pangram</span>
                 </div>
                 <p class="font-serif italic text-base sm:text-lg text-[#22201e]/90 leading-tight">
                   "Sensory velocity & kinetic motion"
                 </p>
-                <span class="font-sans text-[11px] text-[#22201e]/60 leading-normal">
+                <span class="font-sans text-[11px] text-[#22201e]/70 leading-normal">
                   Primary editorial serif for chapter titles, pull quotes, and longform accents.
                 </span>
               </div>
@@ -90,12 +90,12 @@
               <div class="flex flex-col gap-2 p-3 sm:p-3.5 rounded-lg bg-black/[0.02] border border-black/5">
                 <div class="flex items-baseline justify-between gap-1 flex-wrap">
                   <span class="font-sans font-semibold text-xs text-[#22201e]">Cabinet Grotesk</span>
-                  <span class="font-mono text-[9px] sm:text-[10px] text-[#22201e]/50 uppercase">Indian Type Foundry</span>
+                  <span class="font-mono text-[9px] sm:text-[10px] text-[#22201e]/65 uppercase">Indian Type Foundry</span>
                 </div>
                 <p class="font-sans font-black text-xs sm:text-sm uppercase tracking-tight text-[#22201e]">
                   ARCHITECTURAL HEADINGS
                 </p>
-                <span class="font-sans text-[11px] text-[#22201e]/60 leading-normal">
+                <span class="font-sans text-[11px] text-[#22201e]/70 leading-normal">
                   Display grotesque driving high-impact headings and typographic watermarks.
                 </span>
               </div>
@@ -104,12 +104,12 @@
               <div class="flex flex-col gap-2 p-3 sm:p-3.5 rounded-lg bg-black/[0.02] border border-black/5">
                 <div class="flex items-baseline justify-between gap-1 flex-wrap">
                   <span class="font-sans font-semibold text-xs text-[#22201e]">Instrument Sans & Mono</span>
-                  <span class="font-mono text-[9px] sm:text-[10px] text-[#22201e]/50 uppercase">Google / Open Source</span>
+                  <span class="font-mono text-[9px] sm:text-[10px] text-[#22201e]/65 uppercase">Google / Open Source</span>
                 </div>
                 <div class="font-mono text-[11px] text-[#22201e]/75">
                   SPEC // 60.0 FPS · LATENCY: 0MS
                 </div>
-                <span class="font-sans text-[11px] text-[#22201e]/60 leading-normal">
+                <span class="font-sans text-[11px] text-[#22201e]/70 leading-normal">
                   Precision technical monospace and Swiss neo-grotesque for dense UI spec grids.
                 </span>
               </div>
@@ -118,7 +118,7 @@
             <!-- Pillar 2: Core Stack & Runtime -->
             <div class="flex flex-col gap-5">
               <div class="flex items-baseline gap-2 pb-2.5 border-b border-black/10">
-                <span class="font-mono text-xs text-[#22201e]/40 font-bold">02.</span>
+                <span class="font-mono text-xs text-[#22201e]/65 font-bold">02.</span>
                 <h3 class="font-sans font-bold text-xs sm:text-sm uppercase tracking-widest text-[#22201e]">
                   CORE RUNTIME STACK
                 </h3>
@@ -165,7 +165,7 @@
             <!-- Pillar 3: Performance Architecture -->
             <div class="flex flex-col gap-5">
               <div class="flex items-baseline gap-2 pb-2.5 border-b border-black/10">
-                <span class="font-mono text-xs text-[#22201e]/40 font-bold">03.</span>
+                <span class="font-mono text-xs text-[#22201e]/65 font-bold">03.</span>
                 <h3 class="font-sans font-bold text-xs sm:text-sm uppercase tracking-widest text-[#22201e]">
                   PERFORMANCE ARCHITECTURE
                 </h3>
@@ -205,7 +205,7 @@
             <!-- Pillar 4: Production & Deployment -->
             <div class="flex flex-col gap-5">
               <div class="flex items-baseline gap-2 pb-2.5 border-b border-black/10">
-                <span class="font-mono text-xs text-[#22201e]/40 font-bold">04.</span>
+                <span class="font-mono text-xs text-[#22201e]/65 font-bold">04.</span>
                 <h3 class="font-sans font-bold text-xs sm:text-sm uppercase tracking-widest text-[#22201e]">
                   PRODUCTION & DEPLOYMENT
                 </h3>
@@ -247,7 +247,7 @@
           <!-- Bottom Credits & Philosophy Signoff -->
           <div class="pt-6 md:pt-8 border-t border-black/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-8">
             <div class="flex flex-col gap-0.5">
-              <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/40 font-semibold">
+              <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/65 font-semibold">
                 DESIGN & CODE
               </span>
               <span class="font-sans text-xs sm:text-sm font-medium text-[#22201e]">
