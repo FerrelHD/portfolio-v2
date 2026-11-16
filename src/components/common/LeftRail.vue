@@ -83,7 +83,7 @@
       <!-- Top: FOLIO — EDITION -->
       <span
         class="vt-rl vt-reading-up font-sans text-[10px] uppercase tracking-[0.22em] transition-colors duration-500 whitespace-nowrap cursor-default select-none"
-        :class="isDark && !isOpen ? 'text-[#f3eee8]/50' : (isOpen ? 'text-[#f3eee8]/50' : 'text-[#22201e]/50')"
+        :class="isDark && !isOpen ? 'text-[#f3eee8]/65' : (isOpen ? 'text-[#f3eee8]/65' : 'text-[#22201e]/65')"
       >
         FOLIO — EDITION
       </span>
@@ -104,7 +104,7 @@
       <!-- Bottom: Copyright Year -->
       <span
         class="vt-rl vt-reading-up font-sans text-[10px] tracking-[0.2em] tabular-nums uppercase transition-colors duration-500 cursor-default select-none"
-        :class="isDark && !isOpen ? 'text-[#f3eee8]/50' : (isOpen ? 'text-[#f3eee8]/50' : 'text-[#22201e]/50')"
+        :class="isDark && !isOpen ? 'text-[#f3eee8]/65' : (isOpen ? 'text-[#f3eee8]/65' : 'text-[#22201e]/65')"
       >
         © 2026
       </span>
@@ -114,7 +114,7 @@
     <div class="flex items-center md:hidden">
       <span
         class="font-sans text-[10px] tracking-widest uppercase transition-colors duration-500 cursor-default"
-        :class="isDark ? 'text-[#f3eee8]/50' : 'text-[#22201e]/50'"
+        :class="isDark ? 'text-[#f3eee8]/65' : 'text-[#22201e]/65'"
       >
         © 2026
       </span>
@@ -171,7 +171,7 @@
               @blur="hoveredItem = null"
               :aria-current="activeSection === item.id ? 'location' : undefined"
               class="group/nav w-full text-left bg-transparent border-0 p-0 cursor-pointer flex items-baseline gap-3 sm:gap-5 md:gap-6 lg:gap-8 transition-all duration-300 ease-out hover:translate-x-2 sm:hover:translate-x-4"
-              :class="activeSection === item.id || hoveredItem === item.id ? 'opacity-100' : 'opacity-30 hover:opacity-100 focus-visible:opacity-100'"
+              :class="activeSection === item.id || hoveredItem === item.id ? 'text-[#faf9f6]' : 'text-[#faf9f6]/60 hover:text-[#faf9f6] focus-visible:text-[#faf9f6]'"
             >
               <!-- Small Serif Slide Number -->
               <span class="font-serif text-base sm:text-xl md:text-2xl lg:text-[26px] text-inherit transition-colors duration-300">
@@ -185,7 +185,7 @@
                   {{ item.label }}
                 </span>
                 <!-- Chapter Sub-badge -->
-                <span class="hidden sm:inline-block font-sans text-[10px] uppercase tracking-[0.2em] text-[#faf9f6]/40 transition-colors group-hover/nav:text-[#faf9f6]/75">
+                <span class="hidden sm:inline-block font-sans text-[10px] uppercase tracking-[0.2em] text-[#faf9f6]/60 transition-colors group-hover/nav:text-[#faf9f6]/85">
                   {{ item.chapter }}
                 </span>
                 <!-- Subtle editorial accent line: active has resting indicator, hover expands smoothly -->
@@ -208,7 +208,7 @@
         <!-- Top Metadata: Live Jakarta Time & Availability Badge -->
         <div class="flex flex-col gap-3 pb-6 border-b border-white/10">
           <div class="flex items-center justify-between">
-            <span class="font-sans text-[11px] uppercase tracking-[0.2em] text-[#faf9f6]/50">
+            <span class="font-sans text-[11px] uppercase tracking-[0.2em] text-[#faf9f6]/60">
               LOCAL TIME
             </span>
             <span class="font-sans text-xs uppercase tracking-wider text-[#faf9f6]/80 tabular-nums">
@@ -216,7 +216,7 @@
             </span>
           </div>
           <div class="flex items-center justify-between">
-            <span class="font-sans text-[11px] uppercase tracking-[0.2em] text-[#faf9f6]/50">
+            <span class="font-sans text-[11px] uppercase tracking-[0.2em] text-[#faf9f6]/60">
               STATUS
             </span>
             <span class="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-wider text-[#faf9f6]/90">
@@ -229,7 +229,7 @@
         <!-- Middle Dynamic Context Card -->
         <div class="my-auto py-6 flex flex-col gap-3 transition-opacity duration-300">
           <div class="overflow-hidden">
-            <span class="font-sans text-xs uppercase tracking-[0.22em] text-[#faf9f6]/50 block">
+            <span class="font-sans text-xs uppercase tracking-[0.22em] text-[#faf9f6]/60 block">
               {{ activeContext.chapter }}
             </span>
           </div>
@@ -242,7 +242,7 @@
         </div>
 
         <!-- Bottom Micro Hint -->
-        <div class="pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-sans uppercase tracking-[0.2em] text-[#faf9f6]/35">
+        <div class="pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-sans uppercase tracking-[0.2em] text-[#faf9f6]/55">
           <span>{{ activeContext.meta }}</span>
           <span>FOLIO 2026</span>
         </div>
