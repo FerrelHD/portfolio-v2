@@ -563,7 +563,7 @@
       : ['Hover a day for details · arrow keys to explore', 'Drag to orbit · double-click to reset'],
   );
   const currentHint = computed(() => hints.value[currentView.value === '3d' && props.orbit ? 1 : 0]);
-  const mutedColor = 'rgba(255, 255, 255, 0.45)';
+  const mutedColor = 'rgba(255, 255, 255, 0.55)';
 
   const FG_FALLBACK: RGB = [243, 238, 232];
   const BG_FALLBACK: RGB = [30, 28, 26];
