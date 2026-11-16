@@ -72,23 +72,25 @@
               <span class="inline-block transition-transform duration-300 ease-out hover:translate-x-0.5 hover:-translate-y-0.5">↗</span>
             </a>
 
-            <!-- Copied Toast Badge -->
-            <transition
-              enter-active-class="transition duration-200 ease-out"
-              enter-from-class="opacity-0 -translate-y-1 scale-95"
-              enter-to-class="opacity-100 translate-y-0 scale-100"
-              leave-active-class="transition duration-150 ease-in"
-              leave-from-class="opacity-100 translate-y-0 scale-100"
-              leave-to-class="opacity-0 -translate-y-1 scale-95"
-            >
-              <div
-                v-if="isCopied"
-                class="absolute -top-8 left-0 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#1e1c1a] border border-white/20 text-[#f3eee8] text-[11px] font-mono tracking-wider shadow-lg pointer-events-none whitespace-nowrap"
+            <!-- Copied Toast Badge (persistent live region so screen readers always announce changes) -->
+            <div role="status" aria-live="polite" class="contents">
+              <transition
+                enter-active-class="transition duration-200 ease-out"
+                enter-from-class="opacity-0 -translate-y-1 scale-95"
+                enter-to-class="opacity-100 translate-y-0 scale-100"
+                leave-active-class="transition duration-150 ease-in"
+                leave-from-class="opacity-100 translate-y-0 scale-100"
+                leave-to-class="opacity-0 -translate-y-1 scale-95"
               >
-                <span class="text-emerald-400">✓</span>
-                <span>Copied to clipboard!</span>
-              </div>
-            </transition>
+                <div
+                  v-if="isCopied"
+                  class="absolute -top-8 left-0 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#1e1c1a] border border-white/20 text-[#f3eee8] text-[11px] font-mono tracking-wider shadow-lg pointer-events-none whitespace-nowrap"
+                >
+                  <span aria-hidden="true" class="text-emerald-400">✓</span>
+                  <span>Copied to clipboard!</span>
+                </div>
+              </transition>
+            </div>
           </div>
 
           <!-- GitHub Link with SVG -->
