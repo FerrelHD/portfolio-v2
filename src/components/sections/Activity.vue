@@ -79,6 +79,7 @@
       <!-- Skyline Canvas Component with Live GitHub Data -->
       <div
         ref="skylineCardRef"
+        :aria-busy="contributionStatus === 'loading'"
         class="w-full will-change-transform"
       >
         <ContributionSkyline
@@ -98,11 +99,24 @@
     <!-- Bottom Contextual Status Bar -->
     <div
       ref="statusBarRef"
-      class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4 text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.12em] sm:tracking-[0.15em] text-[#faf9f6]/55 shrink-0 pt-3 sm:pt-2 border-t border-white/5 will-change-transform"
+      class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4 text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.12em] sm:tracking-[0.15em] text-[#faf9f6]/60 shrink-0 pt-3 sm:pt-2 border-t border-white/5 will-change-transform"
     >
       <span class="hidden sm:inline">Toggle 3D for skyline wave · Click cell for details</span>
       <span class="sm:hidden">Swipe 3D to orbit · Tap cell for details</span>
-      <span class="tabular-nums">Status: Active Development</span>
+      <div role="status" aria-live="polite" class="flex items-center gap-2.5 tabular-nums">
+        <span v-if="contributionStatus === 'loading'">Status: Syncing GitHub telemetry...</span>
+        <span v-else-if="contributionStatus === 'live'">Status: Live GitHub Telemetry</span>
+        <template v-else>
+          <span>Offline snapshot shown (live feed unavailable)</span>
+          <button
+            type="button"
+            @click="loadContributions"
+            class="underline underline-offset-2 text-[#faf9f6] hover:text-white cursor-pointer bg-transparent border-0 p-0 uppercase tracking-[0.12em]"
+          >
+            Retry
+          </button>
+        </template>
+      </div>
     </div>
 
     <!-- Fullscreen 3D Inspection Modal (Option B: Immersive Orbit View) -->
@@ -172,7 +186,7 @@
   import gsap from 'gsap';
   import ContributionSkyline from '@/components/ui/ContributionSkyline.vue';
   import {
-    fetchGitHubContributions,
+    fetchGitHubContributionsWithStatus,
     ferrelFallbackContributions,
   } from '@/services/githubContributions';
   import type { ContributionDay } from '@/utils/contributionMath';
@@ -188,7 +202,15 @@
   const statusBarRef = ref<HTMLElement | null>(null);
 
   const contributions = ref<ContributionDay[]>(ferrelFallbackContributions);
+  const contributionStatus = ref<'loading' | 'live' | 'fallback'>('loading');
   const isFullscreenOpen = ref(false);
+
+  const loadContributions = async () => {
+    contributionStatus.value = 'loading';
+    const result = await fetchGitHubContributionsWithStatus('FerrelHD');
+    contributions.value = result.data;
+    contributionStatus.value = result.source;
+  };
   const fullscreenModalRef = ref<HTMLElement | null>(null);
   const closeFullscreenBtn = ref<HTMLButtonElement | null>(null);
   let previousFocus: HTMLElement | null = null;
@@ -261,7 +283,7 @@
     if (statusBarRef.value) gsap.set(statusBarRef.value, { y: 10, opacity: 0 });
 
     window.addEventListener('keydown', handleKeydown);
-    contributions.value = await fetchGitHubContributions('FerrelHD');
+    await loadContributions();
   });
 
   onUnmounted(() => {
