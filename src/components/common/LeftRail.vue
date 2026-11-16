@@ -131,26 +131,28 @@
     tabindex="-1"
     class="fixed inset-y-0 right-0 left-0 md:left-16 z-[95] flex flex-col justify-between
            bg-[#24211e] text-[#faf9f6] select-none
-           px-6 pt-20 pb-6 sm:p-10 md:pt-8 md:pb-10 md:pl-20 md:pr-16 overflow-y-auto will-change-[clip-path]"
+           px-6 pt-20 pb-5 sm:p-8 md:pt-6 md:pb-6 md:pl-20 md:pr-16 overflow-y-auto will-change-[clip-path]"
     style="clip-path: inset(0 100% 0 0);"
   >
-    <!-- Top Right: Pure Serif "CLOSE" Button (Identical to Khanh Nguyen) -->
-    <div class="shrink-0 flex justify-end w-full overflow-hidden p-1">
+    <!-- Top Right: Sleek Editorial Close Button -->
+    <div class="shrink-0 flex justify-end w-full overflow-hidden p-1 pb-1.5 sm:pb-2">
       <button
         ref="closeBtn"
         type="button"
         @click="closeMenu()"
-        class="font-serif text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-[#faf9f6] opacity-75 hover:opacity-100 transition-opacity cursor-pointer will-change-transform min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
-        aria-label="Close navigation menu"
+        class="group/close relative inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/20 hover:border-white/60 bg-white/[0.03] hover:bg-white/[0.08] text-[#faf9f6]/75 hover:text-white font-sans text-xs tracking-[0.2em] uppercase font-medium transition-all duration-300 cursor-pointer will-change-transform outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#24211e]"
+        aria-label="Close navigation menu (ESC)"
       >
-        CLOSE
+        <span>CLOSE</span>
+        <span class="text-[10px] text-[#faf9f6]/40 group-hover/close:text-[#faf9f6]/70 transition-colors hidden sm:inline">[ESC]</span>
+        <span class="text-xs inline-block transition-transform duration-300 group-hover/close:rotate-90">✕</span>
       </button>
     </div>
 
     <!-- Center: Split Editorial Layout (Left: Menu Links, Right: Dynamic Context Panel) -->
-    <div class="shrink-0 my-auto py-4 sm:py-6 md:py-6 lg:py-8 grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+    <div class="flex-1 min-h-0 my-auto py-2 sm:py-3 md:py-3 lg:py-5 grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-12 items-center">
       <!-- Left Column: Giant Editorial Navigation Links with Masked Reveals -->
-      <nav aria-label="Primary chapters" class="md:col-span-7 flex flex-col gap-2.5 sm:gap-3.5 md:gap-4 lg:gap-5 xl:gap-6">
+      <nav aria-label="Primary chapters" class="md:col-span-7 flex flex-col gap-2 sm:gap-2.5 md:gap-2.5 lg:gap-3 xl:gap-4">
         <div
           v-for="item in navItems"
           :key="item.id"
@@ -170,17 +172,17 @@
               @focus="hoveredItem = item.id"
               @blur="hoveredItem = null"
               :aria-current="activeSection === item.id ? 'location' : undefined"
-              class="group/nav w-full text-left bg-transparent border-0 p-0 cursor-pointer flex items-baseline gap-3 sm:gap-5 md:gap-6 lg:gap-8 transition-all duration-300 ease-out hover:translate-x-2 sm:hover:translate-x-4"
+              class="group/nav w-full text-left bg-transparent border-0 p-0 cursor-pointer flex items-baseline gap-3 sm:gap-5 md:gap-5 lg:gap-7 transition-all duration-300 ease-out hover:translate-x-2 sm:hover:translate-x-4"
               :class="activeSection === item.id || hoveredItem === item.id ? 'text-[#faf9f6]' : 'text-[#faf9f6]/60 hover:text-[#faf9f6] focus-visible:text-[#faf9f6]'"
             >
               <!-- Small Serif Slide Number -->
-              <span class="font-serif text-base sm:text-xl md:text-2xl lg:text-[26px] text-inherit transition-colors duration-300">
+              <span class="font-serif text-sm sm:text-lg md:text-xl lg:text-2xl text-inherit transition-colors duration-300">
                 {{ item.num }}
               </span>
               <!-- Giant Editorial Serif Title + Chapter Sub-badge + Dynamic Dash Indicator -->
-              <span class="flex items-center gap-3 sm:gap-5 lg:gap-6">
+              <span class="flex items-center gap-3 sm:gap-4 lg:gap-5">
                 <span
-                  class="font-serif text-3xl sm:text-6xl md:text-[50px] lg:text-[62px] xl:text-[72px] 2xl:text-[5vw] uppercase tracking-[-0.03em] leading-[0.9] text-inherit transition-colors duration-300"
+                  class="font-serif text-3xl sm:text-5xl md:text-[clamp(2rem,3.8vh,3.2rem)] lg:text-[clamp(2.3rem,4.4vh,3.8rem)] xl:text-[clamp(2.7rem,5vh,4.5rem)] uppercase tracking-[-0.03em] leading-[0.92] text-inherit transition-colors duration-300"
                 >
                   {{ item.label }}
                 </span>
@@ -203,10 +205,10 @@
       <!-- Right Column: Editorial Context & Live Status Panel (Desktop Only) -->
       <aside
         ref="contextPanel"
-        class="hidden md:flex md:col-span-5 flex-col justify-between self-stretch py-2 pl-6 lg:pl-10 border-l border-white/10 will-change-transform"
+        class="hidden md:flex md:col-span-5 flex-col justify-between self-stretch py-1.5 pl-6 lg:pl-10 border-l border-white/10 will-change-transform"
       >
         <!-- Top Metadata: Live Jakarta Time & Availability Badge -->
-        <div class="flex flex-col gap-3 pb-6 border-b border-white/10">
+        <div class="flex flex-col gap-2.5 pb-3.5 border-b border-white/10">
           <div class="flex items-center justify-between">
             <span class="font-sans text-[11px] uppercase tracking-[0.2em] text-[#faf9f6]/60">
               LOCAL TIME
@@ -227,22 +229,22 @@
         </div>
 
         <!-- Middle Dynamic Context Card -->
-        <div class="my-auto py-6 flex flex-col gap-3 transition-opacity duration-300">
+        <div class="my-auto py-3 md:py-4 flex flex-col gap-2 md:gap-2.5 transition-opacity duration-300">
           <div class="overflow-hidden">
-            <span class="font-sans text-xs uppercase tracking-[0.22em] text-[#faf9f6]/60 block">
+            <span class="font-sans text-[11px] uppercase tracking-[0.22em] text-[#faf9f6]/60 block">
               {{ activeContext.chapter }}
             </span>
           </div>
-          <h4 class="font-sans font-bold text-xl lg:text-2xl text-[#faf9f6] tracking-tight leading-snug">
+          <h4 class="font-sans font-bold text-lg lg:text-xl xl:text-2xl text-[#faf9f6] tracking-tight leading-snug">
             {{ activeContext.title }}
           </h4>
-          <p class="font-sans text-xs lg:text-sm text-[#faf9f6]/70 leading-relaxed max-w-sm">
+          <p class="font-sans text-xs lg:text-[13px] text-[#faf9f6]/70 leading-relaxed max-w-sm line-clamp-3">
             {{ activeContext.desc }}
           </p>
         </div>
 
         <!-- Bottom Micro Hint -->
-        <div class="pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-sans uppercase tracking-[0.2em] text-[#faf9f6]/55">
+        <div class="pt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-sans uppercase tracking-[0.2em] text-[#faf9f6]/55">
           <span>{{ activeContext.meta }}</span>
           <span>FOLIO 2026</span>
         </div>
@@ -250,12 +252,12 @@
     </div>
 
     <!-- Bottom Row: Left Archive Link & Colophon, Right Social Links -->
-    <div class="shrink-0 pt-4 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-4">
+    <div class="shrink-0 pt-3 md:pt-3.5 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-2.5 md:gap-4">
       <div class="flex flex-wrap items-center gap-3 sm:gap-5">
         <button
           type="button"
           @click="openArchiveModal"
-          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer min-h-[44px]"
+          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer min-h-[38px] md:min-h-0"
         >
           <span class="border-b border-white/20 group-hover:border-white transition-colors">All Works Archive (10+)</span>
           <span class="font-serif italic text-sm inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -266,7 +268,7 @@
         <button
           type="button"
           @click="openColophonModal"
-          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer min-h-[44px]"
+          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer min-h-[38px] md:min-h-0"
         >
           <span class="border-b border-white/20 group-hover:border-white transition-colors">Colophon & Specs</span>
           <span class="font-serif italic text-sm inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -276,7 +278,7 @@
       <div class="overflow-hidden p-1 -m-1">
         <div
           ref="socialLinks"
-          class="flex flex-wrap items-center justify-start md:justify-end gap-6 sm:gap-8 text-xs sm:text-sm font-sans font-medium text-[#faf9f6]/70 will-change-transform"
+          class="flex flex-wrap items-center justify-start md:justify-end gap-5 sm:gap-7 text-xs sm:text-sm font-sans font-medium text-[#faf9f6]/70 will-change-transform"
         >
           <a
             href="https://github.com/FerrelHD"
