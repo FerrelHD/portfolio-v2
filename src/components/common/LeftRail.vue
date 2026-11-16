@@ -25,7 +25,7 @@
       ref="menuBtn"
       type="button"
       @click="toggleMenu"
-      class="group relative flex size-10 md:size-auto md:h-16 md:w-full items-center justify-center transition-all duration-300 cursor-pointer md:border-b select-none"
+      class="group relative flex size-11 md:size-auto md:h-16 md:w-full items-center justify-center transition-all duration-300 cursor-pointer md:border-b select-none"
       :class="[
         isDark || isOpen
           ? 'text-[#f3eee8] hover:text-white md:border-white/10 hover:bg-white/[0.04]'
@@ -70,7 +70,7 @@
     <button
       type="button"
       @click="navigateTo('hero')"
-      class="flex items-center gap-2 md:hidden cursor-pointer select-none transition-opacity hover:opacity-80"
+      class="flex items-center gap-2 min-h-[44px] px-2 md:hidden cursor-pointer select-none transition-opacity hover:opacity-80"
       aria-label="Go to home"
     >
       <span class="font-serif text-lg tracking-wider font-normal">

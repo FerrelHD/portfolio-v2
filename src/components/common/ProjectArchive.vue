@@ -28,7 +28,7 @@
           ref="closeBtn"
           type="button"
           @click="handleClose"
-          class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/70 hover:text-[#22201e] hover:bg-black/[0.06] transition-all duration-200 cursor-pointer"
+          class="group flex items-center justify-center size-11 rounded-full text-[#22201e]/70 hover:text-[#22201e] hover:bg-black/[0.06] transition-all duration-200 cursor-pointer"
           aria-label="Close archive dialog"
         >
           <span class="text-lg transition-transform duration-300 group-hover:rotate-90 inline-block">✕</span>
@@ -57,7 +57,7 @@
                 type="button"
                 :aria-pressed="activeCategory === cat.id"
                 @click="activeCategory = cat.id"
-                class="px-3.5 py-1.5 rounded-full text-xs sm:text-[13px] font-sans font-medium uppercase tracking-wider transition-all duration-300 cursor-pointer select-none"
+                class="px-3.5 py-2 min-h-[44px] sm:min-h-0 sm:py-1.5 rounded-full text-xs sm:text-[13px] font-sans font-medium uppercase tracking-wider transition-all duration-300 cursor-pointer select-none inline-flex items-center"
                 :class="[
                   activeCategory === cat.id
                     ? 'bg-[#22201e] text-[#faf9f6] shadow-sm'
@@ -234,7 +234,7 @@
                 <button
                   type="button"
                   @click.stop="emit('openCaseStudy', project.id)"
-                  class="font-semibold text-[#22201e] underline underline-offset-2 py-0.5 cursor-pointer inline-flex items-center gap-1"
+                  class="font-semibold text-[#22201e] underline underline-offset-2 min-h-[44px] py-1 cursor-pointer inline-flex items-center gap-1"
                 >
                   <span>Case Study</span>
                   <span>→</span>
@@ -245,7 +245,7 @@
                   target="_blank"
                   rel="noreferrer"
                   @click.stop
-                  class="group inline-flex items-center gap-1 text-[#22201e]/80 border-b border-transparent hover:border-black/60 py-0.5 transition-colors"
+                  class="group inline-flex items-center gap-1 text-[#22201e]/80 border-b border-transparent hover:border-black/60 min-h-[44px] py-1 transition-colors"
                 >
                   <span>Live Demo</span>
                   <span class="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
@@ -256,7 +256,7 @@
                   target="_blank"
                   rel="noreferrer"
                   @click.stop
-                  class="group inline-flex items-center gap-1 text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 py-0.5 transition-colors"
+                  class="group inline-flex items-center gap-1 text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 min-h-[44px] py-1 transition-colors"
                 >
                   <span>GitHub</span>
                   <span class="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>

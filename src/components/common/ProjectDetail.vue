@@ -29,7 +29,7 @@
             ref="closeBtn"
             type="button"
             @click="handleClose"
-            class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/70 hover:text-[#22201e] hover:bg-black/[0.06] transition-all cursor-pointer"
+            class="group flex items-center justify-center size-11 rounded-full text-[#22201e]/70 hover:text-[#22201e] hover:bg-black/[0.06] transition-all cursor-pointer"
             aria-label="Close case study dialog"
           >
             <span class="text-base sm:text-lg transition-transform duration-300 group-hover:rotate-90 inline-block">✕</span>

@@ -32,7 +32,7 @@
             ref="closeBtn"
             type="button"
             @click="handleClose"
-            class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/70 hover:text-[#22201e] hover:bg-black/[0.05] transition-colors cursor-pointer select-none"
+            class="group flex items-center justify-center size-11 rounded-full text-[#22201e]/70 hover:text-[#22201e] hover:bg-black/[0.05] transition-colors cursor-pointer select-none"
             aria-label="Close colophon modal"
           >
             <span class="text-xl transition-transform duration-300 group-hover:rotate-90 inline-block leading-none">✕</span>
@@ -260,7 +260,7 @@
                 href="https://github.com/FerrelHD/portfolio-v2"
                 target="_blank"
                 rel="noreferrer"
-                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full border border-black/15 text-xs font-sans font-medium uppercase tracking-wider text-[#22201e] hover:border-black/40 hover:bg-black/[0.02] transition-colors"
+                class="inline-flex items-center gap-1.5 px-4 py-2.5 min-h-[44px] rounded-full border border-black/15 text-xs font-sans font-medium uppercase tracking-wider text-[#22201e] hover:border-black/40 hover:bg-black/[0.02] transition-colors"
               >
                 <span>GitHub Repository</span>
                 <span class="text-xs">↗</span>
@@ -269,7 +269,7 @@
               <button
                 type="button"
                 @click="handleClose"
-                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#22201e] text-[#faf9f6] text-xs font-sans font-medium uppercase tracking-wider hover:bg-black transition-colors cursor-pointer"
+                class="inline-flex items-center gap-1.5 px-4 py-2.5 min-h-[44px] rounded-full bg-[#22201e] text-[#faf9f6] text-xs font-sans font-medium uppercase tracking-wider hover:bg-black transition-colors cursor-pointer"
               >
                 <span>Return to Folio</span>
                 <span class="text-xs">✕</span>
