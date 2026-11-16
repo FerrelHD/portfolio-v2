@@ -2,7 +2,7 @@
   <section
     id="activity"
     class="activity-slide shrink-0 w-full md:w-screen min-h-[100svh] md:h-dvh flex flex-col justify-between select-none
-           bg-[#23201e] text-[#faf9f6] relative overflow-hidden
+           bg-[#23201e] text-[#faf9f6] relative overflow-x-hidden overflow-y-auto
            pt-20 pb-6 px-5 sm:px-6 md:pt-6 md:pb-5 lg:pt-8 lg:pb-6 md:pl-24 md:pr-12 font-sans"
   >
     <!-- Top Editorial Header Bar -->

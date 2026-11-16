@@ -2,7 +2,7 @@
   <section
     id="about"
     class="shrink-0 w-full md:w-screen min-h-[100svh] md:h-dvh flex flex-col justify-between select-none
-           bg-[#faf9f6] text-[#22201e] relative overflow-hidden
+           bg-[#faf9f6] text-[#22201e] relative overflow-x-hidden overflow-y-auto
            pt-20 pb-8 px-6 md:pt-10 md:pb-7 md:pl-24 md:pr-12 font-sans"
   >
     <!-- Top Row: CHAPTER I on Left, QUICK INTRO on Right -->

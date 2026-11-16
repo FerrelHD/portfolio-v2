@@ -6,7 +6,7 @@
       :key="project.id"
       :id="index === 0 ? 'works' : `work-${project.id}`"
       class="work-slide shrink-0 w-full md:w-screen min-h-[100svh] md:h-dvh flex flex-col justify-between select-none
-             bg-[#faf9f6] text-[#22201e] relative overflow-hidden
+             bg-[#faf9f6] text-[#22201e] relative overflow-x-hidden overflow-y-auto
              pt-20 pb-6 px-6 md:pt-6 md:pb-4 lg:pt-8 lg:pb-5 md:pl-24 md:pr-12 font-sans"
     >
       <!-- Top Row: CHAPTER II on Left, Live Link on Right -->

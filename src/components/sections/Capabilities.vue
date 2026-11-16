@@ -2,7 +2,7 @@
   <section
     id="capabilities"
     class="shrink-0 w-full md:w-screen min-h-[100svh] md:h-dvh flex flex-col md:flex-row items-stretch select-none
-           bg-[#282523] text-[#faf9f6] relative overflow-hidden
+           bg-[#282523] text-[#faf9f6] relative overflow-x-hidden overflow-y-auto
            pt-16 pb-8 px-0 md:pt-0 md:pb-0 md:pl-16 md:pr-0 font-sans"
   >
     <!-- Left Column: Chapter III Title & "What I do?" Statement -->
@@ -36,23 +36,23 @@
 
         <div class="font-sans text-lg sm:text-2xl lg:text-[26px] xl:text-[28px] font-normal leading-[1.3] text-[#faf9f6] max-w-sm flex flex-col">
           <div class="overflow-hidden">
-            <span ref="statementLine1" class="statement-line block whitespace-nowrap will-change-transform">Designing digital</span>
+            <span ref="statementLine1" class="statement-line block will-change-transform">Designing digital</span>
           </div>
           <div class="overflow-hidden">
-            <span ref="statementLine2" class="statement-line block whitespace-nowrap will-change-transform">experiences with</span>
+            <span ref="statementLine2" class="statement-line block will-change-transform">experiences with</span>
           </div>
           <div class="overflow-hidden">
-            <span ref="statementLine3" class="statement-line block whitespace-nowrap will-change-transform"><span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">clarity</span>, <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">structure</span>,</span>
+            <span ref="statementLine3" class="statement-line block will-change-transform"><span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">clarity</span>, <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">structure</span>,</span>
           </div>
           <div class="overflow-hidden">
-            <span ref="statementLine4" class="statement-line block whitespace-nowrap will-change-transform">and <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">intention</span>.</span>
+            <span ref="statementLine4" class="statement-line block will-change-transform">and <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">intention</span>.</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Right Side: 3 Capabilities Columns with Bottom-to-Top Image Reveal on Hover -->
-    <div class="flex flex-col md:flex-row flex-1 items-stretch overflow-hidden">
+    <div class="flex flex-col md:flex-row flex-1 items-stretch">
       <article
         v-for="(item, index) in capabilityItems"
         :key="item.num"
