@@ -480,7 +480,11 @@
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (isArchiveOpen.value || activeCaseStudyId.value || isColophonOpen.value) return;
-    if (['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as HTMLElement)?.tagName)) return;
+    if (document.querySelector('[role="dialog"][aria-modal="true"]')) return;
+
+    const target = e.target as HTMLElement | null;
+    if (target?.closest('input, textarea, select, canvas')) return;
+    if (e.key === ' ' && target?.closest('button, a, summary, [role="button"], [tabindex]')) return;
 
     if (['ArrowRight', 'ArrowDown', 'PageDown'].includes(e.key) || (e.key === ' ' && !e.shiftKey)) {
       if (currentSlideIndex.value < TOTAL_SLIDES - 1) {
