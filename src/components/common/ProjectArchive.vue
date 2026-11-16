@@ -18,7 +18,7 @@
           <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-[#22201e] leading-none">
             ARCHIVE
           </h2>
-          <span class="font-sans text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#22201e]/60 font-medium">
+          <span class="font-sans text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#22201e]/65 font-medium">
             INDEX // {{ filteredProjects.length.toString().padStart(2, '0') }} WORKS
           </span>
         </div>
@@ -28,7 +28,7 @@
           ref="closeBtn"
           type="button"
           @click="handleClose"
-          class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/60 hover:text-[#22201e] hover:bg-black/[0.06] transition-all duration-200 cursor-pointer"
+          class="group flex items-center justify-center size-10 rounded-full text-[#22201e]/70 hover:text-[#22201e] hover:bg-black/[0.06] transition-all duration-200 cursor-pointer"
           aria-label="Close archive dialog"
         >
           <span class="text-lg transition-transform duration-300 group-hover:rotate-90 inline-block">✕</span>
@@ -61,11 +61,11 @@
                 :class="[
                   activeCategory === cat.id
                     ? 'bg-[#22201e] text-[#faf9f6] shadow-sm'
-                    : 'bg-black/[0.04] text-[#22201e]/70 hover:bg-black/[0.08] hover:text-[#22201e] border border-black/5'
+                    : 'bg-black/[0.04] text-[#22201e]/75 hover:bg-black/[0.08] hover:text-[#22201e] border border-black/15'
                 ]"
               >
                 {{ cat.label }}
-                <span class="ml-1 opacity-60 tabular-nums text-[11px]">
+                <span class="ml-1 opacity-80 tabular-nums text-[11px]">
                   ({{ getCategoryCount(cat.id) }})
                 </span>
               </button>
@@ -76,7 +76,7 @@
           <div class="hidden md:block w-full">
             <table class="w-full text-left border-collapse">
               <thead>
-                <tr class="border-b border-black/15 text-[11px] font-sans uppercase tracking-[0.2em] text-[#22201e]/50">
+                <tr class="border-b border-black/15 text-[11px] font-sans uppercase tracking-[0.2em] text-[#22201e]/65">
                   <th class="py-4 pr-4 w-16 shrink-0 font-medium">Year</th>
                   <th class="py-4 pr-6 font-medium">Project</th>
                   <th class="py-4 pr-6 hidden lg:table-cell font-medium">Category</th>
@@ -94,7 +94,7 @@
                   class="group transition-colors duration-200 hover:bg-black/[0.03] cursor-pointer"
                 >
                   <!-- Year -->
-                  <td class="py-5 pr-4 font-sans text-sm tabular-nums text-[#22201e]/60 group-hover:text-[#22201e] transition-colors whitespace-nowrap">
+                  <td class="py-5 pr-4 font-sans text-sm tabular-nums text-[#22201e]/70 group-hover:text-[#22201e] transition-colors whitespace-nowrap">
                     {{ project.year }}
                   </td>
 
@@ -106,10 +106,10 @@
                       class="font-serif text-lg lg:text-xl xl:text-2xl tracking-tight text-[#22201e] group-hover:underline underline-offset-4 decoration-1 decoration-black/30 transition-colors inline-flex items-baseline gap-2 text-left cursor-pointer"
                     >
                       <span>{{ project.title }}</span>
-                      <span class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-xs font-sans text-black/50 inline-block group-hover:translate-x-0.5">→</span>
+                      <span class="opacity-0 group-hover:opacity-100 transition-all duration-300 text-xs font-sans text-black/65 inline-block group-hover:translate-x-0.5">→</span>
                     </button>
                     <!-- Category shown inline on md, hidden on lg where it has its own column -->
-                    <p class="lg:hidden mt-0.5 text-xs font-sans text-[#22201e]/55">{{ project.category }}</p>
+                    <p class="lg:hidden mt-0.5 text-xs font-sans text-[#22201e]/65">{{ project.category }}</p>
                   </td>
 
                   <!-- Category (lg+) -->
@@ -182,7 +182,7 @@
               class="p-5 rounded-xl border border-black/10 bg-white/70 shadow-xs flex flex-col gap-3.5 cursor-pointer hover:bg-white/90 transition-colors"
             >
               <!-- Top Info: Year & Category -->
-              <div class="flex items-center justify-between text-xs font-sans text-[#22201e]/60">
+              <div class="flex items-center justify-between text-xs font-sans text-[#22201e]/65">
                 <span class="tabular-nums font-medium">{{ project.year }}</span>
                 <span class="uppercase tracking-wider text-[11px]">{{ project.category }}</span>
               </div>
@@ -267,7 +267,7 @@
             <span class="size-2.5 rounded-full bg-[#febc2e]/80"></span>
             <span class="size-2.5 rounded-full bg-[#28c840]/80"></span>
           </div>
-          <span class="text-[10px] font-sans uppercase tracking-wider text-black/50 truncate max-w-[180px]">
+          <span class="text-[10px] font-sans uppercase tracking-wider text-black/70 truncate max-w-[180px]">
             {{ hoveredProject?.title || 'Preview' }}
           </span>
           <div class="w-8"></div>
@@ -291,7 +291,7 @@
           <span class="font-serif text-sm text-[#22201e] truncate max-w-[200px]">
             {{ hoveredProject?.title }}
           </span>
-          <span class="font-sans text-[10px] uppercase tracking-wider text-[#22201e]/60 font-medium">
+          <span class="font-sans text-[10px] uppercase tracking-wider text-[#22201e]/65 font-medium">
             {{ hoveredProject?.year }}
           </span>
         </div>
