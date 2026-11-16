@@ -30,7 +30,7 @@
         >
           <span
             aria-hidden="true"
-            class="absolute top-0.5 bottom-0.5 left-0.5 w-8 rounded transition-transform duration-500 motion-reduce:transition-none"
+            class="absolute top-0.5 bottom-0.5 left-0.5 w-11 md:w-8 rounded transition-transform duration-500 motion-reduce:transition-none"
             :style="{
               background: 'var(--color-foreground, #ffffff)',
               transform: effectiveRange === '1y' ? 'translateX(100%)' : 'translateX(0)',
@@ -45,7 +45,7 @@
             :aria-label="r === '6m' ? 'Show last 6 months' : 'Show full 12 months'"
             :title="r === '6m' ? 'Last 6 months view' : 'Full year (12 months) view'"
             @click="setRange(r)"
-            class="relative z-10 grid h-7 w-8 cursor-pointer place-items-center rounded border-0 bg-transparent p-0 font-semibold transition-colors duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none outline-none"
+            class="relative z-10 grid h-11 w-11 md:h-7 md:w-8 cursor-pointer place-items-center rounded border-0 bg-transparent p-0 font-semibold transition-colors duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none outline-none"
             :style="{
               color: effectiveRange === r ? 'var(--color-background, #1e1c1a)' : mutedColor,
             }"
@@ -63,7 +63,7 @@
         >
         <span
           aria-hidden="true"
-          class="absolute top-0.5 bottom-0.5 left-0.5 w-8 rounded transition-transform duration-500 motion-reduce:transition-none"
+          class="absolute top-0.5 bottom-0.5 left-0.5 w-11 md:w-8 rounded transition-transform duration-500 motion-reduce:transition-none"
           :style="{
             background: 'var(--color-foreground, #ffffff)',
             transform: currentView === '3d' ? 'translateX(100%)' : 'translateX(0)',
@@ -78,7 +78,7 @@
           :aria-label="v === '2d' ? 'Flat heat map' : '3D skyline'"
           :title="v === '2d' ? 'Flat heat map' : '3D skyline'"
           @click="setView(v)"
-          class="relative z-10 grid h-7 w-8 cursor-pointer place-items-center rounded border-0 bg-transparent p-0 transition-colors duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none outline-none"
+          class="relative z-10 grid h-11 w-11 md:h-7 md:w-8 cursor-pointer place-items-center rounded border-0 bg-transparent p-0 transition-colors duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none outline-none"
           :style="{
             color: currentView === v ? 'var(--color-background, #1e1c1a)' : mutedColor,
           }"
@@ -301,10 +301,10 @@
 
         <div
           v-if="showLegend"
-          class="flex items-center gap-1.5 shrink-0"
+          class="flex items-center gap-0.5 md:gap-1 shrink-0"
           @mouseleave="legendLevel = -1"
         >
-          <span class="mr-0.5">Less</span>
+          <span class="mr-1">Less</span>
           <button
             v-for="(c, i) in theme.swatches"
             :key="i"
@@ -316,14 +316,19 @@
             @focus="legendLevel = i"
             @blur="legendLevel = -1"
             @click="legendLevel = legendLevel === i ? -1 : i"
-            class="h-[11px] w-[11px] cursor-pointer rounded-[2px] border-0 p-0 transition-[background-color,transform] duration-500 hover:scale-125 focus-visible:outline-2 focus-visible:outline-offset-1 motion-reduce:transition-none"
-            :style="{
-              background: c,
-              outlineColor: 'var(--color-foreground, #ffffff)',
-              boxShadow: 'inset 0 0 0 1px rgba(127,127,127,0.2)',
-            }"
-          />
-          <span class="ml-0.5">More</span>
+            class="group/swatch flex h-11 w-9 sm:w-11 md:h-6 md:w-5 cursor-pointer items-center justify-center rounded border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-offset-1"
+            :style="{ outlineColor: 'var(--color-foreground, #ffffff)' }"
+          >
+            <span
+              aria-hidden="true"
+              class="block h-[11px] w-[11px] rounded-[2px] transition-[background-color,transform] duration-500 group-hover/swatch:scale-125 motion-reduce:transition-none"
+              :style="{
+                background: c,
+                boxShadow: 'inset 0 0 0 1px rgba(127,127,127,0.2)',
+              }"
+            />
+          </button>
+          <span class="ml-1">More</span>
         </div>
       </div>
     </div>
