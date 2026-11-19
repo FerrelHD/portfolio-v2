@@ -49,26 +49,60 @@
               </p>
             </div>
 
-            <!-- Filter Pills (Full Horizontal Row) -->
-            <div class="flex flex-wrap items-center gap-2 sm:gap-2.5 pt-1">
-              <button
-                v-for="cat in archiveCategories"
-                :key="cat.id"
-                type="button"
-                :aria-pressed="activeCategory === cat.id"
-                @click="activeCategory = cat.id"
-                class="px-3.5 py-2 min-h-[44px] sm:min-h-0 sm:py-1.5 rounded-full text-xs sm:text-[13px] font-sans font-medium uppercase tracking-wider transition-all duration-300 cursor-pointer select-none inline-flex items-center"
-                :class="[
-                  activeCategory === cat.id
-                    ? 'bg-[#22201e] text-[#faf9f6] shadow-sm'
-                    : 'bg-black/[0.04] text-[#22201e]/75 hover:bg-black/[0.08] hover:text-[#22201e] border border-black/15'
-                ]"
-              >
-                {{ cat.label }}
-                <span class="ml-1 opacity-80 tabular-nums text-[11px]">
-                  ({{ getCategoryCount(cat.id) }})
-                </span>
-              </button>
+            <!-- Filter Pills & Tech/Keyword Search -->
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 pt-1">
+              <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
+                <button
+                  v-for="cat in archiveCategories"
+                  :key="cat.id"
+                  type="button"
+                  :aria-pressed="activeCategory === cat.id"
+                  @click="activeCategory = cat.id"
+                  class="px-3.5 py-2 min-h-[44px] sm:min-h-0 sm:py-1.5 rounded-full text-xs sm:text-[13px] font-sans font-medium uppercase tracking-wider transition-all duration-300 cursor-pointer select-none inline-flex items-center"
+                  :class="[
+                    activeCategory === cat.id
+                      ? 'bg-[#22201e] text-[#faf9f6] shadow-sm'
+                      : 'bg-black/[0.04] text-[#22201e]/75 hover:bg-black/[0.08] hover:text-[#22201e] border border-black/15'
+                  ]"
+                >
+                  {{ cat.label }}
+                  <span class="ml-1 opacity-80 tabular-nums text-[11px]">
+                    ({{ getCategoryCount(cat.id) }})
+                  </span>
+                </button>
+              </div>
+
+              <!-- Search Input (Title, Tech Stack, Category, Year) -->
+              <div class="relative w-full lg:w-72 shrink-0">
+                <svg
+                  class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-[#22201e]/45"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  aria-hidden="true"
+                >
+                  <circle cx="9" cy="9" r="6" />
+                  <path d="m13.5 13.5 3.5 3.5" stroke-linecap="round" />
+                </svg>
+                <input
+                  ref="searchInputRef"
+                  v-model="searchQuery"
+                  type="search"
+                  placeholder="Search title, tech, or year..."
+                  aria-label="Search archive projects by title, tech stack, category, or year"
+                  class="w-full min-h-[44px] sm:min-h-0 py-2 sm:py-1.5 pl-10 pr-9 rounded-full bg-black/[0.03] border border-black/15 text-xs sm:text-[13px] font-sans text-[#22201e] placeholder:text-[#22201e]/45 focus:outline-none focus:border-[#22201e]/50 focus:bg-white transition-colors"
+                />
+                <button
+                  v-if="searchQuery"
+                  type="button"
+                  @click="clearSearch"
+                  class="absolute right-1.5 top-1/2 -translate-y-1/2 flex items-center justify-center size-7 rounded-full text-[#22201e]/55 hover:text-[#22201e] hover:bg-black/[0.06] transition-colors cursor-pointer"
+                  aria-label="Clear search query"
+                >
+                  <span class="text-xs leading-none" aria-hidden="true">✕</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -78,11 +112,13 @@
             role="status"
             class="py-16 px-6 text-center rounded-xl border border-black/10 bg-black/[0.02] flex flex-col items-center gap-3"
           >
-            <p class="font-serif text-2xl text-[#22201e]">No projects in this category yet.</p>
-            <p class="font-sans text-sm text-[#22201e]/70">Select another filter or reset to view the full archive.</p>
+            <p class="font-serif text-2xl text-[#22201e]">No matching projects found.</p>
+            <p class="font-sans text-sm text-[#22201e]/70">
+              Try another keyword or reset filters to view the full archive.
+            </p>
             <button
               type="button"
-              @click="activeCategory = 'all'"
+              @click="resetFilters"
               class="mt-1 px-4 py-2.5 min-h-[44px] rounded-full bg-[#22201e] text-[#faf9f6] text-xs font-sans font-medium uppercase tracking-wider hover:bg-black transition-colors cursor-pointer"
             >
               Show all works
@@ -339,6 +375,8 @@
   }>();
 
   const activeCategory = ref<ArchiveCategoryFilter>('all');
+  const searchQuery = ref('');
+  const searchInputRef = ref<HTMLInputElement | null>(null);
   const archiveOverlay = ref<HTMLElement | null>(null);
   const closeBtn = ref<HTMLElement | null>(null);
   const floatingPreview = ref<HTMLElement | null>(null);
@@ -352,11 +390,30 @@
   let previousFocus: HTMLElement | null = null;
 
   const filteredProjects = computed(() => {
-    if (activeCategory.value === 'all') {
-      return archiveProjects;
-    }
-    return archiveProjects.filter((p) => p.categoryFilter === activeCategory.value);
+    const query = searchQuery.value.trim().toLowerCase();
+    return archiveProjects.filter((p) => {
+      const matchesCategory =
+        activeCategory.value === 'all' || p.categoryFilter === activeCategory.value;
+      if (!matchesCategory) return false;
+      if (!query) return true;
+      return (
+        p.title.toLowerCase().includes(query) ||
+        p.category.toLowerCase().includes(query) ||
+        p.year.toLowerCase().includes(query) ||
+        p.techStack.some((tech) => tech.toLowerCase().includes(query))
+      );
+    });
   });
+
+  const clearSearch = () => {
+    searchQuery.value = '';
+    searchInputRef.value?.focus();
+  };
+
+  const resetFilters = () => {
+    activeCategory.value = 'all';
+    searchQuery.value = '';
+  };
 
   const getCategoryCount = (catId: ArchiveCategoryFilter) => {
     if (catId === 'all') return archiveProjects.length;
@@ -464,6 +521,10 @@
 
     if (e.key === 'Escape') {
       e.preventDefault();
+      if (document.activeElement === searchInputRef.value && searchQuery.value) {
+        searchQuery.value = '';
+        return;
+      }
       handleClose();
       return;
     }
@@ -508,6 +569,7 @@
         document.body.style.overflow = '';
         isPreviewVisible.value = false;
         hoveredProject.value = null;
+        searchQuery.value = '';
         if (oldVal) {
           restoreFocusOrigin(previousFocus);
           previousFocus = null;
