@@ -134,10 +134,14 @@
               </div>
 
               <!-- Table of Contents (Desktop Jump Links) -->
-              <div class="hidden lg:flex flex-col gap-3 pt-2">
+              <div
+                v-if="project.problem || project.architecture || project.features.length > 0 || project.takeaways.length > 0"
+                class="hidden lg:flex flex-col gap-3 pt-2"
+              >
                 <span class="font-mono text-[10px] uppercase tracking-widest text-[#22201e]/65 font-semibold">TABLE OF CONTENTS</span>
                 <nav class="flex flex-col gap-1 font-sans text-xs border-l border-black/10">
                   <a
+                    v-if="project.problem"
                     href="#section-overview"
                     @click.prevent="scrollToSection('section-overview')"
                     class="transition-all duration-200 py-1 flex items-center gap-2 -ml-[1px] pl-3 border-l-2"
@@ -147,6 +151,7 @@
                     <span>Problem & Context</span>
                   </a>
                   <a
+                    v-if="project.architecture"
                     href="#section-architecture"
                     @click.prevent="scrollToSection('section-architecture')"
                     class="transition-all duration-200 py-1 flex items-center gap-2 -ml-[1px] pl-3 border-l-2"
@@ -156,6 +161,7 @@
                     <span>System Architecture</span>
                   </a>
                   <a
+                    v-if="project.features.length > 0"
                     href="#section-features"
                     @click.prevent="scrollToSection('section-features')"
                     class="transition-all duration-200 py-1 flex items-center gap-2 -ml-[1px] pl-3 border-l-2"
@@ -165,6 +171,7 @@
                     <span>Key Features</span>
                   </a>
                   <a
+                    v-if="project.takeaways.length > 0"
                     href="#section-takeaways"
                     @click.prevent="scrollToSection('section-takeaways')"
                     class="transition-all duration-200 py-1 flex items-center gap-2 -ml-[1px] pl-3 border-l-2"
@@ -228,7 +235,7 @@
               </div>
 
               <!-- Section 1: The Context & Problem Statement -->
-              <section id="section-overview" class="flex flex-col gap-4 scroll-mt-20">
+              <section v-if="project.problem" id="section-overview" class="flex flex-col gap-4 scroll-mt-20">
                 <div class="flex items-baseline gap-2.5">
                   <span class="font-mono text-base sm:text-lg text-[#22201e]/65 font-bold tracking-tight">01.</span>
                   <h2 class="font-sans font-bold text-xl sm:text-2xl text-[#22201e] uppercase tracking-tight">
@@ -244,7 +251,7 @@
               </section>
 
               <!-- Section 2: Architecture & Engineering Highlights -->
-              <section id="section-architecture" class="flex flex-col gap-6 scroll-mt-20">
+              <section v-if="project.architecture" id="section-architecture" class="flex flex-col gap-6 scroll-mt-20">
                 <div class="flex items-baseline gap-2.5">
                   <span class="font-mono text-base sm:text-lg text-[#22201e]/65 font-bold tracking-tight">02.</span>
                   <h2 class="font-sans font-bold text-xl sm:text-2xl text-[#22201e] uppercase tracking-tight">
@@ -259,7 +266,10 @@
                 </p>
 
                 <!-- Technical Highlight Cards -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+                <div
+                  v-if="project.architecture.highlights.length > 0"
+                  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2"
+                >
                   <div
                     v-for="highlight in project.architecture.highlights"
                     :key="highlight.title"
@@ -276,7 +286,7 @@
               </section>
 
               <!-- Section 3: Key Features & UI Engineering -->
-              <section id="section-features" class="flex flex-col gap-6 scroll-mt-20">
+              <section v-if="project.features.length > 0" id="section-features" class="flex flex-col gap-6 scroll-mt-20">
                 <div class="flex items-baseline gap-2.5">
                   <span class="font-mono text-base sm:text-lg text-[#22201e]/65 font-bold tracking-tight">03.</span>
                   <h2 class="font-sans font-bold text-xl sm:text-2xl text-[#22201e] uppercase tracking-tight">
@@ -317,7 +327,7 @@
               </section>
 
               <!-- Section 4: Key Learnings & Outcomes -->
-              <section id="section-takeaways" class="flex flex-col gap-4 scroll-mt-20">
+              <section v-if="project.takeaways.length > 0" id="section-takeaways" class="flex flex-col gap-4 scroll-mt-20">
                 <div class="flex items-baseline gap-2.5">
                   <span class="font-mono text-base sm:text-lg text-[#22201e]/65 font-bold tracking-tight">04.</span>
                   <h2 class="font-sans font-bold text-xl sm:text-2xl text-[#22201e] uppercase tracking-tight">
@@ -389,7 +399,7 @@
     caseStudies,
     caseStudyOrder,
     type ProjectCaseStudy,
-  } from '@/data/caseStudiesData';
+  } from '@/data/projects';
 
   const props = defineProps<{
     projectId: string | null;
@@ -412,8 +422,8 @@
   });
 
   const currentIndex = computed(() => {
-    if (!props.projectId) return -1;
-    return caseStudyOrder.indexOf(props.projectId);
+    if (!project.value) return -1;
+    return caseStudyOrder.indexOf(project.value.id);
   });
 
   const nextProject = computed<ProjectCaseStudy | null>(() => {
@@ -432,12 +442,15 @@
 
   const handleScroll = () => {
     if (!scrollContainer.value) return;
-    const sections = ['section-overview', 'section-architecture', 'section-features', 'section-takeaways'];
+    const sections = ['section-overview', 'section-architecture', 'section-features', 'section-takeaways'].filter(
+      (id) => Boolean(document.getElementById(id)),
+    );
+    if (sections.length === 0) return;
     const containerTop = scrollContainer.value.getBoundingClientRect().top;
 
     const { scrollTop, scrollHeight, clientHeight } = scrollContainer.value;
     if (scrollHeight - scrollTop - clientHeight < 80) {
-      activeSection.value = 'section-takeaways';
+      activeSection.value = sections[sections.length - 1];
       return;
     }
 
