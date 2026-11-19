@@ -1,0 +1,87 @@
+{
+  "id": "charles-leclerc",
+  "title": "Charles Leclerc #16",
+  "year": "2025",
+  "order": 10,
+  "category": "Creative Motion & F1 Physics",
+  "categoryFilter": "creative",
+  "description": "High-octane Formula 1 showcase with canvas telemetry visualizers and fluid kinetic transitions.",
+  "techStack": [
+    "React 18",
+    "GSAP",
+    "Canvas 2D"
+  ],
+  "previewImg": "/projects/Charles-Leclerc.png",
+  "liveUrl": "https://leclerc-redline.vercel.app/",
+  "domain": "leclerc-redline.vercel.app",
+  "featured": true,
+  "featuredOrder": 4,
+  "featuredSlide": {
+    "aboutP1": "Motorsport fans love granular telemetry: throttle curves and sector deltas. I wanted to translate the sensory velocity of Formula 1 into an interactive web experience powered by kinetic motion and sound.",
+    "aboutP2": "I engineered an interactive Canvas 2D tachometer revving dynamically with scroll speed, custom redline shaders, video scrub triggers, and sector delta timelines comparing telemetry across Monaco and Monza.",
+    "previewVideo": "/videos/leclerc.mp4"
+  },
+  "caseStudy": {
+    "tagline": "High-octane Formula 1 showcase with canvas telemetry visualizers and fluid kinetic transitions.",
+    "role": "Creative Frontend Developer",
+    "system": "React 18 · GSAP · Canvas 2D · Tailwind",
+    "context": "Sports Creative Showcase",
+    "techStack": [
+      "React 18",
+      "GSAP",
+      "HTML5 Canvas",
+      "Tailwind CSS"
+    ],
+    "metrics": [
+      {
+        "label": "Animation Engine",
+        "value": "GSAP 3"
+      },
+      {
+        "label": "Telemetry Visuals",
+        "value": "RPM & G-Force"
+      },
+      {
+        "label": "Theme",
+        "value": "Scuderia Ferrari"
+      },
+      {
+        "label": "Frame Pacing",
+        "value": "Smooth 60 FPS"
+      }
+    ],
+    "problem": {
+      "headline": "Translating the sensory velocity and telemetry of Formula 1 into interactive web form.",
+      "description": "Motorsport enthusiasts love granular telemetry: throttle traces, braking curves, and sector deltas. This project explores high-impact sports storytelling using typography, audio cues, and telemetry charts."
+    },
+    "architecture": {
+      "headline": "Canvas-driven RPM tachometer and kinetic scrub animations.",
+      "description": "Engineered an interactive tachometer dial that revs based on user scroll velocity, paired with smooth video scrub triggers.",
+      "highlights": [
+        {
+          "title": "Velocity-Driven UI Feedback",
+          "detail": "Scroll velocity feeds directly into tachometer needle position with spring physics."
+        },
+        {
+          "title": "Dynamic Redline Shader",
+          "detail": "Glow filters simulating race steering wheel shift indicator LEDs."
+        }
+      ]
+    },
+    "features": [
+      {
+        "title": "Interactive F1 Tachometer",
+        "description": "Dynamic RPM gauge reacting to scroll speed with redline sound triggers.",
+        "tag": "Interactive"
+      },
+      {
+        "title": "Sector Delta Timeline",
+        "description": "Qualifying lap breakdown comparing telemetry across Monaco and Monza.",
+        "tag": "Telemetry"
+      }
+    ],
+    "takeaways": [
+      "Tying scroll velocity to mechanical feedback creates an immediate physical connection between user input and visual response."
+    ]
+  }
+}

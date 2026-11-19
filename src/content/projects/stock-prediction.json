@@ -1,0 +1,83 @@
+{
+  "id": "stock-prediction",
+  "title": "Stock Prediction ML",
+  "year": "2024",
+  "order": 11,
+  "category": "Quant ML & Analytics",
+  "categoryFilter": "ml",
+  "description": "Time-series machine learning model analyzing equities with predictive volatility curves and Streamlit dashboard.",
+  "techStack": [
+    "Python",
+    "Streamlit",
+    "XGBoost",
+    "LightGBM"
+  ],
+  "previewImg": "/projects/stock-prediction.png",
+  "githubUrl": "https://github.com/FerrelHD/Stock-Prediction-System",
+  "featured": false,
+  "caseStudy": {
+    "tagline": "Time-series machine learning model analyzing equities with predictive volatility curves and Streamlit dashboard.",
+    "role": "Machine Learning Engineer",
+    "system": "Python · Streamlit · XGBoost · LightGBM · Pandas",
+    "context": "Financial Quantitative Research",
+    "techStack": [
+      "Python",
+      "Streamlit",
+      "XGBoost",
+      "LightGBM",
+      "Scikit-Learn",
+      "Pandas"
+    ],
+    "metrics": [
+      {
+        "label": "ML Models",
+        "value": "XGBoost & LightGBM"
+      },
+      {
+        "label": "Feature Engineering",
+        "value": "RSI, MACD, Bollinger"
+      },
+      {
+        "label": "Framework",
+        "value": "Python / Streamlit"
+      },
+      {
+        "label": "Validation",
+        "value": "Rolling Walk-Forward"
+      }
+    ],
+    "problem": {
+      "headline": "Building robust feature pipelines for non-stationary financial time series.",
+      "description": "Financial market data suffers from low signal-to-noise ratios and regime shifts. Standard regressions often overfit historical data without providing actionable confidence bands."
+    },
+    "architecture": {
+      "headline": "Walk-forward rolling validation with technical indicator feature pipelines.",
+      "description": "Implemented rolling time-series splits to prevent future data leakage, extracting momentum, volatility, and mean-reversion indicators before training gradient-boosted ensembles.",
+      "highlights": [
+        {
+          "title": "Leakage-Free Feature Engineering",
+          "detail": "Strict lag transforms ensuring zero lookahead bias during feature computation."
+        },
+        {
+          "title": "Interactive Volatility Bands",
+          "detail": "Streamlit dashboard rendering confidence envelopes alongside historical moving averages."
+        }
+      ]
+    },
+    "features": [
+      {
+        "title": "Predictive Price Curve",
+        "description": "Ensemble model projection with adjustable forecast horizons and risk boundaries.",
+        "tag": "Forecasting"
+      },
+      {
+        "title": "Technical Indicator Matrix",
+        "description": "Automated calculation of MACD, RSI, and exponential moving averages.",
+        "tag": "Feature Store"
+      }
+    ],
+    "takeaways": [
+      "In financial machine learning, leak-free validation architecture is vastly more important than tuning complex model hyperparameters."
+    ]
+  }
+}

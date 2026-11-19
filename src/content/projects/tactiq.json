@@ -1,0 +1,96 @@
+{
+  "id": "tactiq",
+  "title": "TactIQ",
+  "year": "2026",
+  "order": 6,
+  "category": "Football Analytics & Tactical Tracking Platform",
+  "categoryFilter": "web",
+  "description": "Enterprise-grade football intelligence platform featuring real-time 2D pitch tracking overlay, multi-criteria player scouting, and AI match probability forecasting.",
+  "techStack": [
+    "Next.js 14",
+    "TypeScript",
+    "HTML5 Canvas",
+    "Socket.io",
+    "Chart.js"
+  ],
+  "previewImg": "/projects/TactIQ.png",
+  "githubUrl": "https://github.com/LuthfiMirza/TactIQ",
+  "domain": "tactiq.analytics",
+  "featured": false,
+  "caseStudy": {
+    "tagline": "Real-time football telemetry, tactical tracking overlays, and multivariate player intelligence.",
+    "role": "Front-End Lead & UI Engineer",
+    "system": "Next.js 14 · TypeScript · HTML5 Canvas · Socket.io · Tailwind · Chart.js",
+    "context": "Telemetry Engineering Platform",
+    "techStack": [
+      "Next.js 14",
+      "TypeScript",
+      "HTML5 Canvas",
+      "Socket.io",
+      "Chart.js",
+      "Tailwind CSS"
+    ],
+    "metrics": [
+      {
+        "label": "Render Frame Rate",
+        "value": "60 FPS"
+      },
+      {
+        "label": "Socket Latency",
+        "value": "< 45ms"
+      },
+      {
+        "label": "Radar Dimensions",
+        "value": "7 Axes"
+      },
+      {
+        "label": "Match Data Points",
+        "value": "10K+ / match"
+      }
+    ],
+    "problem": {
+      "headline": "Bridging the gap between raw computer vision tracking and tactical decision-making.",
+      "description": "Modern football coaching staff and analysts face an information overload: telemetry data streams, raw tracking coordinates, and delayed video recordings exist in fragmented silos. Analysts spent hours manually reconciling coordinate feeds with video timestamps, lacking an intuitive platform capable of overlaying spatial vectors and predicting match trajectories in real time."
+    },
+    "architecture": {
+      "headline": "High-frequency Canvas 2D telemetry synchronized over WebSockets.",
+      "description": "As Front-End Lead, I architected the core visualization pipeline. We isolated high-frequency coordinate broadcasts from React DOM reconciliations by utilizing a double-buffered HTML5 Canvas 2D engine driven by requestAnimationFrame. Incoming player and ball coordinates are interpolated smoothly to prevent packet jitter, ensuring fluid 60 FPS motion even on low-spec client hardware.",
+      "highlights": [
+        {
+          "title": "Sub-50ms Socket.io Transport",
+          "detail": "Real-time coordinate broadcasts from computer-vision tracking feeds parsed into spatial vectors with linear interpolation to eliminate visual stutter."
+        },
+        {
+          "title": "Canvas 2D Pitch Heatmaps",
+          "detail": "Custom particle density accumulation algorithm producing live spatial dominance heatmaps and passing corridors directly over the pitch layout."
+        },
+        {
+          "title": "Multivariate Similarity Engine",
+          "detail": "Euclidean distance algorithms matching players across 25+ statistical attributes to identify stylistic alternatives for tactical scouting."
+        }
+      ]
+    },
+    "features": [
+      {
+        "title": "Interactive 2D Pitch Telemetry",
+        "description": "Smooth 60 FPS canvas visualization showing real-time player vectors, passing lanes, and team defensive compactness.",
+        "tag": "Core Visualization"
+      },
+      {
+        "title": "7-Axis Multivariate Radar",
+        "description": "Bespoke Chart.js radar charts comparing player metrics against league percentiles with instant side-by-side scouting comparison.",
+        "tag": "Analytics Engine"
+      },
+      {
+        "title": "Live Match Forecast Simulator",
+        "description": "Predictive win and draw probability curves updating dynamically based on tactical momentum shifts and territory dominance.",
+        "tag": "Machine Learning"
+      }
+    ],
+    "takeaways": [
+      "Decoupling high-frequency data ingestion from the DOM render loop is essential for maintaining a silky 60 FPS on data-heavy dashboards.",
+      "Data visualization is only as good as its cognitive legibility: complex multidimensional matrices require clear hierarchical design and intuitive color semantics.",
+      "Building for tactical analysts requires responsive controls that remain comfortable during high-pressure live match analysis."
+    ]
+  }
+}

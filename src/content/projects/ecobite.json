@@ -1,0 +1,86 @@
+{
+  "id": "ecobite",
+  "title": "EcoBite",
+  "year": "2026",
+  "order": 7,
+  "category": "Campus Food Rescue & SDG 12 Platform",
+  "categoryFilter": "web",
+  "description": "Campus food rescue platform with real-time GPS radar, dynamic QR rescue passes, and ESG carbon reduction & EcoPoints tracking.",
+  "techStack": [
+    "Next.js 14",
+    "TypeScript",
+    "Prisma",
+    "Tailwind"
+  ],
+  "previewImg": "/projects/Eco-Bite.png",
+  "githubUrl": "https://github.com/FerrelHD/Eco-Bite",
+  "featured": false,
+  "caseStudy": {
+    "tagline": "Campus food rescue and SDG 12 platform with real-time GPS radar, dynamic rescue passes, and carbon reduction metrics.",
+    "role": "Fullstack Engineer & UI Lead",
+    "system": "Next.js 14 · TypeScript · Prisma · Tailwind · Supabase",
+    "context": "SDG 12 Social Impact Platform",
+    "techStack": [
+      "Next.js 14",
+      "TypeScript",
+      "Prisma ORM",
+      "Tailwind CSS",
+      "PostgreSQL"
+    ],
+    "metrics": [
+      {
+        "label": "Impact Focus",
+        "value": "SDG 12"
+      },
+      {
+        "label": "Pass Generation",
+        "value": "Dynamic QR"
+      },
+      {
+        "label": "Tracking",
+        "value": "ESG Carbon Reductions"
+      },
+      {
+        "label": "Stack",
+        "value": "Next.js 14"
+      }
+    ],
+    "problem": {
+      "headline": "Preventing campus cafeteria food waste through rapid-response redistributions.",
+      "description": "Excess food from campus cafeterias and vendors frequently ended up discarded despite high student demand for affordable meals. EcoBite bridges supply and demand with a real-time rescue marketplace."
+    },
+    "architecture": {
+      "headline": "Transactional reservation flow with cryptographic QR claim verification.",
+      "description": "Engineered an inventory locking mechanism using PostgreSQL transactions and Prisma to prevent race conditions during end-of-day surplus meal claims, paired with verifiable dynamic QR codes.",
+      "highlights": [
+        {
+          "title": "Inventory Concurrency Guard",
+          "detail": "Row-level locking ensuring zero double-claiming when meal batches hit clearance discounts."
+        },
+        {
+          "title": "Carbon Footprint Calculator",
+          "detail": "Real-time metric calculation translating saved meals into CO2 reduction statistics."
+        },
+        {
+          "title": "Geo-Radius Discovery",
+          "detail": "Proximity sorting highlighting immediate food pickup opportunities within walking distance."
+        }
+      ]
+    },
+    "features": [
+      {
+        "title": "Live Rescue Radar",
+        "description": "Map and list feeds showing remaining food servings with countdown timers.",
+        "tag": "Surplus Radar"
+      },
+      {
+        "title": "Dynamic QR Pass",
+        "description": "Time-expiring QR passes scanned by vendors for instant contactless verification.",
+        "tag": "Verification"
+      }
+    ],
+    "takeaways": [
+      "Food rescue platforms require ultra-low friction checkout flows because vendor surplus windows are typically under 30 minutes."
+    ]
+  }
+}

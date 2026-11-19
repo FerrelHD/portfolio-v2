@@ -1,0 +1,95 @@
+{
+  "id": "student-life",
+  "title": "Student Life",
+  "year": "2025",
+  "order": 9,
+  "category": "All-in-One Productivity PWA",
+  "categoryFilter": "web",
+  "description": "Progressive Web App organizing academic schedules, coursework tracking, and productivity tools.",
+  "techStack": [
+    "React 19",
+    "TypeScript",
+    "Supabase",
+    "PWA"
+  ],
+  "previewImg": "/projects/student-life.png",
+  "liveUrl": "https://ferrelhd.github.io/Student-Life/",
+  "githubUrl": "https://github.com/FerrelHD/Student-Life",
+  "domain": "student-life.app",
+  "featured": false,
+  "caseStudy": {
+    "tagline": "All-in-one offline-first academic productivity ecosystem consolidating schedules, tasks, and focus sessions.",
+    "role": "Lead Developer & Product Designer",
+    "system": "React 19 · TypeScript · Supabase · PWA · Tailwind",
+    "context": "Academic Productivity Product",
+    "techStack": [
+      "React 19",
+      "TypeScript",
+      "Supabase",
+      "Progressive Web App",
+      "IndexedDB",
+      "Tailwind CSS"
+    ],
+    "metrics": [
+      {
+        "label": "Offline Support",
+        "value": "100% PWA Cache"
+      },
+      {
+        "label": "Sync Engine",
+        "value": "Local-First"
+      },
+      {
+        "label": "Focus Modules",
+        "value": "Timer & Kanban"
+      },
+      {
+        "label": "PWA Lighthouse",
+        "value": "100 / 100"
+      }
+    ],
+    "problem": {
+      "headline": "Consolidating fragmented student productivity tools into a single offline-ready hub.",
+      "description": "Students frequently juggle assignments, course schedules, and Pomodoro timers across three or four separate disconnected applications. Unreliable campus Wi-Fi often leads to lost edits or out-of-sync schedules."
+    },
+    "architecture": {
+      "headline": "Progressive Web App with optimistic local-first state synchronization.",
+      "description": "Designed an offline-first architecture utilizing IndexedDB for instantaneous local reads and writes, paired with Supabase for cloud persistence. When connection drops, state changes queue locally in IndexedDB and reconcile with Supabase on reconnect.",
+      "highlights": [
+        {
+          "title": "Optimistic State Architecture",
+          "detail": "Immediate UI updates for task completions and schedule shifts with background Supabase mutation queues."
+        },
+        {
+          "title": "Dedicated Worker Focus Timer",
+          "detail": "Web Worker-backed Pomodoro cycle preventing background tab throttling and maintaining precision timing."
+        },
+        {
+          "title": "Academic Schedule Matrix",
+          "detail": "Conflict-detecting schedule calendar with automated reminders and priority weighting."
+        }
+      ]
+    },
+    "features": [
+      {
+        "title": "Smart Coursework Manager",
+        "description": "Kanban and list views with due-date countdowns and priority tags.",
+        "tag": "Productivity"
+      },
+      {
+        "title": "Precision Pomodoro Timer",
+        "description": "Customizable work/break cycles running on dedicated Web Workers.",
+        "tag": "Focus Tool"
+      },
+      {
+        "title": "Offline PWA Support",
+        "description": "Installable on desktop and mobile with full offline functionality and automatic sync.",
+        "tag": "PWA"
+      }
+    ],
+    "takeaways": [
+      "Building for students means designing for imperfect network conditions: optimistic local-first storage transforms the UX from fragile to dependable.",
+      "Web Workers are critical for web timers to avoid browser background tab sleep throttling."
+    ]
+  }
+}

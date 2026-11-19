@@ -1,0 +1,80 @@
+{
+  "id": "street-rush",
+  "title": "Street Rush",
+  "year": "2024",
+  "order": 12,
+  "category": "3D Arcade Runner Mobile Game",
+  "categoryFilter": "games",
+  "description": "Fast-paced mobile 3D endless runner featuring dynamic procedural obstacle spawning and custom physics.",
+  "techStack": [
+    "Unity 3D",
+    "C#",
+    "Mobile Physics"
+  ],
+  "previewImg": "/projects/street-rush.webp",
+  "githubUrl": "https://github.com/FerrelHD/Street-Rush-Unity",
+  "featured": false,
+  "caseStudy": {
+    "tagline": "Fast-paced mobile 3D endless runner featuring dynamic procedural obstacle spawning and custom physics.",
+    "role": "Game Developer & 3D Designer",
+    "system": "Unity 3D · C# · Mobile Physics",
+    "context": "Mobile Game Project",
+    "techStack": [
+      "Unity 3D",
+      "C#",
+      "Blender",
+      "Mobile Optimization"
+    ],
+    "metrics": [
+      {
+        "label": "Engine",
+        "value": "Unity 3D"
+      },
+      {
+        "label": "Target Platform",
+        "value": "Android / iOS"
+      },
+      {
+        "label": "Framerate",
+        "value": "Stable 60 FPS"
+      },
+      {
+        "label": "Generation",
+        "value": "Procedural"
+      }
+    ],
+    "problem": {
+      "headline": "Maintaining consistent mobile frame pacing with procedural 3D world streaming.",
+      "description": "Continuous object instantiation and garbage collection spikes cause noticeable stutters on mobile devices. Street Rush required zero-allocation pooling to guarantee smooth 60 FPS gameplay."
+    },
+    "architecture": {
+      "headline": "Object pooling architecture and procedural obstacle chunk recycling.",
+      "description": "Architected a ring-buffer object pool that recycles track chunks and obstacles ahead of the camera, eliminating runtime memory allocations during active gameplay.",
+      "highlights": [
+        {
+          "title": "Zero-Allocation Pooler",
+          "detail": "Recycling 3D road meshes, coins, and barriers to prevent garbage collector hitches."
+        },
+        {
+          "title": "Responsive Swipe Controller",
+          "detail": "Custom touch gesture recognizer with sub-pixel lane snapping physics."
+        }
+      ]
+    },
+    "features": [
+      {
+        "title": "Endless Track Generator",
+        "description": "Dynamic procedural generation with curve difficulty ramping as player speed increases.",
+        "tag": "Game Loop"
+      },
+      {
+        "title": "Mobile Touch Controls",
+        "description": "Ultra-low latency swipe detection for lane changes, slide rolls, and jump physics.",
+        "tag": "Input"
+      }
+    ],
+    "takeaways": [
+      "Object pooling is non-negotiable for mobile 3D games: garbage collection spikes ruin player immersion faster than anything else."
+    ]
+  }
+}

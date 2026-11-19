@@ -1,0 +1,80 @@
+{
+  "id": "gunung-gede",
+  "title": "Gunung Gede Simulation",
+  "year": "2024",
+  "order": 13,
+  "category": "3D Trail & Environment Design",
+  "categoryFilter": "games",
+  "description": "Realistic environmental simulation replicating the Mount Gede hiking trail via Gunung Putri route.",
+  "techStack": [
+    "Luau",
+    "Roblox Studio",
+    "Terrain Modeling"
+  ],
+  "previewImg": "/projects/Gunung-Gede.webp",
+  "liveUrl": "https://www.roblox.com/games/125712163693709/Mount-Gede-Via-Gunung-Putri",
+  "featured": false,
+  "caseStudy": {
+    "tagline": "Realistic environmental simulation replicating the Mount Gede hiking trail via Gunung Putri route.",
+    "role": "Environment Artist & Scripter",
+    "system": "Luau · Roblox Studio · Terrain Modeling",
+    "context": "Virtual Trail Simulation",
+    "techStack": [
+      "Luau",
+      "Roblox Studio",
+      "Terrain Sculpting",
+      "Atmospheric Lighting"
+    ],
+    "metrics": [
+      {
+        "label": "Trail Length",
+        "value": "Full Virtual Route"
+      },
+      {
+        "label": "Lighting",
+        "value": "Dynamic Volumetric"
+      },
+      {
+        "label": "Terrain",
+        "value": "Custom Heightmaps"
+      },
+      {
+        "label": "Platform",
+        "value": "Roblox Engine"
+      }
+    ],
+    "problem": {
+      "headline": "Recreating authentic mountaineering topography and atmospheric conditions virtually.",
+      "description": "Simulating the physical feel of ascending the Gunung Putri route on Mount Gede, spanning dense lower tropical rainforest to the rocky summit plateau and Surya Kencana meadow."
+    },
+    "architecture": {
+      "headline": "Heightmap terrain sculpting and altitude-triggered volumetric weather zones.",
+      "description": "Scripted altitude-based weather zones that dynamically adjust ambient temperature, fog density, and wind audio cues as players hike up the mountain slope.",
+      "highlights": [
+        {
+          "title": "Altitude Atmosphere Controller",
+          "detail": "Dynamic Luau scripts transitioning sunlight scattering, wind particles, and fog as elevation increases."
+        },
+        {
+          "title": "Topographic Accuracy",
+          "detail": "Modeled after real GPS trail waypoints from Pos 1 to Surya Kencana savanna."
+        }
+      ]
+    },
+    "features": [
+      {
+        "title": "Realistic Rainforest Foliage",
+        "description": "Carefully staged Indonesian mossy forest vegetation and root-strewn trail obstacles.",
+        "tag": "Environment"
+      },
+      {
+        "title": "Surya Kencana Edelweiss Meadow",
+        "description": "Vast volcanic savanna with iconic edelweiss fields and morning mist effects.",
+        "tag": "Atmosphere"
+      }
+    ],
+    "takeaways": [
+      "Atmospheric cues (ambient soundscapes, subtle fog depth, and directional lighting) do the heaviest lifting in creating environmental immersion."
+    ]
+  }
+}

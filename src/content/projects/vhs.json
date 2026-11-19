@@ -1,0 +1,105 @@
+{
+  "id": "vhs",
+  "title": "Cyberpunk Edgerunners",
+  "year": "2026",
+  "order": 5,
+  "category": "Vintage CRT Studio & 3D VHS Archive",
+  "categoryFilter": "creative",
+  "description": "Interactive archival experience inspired by analog broadcast studio hardware (Sony Trinitron PVM), curved CRT phosphors, and vintage physical VHS cassette sleeves.",
+  "techStack": [
+    "Next.js 15",
+    "Three.js",
+    "R3F",
+    "WebGL2",
+    "Web Audio API"
+  ],
+  "previewImg": "/projects/VHS.png",
+  "liveUrl": "https://vhs-gold.vercel.app",
+  "githubUrl": "https://github.com/FerrelHD/VHS",
+  "domain": "vhs-gold.vercel.app",
+  "featured": true,
+  "featuredOrder": 2,
+  "featuredSlide": {
+    "aboutP1": "Analog broadcast aesthetics often get lost in flat, modern web design. I set out to build an authentic tactile archival experience evoking vintage CRT studio monitors and physical VHS tape decks for Cyberpunk: Edgerunners.",
+    "aboutP2": "I engineered a cylindrical 3D tape carousel in Three.js and React Three Fiber, optical WebGL2 post-processing CRT barrel distortion shaders, procedural Web Audio tape hums and clicks, and a horizontal inertia narrative gallery via Lenis.",
+    "previewVideo": "/videos/vhs-cyberpunk.mp4",
+    "mediaClass": "object-center scale-[1.12] -translate-y-[6%] group-hover/mockup:scale-[1.18]"
+  },
+  "caseStudy": {
+    "tagline": "Vintage CRT studio monitor and 3D cylindrical VHS braindance shard archive celebrating Cyberpunk: Edgerunners.",
+    "role": "Creative Technologist & 3D WebGL Developer",
+    "system": "Next.js 15 · Three.js · R3F · WebGL2 · Web Audio API · Tailwind",
+    "context": "Interactive 3D Hardware Archival Experience",
+    "techStack": [
+      "Next.js 15",
+      "React 19",
+      "Three.js",
+      "React Three Fiber",
+      "WebGL2",
+      "Web Audio API",
+      "Tailwind CSS",
+      "Lenis"
+    ],
+    "metrics": [
+      {
+        "label": "3D Scene Graph",
+        "value": "Cylindrical R3F Tape Deck"
+      },
+      {
+        "label": "Post-Processing",
+        "value": "WebGL2 CRT Barrel Shader"
+      },
+      {
+        "label": "Audio Engine",
+        "value": "Procedural Oscillator FX"
+      },
+      {
+        "label": "Curated Media",
+        "value": "40 Stills / 10 Episodes"
+      }
+    ],
+    "problem": {
+      "headline": "Translating analog broadcast hardware ergonomics and CRT phosphor optics into modern web graphics.",
+      "description": "Digital archives often lack physical tactility and atmosphere. The challenge was recreating the authentic weight of Sony Trinitron PVM studio monitors, physical VHS cassette sleeves, and CRT phosphor decay while keeping 60 FPS performance on the web."
+    },
+    "architecture": {
+      "headline": "Cylindrical Three.js scene graph coupled with custom WebGL2 barrel distortion post-processing.",
+      "description": "Engineered an interactive 3D tape carousel using React Three Fiber with custom UV-mapped cassette spines and card wear, layered beneath an offscreen FBO fragment shader simulating optical CRT curvature and scanlines.",
+      "highlights": [
+        {
+          "title": "Offscreen FBO Barrel Distortion",
+          "detail": "Custom WebGL2 fragment shader introducing subtle parabolic barrel curvature (K = 0.07) and phosphor scanlines without DOM layout degradation."
+        },
+        {
+          "title": "Procedural Audio Oscillator",
+          "detail": "Native Web Audio API synthesis generating zero-latency mechanical cassette clicks, switch snaps, and tape hums on user interaction."
+        },
+        {
+          "title": "Lenis Horizontal Inertia Gallery",
+          "detail": "Full-screen horizontal scroll exhibiting 40 curated 1080p anime stills with balanced monochrome-to-color hover reveals."
+        }
+      ]
+    },
+    "features": [
+      {
+        "title": "3D Cylindrical Tape Carousel",
+        "description": "Interactive Three.js carousel with realistic cassette sleeve wear, spine typography, and mouse/drag momentum.",
+        "tag": "3D WebGL"
+      },
+      {
+        "title": "Tactile Audio Feedback Engine",
+        "description": "Synthesizer generating mechanical button snaps, tape deck clatter, and analog hums with zero external audio assets.",
+        "tag": "Web Audio API"
+      },
+      {
+        "title": "Curated 10-Episode Shard Matrix",
+        "description": "Comprehensive archival index covering all 10 episodes of Cyberpunk: Edgerunners with lore quotes and operational telemetry.",
+        "tag": "Editorial Lore"
+      }
+    ],
+    "takeaways": [
+      "Simulating analog hardware requires coupling visual curvature with tactile acoustic feedback — audio synthesis makes flat polygons feel physical.",
+      "WebGL2 fragment shaders running on offscreen FBOs allow complex optical lens distortion with negligible CPU overhead."
+    ]
+  }
+}

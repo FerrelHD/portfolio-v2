@@ -1,0 +1,81 @@
+{
+  "id": "fersya-shop",
+  "title": "Fersya Shop",
+  "year": "2025",
+  "order": 8,
+  "category": "Organic E-Commerce Storefront",
+  "categoryFilter": "web",
+  "description": "Modern storefront with Filament admin dashboard, granular RBAC, and inventory management.",
+  "techStack": [
+    "Laravel 11",
+    "Filament Admin",
+    "MySQL"
+  ],
+  "previewImg": "/projects/fersya-shop.webp",
+  "githubUrl": "https://github.com/FerrelHD/Fersya-Shop",
+  "featured": false,
+  "caseStudy": {
+    "tagline": "Modern storefront with Filament admin dashboard, granular RBAC, and inventory management.",
+    "role": "Fullstack Laravel Developer",
+    "system": "Laravel 11 · Filament Admin · MySQL · Tailwind",
+    "context": "Retail Commerce Platform",
+    "techStack": [
+      "Laravel 11",
+      "Filament Admin",
+      "MySQL",
+      "Tailwind CSS",
+      "Blade"
+    ],
+    "metrics": [
+      {
+        "label": "Backend",
+        "value": "Laravel 11"
+      },
+      {
+        "label": "Admin Panel",
+        "value": "Filament 3"
+      },
+      {
+        "label": "Architecture",
+        "value": "MVC + RBAC"
+      },
+      {
+        "label": "Database",
+        "value": "MySQL"
+      }
+    ],
+    "problem": {
+      "headline": "Streamlining organic retail commerce with automated stock management and staff permissions.",
+      "description": "Small businesses often struggle with managing offline and online stock counts. Fersya Shop provides a unified back-office with role-based staff access."
+    },
+    "architecture": {
+      "headline": "Modular Laravel architecture with reactive Filament tables and automated audit trails.",
+      "description": "Designed database schemas with foreign key constraints and transactional order placement to guarantee inventory integrity.",
+      "highlights": [
+        {
+          "title": "Granular Role-Based Access",
+          "detail": "Multi-guard authentication separating store managers, fulfillment staff, and customers."
+        },
+        {
+          "title": "Stock Ledger Logging",
+          "detail": "Immutable inventory change logs tracking stock additions, sales, and expirations."
+        }
+      ]
+    },
+    "features": [
+      {
+        "title": "Filament 3 Back-Office",
+        "description": "High-speed administrative panel for product curation and order fulfillment.",
+        "tag": "Back-Office"
+      },
+      {
+        "title": "Responsive Customer Storefront",
+        "description": "Clean organic-themed shopping experience with fast category filtering.",
+        "tag": "Storefront"
+      }
+    ],
+    "takeaways": [
+      "Using mature ecosystem tools like Filament drastically accelerates back-office delivery while preserving enterprise security."
+    ]
+  }
+}

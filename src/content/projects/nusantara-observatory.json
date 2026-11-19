@@ -1,0 +1,100 @@
+{
+  "id": "nusantara-observatory",
+  "title": "Nusantara Observatory",
+  "year": "2026",
+  "order": 4,
+  "category": "Geospatial Hazard & Event Replay",
+  "categoryFilter": "web",
+  "description": "Interactive geospatial hazard tracker integrating real-time disaster feeds into visual 2D mapping.",
+  "techStack": [
+    "React 19",
+    "TypeScript",
+    "Canvas 2D"
+  ],
+  "previewImg": "/projects/indonesian-crustal-observatory.png",
+  "liveUrl": "https://nusantara-observatory.vercel.app/",
+  "githubUrl": "https://github.com/FerrelHD/Global-Seismic-Tracker",
+  "domain": "nusantara-observatory.vercel.app",
+  "featured": true,
+  "featuredOrder": 1,
+  "featuredSlide": {
+    "aboutP1": "Hazard data across Indonesia is often scattered across isolated portals. I built a unified visual experience to make complex seismic events and historical replays immediately clear to explore.",
+    "aboutP2": "I engineered a high-performance 2D canvas observatory featuring live tremor feeds, historical event replays, and proximity analytics, unifying raw spatial data and fluid usability into one system.",
+    "previewVideo": "/videos/nusantara.mp4"
+  },
+  "caseStudy": {
+    "tagline": "Interactive geospatial hazard observatory consolidating archipelago seismic, volcanic, and tsunami data into unified visual telemetry.",
+    "role": "Frontend & Geospatial Engineer",
+    "system": "React 19 · TypeScript · Canvas 2D · GeoJSON · Tailwind",
+    "context": "Independent Geospatial Initiative",
+    "techStack": [
+      "React 19",
+      "TypeScript",
+      "HTML5 Canvas 2D",
+      "GeoJSON",
+      "Tailwind CSS",
+      "Vite"
+    ],
+    "metrics": [
+      {
+        "label": "Render Engine",
+        "value": "Canvas 2D"
+      },
+      {
+        "label": "Feed Sources",
+        "value": "Real-time APIs"
+      },
+      {
+        "label": "Bundle Footprint",
+        "value": "< 90 KB"
+      },
+      {
+        "label": "Replay Speed",
+        "value": "1x - 100x"
+      }
+    ],
+    "problem": {
+      "headline": "Consolidating fragmented archipelago hazard feeds into unified situational awareness.",
+      "description": "Indonesia sits along the Pacific Ring of Fire, experiencing frequent tectonic shifts, volcanic eruptions, and tsunami warnings. Historically, public information has been scattered across separate agency portals and raw tabular reports. Researchers, disaster response teams, and the general public struggled to visualize spatial clusters, event depth correlations, and historical patterns in a single coherent interface."
+    },
+    "architecture": {
+      "headline": "Lightweight coordinate projection engine and in-memory temporal event scrubber.",
+      "description": "Rather than bundling heavy multi-megabyte GIS libraries, I engineered a bespoke Canvas 2D rendering pipeline using custom equirectangular coordinate transforms. This kept the initial payload under 90 KB while sustaining 60 FPS rendering of thousands of historical earthquake epicenters, plate boundary polygons, and active volcano alerts without thermal throttling.",
+      "highlights": [
+        {
+          "title": "Zero-Dependency Map Projection",
+          "detail": "Mathematical projection routines translating spherical latitude/longitude into viewport coordinates with smooth mouse and touch zoom/pan matrix transformations."
+        },
+        {
+          "title": "Temporal Event Replay Engine",
+          "detail": "Time-scrubber allowing historical replay of seismic swarms with adjustable playback speeds and depth coloring."
+        },
+        {
+          "title": "Proximity Exposure Analysis",
+          "detail": "Sub-millisecond Haversine distance calculations determining earthquake proximity to densely populated urban centers and coastal infrastructures."
+        }
+      ]
+    },
+    "features": [
+      {
+        "title": "Real-Time Seismic Swarm Visualizer",
+        "description": "Epicenters scaled dynamically by Richter magnitude and colored according to focal depth to highlight subduction zone mechanics.",
+        "tag": "Geospatial"
+      },
+      {
+        "title": "Volcanic Alert Matrix",
+        "description": "Active volcano monitoring tracking real-time status levels (Normal to Awas) with elevation profiles and regional alert zones.",
+        "tag": "Monitoring"
+      },
+      {
+        "title": "Historical Timeline Scrubber",
+        "description": "Intuitive playback controls enabling researchers to scrub through months of seismic activity to identify swarm precursors.",
+        "tag": "Analytics"
+      }
+    ],
+    "takeaways": [
+      "Custom lightweight canvas rendering often outperforms heavy general-purpose map libraries when rendering thousands of custom dynamic particles and heat trails.",
+      "Accessibility and clarity during crisis information visualization requires strict color contrast and unambiguous typography."
+    ]
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "id": "persona-3",
+  "title": "Persona 3 Reload Portfolio",
+  "year": "2026",
+  "order": 3,
+  "category": "Game Console UI & Web Audio Engine",
+  "categoryFilter": "creative",
+  "description": "Cinematic game-console developer portfolio inspired by Persona 3 Reload, featuring procedural Web Audio synthesis, 1080p character loop videos, and zero-scroll canvas navigation.",
+  "techStack": [
+    "React 18",
+    "TypeScript",
+    "Tailwind",
+    "Web Audio API"
+  ],
+  "previewImg": "/projects/Persona.png",
+  "liveUrl": "https://persona.ferrelrashadakeyla2014.workers.dev/",
+  "githubUrl": "https://github.com/FerrelHD/Persona",
+  "domain": "persona.ferrelrashadakeyla2014.workers.dev",
+  "aliases": [
+    "persona-5"
+  ],
+  "featured": true,
+  "featuredOrder": 3,
+  "featuredSlide": {
+    "title": "Persona 3 Reload",
+    "aboutP1": "Most developer portfolios rely on predictable grids and neutral styling. I wanted to break convention by building an authentic, 60 FPS console interface inspired by the aesthetic of Persona 3 Reload.",
+    "aboutP2": "I engineered a zero-scroll 1080p viewport interface with procedural Web Audio synthesis for zero-latency feedback, kinetic typography, character video loops, and responsive game-menu state machines.",
+    "previewVideo": "/videos/persona.mp4"
+  },
+  "caseStudy": {
+    "tagline": "Authentic 60 FPS console experience featuring procedural Web Audio synthesis, stylized kinetic typography, and zero-scroll canvas navigation.",
+    "role": "Creative Developer & UI Engineer",
+    "system": "React 18 · TypeScript · Web Audio API · Tailwind · CSS 3D",
+    "context": "Creative Technologist Showcase",
+    "techStack": [
+      "React 18",
+      "TypeScript",
+      "Web Audio API",
+      "CSS 3D Transforms",
+      "Tailwind CSS"
+    ],
+    "metrics": [
+      {
+        "label": "Target Framerate",
+        "value": "60 FPS Locked"
+      },
+      {
+        "label": "Audio Latency",
+        "value": "0ms Procedural"
+      },
+      {
+        "label": "Viewport Mode",
+        "value": "1080p Zero-Scroll"
+      },
+      {
+        "label": "Asset Audio Size",
+        "value": "0 KB (Synthesized)"
+      }
+    ],
+    "problem": {
+      "headline": "Pushing web interactivity beyond sterile modern UI conventions.",
+      "description": "Most developer portfolios follow identical grid patterns and neutral aesthetics. I wanted to break the mold entirely by building an authentic, 60 FPS console experience inspired by Persona 3 Reload that pushes web browser audio and animation to its absolute limit."
+    },
+    "architecture": {
+      "headline": "Procedural Web Audio synthesis and zero-scroll state machines.",
+      "description": "Built an acoustic feedback engine using native Web Audio API oscillators and gain nodes (avoiding bulky sound MP3 assets) while providing zero-latency acoustic clicks, thuds, and menu swooshes. Navigation is driven by a finite state machine mimicking console controller inputs.",
+      "highlights": [
+        {
+          "title": "Procedural Audio Synthesizer",
+          "detail": "Native Web Audio API oscillators synthesizing UI mechanical sounds, eliminating audio load latency entirely."
+        },
+        {
+          "title": "Dynamic Stylized Typography",
+          "detail": "Procedural angle, padding, and font-weight jitter algorithms creating the signature Persona 3 Reload visual style."
+        },
+        {
+          "title": "CSS 3D Diagonal Perspective",
+          "detail": "Hardware-accelerated CSS transforms giving menus sharp diagonal angularity without dropping frames."
+        }
+      ]
+    },
+    "features": [
+      {
+        "title": "Console Menu State Machine",
+        "description": "Full keyboard and mouse navigation modeled after game controller menus with sound feedback.",
+        "tag": "State Machine"
+      },
+      {
+        "title": "1080p Character Loop Integration",
+        "description": "Hardware-accelerated video loop integration with alpha blending and dynamic UI color shifting.",
+        "tag": "Creative Tech"
+      },
+      {
+        "title": "Themed Interactive System",
+        "description": "Atmospheric UI system styled with iconic Persona 3 Reload aesthetics and sound design.",
+        "tag": "Interactive UI"
+      }
+    ],
+    "takeaways": [
+      "The Web Audio API is immensely powerful for UI feedback: synthesizing micro-sounds on the fly delivers zero network lag and a tiny bundle footprint.",
+      "Crafting bold, rule-breaking aesthetics requires disciplined performance profiling to ensure heavy visual styling doesn't compromise smoothness."
+    ]
+  }
+}
