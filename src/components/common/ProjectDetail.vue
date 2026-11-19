@@ -23,8 +23,20 @@
           <span>Back to Works</span>
         </button>
         
-        <!-- Right: Close Button -->
-        <div class="flex items-center gap-3">
+        <!-- Right: Copy Link & Close Button -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button
+            type="button"
+            @click="copyCaseStudyLink"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-black/15 hover:border-black/35 bg-black/[0.02] hover:bg-black/[0.06] text-xs font-mono uppercase tracking-wider text-[#22201e]/80 hover:text-[#22201e] transition-all cursor-pointer min-h-[44px]"
+            :aria-label="isLinkCopied ? 'Case study link copied' : 'Copy link to this case study'"
+          >
+            <span v-if="isLinkCopied" aria-hidden="true" class="text-emerald-700">✓</span>
+            <span>{{ isLinkCopied ? 'Copied' : 'Copy Link' }}</span>
+          </button>
+          <span role="status" aria-live="polite" class="sr-only">
+            {{ isLinkCopied ? 'Case study link copied to clipboard.' : '' }}
+          </span>
           <button
             ref="closeBtn"
             type="button"
@@ -414,7 +426,41 @@
   const scrollContainer = ref<HTMLElement | null>(null);
   const closeBtn = ref<HTMLButtonElement | null>(null);
   const activeSection = ref<string>('section-overview');
+  const isLinkCopied = ref(false);
+  let copyLinkTimeout: ReturnType<typeof setTimeout> | null = null;
   let previousFocus: HTMLElement | null = null;
+
+  const resetCopyState = () => {
+    isLinkCopied.value = false;
+    if (copyLinkTimeout) {
+      clearTimeout(copyLinkTimeout);
+      copyLinkTimeout = null;
+    }
+  };
+
+  const copyCaseStudyLink = async () => {
+    if (!project.value) return;
+    const url = `${window.location.origin}${window.location.pathname}#project/${project.value.id}`;
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch {
+      const textarea = document.createElement('textarea');
+      textarea.value = url;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+    }
+    isLinkCopied.value = true;
+    if (copyLinkTimeout) clearTimeout(copyLinkTimeout);
+    copyLinkTimeout = setTimeout(() => {
+      isLinkCopied.value = false;
+      copyLinkTimeout = null;
+    }, 2200);
+  };
 
   const project = computed<ProjectCaseStudy | null>(() => {
     if (!props.projectId) return null;
@@ -610,6 +656,7 @@
   watch(
     () => props.projectId,
     async (newId, oldId) => {
+      resetCopyState();
       if (newId) {
         if (!oldId) {
           // Opening from closed state
@@ -639,6 +686,7 @@
 
   onUnmounted(() => {
     window.removeEventListener('keydown', handleKeyDown);
+    resetCopyState();
     if (animationTl) animationTl.kill();
   });
 </script>
