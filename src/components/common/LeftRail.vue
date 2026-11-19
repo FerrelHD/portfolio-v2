@@ -291,6 +291,18 @@
           <span class="border-b border-white/20 group-hover:border-white transition-colors">Colophon & Specs</span>
           <span class="font-serif italic text-sm inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
         </button>
+
+        <span class="text-white/20 text-xs hidden sm:inline">/</span>
+
+        <a
+          href="/Ferrel_Rashad_Portfolio_Deck.pdf"
+          download="Ferrel_Rashad_Portfolio_Deck.pdf"
+          class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer min-h-[38px] md:min-h-0"
+          aria-label="Download Portfolio Deck PDF"
+        >
+          <span class="border-b border-white/20 group-hover:border-white transition-colors">Portfolio Deck (PDF)</span>
+          <span class="font-serif italic text-sm inline-block transition-transform duration-300 ease-out group-hover:translate-y-0.5" aria-hidden="true">↓</span>
+        </a>
       </div>
 
       <div class="overflow-hidden p-1 -m-1">
