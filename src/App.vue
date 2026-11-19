@@ -59,7 +59,7 @@
           :activeProjectIndex="activeWorkIndex"
           @openArchive="openArchive"
           @openCaseStudy="openCaseStudy"
-          @goToProject="(idx: number) => navigateToSlideIndex(2 + idx)"
+          @goToProject="(idx: number) => navigateToSlideIndex(WORKS_START_INDEX + idx)"
         />
 
         <!-- Slide 6: Chapter III - Capabilities & Workflow (Light #faf9f6) -->
@@ -125,6 +125,24 @@
   import gsap from 'gsap';
   import { ScrollTrigger } from 'gsap/all';
   import { lenis } from './lenis';
+  import { featuredProjects } from '@/data/projects';
+
+  const WORKS_START_INDEX = 2;
+  const WORKS_COUNT = featuredProjects.length;
+  const WORKS_END_INDEX = WORKS_START_INDEX + WORKS_COUNT - 1;
+  const CAPABILITIES_INDEX = WORKS_START_INDEX + WORKS_COUNT;
+  const ACTIVITY_INDEX = CAPABILITIES_INDEX + 1;
+  const CONTACT_INDEX = ACTIVITY_INDEX + 1;
+  const TOTAL_SLIDES = CONTACT_INDEX + 1;
+
+  const SLIDE_IDS: string[] = [
+    'hero',
+    'about',
+    ...featuredProjects.map((project, idx) => (idx === 0 ? 'works' : `work-${project.id}`)),
+    'capabilities',
+    'activity',
+    'contact',
+  ];
 
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.config({ ignoreMobileResize: true });
@@ -236,9 +254,9 @@
   const isSamsungBrowser = /samsung/i.test(navigator.userAgent);
 
   const setRailThemeForSlide = (slideIndex: number) => {
-    // Slide 0 (Hero), Slide 6 (Capabilities), Slide 7 (Contact) are Dark
-    // Slides 1-5 (About, Works 1-4) are Light (#faf9f6)
-    if (slideIndex === 0 || slideIndex >= 6) {
+    // Slide 0 (Hero) and slides from Capabilities onwards are Dark
+    // About and featured Works slides are Light (#faf9f6)
+    if (slideIndex === 0 || slideIndex >= CAPABILITIES_INDEX) {
       isDarkRail.value = true;
     } else {
       isDarkRail.value = false;
@@ -252,18 +270,18 @@
       if (!scrollAmount) return;
       const trackX = scrollProgress.value * scrollAmount;
       const slideUnderRail = Math.floor((trackX + 64) / vw);
-      isDarkRail.value = slideUnderRail === 0 || slideUnderRail >= 6;
+      isDarkRail.value = slideUnderRail === 0 || slideUnderRail >= CAPABILITIES_INDEX;
     } else {
-      isDarkRail.value = currentSlideIndex.value === 0 || currentSlideIndex.value >= 6;
+      isDarkRail.value = currentSlideIndex.value === 0 || currentSlideIndex.value >= CAPABILITIES_INDEX;
     }
   };
 
   const currentSectionId = computed(() => {
     if (currentSlideIndex.value === 0) return 'hero';
     if (currentSlideIndex.value === 1) return 'about';
-    if (currentSlideIndex.value >= 2 && currentSlideIndex.value <= 5) return 'works';
-    if (currentSlideIndex.value === 6) return 'capabilities';
-    if (currentSlideIndex.value === 7) return 'activity';
+    if (currentSlideIndex.value >= WORKS_START_INDEX && currentSlideIndex.value <= WORKS_END_INDEX) return 'works';
+    if (currentSlideIndex.value === CAPABILITIES_INDEX) return 'capabilities';
+    if (currentSlideIndex.value === ACTIVITY_INDEX) return 'activity';
     return 'contact';
   });
 
@@ -271,24 +289,22 @@
     if (isArchiveOpen.value || activeCaseStudyId.value) {
       return null;
     }
-    if (currentSlideIndex.value >= 2 && currentSlideIndex.value <= 5) {
-      return currentSlideIndex.value - 2;
+    if (currentSlideIndex.value >= WORKS_START_INDEX && currentSlideIndex.value <= WORKS_END_INDEX) {
+      return currentSlideIndex.value - WORKS_START_INDEX;
     }
     return null;
   });
 
-  const TOTAL_SLIDES = 9;
-
   const triggerSlideAnimation = (index: number) => {
     if (index === 1) {
       aboutMeRef.value?.revealSlide();
-    } else if (index >= 2 && index <= 5) {
-      worksRef.value?.revealSlideIndex(index - 2);
-    } else if (index === 6) {
+    } else if (index >= WORKS_START_INDEX && index <= WORKS_END_INDEX) {
+      worksRef.value?.revealSlideIndex(index - WORKS_START_INDEX);
+    } else if (index === CAPABILITIES_INDEX) {
       capabilitiesRef.value?.revealSlide();
-    } else if (index === 7) {
+    } else if (index === ACTIVITY_INDEX) {
       activityRef.value?.revealSlide();
-    } else if (index === 8) {
+    } else if (index === CONTACT_INDEX) {
       contactRef.value?.revealSlide();
     }
   };
@@ -357,23 +373,12 @@
   const revealedMobileSlides = new Set<number>();
   const updateMobileSlideState = () => {
     if (window.innerWidth >= 768) return;
-    const slideIds = [
-      'hero',
-      'about',
-      'works',
-      'work-vhs',
-      'work-persona-3',
-      'work-charles-leclerc',
-      'capabilities',
-      'activity',
-      'contact',
-    ];
 
     const viewportMiddle = window.innerHeight * 0.5;
     let mostVisibleSlide = 0;
     let minDistance = Infinity;
 
-    slideIds.forEach((id, idx) => {
+    SLIDE_IDS.forEach((id, idx) => {
       const el = document.getElementById(id);
       if (!el) return;
       const rect = el.getBoundingClientRect();
@@ -439,18 +444,7 @@
         },
       });
     } else {
-      const slideIds = [
-        'hero',
-        'about',
-        'works',
-        'work-vhs',
-        'work-persona-3',
-        'work-charles-leclerc',
-        'capabilities',
-        'activity',
-        'contact',
-      ];
-      const targetId = slideIds[clampedSlide] ?? 'hero';
+      const targetId = SLIDE_IDS[clampedSlide] ?? 'hero';
       const el = document.getElementById(targetId);
       if (el) {
         lenis.scrollTo(el, {
@@ -468,10 +462,10 @@
     const slideTargets: Record<string, number> = {
       hero: 0,
       about: 1,
-      works: 2,
-      capabilities: 6,
-      activity: 7,
-      contact: 8,
+      works: WORKS_START_INDEX,
+      capabilities: CAPABILITIES_INDEX,
+      activity: ACTIVITY_INDEX,
+      contact: CONTACT_INDEX,
     };
 
     const targetSlide = slideTargets[sectionId] ?? 0;

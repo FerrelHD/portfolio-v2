@@ -277,7 +277,7 @@
           @click="openArchiveModal"
           class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-sans font-medium uppercase tracking-wider text-[#faf9f6]/75 hover:text-white transition-colors cursor-pointer min-h-[38px] md:min-h-0"
         >
-          <span class="border-b border-white/20 group-hover:border-white transition-colors">All Works Archive (10+)</span>
+          <span class="border-b border-white/20 group-hover:border-white transition-colors">All Works Archive ({{ totalArchiveCount }})</span>
           <span class="font-serif italic text-sm inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
         </button>
 
@@ -331,6 +331,10 @@
   import gsap from 'gsap';
   import { captureFocusOrigin, restoreFocusOrigin, trapDialogTab } from '@/utils/modalFocus';
   import { prefersReducedMotion } from '@/utils/motion';
+  import { archiveProjects, featuredProjects } from '@/data/projects';
+
+  const totalArchiveCount = archiveProjects.length;
+  const totalFeaturedCount = featuredProjects.length;
 
   const props = withDefaults(
     defineProps<{
@@ -461,7 +465,7 @@
       chapter: 'CHAPTER II',
       title: 'Selected Projects',
       desc: 'Production applications and design systems including NotchFlow, Charles Leclerc interactive portfolio, and Eco-Bite.',
-      meta: '4 FEATURED · ARCHIVE',
+      meta: `${totalFeaturedCount} FEATURED · ${totalArchiveCount} ARCHIVE`,
     },
     capabilities: {
       num: '04.',
