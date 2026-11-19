@@ -119,6 +119,22 @@
         © 2026
       </span>
     </div>
+
+    <!-- Scroll Progress Hairline (Desktop Vertical Right Edge, Mobile Horizontal Bottom Edge) -->
+    <div
+      v-show="!isOpen"
+      aria-hidden="true"
+      class="pointer-events-none hidden md:block absolute top-0 bottom-0 right-0 w-[2px] origin-top will-change-transform transition-colors duration-500"
+      :class="isDark ? 'bg-[#f3eee8]/50' : 'bg-[#22201e]/45'"
+      :style="{ transform: `scaleY(${clampedProgress})` }"
+    ></div>
+    <div
+      v-show="!isOpen"
+      aria-hidden="true"
+      class="pointer-events-none block md:hidden absolute left-0 right-0 bottom-0 h-[2px] origin-left will-change-transform transition-colors duration-500"
+      :class="isDark ? 'bg-[#f3eee8]/50' : 'bg-[#22201e]/45'"
+      :style="{ transform: `scaleX(${clampedProgress})` }"
+    ></div>
   </header>
 
   <!-- Fullscreen Editorial Menu (Khanh Nguyen Style: Left Curtain Roll-Up + Staggered Line Reveals) -->
@@ -368,6 +384,8 @@
     (e: 'openArchive'): void;
     (e: 'openColophon'): void;
   }>();
+
+  const clampedProgress = computed(() => Math.min(1, Math.max(0, props.progress ?? 0)));
 
   const openArchiveModal = () => {
     closeMenu(() => {
