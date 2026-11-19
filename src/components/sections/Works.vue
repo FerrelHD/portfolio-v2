@@ -207,7 +207,7 @@
                   v-else
                   class="inline-block text-[9px] sm:text-[10px] md:text-[11px] transition-transform duration-300 ease-out group-hover/step:-translate-y-0.5"
                 >
-                  0{{ pIdx + 1 }}
+                  {{ String(pIdx + 1).padStart(2, '0') }}
                 </span>
               </div>
             </button>
@@ -220,7 +220,7 @@
             @click="emit('openArchive')"
             class="group hidden sm:inline-flex items-center gap-1.5 text-xs md:text-sm font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer select-none pb-0.5 ml-2"
           >
-            <span>Explore All Works (10+)</span>
+            <span>Explore All Works ({{ totalArchiveCount }})</span>
             <span class="text-sm md:text-base transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
           </button>
         </div>
@@ -253,7 +253,7 @@
           @click="emit('openArchive')"
           class="group inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-[#22201e]/70 hover:text-[#22201e] border-b border-transparent hover:border-black/60 transition-colors cursor-pointer select-none py-1.5 min-h-[44px]"
         >
-          <span>Explore All Works (10+)</span>
+          <span>Explore All Works ({{ totalArchiveCount }})</span>
           <span class="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
         </button>
       </div>
@@ -314,101 +314,14 @@
   }>();
 
   import {
-    indonesianCrustalObservatoryImg,
-    vhsImg,
-    personaImg,
-    charlesLeclercImg,
-  } from '@/assets/images';
+    archiveProjects,
+    featuredProjects as workProjects,
+    type WorkSlideProject,
+  } from '@/data/projects';
 
-  import {
-    leclercVideo,
-    nusantaraVideo,
-    personaVideo,
-    vhsVideo,
-  } from '@/assets/videos';
+  export type { WorkSlideProject };
 
-  export interface WorkSlideProject {
-    id: string;
-    slideNumber: string;
-    title: string;
-    aboutP1: string;
-    aboutP2: string;
-    role: string;
-    system: string;
-    domain: string;
-    previewImg: string;
-    previewVideo?: string;
-    mediaClass?: string;
-    liveUrl?: string;
-    githubUrl?: string;
-  }
-
-  const workProjects: WorkSlideProject[] = [
-    {
-      id: 'nusantara-observatory',
-      slideNumber: '#01',
-      title: 'Nusantara Observatory',
-      aboutP1:
-        'Hazard data across Indonesia is often scattered across isolated portals. I built a unified visual experience to make complex seismic events and historical replays immediately clear to explore.',
-      aboutP2:
-        'I engineered a high-performance 2D canvas observatory featuring live tremor feeds, historical event replays, and proximity analytics, unifying raw spatial data and fluid usability into one system.',
-      role: 'Frontend & Geospatial Engineer',
-      system: 'React 19 · TypeScript · Canvas 2D',
-      domain: 'nusantara-observatory.vercel.app',
-      previewImg: indonesianCrustalObservatoryImg,
-      previewVideo: nusantaraVideo,
-      liveUrl: 'https://nusantara-observatory.vercel.app/',
-      githubUrl: 'https://github.com/FerrelHD/Global-Seismic-Tracker',
-    },
-    {
-      id: 'vhs',
-      slideNumber: '#02',
-      title: 'Cyberpunk Edgerunners',
-      aboutP1:
-        'Analog broadcast aesthetics often get lost in flat, modern web design. I set out to build an authentic tactile archival experience evoking vintage CRT studio monitors and physical VHS tape decks for Cyberpunk: Edgerunners.',
-      aboutP2:
-        'I engineered a cylindrical 3D tape carousel in Three.js and React Three Fiber, optical WebGL2 post-processing CRT barrel distortion shaders, procedural Web Audio tape hums and clicks, and a horizontal inertia narrative gallery via Lenis.',
-      role: 'Creative Technologist & 3D WebGL Developer',
-      system: 'Next.js 15 · Three.js · R3F · WebGL2 · Web Audio API',
-      domain: 'vhs-gold.vercel.app',
-      previewImg: vhsImg,
-      previewVideo: vhsVideo,
-      mediaClass: 'object-center scale-[1.12] -translate-y-[6%] group-hover/mockup:scale-[1.18]',
-      liveUrl: 'https://vhs-gold.vercel.app',
-      githubUrl: 'https://github.com/FerrelHD/VHS',
-    },
-    {
-      id: 'persona-3',
-      slideNumber: '#03',
-      title: 'Persona 3 Reload',
-      aboutP1:
-        'Most developer portfolios rely on predictable grids and neutral styling. I wanted to break convention by building an authentic, 60 FPS console interface inspired by the aesthetic of Persona 3 Reload.',
-      aboutP2:
-        'I engineered a zero-scroll 1080p viewport interface with procedural Web Audio synthesis for zero-latency feedback, kinetic typography, character video loops, and responsive game-menu state machines.',
-      role: 'Creative Developer & UI Engineer',
-      system: 'React 18 · TypeScript · Web Audio · Tailwind',
-      domain: 'persona.ferrelrashadakeyla2014.workers.dev',
-      previewImg: personaImg,
-      previewVideo: personaVideo,
-      liveUrl: 'https://persona.ferrelrashadakeyla2014.workers.dev/',
-      githubUrl: 'https://github.com/FerrelHD/Persona',
-    },
-    {
-      id: 'charles-leclerc',
-      slideNumber: '#04',
-      title: 'Charles Leclerc #16',
-      aboutP1:
-        'Motorsport fans love granular telemetry: throttle curves and sector deltas. I wanted to translate the sensory velocity of Formula 1 into an interactive web experience powered by kinetic motion and sound.',
-      aboutP2:
-        'I engineered an interactive Canvas 2D tachometer revving dynamically with scroll speed, custom redline shaders, video scrub triggers, and sector delta timelines comparing telemetry across Monaco and Monza.',
-      role: 'Creative Frontend Developer',
-      system: 'React 18 · GSAP · Canvas 2D · Tailwind',
-      domain: 'leclerc-redline.vercel.app',
-      previewImg: charlesLeclercImg,
-      previewVideo: leclercVideo,
-      liveUrl: 'https://leclerc-redline.vercel.app/',
-    },
-  ];
+  const totalArchiveCount = archiveProjects.length;
 
   const videoRefs = ref<Map<number, HTMLVideoElement>>(new Map());
 
