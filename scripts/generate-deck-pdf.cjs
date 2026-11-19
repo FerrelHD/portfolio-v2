@@ -18,10 +18,10 @@ function getFileUri(relPath) {
 }
 
 const portraitUri = getFileUri('src/assets/images/ferrel-portrait.jpg');
-const observatoryUri = getFileUri('src/assets/images/Indonesian Crustal Observatory.png');
-const tactiqUri = getFileUri('src/assets/images/TactIQ.png');
-const personaUri = getFileUri('src/assets/images/Persona.png');
-const studentLifeUri = getFileUri('src/assets/images/student-life.png');
+const observatoryUri = getFileUri('public/projects/indonesian-crustal-observatory.png');
+const tactiqUri = getFileUri('public/projects/TactIQ.png');
+const personaUri = getFileUri('public/projects/Persona.png');
+const studentLifeUri = getFileUri('public/projects/student-life.png');
 
 const fontEditorialUri = getFileUri('src/assets/fonts/PPEditorialOld-Light.woff2');
 const fontCabinetUri = getFileUri('src/assets/fonts/CabinetGrotesk-Variable.ttf');

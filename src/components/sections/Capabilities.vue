@@ -121,11 +121,7 @@
   import { ref, onMounted } from 'vue';
   import gsap from 'gsap';
   import { prefersReducedMotion } from '@/utils/motion';
-  import {
-    indonesianCrustalObservatoryImg,
-    personaImg,
-    fersyaShopImg,
-  } from '@/assets/images';
+  import { projectsById } from '@/data/projects';
 
   interface CapabilityItem {
     num: string;
@@ -140,21 +136,21 @@
       num: '01',
       name: 'Frontend Engineering',
       category: 'ARCHITECTURE',
-      image: indonesianCrustalObservatoryImg,
+      image: projectsById['nusantara-observatory']?.previewImg || '/projects/indonesian-crustal-observatory.png',
       desc: 'High-speed web platforms with React 19, Next.js 15, Vue, TypeScript, and GSAP. Type-safe APIs, responsive design, and 60 FPS motion.',
     },
     {
       num: '02',
       name: 'Creative Development',
       category: 'INTERACTION',
-      image: personaImg,
+      image: projectsById['persona-3']?.previewImg || '/projects/Persona.png',
       desc: 'Console-grade game UI architectures, procedural Web Audio synthesis, kinetic typography, and fluid GSAP choreographies — engineered for cinematic immersion.',
     },
     {
       num: '03',
       name: 'Full-Stack Architecture',
       category: 'ENGINEERING',
-      image: fersyaShopImg,
+      image: projectsById['fersya-shop']?.previewImg || '/projects/fersya-shop.webp',
       desc: 'End-to-end systems with Laravel, PostgreSQL, real-time APIs, and zero-downtime deployments. Clean, maintainable codebases.',
     },
   ];
