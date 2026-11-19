@@ -327,7 +327,7 @@
     archiveProjects,
     type ArchiveCategoryFilter,
     type ArchiveProject,
-  } from '@/data/archiveProjects';
+  } from '@/data/projects';
 
   const props = defineProps<{
     isOpen: boolean;
