@@ -126,10 +126,16 @@
         ref="plinthColRef"
         class="md:col-span-5 flex flex-col items-center justify-end will-change-transform"
       >
-        <div class="scale-[0.74] xs:scale-[0.84] sm:scale-[0.92] md:scale-[0.72] lg:scale-[0.88] xl:scale-100 origin-bottom flex flex-col items-center">
+        <div
+          class="origin-bottom flex flex-col items-center"
+          :style="{
+            transform: `scale(${plinthScale})`,
+            marginTop: `${plinthLayoutOffset}px`,
+          }"
+        >
           <div
             ref="plinthContainerRef"
-            class="relative w-[372px] rounded-lg shadow-[0_18px_40px_rgba(34,32,30,0.16)] transition-[margin-top] duration-500 ease-out"
+            class="relative w-[372px] rounded-lg shadow-[0_18px_40px_rgba(34,32,30,0.16)]"
             :style="{ marginTop: `${towerHeight}px` }"
           >
             <!-- Stacked Equipped Modules -->
@@ -150,6 +156,7 @@
                 <TechModuleBlock
                   :module="item.module"
                   :isEquipped="true"
+                  :scale="plinthScale"
                   :hiddenStuds="
                     getHiddenModuleStuds(
                       packed.grid,
@@ -274,6 +281,7 @@
 
 <script setup lang="ts">
   import { computed, onMounted, ref } from 'vue';
+  import { useWindowSize } from '@vueuse/core';
   import gsap from 'gsap';
   import {
     STACK_PRESETS,
@@ -284,6 +292,7 @@
   } from '@/data/techStack';
   import {
     STACK_GRID,
+    computePlinthScale,
     deriveStackProfile,
     getHiddenBaseStuds,
     getHiddenModuleStuds,
@@ -332,9 +341,29 @@
     getHiddenBaseStuds(packed.value.grid, animatingBlocks.value)
   );
 
+  const { width, height } = useWindowSize();
+
   const towerHeight = computed(() =>
-    packed.value.maxRow >= 0 ? (packed.value.maxRow + 1) * STACK_GRID.ROW_HEIGHT : 0
+    packed.value.maxRow >= 0
+      ? (packed.value.maxRow + 1) * STACK_GRID.ROW_HEIGHT + STACK_GRID.BEVEL_OVERLAP
+      : 0
   );
+
+  const plinthScale = computed(() => {
+    const vw = width.value || 1280;
+    const vh = height.value || 800;
+    if (vw < 768) {
+      return Math.min(0.9, Math.max(0.7, (vw - 44) / 372));
+    }
+    const heightScale = computePlinthScale(vh, packed.value.maxRow);
+    const widthScale = vw < 1024 ? 0.76 : vw < 1280 ? 0.88 : 1;
+    return Math.min(heightScale, widthScale);
+  });
+
+  const plinthLayoutOffset = computed(() => {
+    const unscaledTotal = towerHeight.value + STACK_GRID.PLINTH_BASE_HEIGHT;
+    return -Math.round(unscaledTotal * (1 - plinthScale.value));
+  });
 
   const stackProfile = computed(() => deriveStackProfile(equippedModules.value));
 
