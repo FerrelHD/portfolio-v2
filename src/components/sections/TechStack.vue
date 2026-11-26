@@ -11,7 +11,7 @@
       <div class="overflow-hidden">
         <h2
           ref="chapterTitleRef"
-          class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#22201e] uppercase leading-none will-change-transform"
+          class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#22201e] uppercase leading-none"
         >
           CHAPTER IV
         </h2>
@@ -20,7 +20,7 @@
       <!-- Category Filter Tabs & Quick Presets -->
       <div
         ref="controlsBarRef"
-        class="flex flex-wrap items-center gap-2 will-change-transform"
+        class="flex flex-wrap items-center gap-2"
       >
         <div class="inline-flex flex-wrap items-center gap-1 rounded-full border border-[#22201e]/15 bg-[#ebe9e1]/60 p-1">
           <button
@@ -53,7 +53,7 @@
     <!-- Main Split Stage: Left Pool, Right Interactive Architectural Plinth -->
     <div class="my-auto py-4 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-6 lg:gap-10 items-center w-full max-w-[1200px] mx-auto">
       <!-- Left Column: Module Pool + Presets + Hovered Project Context -->
-      <div ref="poolColRef" class="md:col-span-7 flex flex-col gap-3 sm:gap-4 will-change-transform">
+      <div ref="poolColRef" class="md:col-span-7 flex flex-col gap-3 sm:gap-4">
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-[#22201e]/10 pb-2.5">
           <span class="font-sans text-xs uppercase tracking-[0.18em] text-[#22201e]/65 font-medium">
             Available Modules ({{ unequippedModules.length }})
@@ -124,58 +124,54 @@
       <!-- Right Column: Editorial Architectural Plinth & Stacked Modules -->
       <div
         ref="plinthColRef"
-        class="md:col-span-5 flex flex-col items-center justify-end will-change-transform"
+        class="md:col-span-5 flex flex-col items-center justify-end"
       >
         <div
-          class="origin-bottom flex flex-col items-center"
+          ref="plinthContainerRef"
+          class="relative rounded-lg shadow-[0_18px_40px_rgba(34,32,30,0.16)]"
           :style="{
-            transform: `scale(${plinthScale})`,
-            marginTop: `${plinthLayoutOffset}px`,
+            width: `${plinthWidth}px`,
+            marginTop: `${towerHeight}px`,
           }"
         >
+          <!-- Stacked Equipped Modules -->
           <div
-            ref="plinthContainerRef"
-            class="relative w-[372px] rounded-lg shadow-[0_18px_40px_rgba(34,32,30,0.16)]"
-            :style="{ marginTop: `${towerHeight}px` }"
+            class="absolute left-0 w-full h-0 z-20"
+            :style="{ bottom: `calc(100% - ${gridMetrics.bevelOverlap}px)` }"
           >
-            <!-- Stacked Equipped Modules -->
             <div
-              class="absolute left-0 w-full h-0 z-20"
-              style="bottom: calc(100% - 12px);"
+              v-for="item in packed.positioned"
+              :key="item.module.id"
+              class="absolute"
+              :style="{
+                bottom: `${item.rowIndex * gridMetrics.rowHeight}px`,
+                left: `${item.colIndex * gridMetrics.studWidth}px`,
+                zIndex: item.rowIndex * 10,
+              }"
             >
-              <div
-                v-for="item in packed.positioned"
-                :key="item.module.id"
-                class="absolute"
-                :style="{
-                  bottom: `${item.rowIndex * STACK_GRID.ROW_HEIGHT}px`,
-                  left: `${item.colIndex * STACK_GRID.STUD_WIDTH}px`,
-                  zIndex: item.rowIndex * 10,
-                }"
-              >
-                <TechModuleBlock
-                  :module="item.module"
-                  :isEquipped="true"
-                  :scale="plinthScale"
-                  :hiddenStuds="
-                    getHiddenModuleStuds(
-                      packed.grid,
-                      item.rowIndex,
-                      item.colIndex,
-                      item.module.studs,
-                      animatingBlocks
-                    )
-                  "
-                  :pointerX="pointerX"
-                  :pointerY="pointerY"
-                  :isAnimating="!!animatingBlocks[item.module.id]"
-                  :startRect="animatingBlocks[item.module.id] || null"
-                  @toggle="handleToggleEquip"
-                  @hover="hoveredModule = $event"
-                  @animationComplete="clearAnimating(item.module.id)"
-                />
-              </div>
+              <TechModuleBlock
+                :module="item.module"
+                :isEquipped="true"
+                :metrics="gridMetrics"
+                :hiddenStuds="
+                  getHiddenModuleStuds(
+                    packed.grid,
+                    item.rowIndex,
+                    item.colIndex,
+                    item.module.studs,
+                    animatingBlocks
+                  )
+                "
+                :pointerX="pointerX"
+                :pointerY="pointerY"
+                :isAnimating="!!animatingBlocks[item.module.id]"
+                :startRect="animatingBlocks[item.module.id] || null"
+                @toggle="handleToggleEquip"
+                @hover="hoveredModule = $event"
+                @animationComplete="clearAnimating(item.module.id)"
+              />
             </div>
+          </div>
 
             <!-- Editorial Plinth Base Block (6 Columns) -->
             <div class="relative z-10 w-full">
@@ -266,7 +262,6 @@
                 "
               ></div>
             </div>
-          </div>
         </div>
       </div>
     </div>
@@ -292,7 +287,7 @@
   } from '@/data/techStack';
   import {
     STACK_GRID,
-    computePlinthScale,
+    computeGridMetrics,
     deriveStackProfile,
     getHiddenBaseStuds,
     getHiddenModuleStuds,
@@ -343,27 +338,17 @@
 
   const { width, height } = useWindowSize();
 
-  const towerHeight = computed(() =>
-    packed.value.maxRow >= 0
-      ? (packed.value.maxRow + 1) * STACK_GRID.ROW_HEIGHT + STACK_GRID.BEVEL_OVERLAP
-      : 0
+  const gridMetrics = computed(() =>
+    computeGridMetrics(width.value || 1280, height.value || 800, packed.value.maxRow)
   );
 
-  const plinthScale = computed(() => {
-    const vw = width.value || 1280;
-    const vh = height.value || 800;
-    if (vw < 768) {
-      return Math.min(0.9, Math.max(0.7, (vw - 44) / 372));
-    }
-    const heightScale = computePlinthScale(vh, packed.value.maxRow);
-    const widthScale = vw < 1024 ? 0.76 : vw < 1280 ? 0.88 : 1;
-    return Math.min(heightScale, widthScale);
-  });
+  const plinthWidth = computed(() => gridMetrics.value.cols * gridMetrics.value.studWidth);
 
-  const plinthLayoutOffset = computed(() => {
-    const unscaledTotal = towerHeight.value + STACK_GRID.PLINTH_BASE_HEIGHT;
-    return -Math.round(unscaledTotal * (1 - plinthScale.value));
-  });
+  const towerHeight = computed(() =>
+    packed.value.maxRow >= 0
+      ? (packed.value.maxRow + 1) * gridMetrics.value.rowHeight + gridMetrics.value.bevelOverlap
+      : 0
+  );
 
   const stackProfile = computed(() => deriveStackProfile(equippedModules.value));
 
@@ -416,7 +401,14 @@
   const revealSlide = () => {
     if (prefersReducedMotion()) return;
 
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    const tl = gsap.timeline({
+      defaults: { ease: 'power3.out' },
+      onComplete: () => {
+        gsap.set([chapterTitleRef.value, controlsBarRef.value, poolColRef.value, plinthColRef.value], {
+          clearProps: 'transform',
+        });
+      },
+    });
     if (chapterTitleRef.value) {
       tl.to(chapterTitleRef.value, { yPercent: 0, duration: 1.0 }, 0);
     }
