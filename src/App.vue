@@ -62,10 +62,13 @@
           @goToProject="(idx: number) => navigateToSlideIndex(WORKS_START_INDEX + idx)"
         />
 
-        <!-- Slide 6: Chapter III - Capabilities & Workflow (Light #faf9f6) -->
+        <!-- Slide 6: Chapter III - Capabilities & Workflow (Dark #282523) -->
         <Capabilities ref="capabilitiesRef" />
 
-        <!-- Slide 7: Chapter IV - Engineering Activity & 3D Skyline (Dark #23201e) -->
+        <!-- Slide 7: Chapter IV - Tech Stack Builder (Light #faf9f6) -->
+        <TechStack ref="techStackRef" />
+
+        <!-- Slide 8: Chapter V - Engineering Activity & 3D Skyline (Dark #23201e) -->
         <Activity ref="activityRef" />
 
         <!-- Slide 8: Closing - Thank You & Contact (Dark #3A3632) -->
@@ -105,6 +108,7 @@
     Works,
     aboutMe,
     Capabilities,
+    TechStack,
     Activity,
     Contact,
   } from '@/components/sections';
@@ -131,7 +135,8 @@
   const WORKS_COUNT = featuredProjects.length;
   const WORKS_END_INDEX = WORKS_START_INDEX + WORKS_COUNT - 1;
   const CAPABILITIES_INDEX = WORKS_START_INDEX + WORKS_COUNT;
-  const ACTIVITY_INDEX = CAPABILITIES_INDEX + 1;
+  const TECH_STACK_INDEX = CAPABILITIES_INDEX + 1;
+  const ACTIVITY_INDEX = TECH_STACK_INDEX + 1;
   const CONTACT_INDEX = ACTIVITY_INDEX + 1;
   const TOTAL_SLIDES = CONTACT_INDEX + 1;
 
@@ -140,6 +145,7 @@
     'about',
     ...featuredProjects.map((project, idx) => (idx === 0 ? 'works' : `work-${project.id}`)),
     'capabilities',
+    'tech-stack',
     'activity',
     'contact',
   ];
@@ -154,6 +160,7 @@
   const aboutMeRef = ref<any>(null);
   const worksRef = ref<any>(null);
   const capabilitiesRef = ref<any>(null);
+  const techStackRef = ref<any>(null);
   const activityRef = ref<any>(null);
   const contactRef = ref<any>(null);
 
@@ -253,14 +260,12 @@
   let cachedScrollAmount = 0;
   const isSamsungBrowser = /samsung/i.test(navigator.userAgent);
 
+  const isDarkSlide = (slideIndex: number) =>
+    slideIndex === 0 || slideIndex === CAPABILITIES_INDEX || slideIndex >= ACTIVITY_INDEX;
+
   const setRailThemeForSlide = (slideIndex: number) => {
-    // Slide 0 (Hero) and slides from Capabilities onwards are Dark
-    // About and featured Works slides are Light (#faf9f6)
-    if (slideIndex === 0 || slideIndex >= CAPABILITIES_INDEX) {
-      isDarkRail.value = true;
-    } else {
-      isDarkRail.value = false;
-    }
+    // Hero, Capabilities, Activity, and Contact are Dark; About, Works, and Tech Stack are Light (#faf9f6)
+    isDarkRail.value = isDarkSlide(slideIndex);
   };
 
   const checkRailTheme = () => {
@@ -270,9 +275,9 @@
       if (!scrollAmount) return;
       const trackX = scrollProgress.value * scrollAmount;
       const slideUnderRail = Math.floor((trackX + 64) / vw);
-      isDarkRail.value = slideUnderRail === 0 || slideUnderRail >= CAPABILITIES_INDEX;
+      isDarkRail.value = isDarkSlide(slideUnderRail);
     } else {
-      isDarkRail.value = currentSlideIndex.value === 0 || currentSlideIndex.value >= CAPABILITIES_INDEX;
+      isDarkRail.value = isDarkSlide(currentSlideIndex.value);
     }
   };
 
@@ -281,6 +286,7 @@
     if (currentSlideIndex.value === 1) return 'about';
     if (currentSlideIndex.value >= WORKS_START_INDEX && currentSlideIndex.value <= WORKS_END_INDEX) return 'works';
     if (currentSlideIndex.value === CAPABILITIES_INDEX) return 'capabilities';
+    if (currentSlideIndex.value === TECH_STACK_INDEX) return 'tech-stack';
     if (currentSlideIndex.value === ACTIVITY_INDEX) return 'activity';
     return 'contact';
   });
@@ -302,6 +308,8 @@
       worksRef.value?.revealSlideIndex(index - WORKS_START_INDEX);
     } else if (index === CAPABILITIES_INDEX) {
       capabilitiesRef.value?.revealSlide();
+    } else if (index === TECH_STACK_INDEX) {
+      techStackRef.value?.revealSlide();
     } else if (index === ACTIVITY_INDEX) {
       activityRef.value?.revealSlide();
     } else if (index === CONTACT_INDEX) {
@@ -464,6 +472,7 @@
       about: 1,
       works: WORKS_START_INDEX,
       capabilities: CAPABILITIES_INDEX,
+      'tech-stack': TECH_STACK_INDEX,
       activity: ACTIVITY_INDEX,
       contact: CONTACT_INDEX,
     };

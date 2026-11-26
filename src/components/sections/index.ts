@@ -3,8 +3,9 @@ import Contact from './Contact.vue';
 import Works from './Works.vue';
 import aboutMe from './aboutMe.vue';
 import Capabilities from './Capabilities.vue';
+import TechStack from './TechStack.vue';
 import Activity from './Activity.vue';
 
-export { Hero, Works, aboutMe, Capabilities, Activity, Contact };
+export { Hero, Works, aboutMe, Capabilities, TechStack, Activity, Contact };
 
 
