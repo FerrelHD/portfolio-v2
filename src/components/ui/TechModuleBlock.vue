@@ -17,7 +17,7 @@
         <div
           class="relative w-full rounded-t-[4px]"
           :style="{
-            height: '14px',
+            height: `${topBevelHeight}px`,
             background: `linear-gradient(to bottom, ${theme.topColor}, color-mix(in srgb, ${theme.topColor} 82%, black))`,
             boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 2px rgba(0,0,0,0.28)',
           }"
@@ -76,8 +76,9 @@
           ></div>
 
           <div
-            class="relative z-30 flex h-[46px] w-full items-center"
+            class="relative z-30 flex w-full items-center"
             :class="isCompact ? 'gap-2 px-2.5' : 'gap-3 px-3.5'"
+            :style="{ height: `${faceHeight}px` }"
           >
             <div
               class="flex shrink-0 items-center justify-center rounded-[4px]"
@@ -124,7 +125,7 @@
         <div
           class="relative w-full rounded-b-[4px]"
           :style="{
-            height: '8px',
+            height: `${bottomLipHeight}px`,
             background: theme.bottomColor,
             boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.35)',
           }"
@@ -137,7 +138,7 @@
 <script setup lang="ts">
   import { computed, onUnmounted, ref, watch } from 'vue';
   import type { TechModule } from '@/data/techStack';
-  import { STACK_GRID } from '@/utils/techStackGrid';
+  import { STACK_GRID, type GridMetrics } from '@/utils/techStackGrid';
   import { EDITORIAL_BLOCK_THEMES, TECH_ICON_PATHS } from '@/utils/techStackTheme';
   import { prefersReducedMotion } from '@/utils/motion';
 
@@ -150,7 +151,7 @@
       pointerX?: number;
       pointerY?: number;
       isEquipped?: boolean;
-      scale?: number;
+      metrics?: GridMetrics;
     }>(),
     {
       hiddenStuds: () => [],
@@ -159,7 +160,6 @@
       pointerX: 50,
       pointerY: 50,
       isEquipped: false,
-      scale: 1,
     }
   );
 
@@ -172,7 +172,12 @@
   const wrapperRef = ref<HTMLElement | null>(null);
   let activeAnimation: Animation | null = null;
 
-  const widthPx = computed(() => props.module.studs * STACK_GRID.STUD_WIDTH);
+  const studWidth = computed(() => props.metrics?.studWidth ?? STACK_GRID.STUD_WIDTH);
+  const topBevelHeight = computed(() => props.metrics?.topBevelHeight ?? 14);
+  const faceHeight = computed(() => props.metrics?.faceHeight ?? 46);
+  const bottomLipHeight = computed(() => props.metrics?.bottomLipHeight ?? 8);
+
+  const widthPx = computed(() => props.module.studs * studWidth.value);
   const isCompact = computed(() => props.module.studs <= 2);
   const theme = computed(() => EDITORIAL_BLOCK_THEMES[props.module.tone]);
   const iconSpec = computed(() => TECH_ICON_PATHS[props.module.id]);
@@ -192,10 +197,9 @@
         activeAnimation = null;
       }
 
-      const scale = props.scale || 1;
       const endRect = wrapperRef.value.getBoundingClientRect();
-      const dx = (startRect.left - endRect.left) / scale;
-      const dy = (startRect.top - endRect.top) / scale;
+      const dx = startRect.left - endRect.left;
+      const dy = startRect.top - endRect.top;
       const apexY = Math.min(dy, 0) - STACK_GRID.APEX_HEIGHT;
 
       activeAnimation = wrapperRef.value.animate(
@@ -209,13 +213,14 @@
           { transform: 'translate(0px, 0px) scale(1, 1)', offset: 1 },
         ],
         {
-          duration: 850,
+          duration: 820,
           easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-          fill: 'both',
+          fill: 'none',
         }
       );
 
       activeAnimation.onfinish = () => {
+        activeAnimation?.cancel();
         activeAnimation = null;
         emit('animationComplete', props.module.id);
       };
