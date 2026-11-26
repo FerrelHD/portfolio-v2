@@ -8,18 +8,13 @@
   >
     <!-- Top Editorial Header Bar -->
     <div class="flex flex-wrap items-center justify-between gap-3 shrink-0">
-      <div class="flex flex-col gap-1">
-        <div class="overflow-hidden">
-          <h2
-            ref="chapterTitleRef"
-            class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#22201e] uppercase leading-none will-change-transform"
-          >
-            CHAPTER IV
-          </h2>
-        </div>
-        <span class="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#22201e]/55">
-          THE ARSENAL // INTERACTIVE STACK BUILDER
-        </span>
+      <div class="overflow-hidden">
+        <h2
+          ref="chapterTitleRef"
+          class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#22201e] uppercase leading-none will-change-transform"
+        >
+          CHAPTER IV
+        </h2>
       </div>
 
       <!-- Category Filter Tabs & Quick Presets -->
@@ -33,7 +28,7 @@
             :key="cat.id"
             type="button"
             @click="activeCategory = cat.id"
-            class="px-3 py-1 rounded-full font-sans text-[11px] font-medium uppercase tracking-wider transition-colors cursor-pointer"
+            class="px-2.5 sm:px-3 py-1 rounded-full font-sans text-[10px] sm:text-[11px] font-medium uppercase tracking-wider transition-colors cursor-pointer"
             :class="
               activeCategory === cat.id
                 ? 'bg-[#22201e] text-[#faf9f6]'
@@ -48,7 +43,7 @@
           v-if="equippedIds.length > 0"
           type="button"
           @click="clearStack"
-          class="px-3 py-1.5 rounded-full border border-[#22201e]/20 text-[11px] font-mono uppercase tracking-wider text-[#22201e]/70 hover:bg-[#22201e] hover:text-[#faf9f6] transition-colors cursor-pointer"
+          class="px-3 py-1.5 rounded-full border border-[#22201e]/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#22201e]/70 hover:bg-[#22201e] hover:text-[#faf9f6] transition-colors cursor-pointer"
         >
           Reset
         </button>
@@ -56,9 +51,9 @@
     </div>
 
     <!-- Main Split Stage: Left Pool, Right Interactive Architectural Plinth -->
-    <div class="my-auto py-4 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center w-full max-w-[1200px] mx-auto">
+    <div class="my-auto py-4 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-6 lg:gap-10 items-center w-full max-w-[1200px] mx-auto">
       <!-- Left Column: Module Pool + Presets + Hovered Project Context -->
-      <div ref="poolColRef" class="lg:col-span-7 flex flex-col gap-4 will-change-transform">
+      <div ref="poolColRef" class="md:col-span-7 flex flex-col gap-3 sm:gap-4 will-change-transform">
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-[#22201e]/10 pb-2.5">
           <span class="font-sans text-xs uppercase tracking-[0.18em] text-[#22201e]/65 font-medium">
             Available Modules ({{ unequippedModules.length }})
@@ -129,9 +124,9 @@
       <!-- Right Column: Editorial Architectural Plinth & Stacked Modules -->
       <div
         ref="plinthColRef"
-        class="lg:col-span-5 flex flex-col items-center justify-end will-change-transform"
+        class="md:col-span-5 flex flex-col items-center justify-end will-change-transform"
       >
-        <div class="scale-[0.76] sm:scale-[0.88] xl:scale-100 origin-bottom flex flex-col items-center">
+        <div class="scale-[0.74] xs:scale-[0.84] sm:scale-[0.92] md:scale-[0.72] lg:scale-[0.88] xl:scale-100 origin-bottom flex flex-col items-center">
           <div
             ref="plinthContainerRef"
             class="relative w-[372px] rounded-lg shadow-[0_18px_40px_rgba(34,32,30,0.16)] transition-[margin-top] duration-500 ease-out"
@@ -360,6 +355,7 @@
   };
 
   const handleToggleEquip = (mod: TechModule, event: MouseEvent) => {
+    hoveredModule.value = mod;
     if (animatingBlocks.value[mod.id]) return;
 
     const target = event.currentTarget as HTMLElement | null;
