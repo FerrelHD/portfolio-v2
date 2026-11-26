@@ -11,13 +11,71 @@ export const STACK_GRID = {
   APEX_HEIGHT: 120,
 } as const;
 
-export function computePlinthScale(viewportHeight: number, maxRow: number): number {
+export interface GridMetrics {
+  cols: number;
+  studWidth: number;
+  topBevelHeight: number;
+  faceHeight: number;
+  bottomLipHeight: number;
+  bevelOverlap: number;
+  blockHeight: number;
+  rowHeight: number;
+  isCompact: boolean;
+}
+
+export function computeGridMetrics(
+  viewportWidth: number,
+  viewportHeight: number,
+  maxRow: number
+): GridMetrics {
+  const cols = STACK_GRID.COLS;
+  let studWidth: number = STACK_GRID.STUD_WIDTH;
+  if (viewportWidth < 768) {
+    studWidth = Math.max(44, Math.min(58, Math.floor((viewportWidth - 44) / cols)));
+  } else if (viewportWidth < 1024) {
+    studWidth = 52;
+  } else if (viewportWidth < 1280) {
+    studWidth = 58;
+  }
+
   const rows = Math.max(0, maxRow + 1);
-  const unscaledHeight =
-    STACK_GRID.PLINTH_BASE_HEIGHT + rows * STACK_GRID.ROW_HEIGHT + (rows > 0 ? STACK_GRID.BEVEL_OVERLAP : 0);
   const availableHeight = Math.max(260, viewportHeight - 190);
-  if (unscaledHeight <= availableHeight) return 1;
-  return Math.max(0.58, Number((availableHeight / unscaledHeight).toFixed(3)));
+  const normalTotal =
+    STACK_GRID.PLINTH_BASE_HEIGHT +
+    rows * STACK_GRID.ROW_HEIGHT +
+    (rows > 0 ? STACK_GRID.BEVEL_OVERLAP : 0);
+
+  if (viewportWidth >= 768 && (normalTotal > availableHeight || (rows >= 6 && viewportHeight < 840))) {
+    const topBevelHeight = 12;
+    const bottomLipHeight = 6;
+    const bevelOverlap = 10;
+    const compactTotal = 108 + rows * (topBevelHeight + 36 + bottomLipHeight - bevelOverlap) + bevelOverlap;
+    const faceHeight = compactTotal > availableHeight ? 32 : 36;
+    const blockHeight = topBevelHeight + faceHeight + bottomLipHeight;
+    return {
+      cols,
+      studWidth,
+      topBevelHeight,
+      faceHeight,
+      bottomLipHeight,
+      bevelOverlap,
+      blockHeight,
+      rowHeight: blockHeight - bevelOverlap,
+      isCompact: true,
+    };
+  }
+
+  return {
+    cols,
+    studWidth,
+    topBevelHeight: 14,
+    faceHeight: 46,
+    bottomLipHeight: 8,
+    bevelOverlap: 12,
+    blockHeight: 68,
+    rowHeight: 56,
+    isCompact: false,
+  };
 }
 
 export interface PositionedModule {
