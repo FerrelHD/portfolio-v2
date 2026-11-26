@@ -505,18 +505,26 @@
       desc: 'Component architecture, animation and micro-interactions, full-stack prototyping, and responsive layouts.',
       meta: 'VUE · TYPESCRIPT · TAILWIND',
     },
-    activity: {
+    'tech-stack': {
       num: '05.',
-      label: 'ACTIVITY',
+      label: 'TECH STACK',
       chapter: 'CHAPTER IV',
+      title: 'The Engineering Arsenal',
+      desc: 'Interactive modular stack builder spanning frontend motion, backend APIs, machine learning, and 3D systems.',
+      meta: 'MODULAR · STACK · BUILDER',
+    },
+    activity: {
+      num: '06.',
+      label: 'ACTIVITY',
+      chapter: 'CHAPTER V',
       title: 'GitHub Contributions',
       desc: 'Daily git commits rendered on an interactive canvas in 2D grid and 3D isometric skyline view.',
       meta: 'GITHUB @FERRELHD',
     },
     contact: {
-      num: '06.',
+      num: '07.',
       label: 'CONTACT',
-      chapter: 'CHAPTER V',
+      chapter: 'CHAPTER VI',
       title: 'Contact and Inquiries',
       desc: 'Open for freelance projects, engineering roles, and technical collaborations.',
       meta: 'EMAIL · LINKEDIN · GITHUB',
@@ -533,8 +541,9 @@
     { num: '02.', label: 'ABOUT', id: 'about', chapter: 'CH. I' },
     { num: '03.', label: 'WORKS', id: 'works', chapter: 'CH. II' },
     { num: '04.', label: 'SERVICES', id: 'capabilities', chapter: 'CH. III' },
-    { num: '05.', label: 'ACTIVITY', id: 'activity', chapter: 'CH. IV' },
-    { num: '06.', label: 'CONTACT', id: 'contact', chapter: 'CH. V' },
+    { num: '05.', label: 'TECH STACK', id: 'tech-stack', chapter: 'CH. IV' },
+    { num: '06.', label: 'ACTIVITY', id: 'activity', chapter: 'CH. V' },
+    { num: '07.', label: 'CONTACT', id: 'contact', chapter: 'CH. VI' },
   ];
 
   let activeMenuTl: gsap.core.Timeline | null = null;

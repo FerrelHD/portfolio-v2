@@ -12,7 +12,7 @@
           ref="chapterTitleRef"
           class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#faf9f6] uppercase leading-none will-change-transform"
         >
-          CHAPTER IV
+          CHAPTER V
         </h2>
       </div>
 
