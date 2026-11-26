@@ -76,7 +76,7 @@
           ></div>
 
           <div
-            class="relative z-30 flex h-[52px] w-full items-center"
+            class="relative z-30 flex h-[46px] w-full items-center"
             :class="isCompact ? 'gap-2 px-2.5' : 'gap-3 px-3.5'"
           >
             <div
@@ -150,6 +150,7 @@
       pointerX?: number;
       pointerY?: number;
       isEquipped?: boolean;
+      scale?: number;
     }>(),
     {
       hiddenStuds: () => [],
@@ -158,6 +159,7 @@
       pointerX: 50,
       pointerY: 50,
       isEquipped: false,
+      scale: 1,
     }
   );
 
@@ -190,9 +192,10 @@
         activeAnimation = null;
       }
 
+      const scale = props.scale || 1;
       const endRect = wrapperRef.value.getBoundingClientRect();
-      const dx = startRect.left - endRect.left;
-      const dy = startRect.top - endRect.top;
+      const dx = (startRect.left - endRect.left) / scale;
+      const dy = (startRect.top - endRect.top) / scale;
       const apexY = Math.min(dy, 0) - STACK_GRID.APEX_HEIGHT;
 
       activeAnimation = wrapperRef.value.animate(
