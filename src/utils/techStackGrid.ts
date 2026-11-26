@@ -2,11 +2,23 @@ import type { TechModule } from '../data/techStack';
 
 export const STACK_GRID = {
   STUD_WIDTH: 62,
-  ROW_HEIGHT: 74,
+  BLOCK_HEIGHT: 68,
+  BEVEL_OVERLAP: 12,
+  ROW_HEIGHT: 56,
+  PLINTH_BASE_HEIGHT: 120,
   MAX_ROWS: 12,
   COLS: 6,
-  APEX_HEIGHT: 130,
+  APEX_HEIGHT: 120,
 } as const;
+
+export function computePlinthScale(viewportHeight: number, maxRow: number): number {
+  const rows = Math.max(0, maxRow + 1);
+  const unscaledHeight =
+    STACK_GRID.PLINTH_BASE_HEIGHT + rows * STACK_GRID.ROW_HEIGHT + (rows > 0 ? STACK_GRID.BEVEL_OVERLAP : 0);
+  const availableHeight = Math.max(260, viewportHeight - 190);
+  if (unscaledHeight <= availableHeight) return 1;
+  return Math.max(0.58, Number((availableHeight / unscaledHeight).toFixed(3)));
+}
 
 export interface PositionedModule {
   module: TechModule;
