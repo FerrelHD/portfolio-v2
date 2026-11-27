@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap')
-layer(base);
-
 @layer utilities {
   @font-face {
     font-family: 'PP Editorial Old';
@@ -14,6 +11,7 @@ layer(base);
     font-family: 'title';
     src: url('./assets/fonts/CabinetGrotesk-Variable.ttf') format('truetype');
     font-style: normal;
+    font-display: swap;
   }
 }
 
