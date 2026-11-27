@@ -4,24 +4,11 @@
   </template>
 
   <!-- Film Grain / Noise Overlay (Applied across ALL sections - Light & Dark, desktop only to avoid mobile GPU lag) -->
-  <div class="pointer-events-none fixed inset-0 z-[120] overflow-hidden hidden md:block" aria-hidden="true">
-    <svg
-      class="h-full w-full"
-      xmlns="http://www.w3.org/2000/svg"
-      style="opacity: 0.08;"
-    >
-      <filter id="film-grain">
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="0.8"
-          numOctaves="3"
-          stitchTiles="stitch"
-        />
-        <feColorMatrix type="saturate" values="0" />
-      </filter>
-      <rect width="100%" height="100%" filter="url(#film-grain)" />
-    </svg>
-  </div>
+  <div
+    class="pointer-events-none fixed inset-0 z-[120] hidden md:block opacity-[0.07]"
+    :style="{ backgroundImage: `url(${filmGrainUrl})`, backgroundRepeat: 'repeat', backgroundSize: '88px 88px' }"
+    aria-hidden="true"
+  ></div>
 
   <!-- Fixed Left Rail Navigation & Frame (Adaptive isDark theme, transparent during intro then solid) -->
   <LeftRail
@@ -130,6 +117,7 @@
   import { ScrollTrigger } from 'gsap/all';
   import { lenis } from './lenis';
   import { featuredProjects } from '@/data/projects';
+  import filmGrainUrl from '@/assets/images/film-grain.png';
 
   const WORKS_START_INDEX = 2;
   const WORKS_COUNT = featuredProjects.length;
