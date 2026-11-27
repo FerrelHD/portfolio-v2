@@ -262,7 +262,6 @@
 
   .mask-reveal-child {
     display: inline-block;
-    will-change: transform;
     transform: translateY(105%);
     transition: none;
   }

@@ -15,7 +15,7 @@
       <div class="overflow-hidden">
         <h2
           ref="chapterTitle"
-          class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#faf9f6] uppercase leading-none will-change-transform"
+          class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#faf9f6] uppercase leading-none"
         >
           CHAPTER III
         </h2>
@@ -28,7 +28,7 @@
         <div class="overflow-hidden">
           <span
             ref="whatIDoRef"
-            class="block font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.25em] text-[#faf9f6]/60 font-medium transition-colors duration-300 group-hover/statement:text-[#faf9f6] will-change-transform"
+            class="block font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.25em] text-[#faf9f6]/60 font-medium transition-colors duration-300 group-hover/statement:text-[#faf9f6]"
           >
             WHAT I DO?
           </span>
@@ -36,16 +36,16 @@
 
         <div class="font-sans text-lg sm:text-2xl lg:text-[26px] xl:text-[28px] font-normal leading-[1.3] text-[#faf9f6] max-w-sm flex flex-col">
           <div class="overflow-hidden">
-            <span ref="statementLine1" class="statement-line block will-change-transform">Designing digital</span>
+            <span ref="statementLine1" class="statement-line block">Designing digital</span>
           </div>
           <div class="overflow-hidden">
-            <span ref="statementLine2" class="statement-line block will-change-transform">experiences with</span>
+            <span ref="statementLine2" class="statement-line block">experiences with</span>
           </div>
           <div class="overflow-hidden">
-            <span ref="statementLine3" class="statement-line block will-change-transform"><span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">clarity</span>, <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">structure</span>,</span>
+            <span ref="statementLine3" class="statement-line block"><span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">clarity</span>, <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">structure</span>,</span>
           </div>
           <div class="overflow-hidden">
-            <span ref="statementLine4" class="statement-line block will-change-transform">and <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">intention</span>.</span>
+            <span ref="statementLine4" class="statement-line block">and <span class="transition-colors duration-300 ease-out group-hover/statement:text-amber-200">intention</span>.</span>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
       >
         <!-- Background Reveal Media Layer (Wipe reveal from bottom to top) -->
         <div
-          class="service-bg-reveal absolute inset-0 -z-0 overflow-hidden pointer-events-none will-change-[clip-path]"
+          class="service-bg-reveal absolute inset-0 -z-0 overflow-hidden pointer-events-none"
           style="clip-path: inset(100% 0% 0% 0%);"
         >
           <!-- Darkened Contrast Layer -->
@@ -75,7 +75,7 @@
           <img
             :src="item.image"
             :alt="`${item.name} — ${item.category} capability by Ferrel Rashad`"
-            class="service-bg-media size-full object-cover object-center scale-105 will-change-transform"
+            class="service-bg-media size-full object-cover object-center scale-105"
             loading="lazy"
             decoding="async"
           />

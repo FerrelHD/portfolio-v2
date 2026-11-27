@@ -25,7 +25,7 @@
       <div class="overflow-hidden pr-4 sm:pr-6">
         <h2
           ref="nextEl"
-          class="font-serif text-[18vw] sm:text-[16vw] md:text-[clamp(3.5rem,min(13vw,19vh),13rem)] lg:text-[clamp(4.5rem,min(12vw,21vh),14rem)] font-normal tracking-[-0.03em] text-[#f3eee8] uppercase leading-[0.84] will-change-transform pr-2"
+          class="font-serif text-[18vw] sm:text-[16vw] md:text-[clamp(3.5rem,min(13vw,19vh),13rem)] lg:text-[clamp(4.5rem,min(12vw,21vh),14rem)] font-normal tracking-[-0.03em] text-[#f3eee8] uppercase leading-[0.84] pr-2"
         >
           NEXT
         </h2>
@@ -33,7 +33,7 @@
       <div class="overflow-hidden pr-6 sm:pr-8">
         <h2
           ref="chapterEl"
-          class="font-serif text-[18vw] sm:text-[16vw] md:text-[clamp(3.5rem,min(13vw,19vh),13rem)] lg:text-[clamp(4.5rem,min(12vw,21vh),14rem)] font-normal tracking-[-0.03em] text-[#f3eee8] uppercase leading-[0.84] will-change-transform pr-4"
+          class="font-serif text-[18vw] sm:text-[16vw] md:text-[clamp(3.5rem,min(13vw,19vh),13rem)] lg:text-[clamp(4.5rem,min(12vw,21vh),14rem)] font-normal tracking-[-0.03em] text-[#f3eee8] uppercase leading-[0.84] pr-4"
         >
           CHAPTER
         </h2>

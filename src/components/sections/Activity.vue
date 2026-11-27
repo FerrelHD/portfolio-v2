@@ -10,7 +10,7 @@
       <div class="overflow-hidden">
         <h2
           ref="chapterTitleRef"
-          class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#faf9f6] uppercase leading-none will-change-transform"
+          class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#faf9f6] uppercase leading-none"
         >
           CHAPTER V
         </h2>
@@ -18,7 +18,7 @@
 
       <div
         ref="headerActionsRef"
-        class="flex items-center gap-3 sm:gap-4 will-change-transform"
+        class="flex items-center gap-3 sm:gap-4"
       >
         <button
           type="button"
@@ -63,14 +63,14 @@
         <div class="overflow-hidden">
           <h3
             ref="titleRef"
-            class="font-sans font-bold text-lg sm:text-2xl md:text-3xl text-[#faf9f6] tracking-tight leading-snug will-change-transform"
+            class="font-sans font-bold text-lg sm:text-2xl md:text-3xl text-[#faf9f6] tracking-tight leading-snug"
           >
             Open Source Activity & Code Frequency.
           </h3>
         </div>
         <p
           ref="descRef"
-          class="font-sans text-xs sm:text-sm text-[#faf9f6]/65 max-w-xl leading-relaxed will-change-transform"
+          class="font-sans text-xs sm:text-sm text-[#faf9f6]/65 max-w-xl leading-relaxed"
         >
           An isometric projection of daily git activity. 3D kinetic elevation with live GitHub telemetry.
         </p>
@@ -80,7 +80,7 @@
       <div
         ref="skylineCardRef"
         :aria-busy="contributionStatus === 'loading'"
-        class="w-full will-change-transform"
+        class="w-full"
       >
         <ContributionSkyline
           ref="skylineCompRef"
@@ -99,7 +99,7 @@
     <!-- Bottom Contextual Status Bar -->
     <div
       ref="statusBarRef"
-      class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4 text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.12em] sm:tracking-[0.15em] text-[#faf9f6]/60 shrink-0 pt-3 sm:pt-2 border-t border-white/5 will-change-transform"
+      class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4 text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.12em] sm:tracking-[0.15em] text-[#faf9f6]/60 shrink-0 pt-3 sm:pt-2 border-t border-white/5"
     >
       <span class="hidden sm:inline">Toggle 3D for skyline wave · Click cell for details</span>
       <span class="sm:hidden">Swipe 3D to orbit · Tap cell for details</span>

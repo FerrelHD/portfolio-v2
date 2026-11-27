@@ -8,7 +8,7 @@
     <!-- Base Curtain Roll-Up Overlay ala Khanh Nguyen (#262220 -> #3A3632 across entire screen including sidebar) -->
     <div
       ref="baseCurtain"
-      class="pointer-events-none absolute inset-x-0 bottom-0 z-0 bg-[#3A3632] will-change-transform origin-bottom"
+      class="pointer-events-none absolute inset-x-0 bottom-0 z-0 bg-[#3A3632] origin-bottom"
       style="height: 0%;"
       aria-hidden="true"
     ></div>
@@ -25,12 +25,12 @@
         >
           <div
             ref="introContent"
-            class="flex items-center h-[1em] text-[clamp(2.75rem,16vw,10rem)] md:text-[clamp(3.75rem,min(9.5vw,16vh),10rem)] lg:text-[clamp(4.25rem,min(9.8vw,17vh),12rem)] xl:text-[clamp(5.2rem,min(10.5vw,21vh),15rem)] text-[#f3eee8] font-normal will-change-transform leading-none tracking-[-0.045em] pr-4 sm:pr-6"
+            class="flex items-center h-[1em] text-[clamp(2.75rem,16vw,10rem)] md:text-[clamp(3.75rem,min(9.5vw,16vh),10rem)] lg:text-[clamp(4.25rem,min(9.8vw,17vh),12rem)] xl:text-[clamp(5.2rem,min(10.5vw,21vh),15rem)] text-[#f3eee8] font-normal leading-none tracking-[-0.045em] pr-4 sm:pr-6"
           >
             <span class="flex h-[1em] items-center leading-none">20</span>
             <!-- Rolling 2-digit strip -->
             <div class="h-[1em] overflow-hidden flex flex-col justify-start pr-4 sm:pr-6">
-              <div ref="yearStrip" class="flex flex-col will-change-transform">
+              <div ref="yearStrip" class="flex flex-col">
                 <span
                   v-for="yr in years"
                   :key="yr"
@@ -46,12 +46,12 @@
         <!-- Name Title (Always in flow, masked with overflow-hidden) -->
         <h1
           ref="heroTitle"
-          class="font-serif font-normal text-[#f3eee8] will-change-transform leading-[0.88] tracking-[-0.045em] opacity-0"
+          class="font-serif font-normal text-[#f3eee8] leading-[0.88] tracking-[-0.045em] opacity-0"
         >
           <span class="block overflow-hidden pr-4 sm:pr-6 pt-1 pb-1">
             <span
               ref="firstNameEl"
-              class="block will-change-transform whitespace-nowrap text-[clamp(2.75rem,16vw,10rem)] md:text-[clamp(3.75rem,min(9.5vw,16vh),10rem)] lg:text-[clamp(4.25rem,min(9.8vw,17vh),12rem)] xl:text-[clamp(5.2rem,min(10.5vw,21vh),15rem)] tracking-[-0.045em] pr-2"
+              class="block whitespace-nowrap text-[clamp(2.75rem,16vw,10rem)] md:text-[clamp(3.75rem,min(9.5vw,16vh),10rem)] lg:text-[clamp(4.25rem,min(9.8vw,17vh),12rem)] xl:text-[clamp(5.2rem,min(10.5vw,21vh),15rem)] tracking-[-0.045em] pr-2"
             >
               FERREL
             </span>
@@ -59,7 +59,7 @@
           <span class="block overflow-hidden pr-6 sm:pr-8 mt-1 sm:mt-1.5 md:mt-2 pt-1 pb-1">
             <span
               ref="lastNameEl"
-              class="block will-change-transform whitespace-nowrap text-[clamp(3rem,17.5vw,11.5rem)] md:text-[clamp(4.25rem,min(10.5vw,17.5vh),11.5rem)] lg:text-[clamp(4.75rem,min(10.8vw,18.5vh),13.5rem)] xl:text-[clamp(5.8rem,min(11.2vw,22.5vh),16.5rem)] tracking-[-0.045em] origin-left pr-4"
+              class="block whitespace-nowrap text-[clamp(3rem,17.5vw,11.5rem)] md:text-[clamp(4.25rem,min(10.5vw,17.5vh),11.5rem)] lg:text-[clamp(4.75rem,min(10.8vw,18.5vh),13.5rem)] xl:text-[clamp(5.8rem,min(11.2vw,22.5vh),16.5rem)] tracking-[-0.045em] origin-left pr-4"
             >
               <span>R</span><span class="inline-block pl-[0.06em]">A</span><span>SHAD</span>
             </span>
@@ -72,7 +72,7 @@
         <div class="overflow-hidden">
           <p
             ref="bioEl"
-            class="font-sans text-xs sm:text-sm md:text-sm lg:text-[15px] xl:text-lg leading-[145%] lg:leading-[150%] text-[#f3eee8]/80 font-normal tracking-normal will-change-transform opacity-0"
+            class="font-sans text-xs sm:text-sm md:text-sm lg:text-[15px] xl:text-lg leading-[145%] lg:leading-[150%] text-[#f3eee8]/80 font-normal tracking-normal opacity-0"
           >
             A fullstack developer & digital creator, crafting high-performance web systems, 3D worlds, and cinematic digital media.
           </p>
@@ -84,7 +84,7 @@
     <div class="relative z-[2] grid grid-cols-2 md:grid-cols-3 items-end gap-4 font-sans text-[#f3eee8]/80 max-w-[1700px] w-full">
       <!-- Bottom Left: Location & Live Local Clock -->
       <div class="overflow-hidden">
-        <div ref="footerLeftEl" class="flex flex-col text-xs sm:text-base md:text-lg leading-[140%] will-change-transform">
+        <div ref="footerLeftEl" class="flex flex-col text-xs sm:text-base md:text-lg leading-[140%]">
           <span class="text-[#f3eee8]">Depok, Indonesia</span>
           <span class="text-[#f3eee8]/60 tabular-nums">
             (GMT+7) {{ currentTime }}
@@ -98,7 +98,7 @@
 
       <!-- Bottom Center: Availability Status (Tablet & Desktop) -->
       <div class="hidden md:flex flex-col items-center text-sm sm:text-base md:text-lg text-center leading-[140%] overflow-hidden">
-        <span ref="footerCenterEl" class="text-[#f3eee8]/80 will-change-transform">
+        <span ref="footerCenterEl" class="text-[#f3eee8]/80">
           Open for collaborations
         </span>
       </div>
@@ -113,7 +113,7 @@
           >
             <div
               ref="quoteEl"
-              class="font-sans text-[11px] sm:text-sm md:text-base text-[#f3eee8]/75 text-right will-change-transform leading-snug tracking-normal whitespace-nowrap"
+              class="font-sans text-[11px] sm:text-sm md:text-base text-[#f3eee8]/75 text-right leading-snug tracking-normal whitespace-nowrap"
             >
               <span>Where logic meets imagination.</span>
             </div>
@@ -125,7 +125,7 @@
               ref="scrollCueEl"
               type="button"
               aria-label="Scroll to About section"
-              class="group flex items-center gap-2.5 cursor-pointer will-change-transform pr-1 bg-transparent border-0 p-0 min-h-[44px]"
+              class="group flex items-center gap-2.5 cursor-pointer pr-1 bg-transparent border-0 p-0 min-h-[44px]"
               @click="scrollToNext"
             >
               <span class="font-serif italic tracking-[0.02em] text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-normal text-[#faf9f6]/90 transition-all duration-300 group-hover:text-white group-hover:tracking-[0.05em] leading-none">
@@ -144,7 +144,7 @@
     <div
       v-if="showIntro"
       ref="introProgressLine"
-      class="pointer-events-none absolute bottom-0 left-0 z-30 h-[2px] w-full origin-left bg-flame will-change-transform"
+      class="pointer-events-none absolute bottom-0 left-0 z-30 h-[2px] w-full origin-left bg-flame"
       aria-hidden="true"
     ></div>
   </section>

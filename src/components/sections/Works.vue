@@ -12,7 +12,7 @@
       <!-- Top Row: CHAPTER II on Left, Live Link on Right -->
       <div class="flex items-center justify-between">
         <div class="overflow-hidden">
-          <h2 class="slide-chapter-title font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#22201e] uppercase leading-none will-change-transform">
+          <h2 class="slide-chapter-title font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#22201e] uppercase leading-none">
             CHAPTER II
           </h2>
         </div>
@@ -57,7 +57,7 @@
           <!-- Project Title (Masked Reveal) — Responsive, bold, uppercase, never clips -->
           <div class="overflow-hidden p-1 -m-1">
             <h3
-              class="slide-project-title font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl uppercase tracking-tight text-[#22201e] leading-[0.92] will-change-transform break-normal"
+              class="slide-project-title font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl uppercase tracking-tight text-[#22201e] leading-[0.92] break-normal"
             >
               <button
                 type="button"
@@ -72,13 +72,13 @@
           <!-- Role & System Metadata — Left-aligned directly beneath title -->
           <div class="flex flex-col gap-1 sm:gap-1.5 mt-2 sm:mt-4 md:mt-6 lg:mt-7 font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.1em] text-[#22201e]/75 text-left">
             <div class="overflow-hidden py-0.5">
-              <div class="slide-project-meta will-change-transform">
+              <div class="slide-project-meta">
                 <span class="font-bold text-[#22201e]">ROLE: </span>
                 <span class="font-medium text-[#22201e]/80">{{ project.role }}</span>
               </div>
             </div>
             <div class="overflow-hidden py-0.5">
-              <div class="slide-project-meta will-change-transform">
+              <div class="slide-project-meta">
                 <span class="font-bold text-[#22201e]">SYSTEM: </span>
                 <span class="font-medium text-[#22201e]/80">{{ project.system }}</span>
               </div>
@@ -89,7 +89,7 @@
         <!-- Left Column on Desktop (Mockup & About) -> On Mobile goes SECOND (order-2 md:order-1) -->
         <div class="order-2 md:order-1 md:col-span-6 flex flex-col gap-2 sm:gap-2.5 lg:gap-3 max-w-[420px] md:max-w-[460px] lg:max-w-[520px] xl:max-w-[620px]">
           <!-- Entrance Animation Wrapper for Mockup -->
-          <div class="slide-mockup will-change-transform">
+          <div class="slide-mockup">
             <!-- Pure Frameless Project Viewport with Responsive Height Clamping -->
             <div
               role="button"
@@ -146,7 +146,7 @@
               <span class="slide-about-text block text-xs sm:text-sm md:text-base font-sans font-semibold text-[#22201e]">
                 About
               </span>
-              <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
+              <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10"></div>
             </div>
 
             <!-- Paragraph 1 -->
@@ -154,7 +154,7 @@
               <p class="slide-about-text font-sans text-xs sm:text-[13px] md:text-[13px] lg:text-sm xl:text-base leading-[140%] text-[#22201e]/85 text-left">
                 {{ project.aboutP1 }}
               </p>
-              <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
+              <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10"></div>
             </div>
 
             <!-- Paragraph 2 (Collapsed on small mobile to preserve vertical breathing room) -->
@@ -162,7 +162,7 @@
               <p class="slide-about-text font-sans text-xs sm:text-[13px] md:text-[13px] lg:text-sm xl:text-base leading-[140%] text-[#22201e]/85 text-left">
                 {{ project.aboutP2 }}
               </p>
-              <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10 will-change-transform"></div>
+              <div class="slide-about-box absolute inset-0 bg-[#22201e] pointer-events-none z-10"></div>
             </div>
           </div>
         </div>
@@ -188,7 +188,7 @@
               <!-- Active Spring Pill vs Inactive Magnetic Dash -->
               <span
                 v-if="pIdx === index"
-                class="step-pill-active inline-block h-1 w-4 sm:w-7 bg-[#22201e] rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.15)] will-change-transform origin-left"
+                class="step-pill-active inline-block h-1 w-4 sm:w-7 bg-[#22201e] rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.15)] origin-left"
               ></span>
               <span
                 v-else
@@ -199,7 +199,7 @@
               <div class="overflow-hidden h-[15px] leading-none inline-flex items-center">
                 <span
                   v-if="pIdx === index"
-                  class="step-num-roll-active inline-block will-change-transform text-[9px] sm:text-[10px] md:text-[11px] font-black text-[#22201e]"
+                  class="step-num-roll-active inline-block text-[9px] sm:text-[10px] md:text-[11px] font-black text-[#22201e]"
                 >
                   0{{ pIdx + 1 }}
                 </span>
@@ -233,13 +233,13 @@
           </div>
           <!-- WORK massive (desktop/tablet) -->
           <div aria-hidden="true" class="hidden sm:block overflow-hidden leading-none">
-            <span class="slide-number font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/25 leading-[0.85] tracking-tighter will-change-transform inline-block">
+            <span class="slide-number font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/25 leading-[0.85] tracking-tighter inline-block">
               WORK
             </span>
           </div>
           <!-- Slide number (shown on all breakpoints) -->
           <div class="overflow-hidden leading-none sm:ml-1.5">
-            <span class="slide-number-idx font-serif text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/55 leading-[0.85] will-change-transform inline-block">
+            <span class="slide-number-idx font-serif text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#22201e]/55 leading-[0.85] inline-block">
               {{ project.slideNumber }}
             </span>
           </div>

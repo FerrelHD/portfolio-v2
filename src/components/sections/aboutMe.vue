@@ -11,7 +11,7 @@
       <div class="overflow-hidden">
         <h2
           ref="chapterTitle"
-          class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#22201e] uppercase leading-none will-change-transform"
+          class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-[#22201e] uppercase leading-none"
         >
           CHAPTER I
         </h2>
@@ -25,7 +25,7 @@
         <!-- Mobile Natural Fluid Flow -->
         <p class="font-sans text-[15px] sm:text-lg leading-[145%] text-[#22201e]/90 font-normal text-left block md:hidden">
           <span class="block overflow-hidden">
-            <span class="intro-line-mobile block will-change-transform">
+            <span class="intro-line-mobile block">
               Hi, I'm Ferrel — a software engineer and creative technologist focused on crafting fluid web interfaces, real-time data visualisations, and interactive digital experiences.
             </span>
           </span>
@@ -33,22 +33,22 @@
         <!-- Desktop Multi-Line Mask Stagger -->
         <p class="font-sans text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[26px] leading-[135%] text-[#22201e]/90 font-normal text-left hidden md:block">
           <span class="block overflow-hidden">
-            <span class="intro-line block will-change-transform">
+            <span class="intro-line block">
               Hi, I'm Ferrel — a software engineer and creative
             </span>
           </span>
           <span class="block overflow-hidden">
-            <span class="intro-line block will-change-transform">
+            <span class="intro-line block">
               technologist focused on crafting fluid web interfaces,
             </span>
           </span>
           <span class="block overflow-hidden">
-            <span class="intro-line block will-change-transform">
+            <span class="intro-line block">
               real-time data visualisations, and interactive digital
             </span>
           </span>
           <span class="block overflow-hidden">
-            <span class="intro-line block will-change-transform">
+            <span class="intro-line block">
               experiences.
             </span>
           </span>
@@ -62,12 +62,12 @@
       <div class="md:col-start-4 md:col-span-4 lg:col-start-5 lg:col-span-3 self-center">
         <blockquote class="font-sans text-xs sm:text-sm md:text-[13px] lg:text-sm xl:text-[15px] text-[#22201e]/80 font-medium leading-[1.4] tracking-[0.04em] uppercase">
           <span class="block overflow-hidden">
-            <span class="quote-line block will-change-transform">
+            <span class="quote-line block">
               "CODE WITH PRECISION,
             </span>
           </span>
           <span class="block overflow-hidden">
-            <span class="quote-line block will-change-transform">
+            <span class="quote-line block">
               DESIGN FOR PEOPLE."
             </span>
           </span>
@@ -78,13 +78,13 @@
       <div class="md:col-start-8 md:col-span-5 lg:col-start-8 lg:col-span-5 flex justify-start md:justify-end">
         <div
           ref="photoEl"
-          class="group/photo relative w-40 sm:w-60 md:w-72 lg:w-80 xl:w-[420px] max-h-[38vh] sm:max-h-[48vh] lg:max-h-[52vh] aspect-[3/4] bg-[#22201e]/5 overflow-hidden shadow-md hover:shadow-2xl border border-black/5 hover:border-black/15 transition-all duration-700 ease-out will-change-transform rounded-sm"
+          class="group/photo relative w-40 sm:w-60 md:w-72 lg:w-80 xl:w-[420px] max-h-[38vh] sm:max-h-[48vh] lg:max-h-[52vh] aspect-[3/4] bg-[#22201e]/5 overflow-hidden shadow-md hover:shadow-2xl border border-black/5 hover:border-black/15 transition-all duration-700 ease-out rounded-sm"
         >
           <img
             ref="photoImgEl"
             :src="ferrelPortrait"
             alt="Ferrel Rashad Akeyla — Full-Stack Developer & Creative Engineer Portrait"
-            class="size-full object-cover object-top grayscale contrast-[115%] brightness-95 transition-all duration-700 ease-out group-hover/photo:grayscale-0 group-hover/photo:contrast-[105%] group-hover/photo:scale-105 will-change-transform"
+            class="size-full object-cover object-top grayscale contrast-[115%] brightness-95 transition-all duration-700 ease-out group-hover/photo:grayscale-0 group-hover/photo:contrast-[105%] group-hover/photo:scale-105"
             loading="lazy"
             decoding="async"
             width="420"
@@ -102,7 +102,7 @@
         <div class="overflow-hidden">
           <p
             ref="bottomNoteEl"
-            class="font-sans text-sm sm:text-base md:text-lg leading-[140%] text-[#22201e]/80 font-normal text-left will-change-transform"
+            class="font-sans text-sm sm:text-base md:text-lg leading-[140%] text-[#22201e]/80 font-normal text-left"
           >
             Beyond engineering: 3D modeling, game environments, and interactive graphics.
           </p>
