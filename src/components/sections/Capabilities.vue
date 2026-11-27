@@ -136,14 +136,14 @@
       num: '01',
       name: 'Frontend Engineering',
       category: 'ARCHITECTURE',
-      image: projectsById['nusantara-observatory']?.previewImg || '/projects/indonesian-crustal-observatory.png',
+      image: projectsById['nusantara-observatory']?.previewImg || '/projects/indonesian-crustal-observatory.webp',
       desc: 'High-speed web platforms with React 19, Next.js 15, Vue, TypeScript, and GSAP. Type-safe APIs, responsive design, and 60 FPS motion.',
     },
     {
       num: '02',
       name: 'Creative Development',
       category: 'INTERACTION',
-      image: projectsById['persona-3']?.previewImg || '/projects/Persona.png',
+      image: projectsById['persona-3']?.previewImg || '/projects/Persona.webp',
       desc: 'Console-grade game UI architectures, procedural Web Audio synthesis, kinetic typography, and fluid GSAP choreographies — engineered for cinematic immersion.',
     },
     {

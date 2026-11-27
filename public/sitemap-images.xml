@@ -14,37 +14,37 @@
       <image:caption>Full-Stack Developer &amp; Creative Engineer Portrait Photo</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/notchflow.png</image:loc>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/notchflow.webp</image:loc>
       <image:title>NotchFlow — Native macOS Bezel Companion</image:title>
       <image:caption>A native, zero-dependency macOS status bar and notch companion built with Swift and AppKit. Features Darwin kernel hardware telemetry, live synced lyrics, and an interactive virtual mascot.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/araki-art.png</image:loc>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/araki-art.webp</image:loc>
       <image:title>Araki Art Archive — Haute-Couture Editorial Archive</image:title>
       <image:caption>Interactive editorial archive documenting the intersection of Hirohiko Araki with haute-couture fashion, featuring a Swiss blueprint 12-column grid and kinetic GSAP motion.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/Persona.png</image:loc>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/Persona.webp</image:loc>
       <image:title>Persona 3 Reload Portfolio — Game Console UI &amp; Web Audio Engine</image:title>
       <image:caption>Cinematic game-console developer portfolio inspired by Persona 3 Reload, featuring procedural Web Audio synthesis, 1080p character loop videos, and zero-scroll canvas navigation.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/indonesian-crustal-observatory.png</image:loc>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/indonesian-crustal-observatory.webp</image:loc>
       <image:title>Nusantara Observatory — Geospatial Hazard &amp; Event Replay</image:title>
       <image:caption>Interactive geospatial hazard tracker integrating real-time disaster feeds into visual 2D mapping.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/VHS.png</image:loc>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/VHS.webp</image:loc>
       <image:title>Cyberpunk Edgerunners — Vintage CRT Studio &amp; 3D VHS Archive</image:title>
       <image:caption>Interactive archival experience inspired by analog broadcast studio hardware (Sony Trinitron PVM), curved CRT phosphors, and vintage physical VHS cassette sleeves.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/TactIQ.png</image:loc>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/TactIQ.webp</image:loc>
       <image:title>TactIQ — Football Analytics &amp; Tactical Tracking Platform</image:title>
       <image:caption>Enterprise-grade football intelligence platform featuring real-time 2D pitch tracking overlay, multi-criteria player scouting, and AI match probability forecasting.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/Eco-Bite.png</image:loc>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/Eco-Bite.webp</image:loc>
       <image:title>EcoBite — Campus Food Rescue &amp; SDG 12 Platform</image:title>
       <image:caption>Campus food rescue platform with real-time GPS radar, dynamic QR rescue passes, and ESG carbon reduction &amp; EcoPoints tracking.</image:caption>
     </image:image>
@@ -54,17 +54,17 @@
       <image:caption>Modern storefront with Filament admin dashboard, granular RBAC, and inventory management.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/student-life.png</image:loc>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/student-life.webp</image:loc>
       <image:title>Student Life — All-in-One Productivity PWA</image:title>
       <image:caption>Progressive Web App organizing academic schedules, coursework tracking, and productivity tools.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/Charles-Leclerc.png</image:loc>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/Charles-Leclerc.webp</image:loc>
       <image:title>Charles Leclerc #16 — Creative Motion &amp; F1 Physics</image:title>
       <image:caption>High-octane Formula 1 showcase with canvas telemetry visualizers and fluid kinetic transitions.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/stock-prediction.png</image:loc>
+      <image:loc>https://ferrel-rashad-portfolio.vercel.app/projects/stock-prediction.webp</image:loc>
       <image:title>Stock Prediction ML — Quant ML &amp; Analytics</image:title>
       <image:caption>Time-series machine learning model analyzing equities with predictive volatility curves and Streamlit dashboard.</image:caption>
     </image:image>

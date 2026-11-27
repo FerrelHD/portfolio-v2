@@ -13,7 +13,7 @@
     "Socket.io",
     "Chart.js"
   ],
-  "previewImg": "/projects/TactIQ.png",
+  "previewImg": "/projects/TactIQ.webp",
   "githubUrl": "https://github.com/LuthfiMirza/TactIQ",
   "domain": "tactiq.analytics",
   "featured": false,

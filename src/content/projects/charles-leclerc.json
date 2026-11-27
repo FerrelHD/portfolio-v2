@@ -11,7 +11,7 @@
     "GSAP",
     "Canvas 2D"
   ],
-  "previewImg": "/projects/Charles-Leclerc.png",
+  "previewImg": "/projects/Charles-Leclerc.webp",
   "liveUrl": "https://leclerc-redline.vercel.app/",
   "domain": "leclerc-redline.vercel.app",
   "featured": true,

@@ -13,7 +13,7 @@
     "WebGL2",
     "Web Audio API"
   ],
-  "previewImg": "/projects/VHS.png",
+  "previewImg": "/projects/VHS.webp",
   "liveUrl": "https://vhs-gold.vercel.app",
   "githubUrl": "https://github.com/FerrelHD/VHS",
   "domain": "vhs-gold.vercel.app",

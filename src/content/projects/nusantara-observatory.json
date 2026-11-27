@@ -11,7 +11,7 @@
     "TypeScript",
     "Canvas 2D"
   ],
-  "previewImg": "/projects/indonesian-crustal-observatory.png",
+  "previewImg": "/projects/indonesian-crustal-observatory.webp",
   "liveUrl": "https://nusantara-observatory.vercel.app/",
   "githubUrl": "https://github.com/FerrelHD/Global-Seismic-Tracker",
   "domain": "nusantara-observatory.vercel.app",
