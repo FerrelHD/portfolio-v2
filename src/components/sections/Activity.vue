@@ -80,7 +80,7 @@
       <div
         ref="skylineCardRef"
         :aria-busy="contributionStatus === 'loading'"
-        class="w-full"
+        class="w-full min-h-[260px]"
       >
         <ContributionSkyline
           ref="skylineCompRef"
@@ -182,9 +182,8 @@
 </template>
 
 <script setup lang="ts">
-  import { nextTick, onMounted, onUnmounted, ref } from 'vue';
+  import { defineAsyncComponent, nextTick, onMounted, onUnmounted, ref } from 'vue';
   import gsap from 'gsap';
-  import ContributionSkyline from '@/components/ui/ContributionSkyline.vue';
   import {
     fetchGitHubContributionsWithStatus,
     ferrelFallbackContributions,
@@ -193,6 +192,10 @@
   import { captureFocusOrigin, restoreFocusOrigin, trapDialogTab } from '@/utils/modalFocus';
   import { prefersReducedMotion } from '@/utils/motion';
   import { lenis } from '@/lenis';
+
+  const ContributionSkyline = defineAsyncComponent(
+    () => import('@/components/ui/ContributionSkyline.vue'),
+  );
 
   const chapterTitleRef = ref<HTMLElement | null>(null);
   const headerActionsRef = ref<HTMLElement | null>(null);
@@ -205,12 +208,21 @@
   const contributions = ref<ContributionDay[]>(ferrelFallbackContributions);
   const contributionStatus = ref<'loading' | 'live' | 'fallback'>('loading');
   const isFullscreenOpen = ref(false);
+  let hasRequestedContributions = false;
+  let visibilityObserver: IntersectionObserver | null = null;
 
   const loadContributions = async () => {
+    hasRequestedContributions = true;
     contributionStatus.value = 'loading';
     const result = await fetchGitHubContributionsWithStatus('FerrelHD');
     contributions.value = result.data;
     contributionStatus.value = result.source;
+  };
+
+  const ensureContributionsLoaded = () => {
+    if (!hasRequestedContributions) {
+      void loadContributions();
+    }
   };
   const fullscreenModalRef = ref<HTMLElement | null>(null);
   const closeFullscreenBtn = ref<HTMLButtonElement | null>(null);
@@ -247,6 +259,7 @@
   };
 
   const revealSlide = () => {
+    ensureContributionsLoaded();
     if (prefersReducedMotion()) {
       skylineCompRef.value?.animateCounter();
       skylineCompRef.value?.playEntrance?.() ?? skylineCompRef.value?.playFlicker?.();
@@ -280,7 +293,7 @@
     revealSlide,
   });
 
-  onMounted(async () => {
+  onMounted(() => {
     if (!prefersReducedMotion()) {
       if (chapterTitleRef.value) gsap.set(chapterTitleRef.value, { yPercent: 105 });
       if (headerActionsRef.value) gsap.set(headerActionsRef.value, { y: 15, opacity: 0 });
@@ -291,11 +304,25 @@
     }
 
     window.addEventListener('keydown', handleKeydown);
-    await loadContributions();
+    if (skylineCardRef.value && typeof IntersectionObserver !== 'undefined') {
+      visibilityObserver = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            ensureContributionsLoaded();
+            visibilityObserver?.disconnect();
+            visibilityObserver = null;
+          }
+        },
+        { rootMargin: '200px' },
+      );
+      visibilityObserver.observe(skylineCardRef.value);
+    }
   });
 
   onUnmounted(() => {
     window.removeEventListener('keydown', handleKeydown);
+    visibilityObserver?.disconnect();
+    visibilityObserver = null;
     if (isFullscreenOpen.value) {
       document.body.style.overflow = '';
       lenis.start();

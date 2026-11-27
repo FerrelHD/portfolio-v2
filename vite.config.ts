@@ -8,7 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   base: '/',
   build: {
-    sourcemap: true,
+    sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks: {
